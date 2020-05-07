@@ -1,0 +1,1408 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "MagicBox API接口文档",
+    "version": "1.0.1",
+    "title": "MagicBox API",
+    "contact": {
+      "name": "magicbox-web"
+    },
+    "license": {}
+  },
+  "host": "172.23.188.102:8501",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "AppAuthInfo-Api",
+      "description": "App Auth Info Controller"
+    },
+    {
+      "name": "AppLog-Api",
+      "description": "App Log Controller"
+    },
+    {
+      "name": "Menu-Api",
+      "description": "Menu Controller"
+    },
+    {
+      "name": "UserCustom-Api",
+      "description": "User Custom Controller"
+    }
+  ],
+  "paths": {
+    "/biz/applog": {
+      "post": {
+        "tags": [
+          "AppLog-Api"
+        ],
+        "summary": "新增AppLog",
+        "description": "新增AppLog",
+        "operationId": "saveAppLogUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "applogReq",
+            "description": "applogReq",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppLogReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/applog/{id}": {
+      "get": {
+        "tags": [
+          "AppLog-Api"
+        ],
+        "summary": "查询单个AppLog",
+        "description": "查询单个AppLog",
+        "operationId": "queryAppLogByIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response«AppLogResp»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/applogs": {
+      "get": {
+        "tags": [
+          "AppLog-Api"
+        ],
+        "summary": "根据appId查询所有AppLog",
+        "description": "根据appId查询所有AppLog",
+        "operationId": "queryByPageUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "description": "appId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "description": "pageNum",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "pageSize",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/authinfo": {
+      "post": {
+        "tags": [
+          "AppAuthInfo-Api"
+        ],
+        "summary": "新增AppAuthInfo",
+        "description": "新增AppAuthInfo",
+        "operationId": "saveAppAuthInfoUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "authInfoReq",
+            "description": "authInfoReq",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthInfoReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppAuthInfo-Api"
+        ],
+        "summary": "更新AppAuthInfo",
+        "description": "更新AppAuthInfo",
+        "operationId": "updateAppAuthInfoUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "authInfoReq",
+            "description": "authInfoReq",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthInfoReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/authinfo/bymenu/{menuId}": {
+      "get": {
+        "tags": [
+          "AppAuthInfo-Api"
+        ],
+        "summary": "根据menuId查询单个AppAuthInfo",
+        "description": "根据menuId查询单个AppAuthInfo",
+        "operationId": "queryAppAuthInfoByMenuIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "menuId",
+            "in": "path",
+            "description": "menuId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response«AppAuthInfoResp»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/authinfo/{id}": {
+      "get": {
+        "tags": [
+          "AppAuthInfo-Api"
+        ],
+        "summary": "查询单个AppAuthInfo",
+        "description": "查询单个AppAuthInfo",
+        "operationId": "queryAppAuthInfoByIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response«AppAuthInfoResp»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/authinfos": {
+      "get": {
+        "tags": [
+          "AppAuthInfo-Api"
+        ],
+        "summary": "查询所有AppAuthInfo",
+        "description": "查询所有AppAuthInfo",
+        "operationId": "queryAppAuthInfosUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/menu": {
+      "post": {
+        "tags": [
+          "Menu-Api"
+        ],
+        "summary": "新增Menu",
+        "description": "新增Menu",
+        "operationId": "saveMenuUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "menuReq",
+            "description": "menuReq",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Menu请求体"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Menu-Api"
+        ],
+        "summary": "更新Menu",
+        "description": "更新Menu",
+        "operationId": "updateMenuUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "menuReq",
+            "description": "menuReq",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Menu请求体"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/menu/{id}": {
+      "get": {
+        "tags": [
+          "Menu-Api"
+        ],
+        "summary": "查询单个Menu",
+        "description": "查询单个Menu",
+        "operationId": "queryMenuByIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response«Menu响应体»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/menus": {
+      "get": {
+        "tags": [
+          "Menu-Api"
+        ],
+        "summary": "查询所有授权的Menu",
+        "description": "查询所有授权的Menu",
+        "operationId": "queryMenusUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/userCustom": {
+      "post": {
+        "tags": [
+          "UserCustom-Api"
+        ],
+        "summary": "新增UserCustom",
+        "description": "新增UserCustom",
+        "operationId": "saveUserCustomUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userCustomReq",
+            "description": "userCustomReq",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserCustom请求体"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response«long»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserCustom-Api"
+        ],
+        "summary": "更新UserCustom",
+        "description": "更新UserCustom",
+        "operationId": "updateUserCustomUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userCustomReq",
+            "description": "userCustomReq",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserCustom请求体"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/biz/usercustom": {
+      "get": {
+        "tags": [
+          "UserCustom-Api"
+        ],
+        "summary": "根据userId查询用户自定义信息",
+        "description": "查询用户自定义信息",
+        "operationId": "queryByUserIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response«UserCustom请求体»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppAuthInfoReq": {
+      "type": "object",
+      "properties": {
+        "authInfo": {
+          "type": "string",
+          "description": "认证信息，加密存储",
+          "allowEmptyValue": false
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间",
+          "allowEmptyValue": false
+        },
+        "createUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "创建人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "description": {
+          "type": "string",
+          "description": "应用描述",
+          "allowEmptyValue": false
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "id",
+          "allowEmptyValue": false
+        },
+        "isDeleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记(0:正常，1:删除)",
+          "allowEmptyValue": false
+        },
+        "menuId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "菜单ID",
+          "allowEmptyValue": false
+        },
+        "salt": {
+          "type": "string",
+          "description": "加密盐",
+          "allowEmptyValue": false
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "修改时间",
+          "allowEmptyValue": false
+        },
+        "updateUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "修改人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "钉钉用户ID",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "AppAuthInfoReq"
+    },
+    "AppAuthInfoResp": {
+      "type": "object",
+      "properties": {
+        "authInfo": {
+          "type": "string",
+          "description": "认证信息，加密存储",
+          "allowEmptyValue": false
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间",
+          "allowEmptyValue": false
+        },
+        "createUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "创建人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "description": {
+          "type": "string",
+          "description": "应用描述",
+          "allowEmptyValue": false
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "id",
+          "allowEmptyValue": false
+        },
+        "isDeleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记(0:正常，1:删除)",
+          "allowEmptyValue": false
+        },
+        "menuId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "菜单ID",
+          "allowEmptyValue": false
+        },
+        "salt": {
+          "type": "string",
+          "description": "加密盐",
+          "allowEmptyValue": false
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "修改时间",
+          "allowEmptyValue": false
+        },
+        "updateUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "修改人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "钉钉用户ID",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "AppAuthInfoResp"
+    },
+    "AppLogReq": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "应用ID",
+          "allowEmptyValue": false
+        },
+        "content": {
+          "type": "string",
+          "description": "日志内容",
+          "allowEmptyValue": false
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间",
+          "allowEmptyValue": false
+        },
+        "createUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "创建人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "id",
+          "allowEmptyValue": false
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "钉钉用户ID",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "AppLogReq"
+    },
+    "AppLogResp": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "应用ID",
+          "allowEmptyValue": false
+        },
+        "content": {
+          "type": "string",
+          "description": "日志内容",
+          "allowEmptyValue": false
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间",
+          "allowEmptyValue": false
+        },
+        "createUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "创建人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "id",
+          "allowEmptyValue": false
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "钉钉用户ID",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "AppLogResp"
+    },
+    "Menu": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "string"
+        },
+        "authType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "code": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createUser": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "displayType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isDeleted": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subMenus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Menu"
+          }
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateUser": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "url": {
+          "type": "string"
+        },
+        "wikiUrl": {
+          "type": "string"
+        }
+      },
+      "title": "Menu"
+    },
+    "Menu响应体": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "string",
+          "description": "菜单属性",
+          "allowEmptyValue": false
+        },
+        "authType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "认证方式：0: sso token cookie（默认，域名相同）; 1: sso token request param（域名不同）; 2:account&password (第三方应用，配合application_account)",
+          "allowEmptyValue": false
+        },
+        "code": {
+          "type": "string",
+          "example": "编码",
+          "description": "编码",
+          "allowEmptyValue": false
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间",
+          "allowEmptyValue": false
+        },
+        "createUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "创建人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "description": {
+          "type": "string",
+          "description": "菜单描述",
+          "allowEmptyValue": false
+        },
+        "displayType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "0：应用内显示；1：iframe；2：弹窗；3：新页签",
+          "allowEmptyValue": false
+        },
+        "icon": {
+          "type": "string",
+          "example": "icon",
+          "description": "icon",
+          "allowEmptyValue": false
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "id",
+          "allowEmptyValue": false
+        },
+        "isDeleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记(0:正常，1:删除)",
+          "allowEmptyValue": false
+        },
+        "name": {
+          "type": "string",
+          "description": "菜单名称",
+          "allowEmptyValue": false
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "example": "排序",
+          "description": "排序",
+          "allowEmptyValue": false
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "父级菜单ID，没有即为0",
+          "allowEmptyValue": false
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": "状态",
+          "description": "状态",
+          "allowEmptyValue": false
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "修改时间",
+          "allowEmptyValue": false
+        },
+        "updateUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "修改人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "url": {
+          "type": "string",
+          "description": "应用url",
+          "allowEmptyValue": false
+        },
+        "wikiUrl": {
+          "type": "string",
+          "description": "wiki url",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Menu响应体"
+    },
+    "Menu请求体": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "string",
+          "description": "菜单属性",
+          "allowEmptyValue": false
+        },
+        "authType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "认证方式：0: sso token cookie（默认，域名相同）; 1: sso token request param（域名不同）; 2:account&password (第三方应用，配合application_account)",
+          "allowEmptyValue": false
+        },
+        "code": {
+          "type": "string",
+          "example": "编码",
+          "description": "编码",
+          "allowEmptyValue": false
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间",
+          "allowEmptyValue": false
+        },
+        "createUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "创建人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "description": {
+          "type": "string",
+          "description": "菜单描述",
+          "allowEmptyValue": false
+        },
+        "displayType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "0：应用内显示；1：iframe；2：弹窗；3：新页签",
+          "allowEmptyValue": false
+        },
+        "icon": {
+          "type": "string",
+          "example": "icon",
+          "description": "icon",
+          "allowEmptyValue": false
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "id",
+          "allowEmptyValue": false
+        },
+        "isDeleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记(0:正常，1:删除)",
+          "allowEmptyValue": false
+        },
+        "name": {
+          "type": "string",
+          "description": "菜单名称",
+          "allowEmptyValue": false
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "example": "排序",
+          "description": "排序",
+          "allowEmptyValue": false
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "父级菜单ID，没有即为0",
+          "allowEmptyValue": false
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": "状态",
+          "description": "状态",
+          "allowEmptyValue": false
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "修改时间",
+          "allowEmptyValue": false
+        },
+        "updateUser": {
+          "type": "integer",
+          "format": "int64",
+          "description": "修改人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "url": {
+          "type": "string",
+          "description": "应用url",
+          "allowEmptyValue": false
+        },
+        "wikiUrl": {
+          "type": "string",
+          "description": "wiki url",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Menu请求体"
+    },
+    "Response": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "响应编码成功：0",
+          "allowEmptyValue": false
+        },
+        "info": {
+          "type": "object"
+        },
+        "msg": {
+          "type": "string",
+          "description": "错误描述，成功：OK",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Response"
+    },
+    "Response«AppAuthInfoResp»": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "响应编码成功：0",
+          "allowEmptyValue": false
+        },
+        "info": {
+          "$ref": "#/definitions/AppAuthInfoResp"
+        },
+        "msg": {
+          "type": "string",
+          "description": "错误描述，成功：OK",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Response«AppAuthInfoResp»"
+    },
+    "Response«AppLogResp»": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "响应编码成功：0",
+          "allowEmptyValue": false
+        },
+        "info": {
+          "$ref": "#/definitions/AppLogResp"
+        },
+        "msg": {
+          "type": "string",
+          "description": "错误描述，成功：OK",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Response«AppLogResp»"
+    },
+    "Response«Menu响应体»": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "响应编码成功：0",
+          "allowEmptyValue": false
+        },
+        "info": {
+          "$ref": "#/definitions/Menu响应体"
+        },
+        "msg": {
+          "type": "string",
+          "description": "错误描述，成功：OK",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Response«Menu响应体»"
+    },
+    "Response«UserCustom请求体»": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "响应编码成功：0",
+          "allowEmptyValue": false
+        },
+        "info": {
+          "$ref": "#/definitions/UserCustom请求体"
+        },
+        "msg": {
+          "type": "string",
+          "description": "错误描述，成功：OK",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Response«UserCustom请求体»"
+    },
+    "Response«long»": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "响应编码成功：0",
+          "allowEmptyValue": false
+        },
+        "info": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string",
+          "description": "错误描述，成功：OK",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Response«long»"
+    },
+    "UserCustom请求体": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "string",
+          "example": "attributes",
+          "description": "其他属性",
+          "allowEmptyValue": false
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "createTime",
+          "description": "创建时间",
+          "allowEmptyValue": false
+        },
+        "createUser": {
+          "type": "integer",
+          "format": "int64",
+          "example": "createUser",
+          "description": "创建人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "description": {
+          "type": "string",
+          "example": "description",
+          "description": "描述",
+          "allowEmptyValue": false
+        },
+        "favMenuIds": {
+          "type": "string",
+          "example": "favMenuIds",
+          "description": "用户收藏的菜单IDs",
+          "allowEmptyValue": false
+        },
+        "favMenus": {
+          "type": "array",
+          "example": "favMenus",
+          "description": "用户收藏的菜单列表",
+          "allowEmptyValue": false,
+          "items": {
+            "$ref": "#/definitions/Menu"
+          }
+        },
+        "focusArea": {
+          "type": "string",
+          "example": "focusArea",
+          "description": "关注地区",
+          "allowEmptyValue": false
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": "id",
+          "description": "id",
+          "allowEmptyValue": false
+        },
+        "isDeleted": {
+          "type": "integer",
+          "format": "int32",
+          "example": "isDeleted",
+          "description": "删除标记(0:正常，1:删除)",
+          "allowEmptyValue": false
+        },
+        "theme": {
+          "type": "string",
+          "example": "theme",
+          "description": "主题",
+          "allowEmptyValue": false
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "updateTime",
+          "description": "修改时间",
+          "allowEmptyValue": false
+        },
+        "updateUser": {
+          "type": "integer",
+          "format": "int64",
+          "example": "updateUser",
+          "description": "修改人 钉钉用户ID",
+          "allowEmptyValue": false
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64",
+          "example": "userId",
+          "description": "钉钉用户ID",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "UserCustom请求体"
+    }
+  }
+}

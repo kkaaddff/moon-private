@@ -1,0 +1,54 @@
+import sdk from "@api/sdk";
+const serverInfo = <%-JSON.stringify(webapiGroup.serverInfo) %>;
+const controllerName = "<%-webapiGroup.name %>";
+
+<% webapiGroup.apis.forEach(apiItem=>{ %>
+
+/**
+ *
+ * <%=apiItem.comment%>
+ *
+ */
+async function <%=Util.getMethodName(apiItem.name)%>(
+    <% apiItem.requestParam.forEach(paramItem=>{ %>
+        <%=paramItem.name%>:<%=Util.genInterfaceName(apiItem.name,paramItem.name,"req")%>,
+    <% }) %>
+):Promise< <%= Util.getTypeNameFromSchema(apiItem.responseSchema) %> > {
+
+  const result = await sdk.<%=Util.getMethodName(apiItem.method)%> <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
+  `<%-apiItem.url%><%-getQueryParam(apiItem.requestParam)%>`
+    <% apiItem.requestParam.forEach(paramItem=>{ %>
+           <% if (paramItem.isInPath) { %>
+           .replace("{<%-paramItem.name %>}",<%-paramItem.name %>+"")
+            <% }  %>
+    <% }) %>
+  ,
+<% if (!isInBody(apiItem.requestParam)) { %>
+    {
+    <% apiItem.requestParam.forEach(paramItem=>{ %>
+        <% if (!(paramItem.isInPath || paramItem.isInQuery)) { %>
+        <%=['string','integer','number','date','file','array','boolean'].includes(paramItem.jsonSchema.type)?"":"..."%><%=paramItem.name%>,
+        <% }  %>
+    <% }) %>
+    }
+<% } else { %>
+    <%= apiItem.requestParam.find(item=>item.isInBody).name%>
+<% }  %>
+
+,{serverInfo,controllerName});
+  return  result.data;
+}
+<% }) %>
+
+
+export default {
+<% webapiGroup.apis.forEach(apiItem=>{ %>
+    <%=Util.getMethodName(apiItem.name)%>,
+<% }) %>
+};
+
+
+
+<%-tsDefinded%>
+
+// create by moon https://github.com/creasy2010/moon

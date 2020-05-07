@@ -1,0 +1,2466 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`api生成 简单api生成 1`] = `
+Object {
+  "PetStoreController.ts": "import sdk from '@api/sdk';
+
+import isMock from './mock-util';
+const controllerName = 'PetStoreController';
+
+/**
+ *
+ * 创建门店
+ *
+ */
+async function createStore(
+  saveRequest: ICreateStoreSaveRequestReq,
+): Promise<unknown> {
+  let result = await sdk.put<unknown>(
+    '/create-store',
+
+    {
+      ...saveRequest,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 创建店铺
+ *
+ */
+async function create(
+  storeCreateRequest: ICreateStoreCreateRequestReq,
+): Promise<unknown> {
+  let result = await sdk.post<unknown>(
+    '/store/create',
+
+    {
+      ...storeCreateRequest,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 修改店铺号
+ *
+ */
+async function modifyStoreNum(
+  storeNumModifyRequest: IModifyStoreNumStoreNumModifyRequestReq,
+): Promise<unknown> {
+  let result = await sdk.post<unknown>(
+    '/store/num',
+
+    {
+      ...storeNumModifyRequest,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 获取所有店铺类型
+ *
+ */
+async function getAllStoreTypes(): Promise<unknown> {
+  let result = await sdk.get<unknown>(
+    '/store/storeTypes',
+
+    {},
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 获取该员工下的所有店铺
+ *
+ */
+async function listByEmployeeId(): Promise<unknown> {
+  let result = await sdk.get<unknown>(
+    '/store/storesByEmployeeId',
+
+    {},
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 切换店铺
+ *
+ */
+async function switchStore(
+  storeChangeRequest: ISwitchStoreStoreChangeRequestReq,
+): Promise<unknown> {
+  let result = await sdk.post<unknown>(
+    '/store/switch',
+
+    {
+      ...storeChangeRequest,
+    },
+  );
+  return result.data;
+}
+
+export default {
+  createStore,
+
+  create,
+
+  modifyStoreNum,
+
+  getAllStoreTypes,
+
+  listByEmployeeId,
+
+  switchStore,
+};
+
+export interface IgnoreType {
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"StoreSaveRequest\\".
+ */
+export interface StoreSaveRequest {
+  /**
+   * 供应商账号
+   */
+  accountName?: string;
+  /**
+   * 密码
+   */
+  accountPassword?: string;
+  /**
+   * 账号类型
+   * * b2bBoss: b2b账号
+   * * s2bBoss: s2b平台端账号
+   * * s2bSupplier: s2b供应商端账号
+   */
+  accountType?: 0 | 1 | 2;
+  /**
+   * 详细地址
+   */
+  addressDetail?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 市
+   */
+  cityId?: number;
+  /**
+   * 公司信息ID
+   */
+  companyInfoId?: number;
+  /**
+   * 联系邮箱
+   */
+  contactEmail?: string;
+  /**
+   * 联系方式
+   */
+  contactMobile?: string;
+  /**
+   * 联系人名字
+   */
+  contactPerson?: string;
+  /**
+   * 使用的运费模板类别(0:店铺运费,1:单品运费)
+   * * NO: 否
+   * * YES: 是
+   */
+  freightTemplateType?: 0 | 1;
+  /**
+   * 是否重置密码
+   */
+  isResetPwd?: boolean;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 店铺主键
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺店招
+   */
+  storeSign?: string;
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"BaseResponse«StoreVO»\\".
+ */
+export interface BaseResponseStoreVO {
+  /**
+   * 结果码
+   */
+  code: string;
+  context?: StoreVO;
+  /**
+   * 消息内容
+   */
+  message?: string;
+  [k: string]: any;
+}
+/**
+ * 内容
+ */
+export interface StoreVO {
+  /**
+   * 结算日
+   */
+  accountDay?: string;
+  /**
+   * 详细地址
+   */
+  addressDetail?: string;
+  /**
+   * 申请入驻时间
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 审核未通过原因
+   */
+  auditReason?: string;
+  /**
+   * 审核状态
+   * * WAIT_CHECK: 0：待审核
+   * * CHECKED: 1：已审核
+   * * NOT_PASS: 2：审核未通过
+   */
+  auditState?: 0 | 1 | 2;
+  /**
+   * 市
+   */
+  cityId?: number;
+  companyInfo?: CompanyInfoVO;
+  /**
+   * 供应商类型(0、平台自营 1、第三方供应商)
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系邮箱
+   */
+  contactEmail?: string;
+  /**
+   * 联系方式
+   */
+  contactMobile?: string;
+  /**
+   * 联系人名字
+   */
+  contactPerson?: string;
+  /**
+   * 签约结束日期
+   */
+  contractEndDate?: string;
+  /**
+   * 签约开始日期
+   */
+  contractStartDate?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 使用的运费模板类别(0:店铺运费,1:单品运费)
+   * * NO: 否
+   * * YES: 是
+   */
+  freightTemplateType?: 0 | 1;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 代开门店人
+   */
+  issuePerson?: string;
+  /**
+   * 店铺员工最后一次登陆时间
+   */
+  loginTime?: string;
+  /**
+   * 创建人最近登陆时间
+   */
+  masterLastLoginTime?: string;
+  /**
+   * 创建人手机号
+   */
+  masterMobile?: string;
+  /**
+   * 创建人姓名
+   */
+  masterName?: string;
+  /**
+   * 开店方式：0自己开店, 1合伙人代开门店，员工代开门店
+   * * SELF: 自己开开店
+   * * PARTNER: 合伙人代开
+   * * BOSS: boss管理员代开
+   */
+  openType?: 0 | 1 | 2;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 门店类型id
+   */
+  shopTypeId?: string;
+  /**
+   * 门店类型名称
+   */
+  shopTypeName?: string;
+  /**
+   * 店铺小程序码
+   */
+  smallProgramCode?: string;
+  /**
+   * 店铺关店原因
+   */
+  storeClosedReason?: string;
+  /**
+   * 店铺号
+   */
+  storeCode?: string;
+  /**
+   * 店铺主键
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺店招
+   */
+  storeSign?: string;
+  /**
+   * 店铺状态
+   * * OPENING: 0、开启
+   * * CLOSED: 1、关店
+   */
+  storeState?: 0 | 1;
+  /**
+   * 店铺类型
+   * * SHOP: 店铺
+   */
+  storeType?: number;
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 离签约到期的剩余天数
+   */
+  surplusDays?: number;
+  [k: string]: any;
+}
+/**
+ * 公司信息
+ */
+export interface CompanyInfoVO {
+  /**
+   * 住所
+   */
+  address?: string;
+  /**
+   * 入驻时间(第一次审核通过时间)
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 法人身份证反面
+   */
+  backIDCard?: string;
+  /**
+   * 营业执照副本电子版
+   */
+  businessLicence?: string;
+  /**
+   * 经营范围
+   */
+  businessScope?: string;
+  /**
+   * 营业期限至
+   */
+  businessTermEnd?: string;
+  /**
+   * 营业期限自
+   */
+  businessTermStart?: string;
+  /**
+   * 市
+   */
+  cityId?: number;
+  /**
+   * 供应商编号
+   */
+  companyCode?: string;
+  /**
+   * 公司简介
+   */
+  companyDescript?: string;
+  /**
+   * 编号
+   */
+  companyInfoId?: number;
+  /**
+   * 公司名称
+   */
+  companyName?: string;
+  /**
+   * 供应商类型
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系人名字
+   */
+  contactName?: string;
+  /**
+   * 联系方式
+   */
+  contactPhone?: string;
+  /**
+   * 版权信息
+   */
+  copyright?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 详细地址
+   */
+  detailAddress?: string;
+  /**
+   * 员工信息
+   */
+  employeeVOList?: EmployeeVO[];
+  /**
+   * 成立日期
+   */
+  foundDate?: string;
+  /**
+   * 法人身份证正面
+   */
+  frontIDCard?: string;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 法定代表人
+   */
+  legalRepresentative?: string;
+  /**
+   * 操作人
+   */
+  operator?: string;
+  /**
+   * 合伙人ID
+   */
+  partnerId?: string;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 注册资本
+   */
+  registeredCapital?: number;
+  /**
+   * 是否确认打款
+   * * NO: 否
+   * * YES: 是
+   */
+  remitAffirm?: 0 | 1;
+  /**
+   * 社会信用代码
+   */
+  socialCreditCode?: string;
+  /**
+   * 店铺信息
+   */
+  storeVOList?: StoreVO1[];
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  [k: string]: any;
+}
+export interface EmployeeVO {
+  /**
+   * 账号禁用原因
+   */
+  accountDisableReason?: string;
+  /**
+   * 账户名
+   */
+  accountName?: string;
+  /**
+   * 密码
+   */
+  accountPassword?: string;
+  /**
+   * 账号状态
+   * * ENABLE: 启用
+   * * DISABLE: 禁用
+   */
+  accountState?: 0 | 1;
+  /**
+   * 账号类型
+   * * b2bBoss: b2b账号
+   * * s2bBoss: s2b平台端账号
+   * * s2bSupplier: s2b供应商端账号
+   */
+  accountType?: 0 | 1 | 2;
+  companyInfo?: CompanyInfoVO1;
+  /**
+   * 供应商Id
+   */
+  companyInfoId?: number;
+  /**
+   * 创建人
+   */
+  createPerson?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 会员id
+   */
+  customerId?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 删除人
+   */
+  deletePerson?: string;
+  /**
+   * 删除时间
+   */
+  deleteTime?: string;
+  /**
+   * 业务员id
+   */
+  employeeId?: string;
+  /**
+   * 会员电话
+   */
+  employeeMobile?: string;
+  /**
+   * 会员名称
+   */
+  employeeName?: string;
+  /**
+   * salt
+   */
+  employeeSaltVal?: string;
+  /**
+   * 是否业务员(0 是 1否)
+   */
+  isEmployee?: number;
+  /**
+   * 是否是主账号
+   * * NO: 否
+   * * YES: 是
+   */
+  isMasterAccount?: number;
+  /**
+   * 最后一次登陆的店铺id
+   */
+  lastStoreId?: number;
+  /**
+   * 登录失败次数
+   */
+  loginErrorTime?: number;
+  /**
+   * 锁定时间
+   */
+  loginLockTime?: string;
+  /**
+   * 会员登录时间
+   */
+  loginTime?: string;
+  /**
+   * 角色id
+   */
+  roleId?: number;
+  /**
+   * 第三方店铺id
+   */
+  thirdId?: string;
+  /**
+   * 更新人
+   */
+  updatePerson?: string;
+  /**
+   * 更新时间
+   */
+  updateTime?: string;
+  [k: string]: any;
+}
+/**
+ * 供应商
+ */
+export interface CompanyInfoVO1 {
+  /**
+   * 住所
+   */
+  address?: string;
+  /**
+   * 入驻时间(第一次审核通过时间)
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 法人身份证反面
+   */
+  backIDCard?: string;
+  /**
+   * 营业执照副本电子版
+   */
+  businessLicence?: string;
+  /**
+   * 经营范围
+   */
+  businessScope?: string;
+  /**
+   * 营业期限至
+   */
+  businessTermEnd?: string;
+  /**
+   * 营业期限自
+   */
+  businessTermStart?: string;
+  /**
+   * 市
+   */
+  cityId?: number;
+  /**
+   * 供应商编号
+   */
+  companyCode?: string;
+  /**
+   * 公司简介
+   */
+  companyDescript?: string;
+  /**
+   * 编号
+   */
+  companyInfoId?: number;
+  /**
+   * 公司名称
+   */
+  companyName?: string;
+  /**
+   * 供应商类型
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系人名字
+   */
+  contactName?: string;
+  /**
+   * 联系方式
+   */
+  contactPhone?: string;
+  /**
+   * 版权信息
+   */
+  copyright?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 详细地址
+   */
+  detailAddress?: string;
+  /**
+   * 员工信息
+   */
+  employeeVOList?: EmployeeVO[];
+  /**
+   * 成立日期
+   */
+  foundDate?: string;
+  /**
+   * 法人身份证正面
+   */
+  frontIDCard?: string;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 法定代表人
+   */
+  legalRepresentative?: string;
+  /**
+   * 操作人
+   */
+  operator?: string;
+  /**
+   * 合伙人ID
+   */
+  partnerId?: string;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 注册资本
+   */
+  registeredCapital?: number;
+  /**
+   * 是否确认打款
+   * * NO: 否
+   * * YES: 是
+   */
+  remitAffirm?: 0 | 1;
+  /**
+   * 社会信用代码
+   */
+  socialCreditCode?: string;
+  /**
+   * 店铺信息
+   */
+  storeVOList?: StoreVO1[];
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  [k: string]: any;
+}
+export interface StoreVO1 {
+  /**
+   * 结算日
+   */
+  accountDay?: string;
+  /**
+   * 详细地址
+   */
+  addressDetail?: string;
+  /**
+   * 申请入驻时间
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 审核未通过原因
+   */
+  auditReason?: string;
+  /**
+   * 审核状态
+   * * WAIT_CHECK: 0：待审核
+   * * CHECKED: 1：已审核
+   * * NOT_PASS: 2：审核未通过
+   */
+  auditState?: 0 | 1 | 2;
+  /**
+   * 市
+   */
+  cityId?: number;
+  companyInfo?: CompanyInfoVO;
+  /**
+   * 供应商类型(0、平台自营 1、第三方供应商)
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系邮箱
+   */
+  contactEmail?: string;
+  /**
+   * 联系方式
+   */
+  contactMobile?: string;
+  /**
+   * 联系人名字
+   */
+  contactPerson?: string;
+  /**
+   * 签约结束日期
+   */
+  contractEndDate?: string;
+  /**
+   * 签约开始日期
+   */
+  contractStartDate?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 使用的运费模板类别(0:店铺运费,1:单品运费)
+   * * NO: 否
+   * * YES: 是
+   */
+  freightTemplateType?: 0 | 1;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 代开门店人
+   */
+  issuePerson?: string;
+  /**
+   * 店铺员工最后一次登陆时间
+   */
+  loginTime?: string;
+  /**
+   * 创建人最近登陆时间
+   */
+  masterLastLoginTime?: string;
+  /**
+   * 创建人手机号
+   */
+  masterMobile?: string;
+  /**
+   * 创建人姓名
+   */
+  masterName?: string;
+  /**
+   * 开店方式：0自己开店, 1合伙人代开门店，员工代开门店
+   * * SELF: 自己开开店
+   * * PARTNER: 合伙人代开
+   * * BOSS: boss管理员代开
+   */
+  openType?: 0 | 1 | 2;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 门店类型id
+   */
+  shopTypeId?: string;
+  /**
+   * 门店类型名称
+   */
+  shopTypeName?: string;
+  /**
+   * 店铺小程序码
+   */
+  smallProgramCode?: string;
+  /**
+   * 店铺关店原因
+   */
+  storeClosedReason?: string;
+  /**
+   * 店铺号
+   */
+  storeCode?: string;
+  /**
+   * 店铺主键
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺店招
+   */
+  storeSign?: string;
+  /**
+   * 店铺状态
+   * * OPENING: 0、开启
+   * * CLOSED: 1、关店
+   */
+  storeState?: 0 | 1;
+  /**
+   * 店铺类型
+   * * SHOP: 店铺
+   */
+  storeType?: number;
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 离签约到期的剩余天数
+   */
+  surplusDays?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"StoreVO\\".
+ */
+export interface StoreVO2 {
+  /**
+   * 结算日
+   */
+  accountDay?: string;
+  /**
+   * 详细地址
+   */
+  addressDetail?: string;
+  /**
+   * 申请入驻时间
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 审核未通过原因
+   */
+  auditReason?: string;
+  /**
+   * 审核状态
+   * * WAIT_CHECK: 0：待审核
+   * * CHECKED: 1：已审核
+   * * NOT_PASS: 2：审核未通过
+   */
+  auditState?: 0 | 1 | 2;
+  /**
+   * 市
+   */
+  cityId?: number;
+  companyInfo?: CompanyInfoVO;
+  /**
+   * 供应商类型(0、平台自营 1、第三方供应商)
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系邮箱
+   */
+  contactEmail?: string;
+  /**
+   * 联系方式
+   */
+  contactMobile?: string;
+  /**
+   * 联系人名字
+   */
+  contactPerson?: string;
+  /**
+   * 签约结束日期
+   */
+  contractEndDate?: string;
+  /**
+   * 签约开始日期
+   */
+  contractStartDate?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 使用的运费模板类别(0:店铺运费,1:单品运费)
+   * * NO: 否
+   * * YES: 是
+   */
+  freightTemplateType?: 0 | 1;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 代开门店人
+   */
+  issuePerson?: string;
+  /**
+   * 店铺员工最后一次登陆时间
+   */
+  loginTime?: string;
+  /**
+   * 创建人最近登陆时间
+   */
+  masterLastLoginTime?: string;
+  /**
+   * 创建人手机号
+   */
+  masterMobile?: string;
+  /**
+   * 创建人姓名
+   */
+  masterName?: string;
+  /**
+   * 开店方式：0自己开店, 1合伙人代开门店，员工代开门店
+   * * SELF: 自己开开店
+   * * PARTNER: 合伙人代开
+   * * BOSS: boss管理员代开
+   */
+  openType?: 0 | 1 | 2;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 门店类型id
+   */
+  shopTypeId?: string;
+  /**
+   * 门店类型名称
+   */
+  shopTypeName?: string;
+  /**
+   * 店铺小程序码
+   */
+  smallProgramCode?: string;
+  /**
+   * 店铺关店原因
+   */
+  storeClosedReason?: string;
+  /**
+   * 店铺号
+   */
+  storeCode?: string;
+  /**
+   * 店铺主键
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺店招
+   */
+  storeSign?: string;
+  /**
+   * 店铺状态
+   * * OPENING: 0、开启
+   * * CLOSED: 1、关店
+   */
+  storeState?: 0 | 1;
+  /**
+   * 店铺类型
+   * * SHOP: 店铺
+   */
+  storeType?: number;
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 离签约到期的剩余天数
+   */
+  surplusDays?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"CompanyInfoVO\\".
+ */
+export interface CompanyInfoVO2 {
+  /**
+   * 住所
+   */
+  address?: string;
+  /**
+   * 入驻时间(第一次审核通过时间)
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 法人身份证反面
+   */
+  backIDCard?: string;
+  /**
+   * 营业执照副本电子版
+   */
+  businessLicence?: string;
+  /**
+   * 经营范围
+   */
+  businessScope?: string;
+  /**
+   * 营业期限至
+   */
+  businessTermEnd?: string;
+  /**
+   * 营业期限自
+   */
+  businessTermStart?: string;
+  /**
+   * 市
+   */
+  cityId?: number;
+  /**
+   * 供应商编号
+   */
+  companyCode?: string;
+  /**
+   * 公司简介
+   */
+  companyDescript?: string;
+  /**
+   * 编号
+   */
+  companyInfoId?: number;
+  /**
+   * 公司名称
+   */
+  companyName?: string;
+  /**
+   * 供应商类型
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系人名字
+   */
+  contactName?: string;
+  /**
+   * 联系方式
+   */
+  contactPhone?: string;
+  /**
+   * 版权信息
+   */
+  copyright?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 详细地址
+   */
+  detailAddress?: string;
+  /**
+   * 员工信息
+   */
+  employeeVOList?: EmployeeVO[];
+  /**
+   * 成立日期
+   */
+  foundDate?: string;
+  /**
+   * 法人身份证正面
+   */
+  frontIDCard?: string;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 法定代表人
+   */
+  legalRepresentative?: string;
+  /**
+   * 操作人
+   */
+  operator?: string;
+  /**
+   * 合伙人ID
+   */
+  partnerId?: string;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 注册资本
+   */
+  registeredCapital?: number;
+  /**
+   * 是否确认打款
+   * * NO: 否
+   * * YES: 是
+   */
+  remitAffirm?: 0 | 1;
+  /**
+   * 社会信用代码
+   */
+  socialCreditCode?: string;
+  /**
+   * 店铺信息
+   */
+  storeVOList?: StoreVO1[];
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"EmployeeVO\\".
+ */
+export interface EmployeeVO1 {
+  /**
+   * 账号禁用原因
+   */
+  accountDisableReason?: string;
+  /**
+   * 账户名
+   */
+  accountName?: string;
+  /**
+   * 密码
+   */
+  accountPassword?: string;
+  /**
+   * 账号状态
+   * * ENABLE: 启用
+   * * DISABLE: 禁用
+   */
+  accountState?: 0 | 1;
+  /**
+   * 账号类型
+   * * b2bBoss: b2b账号
+   * * s2bBoss: s2b平台端账号
+   * * s2bSupplier: s2b供应商端账号
+   */
+  accountType?: 0 | 1 | 2;
+  companyInfo?: CompanyInfoVO1;
+  /**
+   * 供应商Id
+   */
+  companyInfoId?: number;
+  /**
+   * 创建人
+   */
+  createPerson?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 会员id
+   */
+  customerId?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 删除人
+   */
+  deletePerson?: string;
+  /**
+   * 删除时间
+   */
+  deleteTime?: string;
+  /**
+   * 业务员id
+   */
+  employeeId?: string;
+  /**
+   * 会员电话
+   */
+  employeeMobile?: string;
+  /**
+   * 会员名称
+   */
+  employeeName?: string;
+  /**
+   * salt
+   */
+  employeeSaltVal?: string;
+  /**
+   * 是否业务员(0 是 1否)
+   */
+  isEmployee?: number;
+  /**
+   * 是否是主账号
+   * * NO: 否
+   * * YES: 是
+   */
+  isMasterAccount?: number;
+  /**
+   * 最后一次登陆的店铺id
+   */
+  lastStoreId?: number;
+  /**
+   * 登录失败次数
+   */
+  loginErrorTime?: number;
+  /**
+   * 锁定时间
+   */
+  loginLockTime?: string;
+  /**
+   * 会员登录时间
+   */
+  loginTime?: string;
+  /**
+   * 角色id
+   */
+  roleId?: number;
+  /**
+   * 第三方店铺id
+   */
+  thirdId?: string;
+  /**
+   * 更新人
+   */
+  updatePerson?: string;
+  /**
+   * 更新时间
+   */
+  updateTime?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"StoreCreateRequest\\".
+ */
+export interface StoreCreateRequest {
+  /**
+   * 详细地址信息
+   */
+  addressDetail?: string;
+  /**
+   * 县级地区代码
+   */
+  areaId?: number;
+  /**
+   * 市级地区代码
+   */
+  cityId?: number;
+  /**
+   * 地址维度
+   */
+  latitude?: string;
+  /**
+   * 地址经度
+   */
+  longitude?: string;
+  /**
+   * 省级地区代码
+   */
+  provinceId?: number;
+  /**
+   * 门店类型id
+   */
+  shopTypeId?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"BaseResponse«StoreCreateResponse»\\".
+ */
+export interface BaseResponseStoreCreateResponse {
+  /**
+   * 结果码
+   */
+  code: string;
+  context?: StoreCreateResponse;
+  /**
+   * 消息内容
+   */
+  message?: string;
+  [k: string]: any;
+}
+/**
+ * 内容
+ */
+export interface StoreCreateResponse {
+  store?: StoreVO3;
+  /**
+   * 新的token
+   */
+  token?: string;
+  [k: string]: any;
+}
+/**
+ * 已创建的店铺信息信息
+ */
+export interface StoreVO3 {
+  /**
+   * 结算日
+   */
+  accountDay?: string;
+  /**
+   * 详细地址
+   */
+  addressDetail?: string;
+  /**
+   * 申请入驻时间
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 审核未通过原因
+   */
+  auditReason?: string;
+  /**
+   * 审核状态
+   * * WAIT_CHECK: 0：待审核
+   * * CHECKED: 1：已审核
+   * * NOT_PASS: 2：审核未通过
+   */
+  auditState?: 0 | 1 | 2;
+  /**
+   * 市
+   */
+  cityId?: number;
+  companyInfo?: CompanyInfoVO;
+  /**
+   * 供应商类型(0、平台自营 1、第三方供应商)
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系邮箱
+   */
+  contactEmail?: string;
+  /**
+   * 联系方式
+   */
+  contactMobile?: string;
+  /**
+   * 联系人名字
+   */
+  contactPerson?: string;
+  /**
+   * 签约结束日期
+   */
+  contractEndDate?: string;
+  /**
+   * 签约开始日期
+   */
+  contractStartDate?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 使用的运费模板类别(0:店铺运费,1:单品运费)
+   * * NO: 否
+   * * YES: 是
+   */
+  freightTemplateType?: 0 | 1;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 代开门店人
+   */
+  issuePerson?: string;
+  /**
+   * 店铺员工最后一次登陆时间
+   */
+  loginTime?: string;
+  /**
+   * 创建人最近登陆时间
+   */
+  masterLastLoginTime?: string;
+  /**
+   * 创建人手机号
+   */
+  masterMobile?: string;
+  /**
+   * 创建人姓名
+   */
+  masterName?: string;
+  /**
+   * 开店方式：0自己开店, 1合伙人代开门店，员工代开门店
+   * * SELF: 自己开开店
+   * * PARTNER: 合伙人代开
+   * * BOSS: boss管理员代开
+   */
+  openType?: 0 | 1 | 2;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 门店类型id
+   */
+  shopTypeId?: string;
+  /**
+   * 门店类型名称
+   */
+  shopTypeName?: string;
+  /**
+   * 店铺小程序码
+   */
+  smallProgramCode?: string;
+  /**
+   * 店铺关店原因
+   */
+  storeClosedReason?: string;
+  /**
+   * 店铺号
+   */
+  storeCode?: string;
+  /**
+   * 店铺主键
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺店招
+   */
+  storeSign?: string;
+  /**
+   * 店铺状态
+   * * OPENING: 0、开启
+   * * CLOSED: 1、关店
+   */
+  storeState?: 0 | 1;
+  /**
+   * 店铺类型
+   * * SHOP: 店铺
+   */
+  storeType?: number;
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 离签约到期的剩余天数
+   */
+  surplusDays?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"StoreCreateResponse\\".
+ */
+export interface StoreCreateResponse1 {
+  store?: StoreVO3;
+  /**
+   * 新的token
+   */
+  token?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"StoreNumModifyRequest\\".
+ */
+export interface StoreNumModifyRequest {
+  /**
+   * 店铺号
+   */
+  storeCode?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"BaseResponse\\".
+ */
+export interface BaseResponse {
+  /**
+   * 结果码
+   */
+  code: string;
+  /**
+   * 内容
+   */
+  context?: {
+    [k: string]: any;
+  };
+  /**
+   * 消息内容
+   */
+  message?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"BaseResponse«List«ShopTypeVO»»\\".
+ */
+export interface BaseResponseListShopTypeVO {
+  /**
+   * 结果码
+   */
+  code: string;
+  /**
+   * 内容
+   */
+  context?: ShopTypeVO[];
+  /**
+   * 消息内容
+   */
+  message?: string;
+  [k: string]: any;
+}
+export interface ShopTypeVO {
+  /**
+   * 删除标识
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 描述
+   */
+  description?: string;
+  /**
+   * 主键id
+   */
+  shopTypeId?: string;
+  /**
+   * 店铺类型名称
+   */
+  typeName?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"ShopTypeVO\\".
+ */
+export interface ShopTypeVO1 {
+  /**
+   * 删除标识
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 描述
+   */
+  description?: string;
+  /**
+   * 主键id
+   */
+  shopTypeId?: string;
+  /**
+   * 店铺类型名称
+   */
+  typeName?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"BaseResponse«StoreListByEmployeeIdResponse»\\".
+ */
+export interface BaseResponseStoreListByEmployeeIdResponse {
+  /**
+   * 结果码
+   */
+  code: string;
+  context?: StoreListByEmployeeIdResponse;
+  /**
+   * 消息内容
+   */
+  message?: string;
+  [k: string]: any;
+}
+/**
+ * 内容
+ */
+export interface StoreListByEmployeeIdResponse {
+  /**
+   * 店铺信息列表结果
+   */
+  storeVOList?: StoreVO4[];
+  [k: string]: any;
+}
+export interface StoreVO4 {
+  /**
+   * 结算日
+   */
+  accountDay?: string;
+  /**
+   * 详细地址
+   */
+  addressDetail?: string;
+  /**
+   * 申请入驻时间
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 审核未通过原因
+   */
+  auditReason?: string;
+  /**
+   * 审核状态
+   * * WAIT_CHECK: 0：待审核
+   * * CHECKED: 1：已审核
+   * * NOT_PASS: 2：审核未通过
+   */
+  auditState?: 0 | 1 | 2;
+  /**
+   * 市
+   */
+  cityId?: number;
+  companyInfo?: CompanyInfoVO;
+  /**
+   * 供应商类型(0、平台自营 1、第三方供应商)
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系邮箱
+   */
+  contactEmail?: string;
+  /**
+   * 联系方式
+   */
+  contactMobile?: string;
+  /**
+   * 联系人名字
+   */
+  contactPerson?: string;
+  /**
+   * 签约结束日期
+   */
+  contractEndDate?: string;
+  /**
+   * 签约开始日期
+   */
+  contractStartDate?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 使用的运费模板类别(0:店铺运费,1:单品运费)
+   * * NO: 否
+   * * YES: 是
+   */
+  freightTemplateType?: 0 | 1;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 代开门店人
+   */
+  issuePerson?: string;
+  /**
+   * 店铺员工最后一次登陆时间
+   */
+  loginTime?: string;
+  /**
+   * 创建人最近登陆时间
+   */
+  masterLastLoginTime?: string;
+  /**
+   * 创建人手机号
+   */
+  masterMobile?: string;
+  /**
+   * 创建人姓名
+   */
+  masterName?: string;
+  /**
+   * 开店方式：0自己开店, 1合伙人代开门店，员工代开门店
+   * * SELF: 自己开开店
+   * * PARTNER: 合伙人代开
+   * * BOSS: boss管理员代开
+   */
+  openType?: 0 | 1 | 2;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 门店类型id
+   */
+  shopTypeId?: string;
+  /**
+   * 门店类型名称
+   */
+  shopTypeName?: string;
+  /**
+   * 店铺小程序码
+   */
+  smallProgramCode?: string;
+  /**
+   * 店铺关店原因
+   */
+  storeClosedReason?: string;
+  /**
+   * 店铺号
+   */
+  storeCode?: string;
+  /**
+   * 店铺主键
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺店招
+   */
+  storeSign?: string;
+  /**
+   * 店铺状态
+   * * OPENING: 0、开启
+   * * CLOSED: 1、关店
+   */
+  storeState?: 0 | 1;
+  /**
+   * 店铺类型
+   * * SHOP: 店铺
+   */
+  storeType?: number;
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 离签约到期的剩余天数
+   */
+  surplusDays?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"StoreListByEmployeeIdResponse\\".
+ */
+export interface StoreListByEmployeeIdResponse1 {
+  /**
+   * 店铺信息列表结果
+   */
+  storeVOList?: StoreVO4[];
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"StoreChangeRequest\\".
+ */
+export interface StoreChangeRequest {
+  /**
+   * 店铺id
+   */
+  storeId?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"BaseResponse«StoreChangeResponse»\\".
+ */
+export interface BaseResponseStoreChangeResponse {
+  /**
+   * 结果码
+   */
+  code: string;
+  context?: StoreChangeResponse;
+  /**
+   * 消息内容
+   */
+  message?: string;
+  [k: string]: any;
+}
+/**
+ * 内容
+ */
+export interface StoreChangeResponse {
+  /**
+   * 账号名称
+   */
+  accountName?: string;
+  /**
+   * 审核状态
+   * * NON_CHECKED: 0: 未审核
+   * * CHECKED: 1: 已审核
+   * * REJECTED: 2: 已打回
+   */
+  auditState?: string;
+  /**
+   * 公司信息ID
+   */
+  companyInfoId?: number;
+  /**
+   * 供应商类型(0、平台自营 1、第三方供应商)
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 业务员id
+   */
+  employeeId?: string;
+  /**
+   * 业务员名称
+   */
+  employeeName?: string;
+  /**
+   * 是否业务员
+   * * NO: 否
+   * * YES: 是
+   */
+  isEmployee?: number;
+  /**
+   * 是否主账号
+   * * NO: 否
+   * * YES: 是
+   */
+  isMasterAccount?: number;
+  /**
+   * 手机号
+   */
+  mobile?: string;
+  /**
+   * 已经选择店铺
+   */
+  selectedStore?: boolean;
+  store?: StoreVO5;
+  /**
+   * 店铺码
+   */
+  storeCode?: string;
+  /**
+   * 店铺id
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺名称
+   */
+  supplierName?: string;
+  /**
+   * 新的token
+   */
+  token?: string;
+  [k: string]: any;
+}
+/**
+ * 已创建的店铺信息信息
+ */
+export interface StoreVO5 {
+  /**
+   * 结算日
+   */
+  accountDay?: string;
+  /**
+   * 详细地址
+   */
+  addressDetail?: string;
+  /**
+   * 申请入驻时间
+   */
+  applyEnterTime?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 审核未通过原因
+   */
+  auditReason?: string;
+  /**
+   * 审核状态
+   * * WAIT_CHECK: 0：待审核
+   * * CHECKED: 1：已审核
+   * * NOT_PASS: 2：审核未通过
+   */
+  auditState?: 0 | 1 | 2;
+  /**
+   * 市
+   */
+  cityId?: number;
+  companyInfo?: CompanyInfoVO;
+  /**
+   * 供应商类型(0、平台自营 1、第三方供应商)
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 联系邮箱
+   */
+  contactEmail?: string;
+  /**
+   * 联系方式
+   */
+  contactMobile?: string;
+  /**
+   * 联系人名字
+   */
+  contactPerson?: string;
+  /**
+   * 签约结束日期
+   */
+  contractEndDate?: string;
+  /**
+   * 签约开始日期
+   */
+  contractStartDate?: string;
+  /**
+   * 删除标志
+   * * NO: 否
+   * * YES: 是
+   */
+  delFlag?: 0 | 1;
+  /**
+   * 使用的运费模板类别(0:店铺运费,1:单品运费)
+   * * NO: 否
+   * * YES: 是
+   */
+  freightTemplateType?: 0 | 1;
+  /**
+   * 多个SPU编号
+   */
+  goodsIds?: string[];
+  /**
+   * 代开门店人
+   */
+  issuePerson?: string;
+  /**
+   * 店铺员工最后一次登陆时间
+   */
+  loginTime?: string;
+  /**
+   * 创建人最近登陆时间
+   */
+  masterLastLoginTime?: string;
+  /**
+   * 创建人手机号
+   */
+  masterMobile?: string;
+  /**
+   * 创建人姓名
+   */
+  masterName?: string;
+  /**
+   * 开店方式：0自己开店, 1合伙人代开门店，员工代开门店
+   * * SELF: 自己开开店
+   * * PARTNER: 合伙人代开
+   * * BOSS: boss管理员代开
+   */
+  openType?: 0 | 1 | 2;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 门店类型id
+   */
+  shopTypeId?: string;
+  /**
+   * 门店类型名称
+   */
+  shopTypeName?: string;
+  /**
+   * 店铺小程序码
+   */
+  smallProgramCode?: string;
+  /**
+   * 店铺关店原因
+   */
+  storeClosedReason?: string;
+  /**
+   * 店铺号
+   */
+  storeCode?: string;
+  /**
+   * 店铺主键
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺店招
+   */
+  storeSign?: string;
+  /**
+   * 店铺状态
+   * * OPENING: 0、开启
+   * * CLOSED: 1、关店
+   */
+  storeState?: 0 | 1;
+  /**
+   * 店铺类型
+   * * SHOP: 店铺
+   */
+  storeType?: number;
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  /**
+   * 离签约到期的剩余天数
+   */
+  surplusDays?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"StoreChangeResponse\\".
+ */
+export interface StoreChangeResponse1 {
+  /**
+   * 账号名称
+   */
+  accountName?: string;
+  /**
+   * 审核状态
+   * * NON_CHECKED: 0: 未审核
+   * * CHECKED: 1: 已审核
+   * * REJECTED: 2: 已打回
+   */
+  auditState?: string;
+  /**
+   * 公司信息ID
+   */
+  companyInfoId?: number;
+  /**
+   * 供应商类型(0、平台自营 1、第三方供应商)
+   * * NO: 否
+   * * YES: 是
+   */
+  companyType?: 0 | 1;
+  /**
+   * 业务员id
+   */
+  employeeId?: string;
+  /**
+   * 业务员名称
+   */
+  employeeName?: string;
+  /**
+   * 是否业务员
+   * * NO: 否
+   * * YES: 是
+   */
+  isEmployee?: number;
+  /**
+   * 是否主账号
+   * * NO: 否
+   * * YES: 是
+   */
+  isMasterAccount?: number;
+  /**
+   * 手机号
+   */
+  mobile?: string;
+  /**
+   * 已经选择店铺
+   */
+  selectedStore?: boolean;
+  store?: StoreVO5;
+  /**
+   * 店铺码
+   */
+  storeCode?: string;
+  /**
+   * 店铺id
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺名称
+   */
+  supplierName?: string;
+  /**
+   * 新的token
+   */
+  token?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"ICreateStoreSaveRequestReq\\".
+ */
+export interface ICreateStoreSaveRequestReq {
+  /**
+   * 供应商账号
+   */
+  accountName?: string;
+  /**
+   * 密码
+   */
+  accountPassword?: string;
+  /**
+   * 账号类型
+   * * b2bBoss: b2b账号
+   * * s2bBoss: s2b平台端账号
+   * * s2bSupplier: s2b供应商端账号
+   */
+  accountType?: 0 | 1 | 2;
+  /**
+   * 详细地址
+   */
+  addressDetail?: string;
+  /**
+   * 区
+   */
+  areaId?: number;
+  /**
+   * 市
+   */
+  cityId?: number;
+  /**
+   * 公司信息ID
+   */
+  companyInfoId?: number;
+  /**
+   * 联系邮箱
+   */
+  contactEmail?: string;
+  /**
+   * 联系方式
+   */
+  contactMobile?: string;
+  /**
+   * 联系人名字
+   */
+  contactPerson?: string;
+  /**
+   * 使用的运费模板类别(0:店铺运费,1:单品运费)
+   * * NO: 否
+   * * YES: 是
+   */
+  freightTemplateType?: 0 | 1;
+  /**
+   * 是否重置密码
+   */
+  isResetPwd?: boolean;
+  /**
+   * 省
+   */
+  provinceId?: number;
+  /**
+   * 店铺主键
+   */
+  storeId?: number;
+  /**
+   * 店铺logo
+   */
+  storeLogo?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  /**
+   * 店铺店招
+   */
+  storeSign?: string;
+  /**
+   * 供应商名称
+   */
+  supplierName?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"undefined\\".
+ */
+export interface BaseResponseStoreChangeResponse1 {
+  /**
+   * 结果码
+   */
+  code: string;
+  context?: StoreChangeResponse;
+  /**
+   * 消息内容
+   */
+  message?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"ICreateStoreCreateRequestReq\\".
+ */
+export interface ICreateStoreCreateRequestReq {
+  /**
+   * 详细地址信息
+   */
+  addressDetail?: string;
+  /**
+   * 县级地区代码
+   */
+  areaId?: number;
+  /**
+   * 市级地区代码
+   */
+  cityId?: number;
+  /**
+   * 地址维度
+   */
+  latitude?: string;
+  /**
+   * 地址经度
+   */
+  longitude?: string;
+  /**
+   * 省级地区代码
+   */
+  provinceId?: number;
+  /**
+   * 门店类型id
+   */
+  shopTypeId?: string;
+  /**
+   * 店铺名称
+   */
+  storeName?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IModifyStoreNumStoreNumModifyRequestReq\\".
+ */
+export interface IModifyStoreNumStoreNumModifyRequestReq {
+  /**
+   * 店铺号
+   */
+  storeCode?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"ISwitchStoreStoreChangeRequestReq\\".
+ */
+export interface ISwitchStoreStoreChangeRequestReq {
+  /**
+   * 店铺id
+   */
+  storeId?: number;
+  [k: string]: any;
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+}
+`;

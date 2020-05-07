@@ -1,0 +1,7 @@
+@import "~style/theme.less";
+<% if (subComp.style) { %>
+<%-subComp.style %>
+<% }  else {%>
+.<%=Util.toUCamelize(pageInfo.pageKey)%><%=Util.toUCamelize(subComp.fileName)%>   {
+}
+<% } %>

@@ -1,0 +1,165 @@
+{
+  "goods/info":{
+    "title":"商品详情",
+    "models": [
+      {
+        "fileName": "main",
+        "datas":[
+          {
+            "name":"info",
+            "value":{
+              "no":"123123",
+              "time":"123123",
+              "name":"123123"
+            }
+          }
+        ],
+        "methods": [
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "fileName": "action",
+        "methods": [
+          {
+            "name": "modify",
+            "comment":"修改订单",
+            "param": ""
+          },
+          {
+            "name": "print",
+            "comment":"打印订单",
+            "param": ""
+          },
+          {
+            "name": "count",
+            "comment":"收款",
+            "param": ""
+          },
+          {
+            "name": "cancel",
+            "comment":"取消订单",
+            "param": ""
+          },
+          {
+            "name": "assignEmployee",
+            "comment":"分配提成员工",
+            "param": ""
+          }
+        ]
+      }
+    ],
+    "subComps": [
+      {
+        "fileName": "trade-info",
+        "methods": []
+      },
+      {
+        "fileName": "custom-info",
+        "methods": []
+      },
+      {
+        "fileName": "shop-info",
+        "methods": []
+      },
+      {
+        "fileName": "goods",
+        "methods": []
+      }
+    ]
+  },
+  "balance/bankcard-info":{
+    "pagePath": "balance/bankcard-info",
+    "title":"银行卡详情",
+    "models": [
+      {
+        "fileName": "bank-info",
+        "datas":[
+          {
+            "name":"bankInfo",
+            "value":{
+              "id":""
+            }
+          }
+        ],
+        "methods": [
+          {
+            "name": "bankInfo",
+            "param": ""
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "fileName": "bank-info",
+        "methods": [
+          {
+            "name": "unlock",
+            "param": ""
+          }
+        ]
+      }
+    ],
+    "subComps": [
+      {
+        "fileName": "info",
+        "methods": []
+      }
+    ]
+  },
+  "balance/bankcardsTest":{
+    "title":"客户",
+    "pagePath": "balance/bankcardsTest",
+    "models": [
+      {
+        "fileName": "reducer",
+        "datas":[
+          {
+            "name":"bankcards",
+            "value":[{
+              "id":"sdf",
+              "name":"123132"
+            }]
+          },{
+            "name":"totalCount",
+            "value":0
+          },{
+            "name":"actCount",
+            "value":0
+          },{
+            "name":"sleepCount",
+            "value":0
+          }],
+        "methods": [
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "fileName": "action",
+        "methods": [
+          {
+            "name": "add",
+            "param": ""
+          },
+          {
+            "name": "del",
+            "param": ""
+          }
+        ]
+      }
+    ],
+    "subComps": [
+      {
+        "fileName": "list",
+        "methods": []
+      },
+      {
+        "fileName": "card",
+        "methods": []
+      }
+    ]
+  }
+}

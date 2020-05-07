@@ -1,0 +1,27 @@
+<%-getImport()%>
+
+<% pageInfo.models.forEach(actor=>{ %>
+        export interface <%=Util.getReducerTsName(actor.fileName)%> {
+            isReady:boolean;
+            isLoading?:boolean;
+            <% actor.datas.forEach(dataItem=>{ %>
+                         <%=dataItem.name%>:<%=dataItem.typeName%>;
+            <% }) %>
+        }
+<% }) %>
+
+export type IAllReducerProps  = {
+    <% pageInfo.models.forEach(actor=>{ %>
+                <%=Util.toLCamelize(actor.fileName)%>  : <%=Util.getReducerTsName(actor.fileName)%>,
+    <% }) %>
+  [name:string]:any;
+}
+
+ <% pageInfo.subComps.forEach(item=>{ %>
+export type I<%=Util.toUCamelize(item.fileName)%>Props = { };
+export type I<%=Util.toUCamelize(item.fileName)%>State = { };
+ <% }) %>
+
+ <%=valueTsDefinds%>
+
+// create by moon https://github.com/creasy2010/moon

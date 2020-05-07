@@ -1,0 +1,1356 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`云帐房swaggerapi测试 正常生成测试: 无mock数据 1`] = `
+Object {
+  "AppAuthInfo-Api.ts": "import sdk from '@api/sdk';
+
+import isMock from './mock-util';
+const controllerName = 'AppAuthInfo-Api';
+
+/**
+ *
+ * 新增AppAuthInfo
+ *
+ */
+async function saveAppAuthInfo(
+  authInfoReq: ISaveAppAuthInfoAuthInfoReqReq,
+): Promise<unknown> {
+  let result = await sdk.post(
+    '/biz/authinfo',
+
+    {
+      ...authInfoReq,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 更新AppAuthInfo
+ *
+ */
+async function updateAppAuthInfo(
+  authInfoReq: IUpdateAppAuthInfoAuthInfoReqReq,
+): Promise<unknown> {
+  let result = await sdk.put(
+    '/biz/authinfo',
+
+    {
+      ...authInfoReq,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 根据menuId查询单个AppAuthInfo
+ *
+ */
+async function queryAppAuthInfoByMenuId(
+  menuId: IQueryAppAuthInfoByMenuIdMenuIdReq,
+): Promise<unknown> {
+  let result = await sdk.get(
+    '/biz/authinfo/bymenu/{menuId}'.replace('{menuId}', menuId + ''),
+
+    {},
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 查询单个AppAuthInfo
+ *
+ */
+async function queryAppAuthInfoById(
+  id: IQueryAppAuthInfoByIdIdReq,
+): Promise<unknown> {
+  let result = await sdk.get(
+    '/biz/authinfo/{id}'.replace('{id}', id + ''),
+
+    {},
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 查询所有AppAuthInfo
+ *
+ */
+async function queryAppAuthInfos(): Promise<unknown> {
+  let result = await sdk.get(
+    '/biz/authinfos',
+
+    {},
+  );
+  return result.data;
+}
+
+export default {
+  saveAppAuthInfo,
+
+  updateAppAuthInfo,
+
+  queryAppAuthInfoByMenuId,
+
+  queryAppAuthInfoById,
+
+  queryAppAuthInfos,
+};
+
+/**
+ * menuId
+ *
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IQueryAppAuthInfoByMenuIdMenuIdReq\\".
+ */
+export type IQueryAppAuthInfoByMenuIdMenuIdReq = number;
+/**
+ * id
+ *
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IQueryAppAuthInfoByIdIdReq\\".
+ */
+export type IQueryAppAuthInfoByIdIdReq = number;
+
+export interface IgnoreType {
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"AppAuthInfoReq\\".
+ */
+export interface AppAuthInfoReq {
+  /**
+   * 认证信息，加密存储
+   */
+  authInfo?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 应用描述
+   */
+  description?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 菜单ID
+   */
+  menuId?: number;
+  /**
+   * 加密盐
+   */
+  salt?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response\\".
+ */
+export interface Response {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: {
+    [k: string]: any;
+  };
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response«AppAuthInfoResp»\\".
+ */
+export interface ResponseAppAuthInfoResp {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: AppAuthInfoResp;
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"AppAuthInfoResp\\".
+ */
+export interface AppAuthInfoResp {
+  /**
+   * 认证信息，加密存储
+   */
+  authInfo?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 应用描述
+   */
+  description?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 菜单ID
+   */
+  menuId?: number;
+  /**
+   * 加密盐
+   */
+  salt?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"ISaveAppAuthInfoAuthInfoReqReq\\".
+ */
+export interface ISaveAppAuthInfoAuthInfoReqReq {
+  /**
+   * 认证信息，加密存储
+   */
+  authInfo?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 应用描述
+   */
+  description?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 菜单ID
+   */
+  menuId?: number;
+  /**
+   * 加密盐
+   */
+  salt?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IUpdateAppAuthInfoAuthInfoReqReq\\".
+ */
+export interface IUpdateAppAuthInfoAuthInfoReqReq {
+  /**
+   * 认证信息，加密存储
+   */
+  authInfo?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 应用描述
+   */
+  description?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 菜单ID
+   */
+  menuId?: number;
+  /**
+   * 加密盐
+   */
+  salt?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+  "AppLog-Api.ts": "import sdk from '@api/sdk';
+
+import isMock from './mock-util';
+const controllerName = 'AppLog-Api';
+
+/**
+ *
+ * 新增AppLog
+ *
+ */
+async function saveAppLog(
+  applogReq: ISaveAppLogApplogReqReq,
+): Promise<unknown> {
+  let result = await sdk.post(
+    '/biz/applog',
+
+    {
+      ...applogReq,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 查询单个AppLog
+ *
+ */
+async function queryAppLogById(id: IQueryAppLogByIdIdReq): Promise<unknown> {
+  let result = await sdk.get(
+    '/biz/applog/{id}'.replace('{id}', id + ''),
+
+    {},
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 根据appId查询所有AppLog
+ *
+ */
+async function queryByPage(
+  appId: IQueryByPageAppIdReq,
+  pageNum: IQueryByPagePageNumReq,
+  pageSize: IQueryByPagePageSizeReq,
+): Promise<unknown> {
+  let result = await sdk.get(
+    '/biz/applogs',
+
+    {
+      appId,
+
+      pageNum,
+
+      pageSize,
+    },
+  );
+  return result.data;
+}
+
+export default {
+  saveAppLog,
+
+  queryAppLogById,
+
+  queryByPage,
+};
+
+/**
+ * id
+ *
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IQueryAppLogByIdIdReq\\".
+ */
+export type IQueryAppLogByIdIdReq = number;
+/**
+ * appId
+ *
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IQueryByPageAppIdReq\\".
+ */
+export type IQueryByPageAppIdReq = string;
+/**
+ * pageNum
+ *
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IQueryByPagePageNumReq\\".
+ */
+export type IQueryByPagePageNumReq = string;
+/**
+ * pageSize
+ *
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IQueryByPagePageSizeReq\\".
+ */
+export type IQueryByPagePageSizeReq = string;
+
+export interface IgnoreType {
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"AppLogReq\\".
+ */
+export interface AppLogReq {
+  /**
+   * 应用ID
+   */
+  applicationId?: number;
+  /**
+   * 日志内容
+   */
+  content?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response\\".
+ */
+export interface Response {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: {
+    [k: string]: any;
+  };
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response«AppLogResp»\\".
+ */
+export interface ResponseAppLogResp {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: AppLogResp;
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"AppLogResp\\".
+ */
+export interface AppLogResp {
+  /**
+   * 应用ID
+   */
+  applicationId?: number;
+  /**
+   * 日志内容
+   */
+  content?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"ISaveAppLogApplogReqReq\\".
+ */
+export interface ISaveAppLogApplogReqReq {
+  /**
+   * 应用ID
+   */
+  applicationId?: number;
+  /**
+   * 日志内容
+   */
+  content?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+  "Menu-Api.ts": "import sdk from '@api/sdk';
+
+import isMock from './mock-util';
+const controllerName = 'Menu-Api';
+
+/**
+ *
+ * 新增Menu
+ *
+ */
+async function saveMenu(menuReq: ISaveMenuMenuReqReq): Promise<unknown> {
+  let result = await sdk.post(
+    '/biz/menu',
+
+    {
+      ...menuReq,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 更新Menu
+ *
+ */
+async function updateMenu(menuReq: IUpdateMenuMenuReqReq): Promise<unknown> {
+  let result = await sdk.put(
+    '/biz/menu',
+
+    {
+      ...menuReq,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 查询单个Menu
+ *
+ */
+async function queryMenuById(id: IQueryMenuByIdIdReq): Promise<unknown> {
+  let result = await sdk.get(
+    '/biz/menu/{id}'.replace('{id}', id + ''),
+
+    {},
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 查询所有授权的Menu
+ *
+ */
+async function queryMenus(): Promise<unknown> {
+  let result = await sdk.get(
+    '/biz/menus',
+
+    {},
+  );
+  return result.data;
+}
+
+export default {
+  saveMenu,
+
+  updateMenu,
+
+  queryMenuById,
+
+  queryMenus,
+};
+
+/**
+ * id
+ *
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IQueryMenuByIdIdReq\\".
+ */
+export type IQueryMenuByIdIdReq = number;
+
+export interface IgnoreType {
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Menu请求体\\".
+ */
+export interface Menu {
+  /**
+   * 菜单属性
+   */
+  attributes?: string;
+  /**
+   * 认证方式：0: sso token cookie（默认，域名相同）; 1: sso token request param（域名不同）; 2:account&password (第三方应用，配合application_account)
+   */
+  authType?: number;
+  /**
+   * 编码
+   */
+  code?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 菜单描述
+   */
+  description?: string;
+  /**
+   * 0：应用内显示；1：iframe；2：弹窗；3：新页签
+   */
+  displayType?: number;
+  /**
+   * icon
+   */
+  icon?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 菜单名称
+   */
+  name?: string;
+  /**
+   * 排序
+   */
+  orderId?: number;
+  /**
+   * 父级菜单ID，没有即为0
+   */
+  parentId?: number;
+  /**
+   * 状态
+   */
+  status?: number;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 应用url
+   */
+  url?: string;
+  /**
+   * wiki url
+   */
+  wikiUrl?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response\\".
+ */
+export interface Response {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: {
+    [k: string]: any;
+  };
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response«Menu响应体»\\".
+ */
+export interface ResponseMenu {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: Menu1;
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Menu响应体\\".
+ */
+export interface Menu1 {
+  /**
+   * 菜单属性
+   */
+  attributes?: string;
+  /**
+   * 认证方式：0: sso token cookie（默认，域名相同）; 1: sso token request param（域名不同）; 2:account&password (第三方应用，配合application_account)
+   */
+  authType?: number;
+  /**
+   * 编码
+   */
+  code?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 菜单描述
+   */
+  description?: string;
+  /**
+   * 0：应用内显示；1：iframe；2：弹窗；3：新页签
+   */
+  displayType?: number;
+  /**
+   * icon
+   */
+  icon?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 菜单名称
+   */
+  name?: string;
+  /**
+   * 排序
+   */
+  orderId?: number;
+  /**
+   * 父级菜单ID，没有即为0
+   */
+  parentId?: number;
+  /**
+   * 状态
+   */
+  status?: number;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 应用url
+   */
+  url?: string;
+  /**
+   * wiki url
+   */
+  wikiUrl?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"ISaveMenuMenuReqReq\\".
+ */
+export interface ISaveMenuMenuReqReq {
+  /**
+   * 菜单属性
+   */
+  attributes?: string;
+  /**
+   * 认证方式：0: sso token cookie（默认，域名相同）; 1: sso token request param（域名不同）; 2:account&password (第三方应用，配合application_account)
+   */
+  authType?: number;
+  /**
+   * 编码
+   */
+  code?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 菜单描述
+   */
+  description?: string;
+  /**
+   * 0：应用内显示；1：iframe；2：弹窗；3：新页签
+   */
+  displayType?: number;
+  /**
+   * icon
+   */
+  icon?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 菜单名称
+   */
+  name?: string;
+  /**
+   * 排序
+   */
+  orderId?: number;
+  /**
+   * 父级菜单ID，没有即为0
+   */
+  parentId?: number;
+  /**
+   * 状态
+   */
+  status?: number;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 应用url
+   */
+  url?: string;
+  /**
+   * wiki url
+   */
+  wikiUrl?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IUpdateMenuMenuReqReq\\".
+ */
+export interface IUpdateMenuMenuReqReq {
+  /**
+   * 菜单属性
+   */
+  attributes?: string;
+  /**
+   * 认证方式：0: sso token cookie（默认，域名相同）; 1: sso token request param（域名不同）; 2:account&password (第三方应用，配合application_account)
+   */
+  authType?: number;
+  /**
+   * 编码
+   */
+  code?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 菜单描述
+   */
+  description?: string;
+  /**
+   * 0：应用内显示；1：iframe；2：弹窗；3：新页签
+   */
+  displayType?: number;
+  /**
+   * icon
+   */
+  icon?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 菜单名称
+   */
+  name?: string;
+  /**
+   * 排序
+   */
+  orderId?: number;
+  /**
+   * 父级菜单ID，没有即为0
+   */
+  parentId?: number;
+  /**
+   * 状态
+   */
+  status?: number;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 应用url
+   */
+  url?: string;
+  /**
+   * wiki url
+   */
+  wikiUrl?: string;
+  [k: string]: any;
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+  "UserCustom-Api.ts": "import sdk from '@api/sdk';
+
+import isMock from './mock-util';
+const controllerName = 'UserCustom-Api';
+
+/**
+ *
+ * 新增UserCustom
+ *
+ */
+async function saveUserCustom(
+  userCustomReq: ISaveUserCustomUserCustomReqReq,
+): Promise<unknown> {
+  let result = await sdk.post(
+    '/biz/userCustom',
+
+    {
+      ...userCustomReq,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 更新UserCustom
+ *
+ */
+async function updateUserCustom(
+  userCustomReq: IUpdateUserCustomUserCustomReqReq,
+): Promise<unknown> {
+  let result = await sdk.put(
+    '/biz/userCustom',
+
+    {
+      ...userCustomReq,
+    },
+  );
+  return result.data;
+}
+
+/**
+ *
+ * 根据userId查询用户自定义信息
+ *
+ */
+async function queryByUserId(): Promise<unknown> {
+  let result = await sdk.get(
+    '/biz/usercustom',
+
+    {},
+  );
+  return result.data;
+}
+
+export default {
+  saveUserCustom,
+
+  updateUserCustom,
+
+  queryByUserId,
+};
+
+export interface IgnoreType {
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"UserCustom请求体\\".
+ */
+export interface UserCustom {
+  /**
+   * 其他属性
+   */
+  attributes?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 描述
+   */
+  description?: string;
+  /**
+   * 用户收藏的菜单IDs
+   */
+  favMenuIds?: string;
+  /**
+   * 用户收藏的菜单列表
+   */
+  favMenus?: Menu[];
+  /**
+   * 关注地区
+   */
+  focusArea?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 主题
+   */
+  theme?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Menu\\".
+ */
+export interface Menu {
+  attributes?: string;
+  authType?: number;
+  code?: string;
+  createTime?: string;
+  createUser?: number;
+  description?: string;
+  displayType?: number;
+  icon?: string;
+  id?: number;
+  isDeleted?: number;
+  name?: string;
+  orderId?: number;
+  parentId?: number;
+  status?: number;
+  subMenus?: Menu[];
+  updateTime?: string;
+  updateUser?: number;
+  url?: string;
+  wikiUrl?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response«long»\\".
+ */
+export interface ResponseLong {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: number;
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response\\".
+ */
+export interface Response {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: {
+    [k: string]: any;
+  };
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"Response«UserCustom请求体»\\".
+ */
+export interface ResponseUserCustom {
+  /**
+   * 响应编码成功：0
+   */
+  code: string;
+  info?: UserCustom;
+  /**
+   * 错误描述，成功：OK
+   */
+  msg?: string;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"ISaveUserCustomUserCustomReqReq\\".
+ */
+export interface ISaveUserCustomUserCustomReqReq {
+  /**
+   * 其他属性
+   */
+  attributes?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 描述
+   */
+  description?: string;
+  /**
+   * 用户收藏的菜单IDs
+   */
+  favMenuIds?: string;
+  /**
+   * 用户收藏的菜单列表
+   */
+  favMenus?: Menu[];
+  /**
+   * 关注地区
+   */
+  focusArea?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 主题
+   */
+  theme?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"IUpdateUserCustomUserCustomReqReq\\".
+ */
+export interface IUpdateUserCustomUserCustomReqReq {
+  /**
+   * 其他属性
+   */
+  attributes?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 创建人 钉钉用户ID
+   */
+  createUser?: number;
+  /**
+   * 描述
+   */
+  description?: string;
+  /**
+   * 用户收藏的菜单IDs
+   */
+  favMenuIds?: string;
+  /**
+   * 用户收藏的菜单列表
+   */
+  favMenus?: Menu[];
+  /**
+   * 关注地区
+   */
+  focusArea?: string;
+  /**
+   * id
+   */
+  id?: number;
+  /**
+   * 删除标记(0:正常，1:删除)
+   */
+  isDeleted?: number;
+  /**
+   * 主题
+   */
+  theme?: string;
+  /**
+   * 修改时间
+   */
+  updateTime?: string;
+  /**
+   * 修改人 钉钉用户ID
+   */
+  updateUser?: number;
+  /**
+   * 钉钉用户ID
+   */
+  userId?: number;
+  [k: string]: any;
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+}
+`;

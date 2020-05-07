@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`taro生成页面测试 商品列表页面生成 1`] = `
+Object {
+  "src/app.tsx": "
+     pages: [ 
+       
+      'pages/goods/list/index', 
+      //pagePath//
+      \\"pages/entry/index\\"
+    ]
+    ",
+  "src/pages/goods/list/actions/action.ts": "import {Command} from \\"../constant\\";
+import {IAllReducerProps} from \\"../types\\";
+import {redux} from  'moon-runtime';
+import {PageModel} from './index';
+import api from \\"@/api\\";
+
+export default class \${action} extends redux.BaseAction<IAllReducerProps> {
+
+  constructor(pageModel:PageModel) {
+    super(pageModel);
+  }
+
+ 
+        /**
+         * 
+              普通条件查询可以走,commonChange
+              
+         */
+        async modifySearch(param,options:{
+      isQuery:boolean;
+      isResetPage:boolean;
+    }={isQuery:true,isResetPage:false}) {
+            
+      dispatch({ type: Command.modifyRequest, payload: param});
+      //修改完直接查询;
+      if(options.isQuery) {
+        await this.query(options.isResetPage)
+      }
+      
+         },
+   
+        /**
+         * 查询下一页
+         */
+        async nextPage() {
+            
+      let {request} = getData().main;
+      request.pageNum=request.pageNum+1;
+      dispatch({ type: Command.modifyRequest, payload: request });
+      await this.query();
+              
+         },
+   
+        /**
+         * 以当前查询条件查询
+         */
+        async query(isResetPage:boolean=false) {
+            
+            if(isResetPage) {
+              await dispatch({ type: Command.modifyRequest, payload: {pageNum:0} });
+            }
+          
+          let {request} =  getData().main;
+      //TODO 接口缺失 
+      // let {} = await api..XXapi();
+      
+      dispatch({ type: Command.queryResult, payload: {
+        total:0,
+        list:[]
+        } });
+        
+         },
+   
+}
+
+//create by moon https://github.com/creasy2010/moon",
+  "src/pages/goods/list/actions/index.ts": "import {Command} from '../constant';
+import api from 'api';
+import {redux} from 'moon-runtime';
+
+import Action from './action';
+
+import * as goodsListMain from '../reducers/main';
+
+import {IAllReducerProps} from '../types';
+
+export class PageModel extends redux.BaseModel<IAllReducerProps> {
+  models = {
+    goodsListMain,
+  };
+
+  actions = {
+    action: new Action(this),
+  };
+
+  constructor() {
+    super('GoodsList');
+  }
+
+  /**
+   * 初始化数据
+   */
+  async init() {
+    this.emit(Command.init, {
+      //main  :{},
+    });
+  }
+}
+
+export default new PageModel();
+
+//create by moon https://github.com/creasy2010/moon
+",
+  "src/pages/goods/list/components/info.less": "
+
+.info {
+}
+
+",
+  "src/pages/goods/list/components/info.tsx": "import {View, Button, Text, Image} from '@tarojs/components';
+import Taro, {Component, Config} from '@tarojs/taro';
+
+import * as T from '../types';
+import './info.less';
+import pageModel from '../actions';
+import {connect} from '@tarojs/redux';
+import {store2Props} from '../selectors';
+
+type IInfoProps = T.IAllReducerProps & T.IInfoProps;
+
+@connect<Partial<IInfoProps>, T.IInfoState>(
+  store2Props,
+  actions,
+)
+export default class Info extends Component<Partial<IInfoProps>, T.IInfoState> {
+  constructor(props: IInfoProps) {
+    super(props);
+  }
+
+  /**
+    
+*/
+  render() {
+    let {main} = this.props;
+
+    return (
+      <View className=\\"info\\">
+        <View />
+      </View>
+    );
+  }
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+  "src/pages/goods/list/constant.ts": "export const pageKey = 'GoodsList';
+
+export const BASE = pageKey + '_';
+
+export enum Command {
+  //通用修改数据方法
+  commonChange = 'GoodsList_commonChange',
+  init = 'GoodsList_INIT',
+  clean = 'GoodsList_CLEAN',
+
+  /*
+        修改查询条件数据
+    */
+  main_modifyRequest = 'GoodsList_main_modifyRequest',
+
+  /*
+        清空查询结果
+    */
+  main_cleanList = 'GoodsList_main_cleanList',
+
+  /*
+        
+    */
+  main_queryResult = 'GoodsList_main_queryResult',
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+  "src/pages/goods/list/index.less": "
+
+.goodsList {
+}
+
+
+",
+  "src/pages/goods/list/index.tsx": "import {View, Button, Text, Image} from '@tarojs/components';
+import Taro, {Component, Config} from '@tarojs/taro';
+
+import {connect} from '@tarojs/redux';
+import './index.less';
+import * as T from './types';
+import pageModel from './actions';
+import {store2Props} from './selectors';
+
+import Info from './components/info';
+
+@connect<Partial<T.IAllReducerProps>, any>(store2Props)
+export default class GoodsList extends Component<
+  Partial<T.IAllReducerProps>,
+  any
+> {
+  componentDidMount() {
+    pageModel.init();
+  }
+
+  componentWillUnmount() {
+    pageModel.clean();
+  }
+
+  render() {
+    let {main} = this.props;
+
+    return (
+      <View id=\\"goodsList\\" className=\\"goodsList\\">
+        <View />
+      </View>
+    );
+  }
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+  "src/pages/goods/list/reducers/main.ts": "import {Command} from '../constant';
+import _ from 'lodash';
+import {IMainReducer} from '../types';
+import produce from 'immer';
+
+const INITIAL_STATE: IMainReducer = {
+  isReady: false,
+
+  request: {q: '', pageNum: 0, pageSize: 10},
+
+  total: 0,
+
+  list: [],
+};
+
+/*
+修改查询条件数据
+*/
+export function modifyRequest(state: IMainReducer, payload: any): IMainReducer {
+  return state;
+}
+
+/*
+清空查询结果
+*/
+export function cleanList(state: IMainReducer, payload: any): IMainReducer {
+  return state;
+}
+
+/*
+
+*/
+export function queryResult(state: IMainReducer, payload: any): IMainReducer {
+  return state;
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+  "src/pages/goods/list/selectors.ts": "import {createSelector} from 'reselect';
+import {IAllReducerProps} from './types';
+
+export function store2Props({GoodsListMain}: any): IAllReducerProps {
+  return {
+    main: GoodsListMain,
+  };
+}
+
+//衍生数据使用请参考:  https://github.com/reduxjs/reselect
+//create by moon https://github.com/creasy2010/moon
+",
+  "src/pages/goods/list/types.ts": "import Actions from './actions';
+
+export interface IMainReducer {
+  isReady: boolean;
+  isLoading?: boolean;
+
+  request: IMainRequest;
+
+  total: IMainTotal;
+
+  list: IMainListSet;
+}
+
+export type IAllReducerProps = {
+  main: IMainReducer;
+
+  [name: string]: any;
+};
+
+export type IInfoProps = {};
+export type IInfoState = {};
+
+export interface IMainRequest {
+  q?: string;
+  pageNum?: number;
+  pageSize?: number;
+  [k: string]: any;
+}
+export type IMainTotal = number;
+export type IMainListSet = IMainList[];
+
+export interface IMainList {
+  [k: string]: any;
+}
+
+//create by moon https://github.com/creasy2010/moon
+",
+}
+`;

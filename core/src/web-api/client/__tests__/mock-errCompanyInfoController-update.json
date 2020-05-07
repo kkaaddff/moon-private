@@ -1,0 +1,1052 @@
+{
+  "type": "object",
+  "required":["employeeVOList","detailAddress","goodsIds"],
+  "properties": {
+    "employeeVOList": {
+      "type": "array",
+      "description": "员工信息",
+      "items": {
+        "$ref": "#/definitions/EmployeeVO",
+        "originalRef": "EmployeeVO"
+      }
+    },
+    "goodsIds": {
+      "type": "array",
+      "description": "多个SPU编号",
+      "items": {
+        "type": "string"
+      }
+    },
+    "storeVOList": {
+      "type": "array",
+      "description": "店铺信息",
+      "items": {
+        "$ref": "#/definitions/StoreVO",
+        "originalRef": "StoreVO"
+      }
+    },
+    "updateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "修改时间"
+    }
+  },
+  "title": "CompanyInformationModifyResponse",
+  "definitions": {
+    "BaseResponse«CompanyInfoResponse»": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "结果码"
+        },
+        "context": {
+          "description": "内容",
+          "$ref": "#/definitions/CompanyInfoResponse",
+          "originalRef": "CompanyInfoResponse"
+        },
+        "message": {
+          "type": "string",
+          "description": "消息内容"
+        }
+      },
+      "title": "BaseResponse«CompanyInfoResponse»"
+    },
+    "CompanyInfoResponse": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "住所"
+        },
+        "backIDCard": {
+          "type": "string",
+          "description": "法人身份证反面"
+        },
+        "businessLicence": {
+          "type": "string",
+          "description": "营业执照副本电子版"
+        },
+        "businessScope": {
+          "type": "string",
+          "description": "经营范围"
+        },
+        "businessTermEnd": {
+          "type": "string",
+          "format": "date-time",
+          "description": "营业期限至"
+        },
+        "businessTermStart": {
+          "type": "string",
+          "format": "date-time",
+          "description": "营业期限自"
+        },
+        "companyInfoId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "公司信息Id"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "企业名称"
+        },
+        "foundDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "成立日期"
+        },
+        "frontIDCard": {
+          "type": "string",
+          "description": "法人身份证正面"
+        },
+        "legalRepresentative": {
+          "type": "string",
+          "description": "法定代表人"
+        },
+        "registeredCapital": {
+          "type": "number",
+          "description": "注册资本"
+        },
+        "socialCreditCode": {
+          "type": "string",
+          "description": "社会信用代码"
+        }
+      },
+      "title": "CompanyInfoResponse"
+    },
+    "CompanyInformationSaveRequest": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "住所"
+        },
+        "backIDCard": {
+          "type": "string",
+          "description": "法人身份证反面"
+        },
+        "businessLicence": {
+          "type": "string",
+          "description": "营业执照副本电子版"
+        },
+        "businessScope": {
+          "type": "string",
+          "description": "经营范围"
+        },
+        "businessTermEnd": {
+          "type": "string",
+          "description": "营业期限至"
+        },
+        "businessTermStart": {
+          "type": "string",
+          "description": "营业期限自"
+        },
+        "companyInfoId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "编号"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "企业名称"
+        },
+        "foundDate": {
+          "type": "string",
+          "description": "成立日期"
+        },
+        "frontIDCard": {
+          "type": "string",
+          "description": "法人身份证正面"
+        },
+        "legalRepresentative": {
+          "type": "string",
+          "description": "法定代表人"
+        },
+        "registeredCapital": {
+          "type": "number",
+          "description": "注册资本"
+        },
+        "socialCreditCode": {
+          "type": "string",
+          "description": "社会信用代码"
+        }
+      },
+      "title": "CompanyInformationSaveRequest"
+    },
+    "BaseResponse«CompanyInformationModifyResponse»": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "结果码"
+        },
+        "context": {
+          "description": "内容",
+          "$ref": "#/definitions/CompanyInformationModifyResponse",
+          "originalRef": "CompanyInformationModifyResponse"
+        },
+        "message": {
+          "type": "string",
+          "description": "消息内容"
+        }
+      },
+      "title": "BaseResponse«CompanyInformationModifyResponse»"
+    },
+    "CompanyInformationModifyResponse": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "住所"
+        },
+        "applyEnterTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "入驻时间(第一次审核通过时间)"
+        },
+        "areaId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "区"
+        },
+        "backIDCard": {
+          "type": "string",
+          "description": "法人身份证反面"
+        },
+        "businessLicence": {
+          "type": "string",
+          "description": "营业执照副本电子版"
+        },
+        "businessScope": {
+          "type": "string",
+          "description": "经营范围"
+        },
+        "businessTermEnd": {
+          "type": "string",
+          "format": "date-time",
+          "description": "营业期限至"
+        },
+        "businessTermStart": {
+          "type": "string",
+          "format": "date-time",
+          "description": "营业期限自"
+        },
+        "cityId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "市"
+        },
+        "companyCode": {
+          "type": "string",
+          "description": "供应商编号"
+        },
+        "companyDescript": {
+          "type": "string",
+          "description": "公司简介"
+        },
+        "companyInfoId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "编号"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "公司名称"
+        },
+        "companyType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "供应商类型\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "contactName": {
+          "type": "string",
+          "description": "联系人名字"
+        },
+        "contactPhone": {
+          "type": "string",
+          "description": "联系方式"
+        },
+        "copyright": {
+          "type": "string",
+          "description": "版权信息"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "delFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标志\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "detailAddress": {
+          "type": "string",
+          "description": "详细地址"
+        },
+        "employeeVOList": {
+          "type": "array",
+          "description": "员工信息",
+          "items": {
+            "$ref": "#/definitions/EmployeeVO",
+            "originalRef": "EmployeeVO"
+          }
+        },
+        "foundDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "成立日期"
+        },
+        "frontIDCard": {
+          "type": "string",
+          "description": "法人身份证正面"
+        },
+        "goodsIds": {
+          "type": "array",
+          "description": "多个SPU编号",
+          "items": {
+            "type": "string"
+          }
+        },
+        "legalRepresentative": {
+          "type": "string",
+          "description": "法定代表人"
+        },
+        "operator": {
+          "type": "string",
+          "description": "操作人"
+        },
+        "provinceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "省"
+        },
+        "registeredCapital": {
+          "type": "number",
+          "description": "注册资本"
+        },
+        "remitAffirm": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否确认打款\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "socialCreditCode": {
+          "type": "string",
+          "description": "社会信用代码"
+        },
+        "storeVOList": {
+          "type": "array",
+          "description": "店铺信息",
+          "items": {
+            "$ref": "#/definitions/StoreVO",
+            "originalRef": "StoreVO"
+          }
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "供应商名称"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "修改时间"
+        }
+      },
+      "title": "CompanyInformationModifyResponse"
+    },
+    "EmployeeVO": {
+      "type": "object",
+      "required":["accountDisableReason","accountName","accountPassword","accountState","accountType","companyInfo"],
+      "properties": {
+        "accountDisableReason": {
+          "type": "string",
+          "description": "账号禁用原因"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "账户名"
+        },
+        "accountPassword": {
+          "type": "string",
+          "description": "密码"
+        },
+        "accountState": {
+          "type": "integer",
+          "format": "int32",
+          "description": "账号状态\n* ENABLE: 启用\n* DISABLE: 禁用",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "accountType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "账号类型\n* b2bBoss: b2b账号\n* s2bBoss: s2b平台端账号\n* s2bSupplier: s2b供应商端账号",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "companyInfo": {
+          "description": "供应商",
+          "$ref": "#/definitions/CompanyInfoVO",
+          "originalRef": "CompanyInfoVO"
+        },
+        "companyInfoId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "供应商Id"
+        },
+        "createPerson": {
+          "type": "string",
+          "description": "创建人"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "customerId": {
+          "type": "string",
+          "description": "会员id"
+        },
+        "delFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标志\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "deletePerson": {
+          "type": "string",
+          "description": "删除人"
+        },
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "删除时间"
+        },
+        "employeeId": {
+          "type": "string",
+          "description": "业务员id"
+        },
+        "employeeMobile": {
+          "type": "string",
+          "description": "会员电话"
+        },
+        "employeeName": {
+          "type": "string",
+          "description": "会员名称"
+        },
+        "employeeSaltVal": {
+          "type": "string",
+          "description": "salt"
+        },
+        "isEmployee": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否业务员(0 是 1否)"
+        },
+        "isMasterAccount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否是主账号\n* NO: 否\n* YES: 是"
+        },
+        "loginErrorTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "登录失败次数"
+        },
+        "loginLockTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "锁定时间"
+        },
+        "loginTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "会员登录时间"
+        },
+        "roleId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "角色id"
+        },
+        "thirdId": {
+          "type": "string",
+          "description": "第三方店铺id"
+        },
+        "updatePerson": {
+          "type": "string",
+          "description": "更新人"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "EmployeeVO"
+    },
+    "CompanyInfoVO": {
+      "type": "object",
+      "required":["employeeVOList"],
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "住所"
+        },
+        "applyEnterTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "入驻时间(第一次审核通过时间)"
+        },
+        "areaId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "区"
+        },
+        "backIDCard": {
+          "type": "string",
+          "description": "法人身份证反面"
+        },
+        "businessLicence": {
+          "type": "string",
+          "description": "营业执照副本电子版"
+        },
+        "businessScope": {
+          "type": "string",
+          "description": "经营范围"
+        },
+        "businessTermEnd": {
+          "type": "string",
+          "format": "date-time",
+          "description": "营业期限至"
+        },
+        "businessTermStart": {
+          "type": "string",
+          "format": "date-time",
+          "description": "营业期限自"
+        },
+        "cityId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "市"
+        },
+        "companyCode": {
+          "type": "string",
+          "description": "供应商编号"
+        },
+        "companyDescript": {
+          "type": "string",
+          "description": "公司简介"
+        },
+        "companyInfoId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "编号"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "公司名称"
+        },
+        "companyType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "供应商类型\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "contactName": {
+          "type": "string",
+          "description": "联系人名字"
+        },
+        "contactPhone": {
+          "type": "string",
+          "description": "联系方式"
+        },
+        "copyright": {
+          "type": "string",
+          "description": "版权信息"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "delFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标志\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "detailAddress": {
+          "type": "string",
+          "description": "详细地址"
+        },
+        "employeeVOList": {
+          "type": "array",
+          "description": "员工信息",
+          "items": {
+            "$ref": "#/definitions/EmployeeVO",
+            "originalRef": "EmployeeVO"
+          }
+        },
+        "foundDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "成立日期"
+        },
+        "frontIDCard": {
+          "type": "string",
+          "description": "法人身份证正面"
+        },
+        "goodsIds": {
+          "type": "array",
+          "description": "多个SPU编号",
+          "items": {
+            "type": "string"
+          }
+        },
+        "legalRepresentative": {
+          "type": "string",
+          "description": "法定代表人"
+        },
+        "operator": {
+          "type": "string",
+          "description": "操作人"
+        },
+        "provinceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "省"
+        },
+        "registeredCapital": {
+          "type": "number",
+          "description": "注册资本"
+        },
+        "remitAffirm": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否确认打款\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "socialCreditCode": {
+          "type": "string",
+          "description": "社会信用代码"
+        },
+        "storeVOList": {
+          "type": "array",
+          "description": "店铺信息",
+          "items": {
+            "$ref": "#/definitions/StoreVO",
+            "originalRef": "StoreVO"
+          }
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "供应商名称"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "修改时间"
+        }
+      },
+      "title": "CompanyInfoVO"
+    },
+    "StoreVO": {
+      "type": "object",
+      "properties": {
+        "accountDay": {
+          "type": "string",
+          "description": "结算日"
+        },
+        "addressDetail": {
+          "type": "string",
+          "description": "详细地址"
+        },
+        "applyEnterTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "申请入驻时间"
+        },
+        "areaId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "区"
+        },
+        "auditReason": {
+          "type": "string",
+          "description": "审核未通过原因"
+        },
+        "auditState": {
+          "type": "integer",
+          "format": "int32",
+          "description": "审核状态\n* WAIT_CHECK: 0：待审核\n* CHECKED: 1：已审核\n* NOT_PASS: 2：审核未通过",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "cityId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "市"
+        },
+        "companyInfo": {
+          "description": "公司信息",
+          "$ref": "#/definitions/CompanyInfoVO",
+          "originalRef": "CompanyInfoVO"
+        },
+        "companyType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "供应商类型(0、平台自营 1、第三方供应商)\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "contactEmail": {
+          "type": "string",
+          "description": "联系邮箱"
+        },
+        "contactMobile": {
+          "type": "string",
+          "description": "联系方式"
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "联系人名字"
+        },
+        "contractEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "签约结束日期"
+        },
+        "contractStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "签约开始日期"
+        },
+        "delFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标志\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "freightTemplateType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "使用的运费模板类别(0:店铺运费,1:单品运费)\n* NO: 否\n* YES: 是",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "goodsIds": {
+          "type": "array",
+          "description": "多个SPU编号",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provinceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "省"
+        },
+        "smallProgramCode": {
+          "type": "string",
+          "description": "店铺小程序码"
+        },
+        "storeClosedReason": {
+          "type": "string",
+          "description": "店铺关店原因"
+        },
+        "storeCode": {
+          "type": "string",
+          "description": "店铺号"
+        },
+        "storeId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "店铺主键"
+        },
+        "storeLogo": {
+          "type": "string",
+          "description": "店铺logo"
+        },
+        "storeName": {
+          "type": "string",
+          "description": "店铺名称"
+        },
+        "storeSign": {
+          "type": "string",
+          "description": "店铺店招"
+        },
+        "storeState": {
+          "type": "integer",
+          "format": "int32",
+          "description": "店铺状态\n* OPENING: 0、开启\n* CLOSED: 1、关店",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "供应商名称"
+        }
+      },
+      "title": "StoreVO"
+    },
+    "EmployeeLoginRequest": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string",
+          "description": "账号"
+        },
+        "password": {
+          "type": "string",
+          "description": "密码"
+        },
+        "verifyCode": {
+          "type": "string",
+          "description": "验证码"
+        }
+      },
+      "title": "EmployeeLoginRequest"
+    },
+    "BaseResponse": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "结果码"
+        },
+        "context": {
+          "type": "object",
+          "description": "内容"
+        },
+        "message": {
+          "type": "string",
+          "description": "消息内容"
+        }
+      },
+      "title": "BaseResponse"
+    },
+    "BaseResponse«CompanyInfoRopResponse»": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "结果码"
+        },
+        "context": {
+          "description": "内容",
+          "$ref": "#/definitions/CompanyInfoRopResponse",
+          "originalRef": "CompanyInfoRopResponse"
+        },
+        "message": {
+          "type": "string",
+          "description": "消息内容"
+        }
+      },
+      "title": "BaseResponse«CompanyInfoRopResponse»"
+    },
+    "CompanyInfoRopResponse": {
+      "type": "object",
+      "properties": {
+        "areaId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "areaId",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "cityId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "cityId",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "companyDescript": {
+          "type": "string",
+          "xml": {
+            "name": "companyDescript",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "companyInfoId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "companyInfoId",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "companyName": {
+          "type": "string",
+          "xml": {
+            "name": "companyName",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "contactName": {
+          "type": "string",
+          "xml": {
+            "name": "contactName",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "contactPhone": {
+          "type": "string",
+          "xml": {
+            "name": "contactPhone",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "copyright": {
+          "type": "string",
+          "xml": {
+            "name": "copyright",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "detailAddress": {
+          "type": "string",
+          "xml": {
+            "name": "detailAddress",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "provinceId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "provinceId",
+            "attribute": true,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "CompanyInfoRopResponse"
+    },
+    "CompanyInfoSaveRopRequest": {
+      "type": "object",
+      "properties": {
+        "areaId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cityId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "companyDescript": {
+          "type": "string"
+        },
+        "companyInfoId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "contactPhone": {
+          "type": "string"
+        },
+        "copyright": {
+          "type": "string"
+        },
+        "detailAddress": {
+          "type": "string"
+        },
+        "provinceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ropRequestContext": {
+          "$ref": "#/definitions/RopRequestContext",
+          "originalRef": "RopRequestContext"
+        }
+      },
+      "title": "CompanyInfoSaveRopRequest"
+    },
+    "RopRequestContext": {
+      "type": "object",
+      "properties": {
+        "ropResponse": {
+          "type": "object"
+        },
+        "serviceBeginTime": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "serviceEndTime": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RopRequestContext"
+    }
+  }
+}

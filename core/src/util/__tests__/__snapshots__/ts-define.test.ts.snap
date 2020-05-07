@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ts类型定义生成 ts类型定义生成 1`] = `
+"export interface IgnoreType {
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"BaseResponse«WholeMenuInfoResponse»\\".
+ */
+export interface BaseResponseWholeMenuInfoResponse {
+  /**
+   * 结果码
+   */
+  code: string;
+  context?: WholeMenuInfoResponse;
+  /**
+   * 消息内容
+   */
+  message?: string;
+  [k: string]: any;
+}
+/**
+ * 内容
+ */
+export interface WholeMenuInfoResponse {
+  /**
+   * 功能集合
+   */
+  functionInfoVOList?: FunctionInfoVO[];
+  /**
+   * 菜单集合
+   */
+  menuInfoVOList?: MenuInfoVO[];
+  [k: string]: any;
+}
+export interface FunctionInfoVO {
+  /**
+   * Id
+   */
+  functionId?: string;
+  /**
+   * 功能名称
+   */
+  functionName?: string;
+  /**
+   * 排序
+   */
+  functionSort?: number;
+  /**
+   * 功能展示名称
+   */
+  functionTitle?: string;
+  /**
+   * 菜单Id
+   */
+  menuId?: string;
+  /**
+   * 系统类别
+   */
+  systemType?: number;
+  [k: string]: any;
+}
+export interface MenuInfoVO {
+  /**
+   * 菜单级别
+   */
+  menuGrade?: number;
+  /**
+   * Id
+   */
+  menuId?: string;
+  /**
+   * 菜单名
+   */
+  menuName?: string;
+  /**
+   * 排序
+   */
+  menuSort?: number;
+  /**
+   * 父菜单Id
+   */
+  parentMenuId?: string;
+  /**
+   * 系统类别
+   */
+  systemType?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"WholeMenuInfoResponse\\".
+ */
+export interface WholeMenuInfoResponse1 {
+  /**
+   * 功能集合
+   */
+  functionInfoVOList?: FunctionInfoVO[];
+  /**
+   * 菜单集合
+   */
+  menuInfoVOList?: MenuInfoVO[];
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"FunctionInfoVO\\".
+ */
+export interface FunctionInfoVO1 {
+  /**
+   * Id
+   */
+  functionId?: string;
+  /**
+   * 功能名称
+   */
+  functionName?: string;
+  /**
+   * 排序
+   */
+  functionSort?: number;
+  /**
+   * 功能展示名称
+   */
+  functionTitle?: string;
+  /**
+   * 菜单Id
+   */
+  menuId?: string;
+  /**
+   * 系统类别
+   */
+  systemType?: number;
+  [k: string]: any;
+}
+/**
+ * This interface was referenced by \`IgnoreType\`'s JSON-Schema
+ * via the \`definition\` \\"MenuInfoVO\\".
+ */
+export interface MenuInfoVO1 {
+  /**
+   * 菜单级别
+   */
+  menuGrade?: number;
+  /**
+   * Id
+   */
+  menuId?: string;
+  /**
+   * 菜单名
+   */
+  menuName?: string;
+  /**
+   * 排序
+   */
+  menuSort?: number;
+  /**
+   * 父菜单Id
+   */
+  parentMenuId?: string;
+  /**
+   * 系统类别
+   */
+  systemType?: number;
+  [k: string]: any;
+}
+"
+`;

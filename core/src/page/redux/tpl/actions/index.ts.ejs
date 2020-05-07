@@ -1,0 +1,48 @@
+import {Command,pageKey} from '../constant';
+import api from 'api';
+import {redux} from  'moon-runtime';
+
+<% pageInfo.actions.forEach(action=>{ %>
+import <%=Util.toUCamelize(action.fileName) %> from './<%=action.fileName%>'
+<% }) %>
+
+ <% pageInfo.models.forEach(actor=>{ %>
+import * as <%=Util.toLCamelize(actor.fileName)%> from '../reducers/<%=actor.fileName%>';
+ <% }) %>
+
+import {IAllReducerProps} from "../types";
+
+
+export class PageModel extends redux.BaseModel<IAllReducerProps>{
+
+
+  actions= {
+   <% pageInfo.actions.forEach(action=>{ %>
+          <%=Util.toLCamelize(action.fileName) %> :new <%=Util.toUCamelize(action.fileName) %>(this),
+      <% }) %>
+  }
+
+  constructor() {
+    super(pageKey,{
+           <% pageInfo.models.forEach(actor=>{ %>
+                         <%=Util.toLCamelize(actor.fileName)%>,
+            <% }) %>
+    });
+  }
+
+
+  /**
+   * 初始化数据
+   */
+  async init() {
+    this.emit(Command.init,{
+      //main  :{},
+    });
+  }
+
+}
+
+export default new PageModel();
+
+
+// create by moon https://github.com/creasy2010/moon

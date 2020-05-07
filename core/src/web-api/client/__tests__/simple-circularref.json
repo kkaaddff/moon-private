@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required":["storeVOList"],
+  "properties": {
+    "storeVOList": {
+      "type": "array",
+      "description": "店铺信息",
+      "items": {
+        "$ref": "#/definitions/StoreVO",
+        "originalRef": "StoreVO"
+      }
+    }
+  },
+  "title": "CompanyInformationModifyResponse",
+  "definitions": {
+    "CompanyInfoVO": {
+      "type": "object",
+      "required":["storeVOList"],
+      "properties": {
+        "storeVOList": {
+          "type": "array",
+          "description": "店铺信息",
+          "items": {
+            "$ref": "#/definitions/StoreVO",
+            "originalRef": "StoreVO"
+          }
+        }
+      },
+      "title": "CompanyInfoVO"
+    },
+    "StoreVO": {
+      "type": "object",
+      "properties": {
+        "companyInfo": {
+          "description": "公司信息",
+          "$ref": "#/definitions/CompanyInfoVO",
+          "originalRef": "CompanyInfoVO"
+        }
+      },
+      "title": "StoreVO"
+    }
+  }
+}
