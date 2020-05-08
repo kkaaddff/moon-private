@@ -101,16 +101,17 @@ export async function buildWebApi(context: IWebApiContext):Promise<string> {
         webapiGroup,
         tsDefinded,
         isInBody:(requestParams:IParamShape[]):Boolean=>{
+        log(`isInBody:`,requestParams);
           return !!requestParams.find(item=>item.isInBody);
         },
         getQueryParam:(requestParams:IParamShape[]):string=>{
-          let result  = requestParams.filter(item=>item.isInQuery)
-            .map(item=>`${item.name}=\${${item.name}}`).join("&");
-          if(result) {
-            return '?'+ result;
-          }else{
-            return result;
-          }
+          // let result  = requestParams.filter(item=>item.isInQuery)
+          //   .map(item=>`${item.name}=\${${item.name}}`).join("&");
+          // if(result) {
+          //   return '?'+ result;
+          // }else{
+            return '';
+          // }
         }
       });
 

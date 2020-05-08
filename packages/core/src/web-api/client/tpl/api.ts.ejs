@@ -26,7 +26,7 @@ async function <%=Util.getMethodName(apiItem.name)%>(
 <% if (!isInBody(apiItem.requestParam)) { %>
     {
     <% apiItem.requestParam.forEach(paramItem=>{ %>
-        <% if (!(paramItem.isInPath || paramItem.isInQuery)) { %>
+        <% if (!paramItem.isInPath) { %>
         <%=['string','integer','number','date','file','array','boolean'].includes(paramItem.jsonSchema.type)?"":"..."%><%=paramItem.name%>,
         <% }  %>
     <% }) %>
