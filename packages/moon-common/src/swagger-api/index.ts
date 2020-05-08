@@ -279,11 +279,11 @@ export async function genApi(context: {
           options.content = options.content
             .replace(
               `import sdk from "@api/sdk";`,
-              `import * as sdk from './fetch';`,
+              `import * as sdk from '@/utils/fetch';`,
             )
             .replace(
               `import sdk from '@api/sdk';`,
-              `import * as sdk from './fetch';`,
+              `import * as sdk from '@/utils/fetch';`,
             )
             .replace(
               /result\.data/gi,
