@@ -5,8 +5,9 @@ import {
   IWebApiGroup,
   SchemaProps,
 } from '../../../typings/api';
+import debug from "debug";
 import {toLCamelize} from '../../../util/string-util';
-
+const log = debug("swaggerUtil:");
 export function resSchemaModify(
   schema: SchemaProps,
   apiItem: IWebApiDefinded,

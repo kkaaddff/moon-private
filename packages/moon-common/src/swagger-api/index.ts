@@ -5,29 +5,29 @@
  *
  * @Date    2019/4/2
  **/
-import * as request from 'request';
-import * as fse from 'fs-extra';
-import * as _ from 'lodash';
-import {join} from 'path';
-import MoonCore from 'moon-core';
-import debug from 'debug';
-import * as minimatch from 'minimatch';
+import * as request from "request";
+import * as fse from "fs-extra";
+import * as _ from "lodash";
+import { join } from "path";
+import MoonCore from "moon-core";
+import debug from "debug";
+import * as minimatch from "minimatch";
 
-import ApiCompileHooks from './hook';
+import ApiCompileHooks from "./hook";
 
 import {
   IWebApiContext,
   IWebApiDefinded,
   IWebApiGroup,
   SchemaProps,
-} from 'moon-core/declarations/typings/api';
+} from "moon-core/declarations/typings/api";
 
-import {IFileSaveOptions} from 'moon-core/declarations/typings/page';
-import {IInsertOption} from 'moon-core/declarations/typings/util';
-import {IMoonConfig} from 'moon-core/declarations/typings/config';
-import {loadMoonConfig} from './util/config';
-import {applyHook} from '../util/hook-util';
-const log = debug('j2t:cli');
+import { IFileSaveOptions } from "moon-core/declarations/typings/page";
+import { IInsertOption } from "moon-core/declarations/typings/util";
+import { IMoonConfig } from "moon-core/declarations/typings/config";
+import { loadMoonConfig } from "./util/config";
+import { applyHook } from "../util/hook-util";
+const log = debug("j2t:cli");
 async function loadJson(swaggerUrl: string): Promise<any> {
   return new Promise((resolve, reject) => {
     console.log(`从${swaggerUrl}中加载api doc信息`);
@@ -55,7 +55,7 @@ interface IApiIndex {
 let oldApiIndex: IApiIndex = {};
 
 function isDebug(): boolean {
-  return process.env.hasOwnProperty('DEBUG');
+  return process.env.hasOwnProperty("DEBUG");
 }
 
 /**
@@ -74,13 +74,13 @@ function isNewMethod(controller: string, method: string): boolean {
   return true;
 }
 
-process.on('unhandledRejection', (error) => {
-  console.log('unhandledRejection', error);
+process.on("unhandledRejection", (error) => {
+  console.log("unhandledRejection", error);
 });
 
 async function loadeApiGroup(
   apiGenConfig: IGenApiConfig,
-  hookInstance: ApiCompileHooks,
+  hookInstance: ApiCompileHooks
 ): Promise<IWebApiGroup[]> {
   let apiGroups: IWebApiGroup[] = [];
 
@@ -98,22 +98,25 @@ async function loadeApiGroup(
   await hookInstance.loadSwagger.promise(context);
   let apiJson;
 
-  let errrorMsgDeal = async (errorInfo)=>{
-    await hookInstance.onError.promise(errorInfo,context);
+  let errrorMsgDeal = async (errorInfo) => {
+    await hookInstance.onError.promise(errorInfo, context);
   };
 
   if (context.swaggerJson) {
     apiJson = context.swaggerJson;
-    apiGroups = MoonCore.SwaggerUtil.transfer(apiJson,errrorMsgDeal);
+    apiGroups = MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal);
     return apiGroups;
   } else {
     if (apiGenConfig.swaggerUrl) {
       let apiJson = await loadJson(apiGenConfig.swaggerUrl);
       context.swaggerJson = apiJson;
       await hookInstance.swagger2ApiGroup.promise(context);
-      if (!context['apiGroups']) {
+      if (!context["apiGroups"]) {
         //默认转换规则
-        context['apiGroups'] = MoonCore.SwaggerUtil.transfer(apiJson,errrorMsgDeal);
+        context["apiGroups"] = MoonCore.SwaggerUtil.transfer(
+          apiJson,
+          errrorMsgDeal
+        );
       }
     } else if (apiGenConfig.swaggerUrls) {
       let apiGroups = context.apiGroups || [];
@@ -127,18 +130,18 @@ async function loadeApiGroup(
           apiGroups = apiGroups.concat(
             context.apiGroups
               ? context.apiGroups
-              : MoonCore.SwaggerUtil.transfer(apiJson,errrorMsgDeal),
+              : MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal)
           );
         } catch (err) {
           console.warn(`从swagger导出数据失败跳过此swagger${swaggerUrl}`);
           console.warn(err);
         }
       }
-      context['apiGroups'] = apiGroups;
+      context["apiGroups"] = apiGroups;
     }
   }
 
-  return context['apiGroups'];
+  return context["apiGroups"];
 }
 
 export interface IGenApiConfig {
@@ -163,75 +166,73 @@ export async function genApi(context: {
     api: context.config,
   };
   (defaulltMoonConfig.api.plugins || []).map(
-    applyHook.bind(this, hookInstance),
+    applyHook.bind(this, hookInstance)
   );
 
-
   await hookInstance.init.promise(context);
-
 
   const ApiIndexPath = join(
     workBase,
     defaulltMoonConfig.api.dir,
-    '_api-info.json',
+    "_api-info.json"
   );
 
   let apiGroups = await loadeApiGroup(defaulltMoonConfig.api, hookInstance);
 
-  await hookInstance.beforeCompile.call(apiGroups,context);
+  await hookInstance.beforeCompile.call(apiGroups, context);
 
   try {
     oldApiIndex = await fse.readJSONSync(ApiIndexPath);
   } catch (err) {
-    console.warn('读取 历史api索引出错: ', err);
+    console.warn("读取 历史api索引出错: ", err);
   }
 
   let apiDir = join(workBase, defaulltMoonConfig.api.dir);
 
   let inserts: IInsertOption[] = [];
-  let newMethods: {controller: string; method: string}[] = []; //新添加的方法记录
+  let newMethods: { controller: string; method: string }[] = []; //新添加的方法记录
   for (let i = 0, ilen = apiGroups.length; i < ilen; i++) {
     try {
       let webapiGroup: IWebApiGroup = apiGroups[i];
 
-      await hookInstance.beforeGroupCompile.call(webapiGroup,context);
+      await hookInstance.beforeGroupCompile.call(webapiGroup, context);
       if (
         defaulltMoonConfig.api?.exclude?.some((item) =>
-          minimatch(webapiGroup.name, item),
+          minimatch(webapiGroup.name, item)
         )
       ) {
         console.log(
           `${i + 1}/${ilen} ignore webapiGroup:${
             webapiGroup.name
-          },due to MoonConfig.api.exclude`,
+          },due to MoonConfig.api.exclude`
         );
         continue;
       } else {
         if (defaulltMoonConfig.api?.include?.length > 0) {
           if (
             defaulltMoonConfig.api.include.some((item) =>
-              minimatch(webapiGroup.name, item),
+              minimatch(webapiGroup.name, item)
             )
           ) {
             console.log(
               `${i + 1}/${ilen}`,
-              'current webapiGroup:',
-              webapiGroup.name,
+              "current webapiGroup:",
+              webapiGroup.name
             );
           } else {
             console.log(
               `${i + 1}/${ilen}`,
-              'ignore webapiGroup:',
+              "ignore webapiGroup:",
               webapiGroup.name,
-              'due to MoonConfig.api.include',
+              "due to MoonConfig.api.include"
             );
             continue;
           }
         } else {
           console.log(
             `${i + 1}/${ilen}`,
-            'current webapiGroup:',
-            webapiGroup.name,
+            "current webapiGroup:",
+            webapiGroup.name
           );
         }
       }
@@ -246,11 +247,11 @@ export async function genApi(context: {
         resSchemaModify: async (
           schema: SchemaProps,
           apiItem: IWebApiDefinded,
-          context: IWebApiContext,
+          context: IWebApiContext
         ): Promise<SchemaProps> => {
           let _isNewMethod = isNewMethod(
             context.webapiGroup.name,
-            apiItem.name,
+            apiItem.name
           );
           if (_isNewMethod) {
             newMethods.push({
@@ -263,7 +264,7 @@ export async function genApi(context: {
             schema,
             apiItem,
             context,
-            defaulltMoonConfig.api.wrapper,
+            defaulltMoonConfig.api.wrapper
           );
 
           hookInstance.onResponseSchema.call(finalSchema, {
@@ -279,17 +280,17 @@ export async function genApi(context: {
           options.content = options.content
             .replace(
               `import sdk from "@api/sdk";`,
-              `import * as sdk from '@/utils/fetch';`,
+              `import * as sdk from '@/utils/fetch';`
             )
             .replace(
               `import sdk from '@api/sdk';`,
-              `import * as sdk from '@/utils/fetch';`,
+              `import * as sdk from '@/utils/fetch';`
             )
             .replace(
               /result\.data/gi,
               defaulltMoonConfig.api.wrapper
                 ? `result.${defaulltMoonConfig.api.wrapper}`
-                : 'result',
+                : "result"
             );
 
           return Promise.resolve(options);
@@ -315,20 +316,20 @@ export async function genApi(context: {
         content: `${controllerName},`,
         check: (_, raw) => !raw.includes(filePath),
       });
-      await hookInstance.afterGroupCompile.call(webapiGroup,context);
+      await hookInstance.afterGroupCompile.call(webapiGroup, context);
     } catch (err) {
       console.error(err);
     }
   }
-  await hookInstance.afterCompile.call(apiGroups,context);
+  await hookInstance.afterCompile.call(apiGroups, context);
 
-  let apiIndexFilePath = join(apiDir, 'index.ts');
+  let apiIndexFilePath = join(apiDir, "index.ts");
   if (!fse.pathExistsSync(apiIndexFilePath)) {
-    console.log('create: 创建文件' + apiIndexFilePath);
+    console.log("create: 创建文件" + apiIndexFilePath);
     fse.writeFileSync(
       apiIndexFilePath,
       `export default {
-    }`,
+    }`
     );
   }
 
