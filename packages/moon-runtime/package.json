@@ -1,0 +1,29 @@
+{
+	"name": "moon-runtime",
+	"version": "0.0.8-alpha.32",
+	"description": "",
+	"main": "lib/index.js",
+	"typings": "declarations/index.d.ts",
+	"scripts": {
+		"prepublishOnly": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"publishConfig": {
+		"registory": "http://registory.npmjs.org"
+	},
+	"dependencies": {
+		"debug": "^4.1.1",
+		"immer": "^5.0.1",
+		"mitt": "^1.2.0",
+		"moon-core": "^0.0.8-alpha.32",
+		"redux": "^4.0.5",
+		"ts-morph": "^3.1.0"
+	},
+	"author": "",
+	"license": "ISC",
+	"gitHead": "96cd395e9a2b767aa1bc57aa28bca4dd3c794db1",
+	"devDependencies": {
+		"@types/fs-extra": "^7.0.0",
+		"fs-extra": "^8.1.0"
+	}
+}

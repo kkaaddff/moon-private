@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es5",
+    "noEmit": false,
+    "downlevelIteration": true,
+    "rootDir": "./src",
+    "skipDefaultLibCheck": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "./lib",
+    "declarationDir":"./declarations",
+    "declaration": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/**/*", "temp/**",
+    "../moon-wanmi/src/demo/**"
+  ]
+}
