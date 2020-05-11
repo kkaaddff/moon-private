@@ -16,13 +16,7 @@ async function <%=Util.getMethodName(apiItem.name)%>(
 ):Promise< <%= Util.getTypeNameFromSchema(apiItem.responseSchema) %> > {
 
   const result = await sdk.<%=Util.getMethodName(apiItem.method)%> <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
-  `<%-apiItem.url%><%-getQueryParam(apiItem.requestParam)%>`
-    <% apiItem.requestParam.forEach(paramItem=>{ %>
-           <% if (paramItem.isInPath) { %>
-           .replace("{<%-paramItem.name %>}",<%-paramItem.name %>+"")
-            <% }  %>
-    <% }) %>
-  ,
+  `<%- apiItem.url.replace(/{/g,'${') %><%-getQueryParam(apiItem.requestParam)%>`,
 <% if (!isInBody(apiItem.requestParam)) { %>
     {
     <% apiItem.requestParam.forEach(paramItem=>{ %>
