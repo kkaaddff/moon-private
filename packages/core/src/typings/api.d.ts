@@ -6,6 +6,7 @@
  * @Date    2019/5/31
  **/
 import {IFileSaveOpt} from "./util";
+import RequestParameter from "../web-api/client/domain/request-parameter";
 
 /**
  * 对于接口的定义
@@ -16,7 +17,7 @@ export interface IWebApiDefinded {
   //方法名称
   name: string;
   comment: string;
-  requestParam: IParamShape[];
+  requestParam: RequestParameter[];
   responseSchema: SchemaProps;
 }
 
@@ -32,7 +33,7 @@ export interface IWebApiGroup {
     host:string;
     [key:string]:any;
   };
-  apis: IWebApiDefinded[];
+  apis: Method[];
   //公共的props, 供其他人调用;
   definitions?: {
     [defName: string]: SchemaProps;

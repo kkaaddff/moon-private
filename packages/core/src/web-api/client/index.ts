@@ -16,6 +16,7 @@ import { IWebApiContext, IWebApiDefinded } from "../../typings/api";
 
 import debug from "debug";
 import { toUCamelize } from "../../util/string-util";
+import RequestParameter from "./domain/request-parameter";
 const log = debug("web-api:");
 
 //TODO 参数是file类型的处理
@@ -139,7 +140,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
     let apiItem: IWebApiDefinded = webapiGroup.apis[i];
 
     for (let i = 0, ilen = apiItem.requestParam.length; i < ilen; i++) {
-      let param: IParamShape = apiItem.requestParam[i];
+      let param: RequestParameter = apiItem.requestParam[i];
       //@ts-ignore
       param.jsonSchema.title = Util.genInterfaceName(
         apiItem.name,

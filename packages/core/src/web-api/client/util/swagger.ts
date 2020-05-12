@@ -7,6 +7,8 @@ import {
 } from '../../../typings/api';
 import debug from "debug";
 import {toLCamelize} from '../../../util/string-util';
+import RequestParameter from "../domain/request-parameter";
+import Method from "../domain/method";
 const log = debug("swaggerUtil:");
 export function resSchemaModify(
   schema: SchemaProps,
@@ -260,8 +262,8 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
     let groupKey = '';
 
     for (let method in apiItem) {
-      let apiDefItem: any = {url, method};
       let methodInfo: IMethodDefinded = apiItem[method];
+      let apiDefItem: Method = new Method(methodInfo,{url,method}) //{url, method};
 
       groupKey = tag2DescMap[methodInfo.tags[0]]; //controller
 
@@ -279,25 +281,12 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
 
       temp[url] = {url, methodName: methodInfo.operationId, group: groupKey};
 
-      apiDefItem.name = toLCamelize(methodInfo.operationId)
-        .replace(/UsingPOST.*/gi, '')
-        .replace(/UsingPUT.*/gi, '')
-        .replace(/UsingHEAD.*/gi, '')
-        .replace(/UsingOPTIONS.*/gi, '')
-        .replace(/UsingPATCH.*/gi, '')
-        .replace(/UsingGET.*/gi, '')
-        .replace(/UsingDELETE.*/gi, '');
-
-
-
       if(!(KeyMap[groupKey].apis.every(methodItem => methodItem.name !== apiDefItem.name))){
         console.warn('api名字相同::',groupKey,apiDefItem.name);
         continue;
       }
 
-      //检查名字如果重复则添加一个get pot等信息;
-      // console.log(KeyMap[groupKey].apis.every(methodItem => methodItem.name !== apiDefItem.name),apiDefItem.name,KeyMap[groupKey].apis.map(item=>item.name).join(",") )
-     // console.log('apiDefItem.name==>',apiDefItem.name);
+      //检查名字如果重复则添加一个get post等信息;
       if (!KeyMap[groupKey].apis.every(methodItem => methodItem.name !== apiDefItem.name)
       ) {
         apiDefItem.name =
@@ -308,31 +297,15 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
           );
       }
 
-      apiDefItem.comment = methodInfo.summary;
-
-      apiDefItem.requestParam = (methodInfo.parameters || [])
-        .filter(item => item.in != 'header')
-        //spring error根据参数传递过来
-        .filter(item => !(item.name === 'errors' && item.schema &&item.schema["$ref"]==='#/definitions/Errors'))
-        .filter(item=>!item.name.startsWith("userInfo"))
-        .map(item => {
+      apiDefItem.requestParam.map(item => {
           if (item.schema) {
             addDef2List(
               KeyMap[groupKey].definitions,
               findAllRefType(apiDocs.definitions, item.schema),
             );
           }
-
-          return {
-            name: getParamName(item.name),
-            isInQuery: item.in === 'query' ? true : false,
-            isInPath: item.in === 'path' ? true : false,
-            isInBody: item.in === 'body' ? true : false,
-            comment: item.description,
-            jsonSchema: item.schema ? item.schema : item,
-          };
         });
-      apiDefItem.responseSchema = methodInfo.responses['200'].schema;
+
       addDef2List(
         KeyMap[groupKey].definitions,
         findAllRefType(apiDocs.definitions, apiDefItem.responseSchema),

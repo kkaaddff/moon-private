@@ -58,22 +58,6 @@ function isDebug(): boolean {
   return process.env.hasOwnProperty("DEBUG");
 }
 
-/**
- * 判断是否是新添加的方法,如果是新方法, 默认在开发时走mock流程.
- *
- * @param {string} controller
- * @param {string} method
- * @returns {boolean}
- */
-function isNewMethod(controller: string, method: string): boolean {
-  let controllerInfo = oldApiIndex[controller];
-  if (controllerInfo && controllerInfo.methods[method]) {
-    return false;
-  }
-
-  return true;
-}
-
 process.on("unhandledRejection", (error) => {
   console.log("unhandledRejection", error);
 });
@@ -190,7 +174,6 @@ export async function genApi(context: {
   let apiDir = join(workBase, defaulltMoonConfig.api.dir);
 
   let inserts: IInsertOption[] = [];
-  let newMethods: { controller: string; method: string }[] = []; //新添加的方法记录
   for (let i = 0, ilen = apiGroups.length; i < ilen; i++) {
     try {
       let webapiGroup: IWebApiGroup = apiGroups[i];
@@ -249,16 +232,7 @@ export async function genApi(context: {
           apiItem: IWebApiDefinded,
           context: IWebApiContext
         ): Promise<SchemaProps> => {
-          let _isNewMethod = isNewMethod(
-            context.webapiGroup.name,
-            apiItem.name
-          );
-          if (_isNewMethod) {
-            newMethods.push({
-              controller: context.webapiGroup.name,
-              method: apiItem.name,
-            });
-          }
+
           //添加生成mock数据的流程;;
           let finalSchema = MoonCore.SwaggerUtil.resSchemaModify(
             schema,
