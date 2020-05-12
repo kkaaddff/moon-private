@@ -104,6 +104,10 @@ export async function buildWebApi(context: IWebApiContext): Promise<string> {
           log(`isInBody:`, requestParams);
           return !!requestParams.find((item) => item.isInBody);
         },
+        isInQuery: (requestParams: IParamShape[]): Boolean => {
+          log(`isInQuery:`, requestParams);
+          return !!requestParams.find((item) => item.isInQuery);
+        },
         getQueryParam: (requestParams: IParamShape[]): string => {
           // let result  = requestParams.filter(item=>item.isInQuery)
           //   .map(item=>`${item.name}=\${${item.name}}`).join("&");

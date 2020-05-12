@@ -16,20 +16,24 @@ async function <%=Util.getMethodName(apiItem.name)%>(
 ):Promise< <%= Util.getTypeNameFromSchema(apiItem.responseSchema) %> > {
 
   const result = await sdk.<%=Util.getMethodName(apiItem.method)%> <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
-  `<%- apiItem.url.replace(/{/g,'${') %><%-getQueryParam(apiItem.requestParam)%>`,
-<% if (!isInBody(apiItem.requestParam)) { %>
+  `<%-apiItem.url.replace(/{/g,'${')%><%-getQueryParam(apiItem.requestParam)%>`,
     {
     <% apiItem.requestParam.forEach(paramItem=>{ %>
-        <% if (!paramItem.isInPath) { %>
+        <% if (paramItem.isInBody) { %>
         <%=['string','integer','number','date','file','array','boolean'].includes(paramItem.jsonSchema.type)?"":"..."%><%=paramItem.name%>,
         <% }  %>
     <% }) %>
-    }
-<% } else { %>
-    <%= apiItem.requestParam.find(item=>item.isInBody).name%>
-<% }  %>
+    },
+    {
+      <% apiItem.requestParam.forEach(paramItem=>{ %>
+          <% if (paramItem.isInQuery) { %>
+          <%=['string','integer','number','date','file','array','boolean'].includes(paramItem.jsonSchema.type)?"":"..."%><%=paramItem.name%>,
+          <% }  %>
+      <% }) %>
+      }
 
-,{serverInfo,controllerName});
+,
+{serverInfo,controllerName});
   return  result.data;
 }
 <% }) %>
