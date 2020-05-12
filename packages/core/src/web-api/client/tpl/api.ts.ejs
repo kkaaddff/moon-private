@@ -10,9 +10,7 @@ const controllerName = "<%-webapiGroup.name %>";
  *
  */
 async function <%=apiItem.tplGetMethodName()%>(
-    <% apiItem.requestParam.forEach(paramItem=>{ %>
-        <%=paramItem.name%>:<%=paramItem.tplGenInterfaceName()%>,
-    <% }) %>
+    <%= apiItem.tplGetRequestParamContent() %>
 ):Promise< <%= apiItem.tplGetResponseInterfaceName() %> > {
 
   const result = await sdk.<%=apiItem.tplGetMethodType()%> <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(

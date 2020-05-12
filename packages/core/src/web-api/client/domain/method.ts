@@ -112,8 +112,9 @@ export default class Method{
    * 获取入参内容;
    */
   tplGetRequestParamContent():string{
+    
     return this.requestParam.map(item=>{
-      return `${item.name+(item.isRequired?"":"?")}:${item.tplGenInterfaceName()}`
+      return `${item.comment?"\n/*"+item.comment+"*/\n":""}${item.name+(item.isRequired?"":"?")}:${item.tplGenInterfaceName()}`
     }).join(',')
   }
 
