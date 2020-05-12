@@ -9,7 +9,7 @@
 // import {IMoonConfig} from "moon-core/declarations/typings/config";
 import {join} from "path";
 import * as fse from "fs-extra";
-import {IMoonConfig} from "../../../../core/src/typings/config";
+import {IMoonConfig} from "moon-core/declarations/typings/config";
 
 export interface IBackendConfig{
   db:{

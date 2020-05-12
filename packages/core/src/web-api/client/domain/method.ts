@@ -6,11 +6,12 @@
  * @coder.yang2010@gmail.com
  * @Date    2020/5/12
  **/
-import {addDef2List, findAllRefType, IMethodDefinded} from "../util/swagger";
+import {IMethodDefinded} from "../util/swagger";
 import {toLCamelize} from "../../../util/string-util";
 import RequestParameter from "./request-parameter";
 import {SchemaProps} from "../../../typings/api";
 
+export type MethodName = "POST"|"GET"|"UPDATE"|"DELETE"|"OPTIONS";
 export default class Method{
 
   constructor(public methodInfo:IMethodDefinded,public methodInfoOptions:{
@@ -22,6 +23,12 @@ export default class Method{
 
   private _name:string;
 
+  get methodName(){
+    return this.methodInfoOptions.method
+  }
+  get url():string{
+    return this.methodInfoOptions.url;
+  }
   /**
    * 方法名称;
    */
@@ -70,10 +77,22 @@ export default class Method{
     return this.params;
   }
 
+
+  private _responseSchma;
   get responseSchema():SchemaProps{
-    return this.methodInfo.responses['200'].schema;
+    if(!this._responseSchma){
+      this._responseSchma = this.methodInfo.responses['200'].schema;
+    }
+    return this._responseSchma;
   }
 
+  set responseSchema(res){
+    this._responseSchma =res;
+  }
+
+  tplGetMethodType(){
+    return this.methodInfoOptions.method.toLocaleLowerCase();
+  }
 
   tplGetMethodName(){
     let methodName =this.name

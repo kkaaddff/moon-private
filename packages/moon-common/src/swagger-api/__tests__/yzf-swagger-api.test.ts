@@ -9,7 +9,7 @@ import {tmpdir} from 'os';
 import {join} from  'path';
 import {readJSON,remove} from  'fs-extra';
 import moonCore from  'moon-core';
-import {IWebApiContext, IWebApiDefinded, IWebApiGroup, SchemaProps} from "../../../../core/declarations/typings/api";
+import {IWebApiContext, IWebApiDefinded, IWebApiGroup, SchemaProps} from "moon-core//declarations/typings/api";
 
 
 describe('云帐房swaggerapi测试', () => {

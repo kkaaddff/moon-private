@@ -10,7 +10,7 @@ import Method from "./method";
  * @Date    2020/5/12
  **/
 
-const stringUtil = require("../../util/string-util");
+const stringUtil = require("../util/string-util");
 
 export interface IParamAst {
   description: string
@@ -88,7 +88,7 @@ export default class RequestParameter{
    * 获取参数的interfaceName定义;
    */
   tplGenInterfaceName():string{
-    return `I${stringUtil.toUCamelize([this.paramsOptions.ownedMethod.name,this.name,'req'])}`;
+    return `I${stringUtil.toUCamelize([this.paramsOptions.ownedMethod.name,this.name,'req'].join("-"))}`;
   }
 
 }

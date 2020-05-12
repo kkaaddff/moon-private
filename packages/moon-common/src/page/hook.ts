@@ -12,7 +12,7 @@ import {
 } from "tapable";
 
 import {IFileSaveOptions} from "moon-core/declarations/typings/page";
-import {IContext} from "../../../core/src/typings/page";
+import {IContext} from "moon-core/declarations/typings/page";
 import {IPageGenerator} from "./index";
 
 type SaveFilePath=string;
