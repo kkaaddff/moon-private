@@ -132,8 +132,6 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
   log(`ts定义信息: beg`);
   let { webapiGroup, resSchemaModify } = context;
 
-  // let results = [];
-
   let param2RespTypes = [];
 
   for (let i = 0, ilen = webapiGroup.apis.length; i < ilen; i++) {
@@ -147,13 +145,10 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
         param.name,
         "req"
       );
-      param2RespTypes.push(param.jsonSchema);
-      // let {tsContent} = await genTsFromSchema(
-      //   Util.genInterfaceName(apiItem.name, param.name, 'req'),
-      //   param.jsonSchema as any,
-      //   context,
-      // );
-      // results.push(tsContent);
+
+      if(!param.isBasicType()){
+        param2RespTypes.push(param.getObjectJsonSchemas());
+      }
     }
 
     if (apiItem.responseSchema) {

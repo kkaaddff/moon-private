@@ -16,7 +16,7 @@ export default class Method{
 
   constructor(public methodInfo:IMethodDefinded,public methodInfoOptions:{
     url:string;
-    method:"POST"|"GET"|"UPDATE"|"DELETE"|"OPTIONS"|string;
+    method:MethodName|string;
   }) {
 
   }
@@ -77,6 +77,10 @@ export default class Method{
     return this.params;
   }
 
+  getObjectJsonSchemas(){
+
+  }
+
 
   private _responseSchma;
   get responseSchema():SchemaProps{
@@ -112,16 +116,34 @@ export default class Method{
    * 获取入参内容;
    */
   tplGetRequestParamContent():string{
-    
-    return this.requestParam.map(item=>{
-      return `${item.comment?"\n/*"+item.comment+"*/\n":""}${item.name+(item.isRequired?"":"?")}:${item.tplGenInterfaceName()}`
-    }).join(',')
+    let param=`param`;
+    let typeStr="{"+
+      this.requestParam.map(item=>{
+        let typeStr=item.tplGenInterfaceName();
+        if(item.isBasicType()){
+          typeStr=item.getBasicTsType();
+        }
+            return `${item.comment?"\n/*"+item.comment+"*/\n":""}${item.name+(item.isRequired?"":"?")}:${typeStr}`
+    }).join(';')+"}"
+    return `${param}:${typeStr}`;
+  }
+
+  tplGetUrl():string{
+    return `\`${this.url.replace(/{/g,'${')}\``;
+  }
+
+  // getQueryParam(apiItem.requestParam)
+  tplGetBodyParam():string{
+   return  this.requestParam.filter(item=>item.isInBody).map(item=>`${item.name}:param.${item.name}`).join(",\n")
+  }
+
+  tplGetQueryParam():string{
+    return  this.requestParam.filter(item=>item.isInQuery).map(item=>`${item.name}:param.${item.name}`).join(",\n")
   }
 
   tplGetResponseInterfaceName():string{
     return getTypeNameFromSchema(this.responseSchema)
   }
-
 }
 
 

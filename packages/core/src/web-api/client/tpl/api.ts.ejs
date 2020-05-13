@@ -14,24 +14,11 @@ async function <%=apiItem.tplGetMethodName()%>(
 ):Promise< <%= apiItem.tplGetResponseInterfaceName() %> > {
 
   const result = await sdk.<%=apiItem.tplGetMethodType()%> <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
-  `<%-apiItem.url.replace(/{/g,'${')%><%-getQueryParam(apiItem.requestParam)%>`,
-    {
-    <% apiItem.requestParam.forEach(paramItem=>{ %>
-        <% if (paramItem.isInBody) { %>
-        <%=['string','integer','number','date','file','array','boolean'].includes(paramItem.jsonSchema.type)?"":"..."%><%=paramItem.name%>,
-        <% }  %>
-    <% }) %>
-    },
-    {
-      <% apiItem.requestParam.forEach(paramItem=>{ %>
-          <% if (paramItem.isInQuery) { %>
-          <%=['string','integer','number','date','file','array','boolean'].includes(paramItem.jsonSchema.type)?"":"..."%><%=paramItem.name%>,
-          <% }  %>
-      <% }) %>
-      }
-
-,
-{serverInfo,controllerName});
+    <%-apiItem.tplGetUrl()%>,
+    { <%-apiItem.tplGetBodyParam()%> },
+    { <%-apiItem.tplGetQueryParam()%>},
+    {serverInfo,controllerName}
+  );
   return  result.data;
 }
 <% }) %>
@@ -39,7 +26,7 @@ async function <%=apiItem.tplGetMethodName()%>(
 
 export default {
 <% webapiGroup.apis.forEach(apiItem=>{ %>
-    <%=apiItem.name%>,
+    <%=apiItem.tplGetMethodName()%>,
 <% }) %>
 };
 

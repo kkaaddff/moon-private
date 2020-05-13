@@ -80,6 +80,58 @@ export default class RequestParameter{
   get jsonSchema(){
     return this.ast.schema?this.ast.schema : this.ast;
   }
+
+  basicTypesMap={
+    integer:"number",
+    string:"string",
+    boolean:"boolean",
+    file:"File",
+    object:"any",
+  };
+  /**
+   * 判断参数类型是不是基本类型; string int number 等;
+   */
+  isBasicType():boolean{
+    // TODO dong 2020/5/12 这里有一个判断的逻辑在.
+    if(this.basicTypesMap[this.ast.type]){
+      return true;
+    } else if(this.ast.type==='array'){
+      if(this.basicTypesMap[this.ast['items'].type]){
+        return true;
+      }
+      debugger;
+      return false
+    } else if(this.ast.schema){
+      return false;
+    } else {
+      debugger;
+      return false;
+    }
+  }
+
+  /**
+   * 要先判断是基本类型的
+   */
+  getBasicTsType(){
+    if(this.ast.type==='array'){
+      if(!this.ast['items']){
+        debugger;
+      }
+      return this.basicTypesMap[this.ast['items'].type]+"[]"
+    }
+
+    return this.basicTypesMap[this.ast.type];
+  }
+  getObjectJsonSchemas():any|undefined{
+    if(this.isBasicType()){
+      return ;
+    }
+
+    this.jsonSchema['title'] = this.tplGenInterfaceName();
+    return this.jsonSchema;
+  }
+
+
   get schema(){
     return this.ast.schema?this.ast.schema : this.ast;
   }

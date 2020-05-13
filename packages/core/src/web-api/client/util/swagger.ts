@@ -9,6 +9,7 @@ import debug from "debug";
 import {toLCamelize} from '../../../util/string-util';
 import RequestParameter from "../domain/request-parameter";
 import Method from "../domain/method";
+import ApiGroup from "../domain/api-group";
 const log = debug("swaggerUtil:");
 export function resSchemaModify(
   schema: SchemaProps,
@@ -227,9 +228,9 @@ const nameCheckReg= /^[0-9a-zA-Z_\-«»]*$/
  * @param {ISwaggerApisDocs} apiDocs
  * @returns {IWebApiGroup[]}
  */
-export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>console.error(message)): IWebApiGroup[] {
+export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>console.error(message)): ApiGroup[] {
   //分组;
-  let apiGroups: IWebApiGroup[] = [];
+  let apiGroups: ApiGroup[] = [];
   let tag2DescMap:{[name:string]:string} =apiDocs.tags.reduce((acc,next)=>{
     acc[next.name]=  next.description.split(" ").map(toLCamelize).join("-");
     return acc;
@@ -255,7 +256,7 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
   }
 
   let temp = {};
-  let KeyMap:{[controllerName:string]:IWebApiGroup} = {};
+  let KeyMap:{[controllerName:string]:ApiGroup} = {};
   for (let url in apiDocs.paths) {
     let apiItem: IApiDefinded = apiDocs.paths[url];
 
@@ -268,34 +269,32 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
       groupKey = tag2DescMap[methodInfo.tags[0]]; //controller
 
       if (!KeyMap[groupKey]) {
-        KeyMap[groupKey] = {
+        KeyMap[groupKey] = new ApiGroup({
           name: groupKey,
           serverInfo:{
             host:apiDocs.host,
             ...apiDocs.info
           },
-          apis: [],
-          definitions: {},
-        };
+        })
       }
 
       temp[url] = {url, methodName: methodInfo.operationId, group: groupKey};
 
-      if(!(KeyMap[groupKey].apis.every(methodItem => methodItem.name !== apiDefItem.name))){
+      if((KeyMap[groupKey].isMethodNameExist(apiDefItem.name))){
         console.warn('api名字相同::',groupKey,apiDefItem.name);
         continue;
       }
 
       //检查名字如果重复则添加一个get post等信息;
-      if (!KeyMap[groupKey].apis.every(methodItem => methodItem.name !== apiDefItem.name)
-      ) {
-        apiDefItem.name =
-          apiDefItem.name +
-          '_' +
-          methodInfo.operationId.substr(
-            methodInfo.operationId.indexOf('Using') + 5,
-          );
-      }
+      // if (!KeyMap[groupKey].apis.every(methodItem => methodItem.name !== apiDefItem.name)
+      // ) {
+      //   apiDefItem.name =
+      //     apiDefItem.name +
+      //     '_' +
+      //     methodInfo.operationId.substr(
+      //       methodInfo.operationId.indexOf('Using') + 5,
+      //     );
+      // }
 
       apiDefItem.requestParam.map(item => {
           if (item.schema) {
@@ -310,7 +309,7 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
         KeyMap[groupKey].definitions,
         findAllRefType(apiDocs.definitions, apiDefItem.responseSchema),
       );
-      KeyMap[groupKey].apis.push(apiDefItem);
+      KeyMap[groupKey].addApi(apiDefItem);
     }
   }
 
