@@ -10,6 +10,8 @@
 import ApiCompileHooks from "moon-common/declarations/swagger-api/hook";
 import * as fse from "fs-extra";
 
+import fileVisitor from 'file-visitor';
+
 export default class ApiWrapperCodeMod{
 
   constructor() {
@@ -41,11 +43,18 @@ export default class ApiWrapperCodeMod{
     hook.finish.tap('ApiWrapperCodeModFinish',async()=>{
       debugger;
        // TODO dong 2020/5/13
+     await  fileVisitor("/Users/dong/yzfworkbench/Auth4newdaizhang/packages/authority/src",{
+       "\.ts[x]?$":(a)=>{
+         let fileContent=a.content;
 
+         // TODO dong 2020/5/13 检测文件内容
 
+         // TODO dong 2020/5/13 修改引用方式;
 
-
-      await fse.writeJSON("./method-reqparam.json",this.map);
+         return ;
+       }
+      })
+      // await fse.writeJSON("./method-reqparam.json",this.map);
     })
 
   }
