@@ -22,13 +22,14 @@ import {
 } from 'moon-core/declarations/typings/api';
 import {IFileSaveOptions} from "moon-core/declarations/typings/page";
 import {IGenApiConfig} from "./index";
+import ApiGroup from "moon-core/declarations/web-api/client/domain/api-group";
 
 type ApiFilePath=string;
 type ApiIndex=any;
 
 export interface IContext{
   moonConfig: IGenApiConfig,
-  apiGroups?:IWebApiGroup[]
+  apiGroups?:ApiGroup[]
 }
 
 export interface GenContext{
@@ -57,12 +58,12 @@ export default class ApiCompileHooks {
     swaggerJson?:any
   }>(["context"]);
 
-  swagger2ApiGroup=new AsyncSeriesWaterfallHook<any,IWebApiGroup[]>(['context'])
+  swagger2ApiGroup=new AsyncSeriesWaterfallHook<any,ApiGroup[]>(['context'])
 
   //编辑转换之前
-  beforeCompile=new SyncHook<IWebApiGroup[],GenContext>(["webApiGroup",'context']);
+  beforeCompile=new SyncHook<ApiGroup[],GenContext>(["webApiGroup",'context']);
 
-  beforeGroupCompile =new SyncHook<IWebApiGroup,GenContext>(["webApiGroup",'context']);
+  beforeGroupCompile =new SyncHook<ApiGroup,GenContext>(["webApiGroup",'context']);
 
   //单个api编译时
   beforeApiCompile=new SyncHook<IWebApiDefinded>(["IWebApiDefinded"]);
@@ -74,15 +75,15 @@ export default class ApiCompileHooks {
   beforeApiSave =new SyncHook<IFileSaveOptions,GenContext>(["IFileSaveOptions","any"]);
 
   //controller文件存储后
-  afterApiSave =new SyncHook<ApiFilePath,IWebApiGroup>(["ApiFilePath","IWebApiGroup"]);
+  afterApiSave =new SyncHook<ApiFilePath,ApiGroup>(["ApiFilePath","ApiGroup"]);
 
-  afterGroupCompile =new SyncHook<IWebApiGroup,GenContext>(["webApiGroup",'context']);
+  afterGroupCompile =new SyncHook<ApiGroup,GenContext>(["webApiGroup",'context']);
 
   //编辑转换之后
-  afterCompile=new SyncHook<IWebApiGroup[]>(["webApiGroup",'context']);
+  afterCompile=new SyncHook<ApiGroup[]>(["webApiGroup",'context']);
 
 
-  // beforeIndex=new SyncHook<IWebApiGroup>();
+  // beforeIndex=new SyncHook<ApiGroup>();
   afterIndex=new SyncHook<string,ApiIndex>();
 
   //结束后;

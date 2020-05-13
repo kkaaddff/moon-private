@@ -27,6 +27,7 @@ import { IInsertOption } from "moon-core/declarations/typings/util";
 import { IMoonConfig } from "moon-core/declarations/typings/config";
 import { loadMoonConfig } from "./util/config";
 import { applyHook } from "../util/hook-util";
+import ApiGroup from "moon-core/declarations/web-api/client/domain/api-group";
 const log = debug("j2t:cli");
 async function loadJson(swaggerUrl: string): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -65,8 +66,8 @@ process.on("unhandledRejection", (error) => {
 async function loadeApiGroup(
   apiGenConfig: IGenApiConfig,
   hookInstance: ApiCompileHooks
-): Promise<IWebApiGroup[]> {
-  let apiGroups: IWebApiGroup[] = [];
+): Promise<ApiGroup[]> {
+  let apiGroups: ApiGroup[] = [];
 
   let context = {
     moonConfig: apiGenConfig,
@@ -163,6 +164,7 @@ export async function genApi(context: {
 
   let apiGroups = await loadeApiGroup(defaulltMoonConfig.api, hookInstance);
 
+  debugger;
   await hookInstance.beforeCompile.call(apiGroups, context);
 
   try {
@@ -176,7 +178,7 @@ export async function genApi(context: {
   let inserts: IInsertOption[] = [];
   for (let i = 0, ilen = apiGroups.length; i < ilen; i++) {
     try {
-      let webapiGroup: IWebApiGroup = apiGroups[i];
+      let webapiGroup: ApiGroup = apiGroups[i];
 
       await hookInstance.beforeGroupCompile.call(webapiGroup, context);
       if (
