@@ -15,8 +15,8 @@ async function <%=apiItem.tplGetMethodName()%>(
 
   const result = await sdk.<%=apiItem.tplGetMethodType()%> <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
     <%-apiItem.tplGetUrl()%>,
-    { <%-apiItem.tplGetBodyParam()%> },
-    { <%-apiItem.tplGetQueryParam()%>},
+     <%-apiItem.tplGetBodyParam()%> ,
+     <%-apiItem.tplGetQueryParam()%>,
     {serverInfo,controllerName}
   );
   return  result.data;

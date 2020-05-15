@@ -99,12 +99,10 @@ export default class RequestParameter{
       if(this.basicTypesMap[this.ast['items'].type]){
         return true;
       }
-      debugger;
       return false
     } else if(this.ast.schema){
       return false;
     } else {
-      debugger;
       return false;
     }
   }
@@ -115,7 +113,6 @@ export default class RequestParameter{
   getBasicTsType(){
     if(this.ast.type==='array'){
       if(!this.ast['items']){
-        debugger;
       }
       return this.basicTypesMap[this.ast['items'].type]+"[]"
     }

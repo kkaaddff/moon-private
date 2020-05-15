@@ -164,7 +164,6 @@ export async function genApi(context: {
 
   let apiGroups = await loadeApiGroup(defaulltMoonConfig.api, hookInstance);
 
-  debugger;
   await hookInstance.beforeCompile.call(apiGroups, context);
 
   try {
@@ -234,7 +233,6 @@ export async function genApi(context: {
           apiItem: IWebApiDefinded,
           context: IWebApiContext
         ): Promise<SchemaProps> => {
-
           //添加生成mock数据的流程;;
           let finalSchema = MoonCore.SwaggerUtil.resSchemaModify(
             schema,

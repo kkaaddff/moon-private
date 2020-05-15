@@ -109,6 +109,7 @@ export type SchemaProps =
 
 export interface IJsonSchemaRef extends IJsonSchemaProps {
   $ref: string;
+  type?:string
 }
 
 export interface IJsonSchemaBean extends IJSObjectProps {
