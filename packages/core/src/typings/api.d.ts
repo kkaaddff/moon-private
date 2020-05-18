@@ -7,6 +7,8 @@
  **/
 import {IFileSaveOpt} from "./util";
 import RequestParameter from "../web-api/client/domain/request-parameter";
+import {ApiGroup} from "../web-api/client/domain";
+import Method from "../web-api/client/domain/method";
 
 /**
  * 对于接口的定义
@@ -20,35 +22,35 @@ export interface IWebApiDefinded {
   requestParam: RequestParameter[];
   responseSchema: SchemaProps;
 }
-
-export interface IWebApiGroup {
-  name: string;
-  serverInfo:{
-    // contact: string;
-    description: string;
-    // license: {name: string, url: string}
-    // termsOfService: string;
-    title: string;
-    version: string;
-    host:string;
-    [key:string]:any;
-  };
-  apis: Method[];
-  //公共的props, 供其他人调用;
-  definitions?: {
-    [defName: string]: SchemaProps;
-  };
-}
+//
+// export interface IWebApiGroup {
+//   name: string;
+//   serverInfo:{
+//     // contact: string;
+//     description: string;
+//     // license: {name: string, url: string}
+//     // termsOfService: string;
+//     title: string;
+//     version: string;
+//     host:string;
+//     [key:string]:any;
+//   };
+//   apis: Method[];
+//   //公共的props, 供其他人调用;
+//   definitions?: {
+//     [defName: string]: SchemaProps;
+//   };
+// }
 
 export interface IWebApiContext extends IFileSaveOpt {
-  webapiGroup: IWebApiGroup;
+  webapiGroup: ApiGroup;
   projectPath: string;
   //修改返回值的schema信息; 进行调整以生成ts定义; 因为多了api层的修改;
-  resSchemaModify?: (resScheme: SchemaProps,apiItem: IWebApiDefinded , context: IWebApiContext) => Promise<SchemaProps>;
+  resSchemaModify?: (resScheme: SchemaProps,apiItem: Method , context: IWebApiContext) => Promise<SchemaProps>;
   isNeedMock?:(controller:string,method:string)=>boolean;
   beforeCompile?: (
-    apiItem: IWebApiDefinded,
-  ) => Promise<IWebApiDefinded> | IWebApiDefinded;
+    apiItem: Method,
+  ) => Promise<Method> | Method;
 }
 
 interface IJsonSchemaProps {

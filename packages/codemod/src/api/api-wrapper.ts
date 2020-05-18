@@ -20,7 +20,8 @@ type CheckType = 'api' | 'controller'
 
 export default class ApiWrapperCodeMod{
 
-  constructor() {
+  constructor(public props:any,private count) {
+
   }
 
   srouceDir:string = "./demo/src";
@@ -56,7 +57,7 @@ export default class ApiWrapperCodeMod{
           await fileVisitor('D:/node-test/src', {
             '.ts[x]?$': a => {
               const { content, absPath, name } = a
-      
+
               const tranPathToController = (funcName: string) => {
                 const _fileName = name.toString()
                 const _arr = _fileName.split('\\')
@@ -66,7 +67,7 @@ export default class ApiWrapperCodeMod{
                 // 拼接
                 return `api.${_cName}.${funcName}`
               }
-      
+
               // 转驼峰
               const changeCamel = (str: string): string => {
                 const strArr = str.split('-')
@@ -80,12 +81,12 @@ export default class ApiWrapperCodeMod{
                 }
                 return strArr.join('')
               }
-      
+
               const findPageOrComponmentFunc = (controllerName: string): void => {
                 console.log(controllerName)
                 changeApi(controllerName, 'controller')
               }
-      
+
               const findApiController = (_lookStr: string): void => {
                 // 在 data 中查找该字符串的位置
                 const _data = content
@@ -101,9 +102,9 @@ export default class ApiWrapperCodeMod{
                   index = _data.indexOf(_lookStr, index + 1)
                 }
               }
-      
+
               // TODO dong 2020/5/13 修改引用方式;
-      
+
               const handleFileChange = (_lookStr: string): void => {
                 const _data = content
                 const _filePath = absPath
@@ -116,15 +117,15 @@ export default class ApiWrapperCodeMod{
                 const newFileContent = _data.replace(_args, JSON.parse(_new_args))
                 fs.writeFileSync(_filePath, newFileContent, 'utf8')
               }
-      
+
               const makeNewParams = (str: string): string => {
                 const _newStr = str.slice(1, str.length - 1)
                 const _obj = `({${_newStr}})`
                 return JSON.stringify(_obj)
               }
-      
+
               // TODO dong 2020/5/13 检测文件内容
-              
+
               const exc = new RegExp(_lookingForString)
               if (exc.test(content)) {
                 if (type === 'api') {
@@ -133,7 +134,7 @@ export default class ApiWrapperCodeMod{
                   handleFileChange(_lookingForString)
                 }
               }
-      
+
               // return
             }
           })
@@ -142,7 +143,7 @@ export default class ApiWrapperCodeMod{
         }
         // await fse.writeJSON("./method-reqparam.json",this.map);
       }
-      
+
       changeApi(METHOD_GET, 'api')
     })
 

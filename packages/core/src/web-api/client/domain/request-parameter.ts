@@ -16,7 +16,7 @@ export interface IParamAst {
   description: string
   format: string
   in: "query"|"path"|"body",
-  name: "id"
+  name: string;
   required: boolean
   type: string;
   schema?:SchemaProps;

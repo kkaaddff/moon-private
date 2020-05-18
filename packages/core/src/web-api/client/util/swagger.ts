@@ -2,7 +2,6 @@ import {
   IJSObjectProps,
   IWebApiContext,
   IWebApiDefinded,
-  IWebApiGroup,
   SchemaProps,
 } from '../../../typings/api';
 import debug from "debug";
@@ -226,12 +225,13 @@ const nameCheckReg= /^[0-9a-zA-Z_\-«»]*$/
 /**
  * 转换项目
  * @param {ISwaggerApisDocs} apiDocs
- * @returns {IWebApiGroup[]}
+ * @returns {ApiGroup[]}
  */
 export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>console.error(message)): ApiGroup[] {
+
   //分组;
   let apiGroups: ApiGroup[] = [];
-  let tag2DescMap:{[name:string]:string} =apiDocs.tags.reduce((acc,next)=>{
+  let tag2DescMap:{[name:string]:string} =(apiDocs.tags||[]).reduce((acc,next)=>{
     acc[next.name]=  next.description.split(" ").map(toLCamelize).join("-");
     return acc;
   },{});
@@ -266,7 +266,11 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
       let methodInfo: IMethodDefinded = apiItem[method];
       let apiDefItem: Method = new Method(methodInfo,{url,method}) //{url, method};
 
-      groupKey = tag2DescMap[methodInfo.tags[0]]; //controller
+      if(tag2DescMap[methodInfo.tags[0]]){
+        groupKey = tag2DescMap[methodInfo.tags[0]];
+      }else{
+        groupKey = methodInfo.tags[0];
+      }
 
       if (!KeyMap[groupKey]) {
         KeyMap[groupKey] = new ApiGroup({

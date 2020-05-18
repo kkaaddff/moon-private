@@ -101,23 +101,6 @@ export async function buildWebApi(context: IWebApiContext): Promise<string> {
         Util,
         webapiGroup,
         tsDefinded,
-        isInBody: (requestParams: IParamShape[]): Boolean => {
-          log(`isInBody:`, requestParams);
-          return !!requestParams.find((item) => item.isInBody);
-        },
-        isInQuery: (requestParams: IParamShape[]): Boolean => {
-          log(`isInQuery:`, requestParams);
-          return !!requestParams.find((item) => item.isInQuery);
-        },
-        getQueryParam: (requestParams: IParamShape[]): string => {
-          // let result  = requestParams.filter(item=>item.isInQuery)
-          //   .map(item=>`${item.name}=\${${item.name}}`).join("&");
-          // if(result) {
-          //   return '?'+ result;
-          // }else{
-          return "";
-          // }
-        },
       });
 
       return conent;
@@ -135,7 +118,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
   let param2RespTypes = [];
 
   for (let i = 0, ilen = webapiGroup.apis.length; i < ilen; i++) {
-    let apiItem: IWebApiDefinded = webapiGroup.apis[i];
+    let apiItem = webapiGroup.apis[i];
 
     for (let i = 0, ilen = apiItem.requestParam.length; i < ilen; i++) {
       let param: RequestParameter = apiItem.requestParam[i];
@@ -145,8 +128,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
         param.name,
         "req"
       );
-
-      if(!param.isBasicType()){
+      if(!param.isBasicType()) {
         param2RespTypes.push(param.getObjectJsonSchemas());
       }
     }
@@ -161,6 +143,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
           context
         );
       }
+      debugger;
       if (_resSchema) {
         if (/.*[\u4e00-\u9fa5]+.*/.test(_resSchema.title)) {
           console.warn(
@@ -169,7 +152,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
         }
         //title为空, 或者中文.
         if (!_resSchema.title) {
-          _resSchema.title = toUCamelize(apiItem.name + apiItem.method + "Res");
+          _resSchema.title = toUCamelize(apiItem.name + "Res");
         }
         apiItem.responseSchema = _resSchema;
         if (_resSchema) {

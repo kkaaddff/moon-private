@@ -87,6 +87,7 @@ async function loadeApiGroup(
     await hookInstance.onError.promise(errorInfo, context);
   };
 
+  debugger;
   if (context.swaggerJson) {
     apiJson = context.swaggerJson;
     apiGroups = MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal);
@@ -112,11 +113,16 @@ async function loadeApiGroup(
           context.swaggerJson = apiJson;
           context.apiGroups = null;
           await hookInstance.swagger2ApiGroup.promise(context);
-          apiGroups = apiGroups.concat(
-            context.apiGroups
-              ? context.apiGroups
-              : MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal)
-          );
+
+          if(!context.apiGroups){
+            apiGroups = apiGroups.concat(
+              context.apiGroups
+                ? context.apiGroups
+                : MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal)
+            );
+          }
+
+
         } catch (err) {
           console.warn(`从swagger导出数据失败跳过此swagger${swaggerUrl}`);
           console.warn(err);

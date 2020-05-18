@@ -16,9 +16,16 @@ import * as WebApiGen from './web-api/client';
 import * as SwaggerUtil from './web-api/client/util/swagger';
 import * as fakeGen from './web-api/client/fake-gen';
 import * as TsIndex from './web-api/client/ts-index';
+import * as apiDomain from  './web-api/client/domain';
 
+export const api = {
+  domain:apiDomain
+}
 
 export default {
+  // api:{
+  //   domain:apiDomain
+  // },
   ReduxGen,
   JsonUtil,
   StringUtil,

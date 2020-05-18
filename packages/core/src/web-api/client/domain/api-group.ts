@@ -29,6 +29,10 @@ export default  class ApiGroup {
     return this.options.serverInfo;
   }
 
+  addApis(apis:Method[]){
+    this.apis = this.apis.concat(apis);
+  }
+
   /**
    * 添加一个api
    * @param api
