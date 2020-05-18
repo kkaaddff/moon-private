@@ -10,6 +10,7 @@ import { IMethodDefinded } from "../util/swagger";
 import { toLCamelize } from "../../../util/string-util";
 import RequestParameter from "./request-parameter";
 import { SchemaProps } from "../../../typings/api";
+import { toUCamelize } from "../util/string-util";
 
 export type MethodName = "POST" | "GET" | "UPDATE" | "DELETE" | "OPTIONS";
 export default class Method {
@@ -89,12 +90,14 @@ export default class Method {
   get responseSchema(): SchemaProps {
     if (!this._responseSchma) {
       this._responseSchma = this.methodInfo.responses["200"].schema;
+      this._responseSchma.title = toUCamelize( this.name + "Res");
     }
     return this._responseSchma;
   }
 
   set responseSchema(res) {
     this._responseSchma = res;
+    this._responseSchma.title = toUCamelize( this.name + "Res");
   }
 
   tplGetMethodType() {

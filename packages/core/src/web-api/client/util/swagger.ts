@@ -33,9 +33,9 @@ export function resSchemaModify(
     return null;
   } else if (schema['$ref']) {
     // console.log('schema[\'$ref\']',schema);
-    let subSchema = context.webapiGroup.definitions[
+    let subSchema = JSON.parse(JSON.stringify(context.webapiGroup.definitions[
       schema['originalRef']
-    ] as IJSObjectProps;
+      ] as IJSObjectProps));
 
     if (!subSchema) {
       return null;
