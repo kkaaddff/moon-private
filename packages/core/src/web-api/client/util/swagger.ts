@@ -221,7 +221,10 @@ export interface OnError{
   (param:{level:"warn"|"error",message:string}):void;
 }
 
-const nameCheckReg= /^[0-9a-zA-Z_\-«»]*$/
+const nameCheckReg= /^[0-9a-zA-Z_\-«» ]*$/;
+function isCheckable(content:string){
+  return nameCheckReg.test(content);
+}
 /**
  * 转换项目
  * @param {ISwaggerApisDocs} apiDocs
@@ -240,7 +243,7 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
   //验证数据是否正确的.
   for (let i = 0, iLen = checksContents.length; i < iLen; i++) {
     let checksContent = checksContents[i];
-    if(!nameCheckReg.test(checksContent)) {
+    if(!isCheckable(checksContent)) {
       let message =`apiDocs.definitions或tags::包含非法字符,${checksContent},影响前端代码生成!`;
       onError && onError({level:"warn",message});
     }
@@ -268,6 +271,10 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
 
       if(tag2DescMap[methodInfo.tags[0]]){
         groupKey = tag2DescMap[methodInfo.tags[0]];
+        // 任何一个为非中文都可以 ;
+        if(!isCheckable(groupKey) && isCheckable(methodInfo.tags[0])){
+          groupKey = methodInfo.tags[0];
+        }
       }else{
         groupKey = methodInfo.tags[0];
       }
