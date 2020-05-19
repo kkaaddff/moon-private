@@ -17,7 +17,6 @@ import {IMoonConfig} from 'moon-core/declarations/typings/config';
 import {
   IWebApiContext,
   IWebApiDefinded,
-  IWebApiGroup,
   SchemaProps,
 } from 'moon-core/declarations/typings/api';
 import {IFileSaveOptions} from "moon-core/declarations/typings/page";

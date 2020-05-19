@@ -18,7 +18,6 @@ import ApiCompileHooks from "./hook";
 import {
   IWebApiContext,
   IWebApiDefinded,
-  IWebApiGroup,
   SchemaProps,
 } from "moon-core/declarations/typings/api";
 
@@ -230,7 +229,7 @@ export async function genApi(context: {
       let saveApiFile = await MoonCore.WebApiGen.buildWebApi({
         webapiGroup,
         projectPath: apiDir,
-        beforeCompile: (apiItem: IWebApiDefinded) => {
+        beforeCompile: (apiItem) => {
           hookInstance.beforeApiCompile.call(apiItem);
           return apiItem;
         },

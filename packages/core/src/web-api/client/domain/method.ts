@@ -90,14 +90,19 @@ export default class Method {
   get responseSchema(): SchemaProps {
     if (!this._responseSchma) {
       this._responseSchma = this.methodInfo.responses["200"].schema;
-      this._responseSchma.title = toUCamelize( this.name + "Res");
+      if(this._responseSchma ) {
+        this._responseSchma.title = toUCamelize( this.name + "Res");
+      }
     }
     return this._responseSchma;
   }
 
   set responseSchema(res) {
     this._responseSchma = res;
-    this._responseSchma.title = toUCamelize( this.name + "Res");
+
+    if(this._responseSchma ){
+      this._responseSchma.title = toUCamelize( this.name + "Res");
+    }
   }
 
   tplGetMethodType() {
