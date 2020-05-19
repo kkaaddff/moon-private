@@ -86,7 +86,6 @@ async function loadeApiGroup(
     await hookInstance.onError.promise(errorInfo, context);
   };
 
-  debugger;
   if (context.swaggerJson) {
     apiJson = context.swaggerJson;
     apiGroups = MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal);

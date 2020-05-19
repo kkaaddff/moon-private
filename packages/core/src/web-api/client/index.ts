@@ -143,7 +143,6 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
           context
         );
       }
-      debugger;
       if (_resSchema) {
         if (/.*[\u4e00-\u9fa5]+.*/.test(_resSchema.title)) {
           console.warn(
