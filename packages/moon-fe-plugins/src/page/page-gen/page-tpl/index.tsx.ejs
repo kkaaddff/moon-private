@@ -1,0 +1,19 @@
+import './index.less';
+import * as T from './types';
+import pageModel from './actions';
+import React, {useState, useEffect, PropsWithChildren} from 'react';
+
+
+<% pageModel.subComponents.forEach(subComp=>{ %>
+import <%=subComp.className%> from "./components/<%=subComp.name%>";
+<% }) %>
+
+export default (props: PropsWithChildren<T.I<%=pageModel.className%>Props>) => {
+    useEffect(()=>{
+        pageModel.init();
+        return pageModel.clean
+    },[]);
+
+    const [ state,  setState ] = useState<T.I<%=pageModel.className%>State>( {} );
+        return <div className={'<%-pageModel.className%>'}></div>;
+};

@@ -1,0 +1,20 @@
+import _ from 'lodash';
+import {immerUtil} from "moon-runtime";
+import { I<%=dataModel.className %>Reducer } from "../types";
+
+export const INITIAL_STATE: I<%=dataModel.className %>Reducer  = {
+  isReady:false,
+  <% dataModel.datas.forEach(dataItem=>{ %>
+             <%=dataItem.name%>:<%- JSON.stringify(dataItem.value||null)%>,
+  <% }) %>
+};
+
+ <% dataModel.methods.forEach(event=>{ %>
+/*
+<%=event.comment||""%>
+*/
+export function <%=event.name%>(state:I<%=dataModel.className %>Reducer,payload:any) :I<%=dataModel.className %>Reducer{
+    <%=event.content%>
+  return state;
+}
+ <% }) %>

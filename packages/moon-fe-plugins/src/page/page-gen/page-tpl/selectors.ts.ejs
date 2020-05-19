@@ -1,0 +1,16 @@
+import { createSelector } from 'reselect';
+import {IAllReducerProps} from "./types";
+import {ReducerKey} from "./constant";
+
+/*
+ WARNING: 在复杂页面使用统一store2Props,会有性能 问题, 详情,请查看;
+*/
+export function store2Props(allStore: any):IAllReducerProps {
+  return {
+    <% pageModel.dataModels.forEach(actor=>{ %>
+        <%=actor.instanceName%> : allStore[ReducerKey.<%=actor.instanceName%>],
+    <% }) %>
+  }
+}
+
+//衍生数据使用请参考:  https://github.com/reduxjs/reselect
