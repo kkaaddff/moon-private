@@ -1,6 +1,6 @@
 {
 	"name": "moon-common",
-	"version": "0.0.8-alpha.33",
+	"version": "0.1.0-alpha.0",
 	"description": "",
 	"main": "index.js",
 	"bin": {
@@ -19,7 +19,7 @@
 		"generate-schema": "^2.6.0",
 		"json-schema-to-typescript": "^8.2.0",
 		"minimatch": "^3.0.4",
-		"moon-core": "^0.0.8-alpha.33",
+		"moon-core": "^0.1.0-alpha.0",
 		"prettier": "^2.0.5",
 		"tapable": "^1.1.3",
 		"ts-morph": "^7.0.1"
