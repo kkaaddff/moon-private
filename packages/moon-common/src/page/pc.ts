@@ -45,7 +45,7 @@ export async function genPage(context: IGenPageContext): Promise<string> {
   let _gene = await hookInstance.loadGeneratorEngine.promise(context);
   if (_gene && typeof _gene === 'function') {
     //@ts-ignore
-    await _gene(pageModel, {...context,util},);
+    await _gene(pageModel, {...context,util,prettiesConfig},);
     return;
   }
 
