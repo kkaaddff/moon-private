@@ -1,6 +1,6 @@
 {
   "name": "codemod",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "",
   "private": true,
   "main": "index.js",
@@ -15,6 +15,6 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^8.1.0",
-    "moon-common": "^0.1.0-alpha.1"
+    "moon-common": "^0.1.0-alpha.2"
   }
 }
