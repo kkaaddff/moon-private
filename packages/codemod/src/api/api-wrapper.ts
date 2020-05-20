@@ -44,9 +44,7 @@ export default class ApiWrapperCodeMod {
     });
 
     hook.finish.tap("ApiWrapperCodeModFinish", async () => {
-      // TODO dong 2020/5/13
       await fse.writeJSON("./method-reqparam.json", this.map);
-
     });
   };
 }
