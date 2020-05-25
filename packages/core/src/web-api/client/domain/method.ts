@@ -90,8 +90,8 @@ export default class Method {
   get responseSchema(): SchemaProps {
     if (!this._responseSchma) {
       this._responseSchma = this.methodInfo.responses["200"].schema;
-      if(this._responseSchma ) {
-        this._responseSchma.title = toUCamelize( this.name + "Res");
+      if (this._responseSchma) {
+        this._responseSchma.title = toUCamelize(this.name + "Res");
       }
     }
     return this._responseSchma;
@@ -100,8 +100,8 @@ export default class Method {
   set responseSchema(res) {
     this._responseSchma = res;
 
-    if(this._responseSchma ){
-      this._responseSchma.title = toUCamelize( this.name + "Res");
+    if (this._responseSchma) {
+      this._responseSchma.title = toUCamelize(this.name + "Res");
     }
   }
 
@@ -174,18 +174,19 @@ export default class Method {
 
   tplGetQueryParam(): string {
     let paramItem = this.requestParam.filter((item) => item.isInQuery);
-    if (
-      paramItem.length === 1 &&
-      (["date", "file", "array"].includes(paramItem[0].jsonSchema.type) ||
-        // @ts-ignore
-        paramItem[0].jsonSchema.$ref)
-    ) {
-      return `param.${paramItem[0].name}`;
-    } else {
-      return `{${paramItem
-        .map((item) => `${item.name}:param.${item.name}`)
-        .join(",\n")}}`;
-    }
+    // if (
+    //   paramItem.length === 1 &&
+    //   (["date", "file", "array"].includes(paramItem[0].jsonSchema.type) ||
+    //     // @ts-ignore
+    //     paramItem[0].jsonSchema.$ref)
+    // ) {
+    //   return `param.${paramItem[0].name}`;
+    // } else {
+    // InQuery的参数必须得有key
+    return `{${paramItem
+      .map((item) => `${item.name}:param.${item.name}`)
+      .join(",\n")}}`;
+    // }
   }
 
   tplGetResponseInterfaceName(): string {
