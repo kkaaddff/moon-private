@@ -14,6 +14,10 @@ export interface IGenPageContext {
   pageModel:PageModel;
   pageInfo: IPageDefined;
   prettiesConfig?: object;
+  util:{
+    [name:string]:any;
+  }
+  hook?:PageCompileHooks;
   config: IMoonConfig;
 }
 
@@ -41,6 +45,7 @@ export async function genPage(context: IGenPageContext): Promise<string> {
   }
   let pageModel = new PageModel(pageInfo, context);
   context.pageModel=pageModel;
+  context.hook=hookInstance;
 
   let _gene = await hookInstance.loadGeneratorEngine.promise(context);
   if (_gene && typeof _gene === 'function') {
@@ -53,7 +58,7 @@ export async function genPage(context: IGenPageContext): Promise<string> {
     //默认行为; 外部可以覆盖.
     beforeSave: async (options, context) => {
       //@ts-ignore
-      await (hookInstance && hookInstance.beforeSave.call(options, context));
+      await (hookInstance && hookInstance.beforeSbeforeSaveave.call(options, context));
       return options;
     },
     afterSave: async (options, context) => {

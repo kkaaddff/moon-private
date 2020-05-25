@@ -1,6 +1,7 @@
 import {join} from 'path'
 import * as ejs from 'ejs'
 import * as fse from 'fs-extra';
+import {IGenPageContext} from "moon-common/declarations/page/pc";
 
 /**
  * @desc
@@ -12,8 +13,9 @@ import * as fse from 'fs-extra';
  **/
 export function apply(hook: any) {
   hook.loadGeneratorEngine.tap('loadcustom tpl', async () => {
-    return async (pageModel: any, context: any) => {
+    return async (pageModel: any, context: IGenPageContext) => {
       let prettConfig = context.prettiesConfig;
+      let hook =context.hook;
       let {tplUtil, prettierUtil} = context.util;
       let tplHandle = tplUtil.getHandleFile({
         outDir: join(context.projectPath, 'src/pages/', pageModel.pagePath),
@@ -26,8 +28,12 @@ export function apply(hook: any) {
             if(prettConfig){
                options.content = prettierUtil.prettier(options.content,prettConfig)
             }
+            hook?.beforeSave?.call(options,context);
             return options
           },
+          afterSave:async(options, context)=>{
+            hook?.afterSave?.call(options,context);
+          }
         },
       })
 
