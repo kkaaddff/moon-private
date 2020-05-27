@@ -18,7 +18,7 @@ export default class SwaggerMock{
 
       let {apiItem,apiGroup:webapiGroup,apiDir}=context;
       let {name:controlFileName} = webapiGroup;
-      let {url,method,name}=apiItem;
+      let {url,methodName:method,name}=apiItem;
 
       if(!mockItem) {
         mockItem=new MockRepos(join(apiDir,'mock'));
