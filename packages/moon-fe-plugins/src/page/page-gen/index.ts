@@ -19,7 +19,7 @@ export function apply(hook: any) {
         outDir: join(context.projectPath, 'src/pages/', pageModel.pagePath),
         tplBase: join(__dirname, 'page-tpl'),
         context: {
-          beforeSave: async (options, context) => {
+          beforeSave: async (options, __) => {
             if (options.tplPath.includes('.less')) {
               return options
             }
