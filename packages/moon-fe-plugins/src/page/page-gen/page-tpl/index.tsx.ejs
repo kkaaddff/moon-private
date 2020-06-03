@@ -1,5 +1,5 @@
-import './index.less';
-import * as T from './types';
+import styles from './index.less';
+import * as T from './types.d';
 import pageModel from './actions';
 import React, {useState, useEffect, PropsWithChildren} from 'react';
 
@@ -15,5 +15,5 @@ export default (props: PropsWithChildren<T.I<%=pageModel.className%>Props>) => {
     },[]);
 
     const [ state,  setState ] = useState<T.I<%=pageModel.className%>State>( {} );
-        return <div className={'<%-pageModel.className%>'}></div>;
+        return <div className={styles.<%-pageModel.className%>}></div>;
 };

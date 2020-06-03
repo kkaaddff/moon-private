@@ -1,14 +1,11 @@
-
 import React, {useState, PropsWithChildren} from 'react';
-import * as T from '../types';
+import * as T from '../types.d';
 import pageModel from '../actions';
-import {  useSelector } from 'react-redux/lib';
+import {  useSelector } from 'react-redux';
 import {store2Props} from "../selectors";
 import classNames from "classnames";
-import './<%=subComp.name%>.less';
+import styles from './<%=subComp.name%>.less';
 <%-subComp.imports||""%>
-type I<%=subComp.className%>Props = T.IAllReducerProps & T.I<%=subComp.className%>Props;
-
 
 export default (props: PropsWithChildren<T.I<%=subComp.className%>Props>) => {
         const [ state,  setState ] = useState<T.I<%=subComp.className%>State>({});
@@ -18,7 +15,10 @@ export default (props: PropsWithChildren<T.I<%=subComp.className%>Props>) => {
         <% }) %>
         }: T.IAllReducerProps = useSelector(store2Props)
 
-        return <div className={'<%-pageModel.className+subComp.className%>'}>
-            {subComp.getRenderMethod() && subComp.getRenderMethod().content}
+        <%-tplContent.initMethodContent%>
+        <%-tplContent.otherMethodsContent%>
+
+        return <div className={styles.<%-pageModel.className+subComp.className%>}>
+            <%-tplContent.renderContent%>
         </div>;
 };
