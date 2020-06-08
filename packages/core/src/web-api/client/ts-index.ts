@@ -88,10 +88,6 @@ export function genApiTsIndex({
             statement.returnType.replace('Promise<', '').replace('>', ''),
           )
           : [];
-
-
-        // console.log(statement);
-        let params;
         allMethods[statement.name] = {
           responseTs,
           params:statement.parameters.map(item=>{
