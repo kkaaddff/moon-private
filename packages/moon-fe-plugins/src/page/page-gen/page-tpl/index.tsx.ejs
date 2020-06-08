@@ -14,6 +14,6 @@ export default (props: PropsWithChildren<T.I<%=pageModel.className%>Props>) => {
         return pageModel.clean
     },[]);
 
-    const [ state,  setState ] = useState<T.I<%=pageModel.className%>State>( {} );
+    const [ state,  setState ] = useState<T.I<%=pageModel.className%>State>({});
         return <div className={styles.<%-pageModel.className%>}></div>;
 };
