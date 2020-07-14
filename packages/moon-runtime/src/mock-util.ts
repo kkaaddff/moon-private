@@ -7,27 +7,24 @@
 
 // let mockApiInfo={};
 
-export function createMockUtil(mockApiInfo={}){
-
+export function createMockUtil(mockApiInfo = {}) {
   return {
-
     /**
      * 判断此api是否需要mock
      * @param {string} controller
      * @param {string} method
      * @returns {boolean}
      */
-    isMockApi(controller:string,method:string){
-
-      if(!mockApiInfo || !mockApiInfo[controller]){
+    isMockApi(controller: string, method: string) {
+      if (!mockApiInfo || !mockApiInfo[controller]) {
         return false;
       }
 
-      if(mockApiInfo[controller].includes(method)){
+      if (mockApiInfo[controller].includes(method)) {
         return true;
-      }else{
+      } else {
         return false;
       }
-    }
-  }
+    },
+  };
 }

@@ -13,12 +13,12 @@ export function commonChange(
       {
         paths: string[];
         value: any;
-      },
+      }
     ];
     paths: string[];
     value: any;
     key: string;
-  },
+  }
 ) {
   if (param.paths) {
     param.paths = ensurePath(param.paths);
@@ -30,7 +30,7 @@ export function commonChange(
 
   if (param.batchUpdate) {
     for (let i = 0, iLen = param.batchUpdate.length; i < iLen; i++) {
-      let {paths, value} = param.batchUpdate[i];
+      let { paths, value } = param.batchUpdate[i];
       paths = ensurePath(paths);
 
       if (paths[0] === param.key) {
@@ -45,8 +45,8 @@ export function commonChange(
 function ensurePath(paths: string | string[]): string[] {
   let result = paths;
 
-  if (typeof paths === 'string') {
-    result = paths.split('.');
+  if (typeof paths === "string") {
+    result = paths.split(".");
     return result;
   } else {
     return result as string[];
@@ -56,7 +56,7 @@ function ensurePath(paths: string | string[]): string[] {
 
 export function getValueByPath<T = any>(
   immerObj,
-  paths: (string | number)[],
+  paths: (string | number)[]
 ): T | undefined {
   if (!immerObj) {
     return;
@@ -84,7 +84,7 @@ export function getValueByPath<T = any>(
  */
 export function modifyDeep(immerObj, paths: (string | number)[], value: any) {
   if (paths.length == 0) {
-    if (typeof value === 'function') {
+    if (typeof value === "function") {
       //调用外部方法对对象进行处理;
       immerObj = value(immerObj);
     } else {
@@ -96,7 +96,7 @@ export function modifyDeep(immerObj, paths: (string | number)[], value: any) {
   let lastIndex = paths.length - 1;
   let obj = getValueByPath(immerObj, paths.slice(0, lastIndex));
 
-  if (typeof value === 'function') {
+  if (typeof value === "function") {
     //调用外部方法对对象进行处理;
     immerObj = value(obj[paths[lastIndex]]);
   } else {

@@ -6,11 +6,7 @@
  * @coder.yang2010@gmail.com
  * @Date    2019/11/23
  **/
-import {
-  combineReducers,
-  Store,
-  ReducersMapObject,
-} from 'redux';
+import { combineReducers, Store, ReducersMapObject } from "redux";
 
 var GlobalStore, GlobalReducer;
 
@@ -27,32 +23,31 @@ export function init(globalStore: Store, globalReducer: ReducersMapObject) {
 //动态注册reducer
 let newReducer = {}; //保存动态新加的reducers
 //动态注册reducer
-export function registerReducer(reducerMap: {[name: string]: Function}) {
+export function registerReducer(reducerMap: { [name: string]: Function }) {
   //判断是否重复.
   for (let key in reducerMap) {
     if (GlobalReducer[key] || newReducer[key]) {
       console.warn(
-        `the register reducer conflict with reducer name: ${key},please modify the reducer name`,
+        `the register reducer conflict with reducer name: ${key},please modify the reducer name`
       );
     }
   }
 
-  newReducer = {...newReducer, ...reducerMap}; //更新动态添加
+  newReducer = { ...newReducer, ...reducerMap }; //更新动态添加
 
   GlobalStore.replaceReducer(
     combineReducers({
       ...GlobalReducer,
       ...newReducer,
-    }),
+    })
   );
 }
 
-export function getDispatch(){
+export function getDispatch() {
   return GlobalStore.dispatch;
 }
 
-
-export function getSubscribe(func:Function){
+export function getSubscribe(func: Function) {
   return GlobalStore.subscribe(func);
 }
 /**

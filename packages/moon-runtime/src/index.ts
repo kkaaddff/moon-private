@@ -7,18 +7,18 @@
  * @Date    2019/11/23
  **/
 
-import {assign, modifyDeep, commonChange} from './immer-util';
-import {createMockUtil} from './mock-util';
-import * as storeContext from './redux/store-context';
-import {extraPathsValue} from './redux/util';
-import * as actionUtil from './redux/action-util';
-import BasePageModel from './redux/base-page-model';
-import BaseAction from './redux/base-action';
-import {on, bus,emit} from './msg';
+import { assign, modifyDeep, commonChange } from "./immer-util";
+import { createMockUtil } from "./mock-util";
+import * as storeContext from "./redux/store-context";
+import { extraPathsValue } from "./redux/util";
+import * as actionUtil from "./redux/action-util";
+import BasePageModel from "./redux/base-page-model";
+import BaseAction from "./redux/base-action";
+import { on, bus, emit } from "./msg";
 
 export const redux = {
   storeContext,
-  util:{extraPathsValue},
+  util: { extraPathsValue },
   actionUtil,
   BaseModel: BasePageModel,
   BaseAction,
@@ -27,7 +27,7 @@ export const redux = {
 export const msg = {
   on,
   bus,
-  emit
+  emit,
 };
 
 export const mock = {
@@ -40,7 +40,7 @@ export const immerUtil = {
   commonChange,
 };
 
-export const util ={
+export const util = {
   modifyDeep,
-  extraPathsValue
-}
+  extraPathsValue,
+};

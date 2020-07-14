@@ -1,10 +1,10 @@
-import {getDispatch, getReducerData,getSubscribe} from './store-context';
-import {Dispath} from '../typings/global';
-import produce from 'immer';
-import * as immerUtil from '../immer-util';
-import {registerReducer} from './store-context';
-import {extraPathsValue} from './util';
-import {getValueByPath} from "../immer-util";
+import { getDispatch, getReducerData, getSubscribe } from "./store-context";
+import { Dispath } from "../typings/global";
+import produce from "immer";
+import * as immerUtil from "../immer-util";
+import { registerReducer } from "./store-context";
+import { extraPathsValue } from "./util";
+import { getValueByPath } from "../immer-util";
 
 /**
  * @desc
@@ -24,8 +24,8 @@ class BasePageModel<ModelData = any> {
 
   //watch机制,当数据发生变化,则自动触发;
   public watch?: {
-    [dataPath:string]:Function;
-  }
+    [dataPath: string]: Function;
+  };
   private actorNames: string[];
 
   __pageReducers = {};
@@ -33,44 +33,41 @@ class BasePageModel<ModelData = any> {
   //@ts-ignore
   __initdata: ModelData = {};
 
-  constructor(pageKey: string,models={}) {
+  constructor(pageKey: string, models = {}) {
     this.pageKey = pageKey;
     this.dispatch = getDispatch();
-    this.models=models;
+    this.models = models;
     this.actorNames = Object.keys(this.models);
     this.__link();
     this.registerReducer();
 
     //这个地方的调用放在那里自动来调呢? TODO
-    setTimeout(this.subscribe,0);
+    setTimeout(this.subscribe, 0);
   }
-
 
   /**
    * 通用变化;
    * @param param
    */
-  commonChange=(...param: any)=> {
-    this.emit(`${this.pageKey}_commonChange`,extraPathsValue(...param));
-  }
+  commonChange = (...param: any) => {
+    this.emit(`${this.pageKey}_commonChange`, extraPathsValue(...param));
+  };
 
   /**
    * 包装一层;
    * @param {string} event
    * @param {T} payload
    */
-   emit=async <T=any>(event:string, payload?:T) =>{
-    return this.dispatch(
-      {
-        type:event,
-        payload
-      }
-    )
-  }
+  emit = async <T = any>(event: string, payload?: T) => {
+    return this.dispatch({
+      type: event,
+      payload,
+    });
+  };
 
-  clean=()=> {
+  clean = () => {
     return this.emit(`${this.pageKey}_clean`);
-  }
+  };
 
   /**
    * 获取此页面model所有state数据;
@@ -83,30 +80,29 @@ class BasePageModel<ModelData = any> {
 
   get state(): ModelData {
     return this.actorNames.reduce((current, actorKey) => {
-      current[actorKey] = getReducerData(`${this.pageKey}${actorKey[0].toUpperCase()+actorKey.substr(1)}`);
+      current[actorKey] = getReducerData(
+        `${this.pageKey}${actorKey[0].toUpperCase() + actorKey.substr(1)}`
+      );
       return current;
     }, {}) as any;
   }
-
-
-
 
   /**
    * 动态注入reducer,
    *
    */
-  registerReducer=()=> {
+  registerReducer = () => {
     registerReducer(this.__pageReducers);
-  }
+  };
 
   /**
    * 暂不实现逻辑 .;
    */
-  unregisterReducer=()=> {}
+  unregisterReducer = () => {};
 
   //记录当前model的值,当model发生变化时,自动记录起来;
-  __currentValue:{
-    [modelKey:string]:any
+  __currentValue: {
+    [modelKey: string]: any;
   };
 
   __unsubscribe;
@@ -114,59 +110,56 @@ class BasePageModel<ModelData = any> {
   /**
    * 添加watch机制,当model存在监控值,则
    */
-  private subscribe=()=> {
-    if(this.watch) {
-     this.__unsubscribe = getSubscribe(()=> {
+  private subscribe = () => {
+    if (this.watch) {
+      this.__unsubscribe = getSubscribe(() => {
         let previousValue = this.__currentValue;
         let currentValue = this.data;
-        if(!this.isEqual(previousValue,currentValue)) {
+        if (!this.isEqual(previousValue, currentValue)) {
           for (let dataPath in this.watch) {
-            let _paths =dataPath.split('.');
-            let oldVal = getValueByPath(previousValue,_paths);
-            let newVal = getValueByPath(currentValue,_paths);
+            let _paths = dataPath.split(".");
+            let oldVal = getValueByPath(previousValue, _paths);
+            let newVal = getValueByPath(currentValue, _paths);
 
-            if(oldVal !==newVal) {
-              this.watch[dataPath].apply(this,[newVal,oldVal,{}]);
+            if (oldVal !== newVal) {
+              this.watch[dataPath].apply(this, [newVal, oldVal, {}]);
             }
           }
 
-          this.__currentValue=currentValue;
+          this.__currentValue = currentValue;
         }
       });
     }
-  }
+  };
 
-
-  private isEqual(modelValue1,modelValue2) : boolean {
-
-    if(!modelValue1 || !modelValue2){
+  private isEqual(modelValue1, modelValue2): boolean {
+    if (!modelValue1 || !modelValue2) {
       //两者都不存在 的情况;
-      return modelValue1 ===modelValue2;
+      return modelValue1 === modelValue2;
     }
 
     let keys1 = Object.keys(modelValue1);
-    let keys2 =  Object.keys(modelValue2);
+    let keys2 = Object.keys(modelValue2);
 
-    if(keys1.length !==keys2.length){
+    if (keys1.length !== keys2.length) {
       return false;
     } else {
       for (let i = 0, iLen = keys1.length; i < iLen; i++) {
-        if(keys1[i] !==keys2[i]){
+        if (keys1[i] !== keys2[i]) {
           return false;
         }
-        if(modelValue1[keys1[i]] !==modelValue2[keys1[i]]){
+        if (modelValue1[keys1[i]] !== modelValue2[keys1[i]]) {
           return false;
         }
       }
     }
   }
 
-
   /**
    * 组装关联
    * @private
    */
-  private __link=()=> {
+  private __link = () => {
     for (let modelsKey in this.models) {
       //公共方法处理;
       const commonMethod = {
@@ -179,8 +172,8 @@ class BasePageModel<ModelData = any> {
           return state;
         },
         commonChange: (state, payload) => {
-          console.log('后面会走公共的');
-          return immerUtil.commonChange(state, {...payload, key: modelsKey});
+          console.log("后面会走公共的");
+          return immerUtil.commonChange(state, { ...payload, key: modelsKey });
         },
         clean: (state, payload) => {
           let INITIAL_STATE = this.__initdata[modelsKey];
@@ -192,22 +185,23 @@ class BasePageModel<ModelData = any> {
       };
 
       let reducer = this.models[modelsKey];
-      let initState = this.models[modelsKey]['INITIAL_STATE'];
+      let initState = this.models[modelsKey]["INITIAL_STATE"];
 
       let methodMap = {};
       for (let methodName in reducer) {
         if (
           reducer.hasOwnProperty(methodName) &&
-          typeof reducer[methodName] === 'function'
+          typeof reducer[methodName] === "function"
         ) {
-          methodMap[`${this.pageKey}_${modelsKey}_${methodName}`] = reducer[methodName];
+          methodMap[`${this.pageKey}_${modelsKey}_${methodName}`] =
+            reducer[methodName];
         }
       }
 
       for (let methodName in commonMethod) {
         if (
           commonMethod.hasOwnProperty(methodName) &&
-          typeof commonMethod[methodName] === 'function'
+          typeof commonMethod[methodName] === "function"
         ) {
           methodMap[`${this.pageKey}_${methodName}`] = commonMethod[methodName];
         }
@@ -215,14 +209,16 @@ class BasePageModel<ModelData = any> {
 
       this.__initdata[modelsKey] = initState;
 
-      this.__pageReducers[`${this.pageKey}${modelsKey[0].toUpperCase()+modelsKey.substr(1)}`] = (state, action) => {
+      this.__pageReducers[
+        `${this.pageKey}${modelsKey[0].toUpperCase() + modelsKey.substr(1)}`
+      ] = (state, action) => {
         if (!state) {
           state = initState;
         }
-        let {type, payload} = action;
+        let { type, payload } = action;
 
         if (methodMap[type]) {
-          state =  produce(state, draftState => {
+          state = produce(state, (draftState) => {
             return methodMap[type](draftState, payload);
           });
         }
@@ -232,7 +228,7 @@ class BasePageModel<ModelData = any> {
     }
 
     //公公方法
-  }
+  };
 }
 
 export default BasePageModel;
