@@ -19,13 +19,14 @@ export function apply(hook: any) {
         outDir: join(context.projectPath, 'src/pages/', pageModel.pagePath),
         tplBase: join(__dirname, 'page-tpl'),
         context: {
-          beforeSave: async (options, context) => {
+          beforeSave: async (options, __) => {
             if (options.tplPath.includes('.less')) {
               return options
             }
             if(prettConfig){
                options.content = prettierUtil.prettier(options.content,prettConfig)
             }
+            hook.beforeSave?.call(options, context);
             return options
           },
         },
@@ -38,9 +39,22 @@ export function apply(hook: any) {
           tplHandle(
             'components/sub-components.tsx.ejs',
             async (tplContent) => {
+              let otherMethodsContent = subComp.queryMethod({
+                excludes:["render","__init"]
+              }).map(item=>`${item.comment?`/*${item.comment}*/`:""}let ${item.name}=(${item.param})=>{
+              ${item.content}
+              }`).join('\n');
+
+              let initMethodContent =subComp.getMethod("__init")?.content;
+              let renderContent=subComp.getRenderMethod()?.content;
               let conent = ejs.render(tplContent, {
                 pageModel,
                 subComp,
+                tplContent:{
+                  initMethodContent,
+                  otherMethodsContent,
+                  renderContent
+                }
               })
               return conent
             },

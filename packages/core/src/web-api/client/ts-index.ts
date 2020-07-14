@@ -12,7 +12,6 @@ import {Project, InterfaceDeclarationStructure, StructureKind, TypeAliasDeclarat
 import debug from 'debug';
 const baseType = ['number', 'string','unknown','boolean'];
 const numberReg = /^[0-9]+$/;
-
 let log = debug('web-api:ts-index');
 export interface Controller{
   fileName:"",
@@ -91,6 +90,17 @@ export function genApiTsIndex({
           : [];
         allMethods[statement.name] = {
           responseTs,
+          params:statement.parameters.map(item=>{
+            // console.log(item.type);
+            //@ts-ignore
+            let results = (item.type as string).matchAll(/([a-zA-Z0-9_]*): ([a-zA-Z0-9_]*);/);
+            // console.log(Array.from(results).map(item=>item));
+            // console.log('---------')
+            return {
+              name:item.name,
+              subTypes:Array.from(results).map(item=>({name:item[1],type:item[2]})),
+            }
+          })
         };
       }
     }

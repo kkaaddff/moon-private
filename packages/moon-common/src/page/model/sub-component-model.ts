@@ -66,7 +66,7 @@ export default class SubComponentModel {
     let methods  = this.ast.methods;
 
     if(param.nameKey){
-      methods = methods.filter(item=>item.name.include("param.nameKey"));
+      methods = methods.filter(item=>item.name.include(param.nameKey));
     }
 
     if(param.includes){
