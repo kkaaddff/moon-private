@@ -172,7 +172,6 @@ class BasePageModel<ModelData = any> {
           return state;
         },
         commonChange: (state, payload) => {
-          console.log("后面会走公共的");
           return immerUtil.commonChange(state, { ...payload, key: modelsKey });
         },
         clean: (state, payload) => {
