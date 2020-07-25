@@ -1166,6 +1166,13 @@ loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+loose-envify@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
+  integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+  dependencies:
+    js-tokens "^3.0.0 || ^4.0.0"
+
 lru-queue@0.1:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/lru-queue/-/lru-queue-0.1.0.tgz#2738bd9f0d3cf4f84490c5736c48699ac632cda3"
@@ -1243,9 +1250,9 @@ minimatch@^3.0.0, minimatch@^3.0.4:
     brace-expansion "^1.1.7"
 
 minimist@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-  integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
+  integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
 mitt@^1.2.0:
   version "1.2.0"
@@ -1261,9 +1268,9 @@ mixin-deep@^1.2.0:
     is-extendable "^1.0.1"
 
 moon-core@^0.1.0-alpha.2:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/moon-core/-/moon-core-0.1.0.tgz#5a4233c0c3005d59bb939263fcb89b331c1dba61"
-  integrity sha512-mcsGzgnV8WI9gtpr80VAokZosDMe5DuHFo5ToLtEj9WmnA3jiOwUXsybq6ZDxMJzVh+SuHuDNAS7jgCNM1TuiA==
+  version "0.1.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/moon-core/-/moon-core-0.1.0-alpha.2.tgz#40a239bc17dd76bcc21436f4e352ce90aa1bf32e"
+  integrity sha512-Wi0Q7puzwfVDzX5Y8Q7X1g0zAqT23k5eaXO4ZaRwNimwlDZ5qhoatkYCJ8KIf9IhsQOx3qty7Ye+frgte/0UjQ==
   dependencies:
     "-" "0.0.1"
     "@types/lodash" "^4.14.152"
