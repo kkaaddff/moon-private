@@ -3,9 +3,9 @@ import {
   IWebApiContext,
   IWebApiDefinded,
   SchemaProps,
-} from '../../../typings/api';
+} from "../../../typings/api";
 import debug from "debug";
-import {toLCamelize} from '../../../util/string-util';
+import { toLCamelize } from "../../../util/string-util";
 import RequestParameter from "../domain/request-parameter";
 import Method from "../domain/method";
 import ApiGroup from "../domain/api-group";
@@ -14,28 +14,30 @@ export function resSchemaModify(
   schema: SchemaProps,
   apiItem: IWebApiDefinded,
   context: IWebApiContext,
-  wrapper?: string,
+  wrapper?: string
 ): SchemaProps {
   //api外了一层. 所有内容均把data提取出来d即可..
   if (!schema) {
     return schema;
   }
 
-  if(apiItem.name==='sendSms_POST_4'){
+  if (apiItem.name === "sendSms_POST_4") {
   }
 
-  if (!schema['originalRef'] && schema['$ref']) {
-    schema['originalRef'] = schema['$ref'].replace('#/definitions/', '');
+  if (!schema["originalRef"] && schema["$ref"]) {
+    schema["originalRef"] = schema["$ref"].replace("#/definitions/", "");
   }
 
   //@ts-ignore;
-  if (schema['originalRef'] === 'BaseResponse') {
+  if (schema["originalRef"] === "BaseResponse") {
     return null;
-  } else if (schema['$ref']) {
+  } else if (schema["$ref"]) {
     // console.log('schema[\'$ref\']',schema);
-    let subSchema = JSON.parse(JSON.stringify(context.webapiGroup.definitions[
-      schema['originalRef']
-      ] as IJSObjectProps));
+    let subSchema = JSON.parse(
+      JSON.stringify(context.webapiGroup.definitions[
+        schema["originalRef"]
+      ] as IJSObjectProps)
+    );
 
     if (!subSchema) {
       return null;
@@ -43,29 +45,34 @@ export function resSchemaModify(
 
     if (
       wrapper &&
-      subSchema.type === 'object' &&
+      subSchema.type === "object" &&
       subSchema.properties &&
       subSchema.properties[wrapper]
     ) {
-      if (subSchema.properties[wrapper]['$ref']) {
+      if (subSchema.properties[wrapper]["$ref"]) {
         return context.webapiGroup.definitions[
-          subSchema.properties[wrapper]['originalRef'] ||
-            subSchema.properties[wrapper]['$ref'].replace('#/definitions/', '')
+          subSchema.properties[wrapper]["originalRef"] ||
+            subSchema.properties[wrapper]["$ref"].replace("#/definitions/", "")
         ];
-      } else if (subSchema.properties[wrapper]['type'] === 'array') {
+      } else if (subSchema.properties[wrapper]["type"] === "array") {
         //@ts-ignore
-        if(!(subSchema.properties[wrapper].items.originalRef ||subSchema.properties[wrapper].items['$ref'])){
-          return null
+        if (
+          !(
+            subSchema.properties[wrapper].items.originalRef ||
+            subSchema.properties[wrapper].items["$ref"]
+          )
+        ) {
+          return null;
         }
         let arrayAschema = subSchema.properties[wrapper];
         arrayAschema.title =
           //@ts-ignore
           (subSchema.properties[wrapper].items.originalRef ||
             //@ts-ignore
-            subSchema.properties[wrapper].items['$ref'].replace(
-              '#/definitions/',
-              '',
-            )) + 'Array';
+            subSchema.properties[wrapper].items["$ref"].replace(
+              "#/definitions/",
+              ""
+            )) + "Array";
         return arrayAschema;
       } else {
         return subSchema.properties[wrapper];
@@ -82,7 +89,7 @@ export function addDef2List(
   definitions: {
     [defName: string]: SchemaProps;
   },
-  schema: SchemaProps | SchemaProps[],
+  schema: SchemaProps | SchemaProps[]
 ) {
   if (schema instanceof Array) {
     for (let i = 0, iLen = schema.length; i < iLen; i++) {
@@ -104,7 +111,7 @@ export function findAllRefType(
     [defName: string]: SchemaProps;
   },
   obj: any,
-  refs: string[] = [],
+  refs: string[] = []
 ): SchemaProps[] {
   if (!obj) {
     return [];
@@ -120,7 +127,7 @@ export function findAllRefType(
   }
 
   for (let i = refLeng, ilen = refs.length; i < ilen; i++) {
-    let ref = refs[i].replace('#/definitions/', '');
+    let ref = refs[i].replace("#/definitions/", "");
 
     if (ref && definitions[ref]) {
       results.push(definitions[ref]);
@@ -135,9 +142,9 @@ export function findAllRefType(
           results = results.concat(
             findAllRefType(
               definitions,
-              definitions[refs[j].replace('#/definitions/', '')],
-              refs,
-            ),
+              definitions[refs[j].replace("#/definitions/", "")],
+              refs
+            )
           );
         }
       }
@@ -152,11 +159,11 @@ export function findAllRefType(
  */
 function traverseObj(obj: object, refs: string[] = []) {
   for (let key in obj) {
-    if (obj.hasOwnProperty(key) && key === '$ref') {
+    if (obj.hasOwnProperty(key) && key === "$ref") {
       if (!refs.includes(obj[key])) {
         refs.push(obj[key]);
       }
-    } else if (typeof obj[key] === 'object') {
+    } else if (typeof obj[key] === "object") {
       traverseObj(obj[key], refs);
     }
   }
@@ -216,13 +223,12 @@ export interface ISwaggerApisDocs {
   };
 }
 
-
-export interface OnError{
-  (param:{level:"warn"|"error",message:string}):void;
+export interface OnError {
+  (param: { level: "warn" | "error"; message: string }): void;
 }
 
-const nameCheckReg= /^[0-9a-zA-Z_\-«» ]*$/;
-function isCheckable(content:string){
+const nameCheckReg = /^[0-9a-zA-Z_\-«» ]*$/;
+function isCheckable(content: string) {
   return nameCheckReg.test(content);
 }
 /**
@@ -230,22 +236,33 @@ function isCheckable(content:string){
  * @param {ISwaggerApisDocs} apiDocs
  * @returns {ApiGroup[]}
  */
-export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>console.error(message)): ApiGroup[] {
-
+export function transfer(
+  apiDocs: ISwaggerApisDocs,
+  onError: OnError = ({ message }) => console.error(message)
+): ApiGroup[] {
   //分组;
   let apiGroups: ApiGroup[] = [];
-  let tag2DescMap:{[name:string]:string} =(apiDocs.tags||[]).reduce((acc,next)=>{
-    acc[next.name]=  next.description.split(" ").map(toLCamelize).join("-");
-    return acc;
-  },{});
-  let checksContents  = [...Object.keys(apiDocs.definitions),...Object.values(tag2DescMap)];
+  let tag2DescMap: { [name: string]: string } = (apiDocs.tags || []).reduce(
+    (acc, next) => {
+      acc[next.name] = next.description
+        .split(" ")
+        .map(toLCamelize)
+        .join("-");
+      return acc;
+    },
+    {}
+  );
+  let checksContents = [
+    ...Object.keys(apiDocs.definitions),
+    ...Object.values(tag2DescMap),
+  ];
 
   //验证数据是否正确的.
   for (let i = 0, iLen = checksContents.length; i < iLen; i++) {
     let checksContent = checksContents[i];
-    if(!isCheckable(checksContent)) {
-      let message =`apiDocs.definitions或tags::包含非法字符,${checksContent},影响前端代码生成!`;
-      onError && onError({level:"warn",message});
+    if (!isCheckable(checksContent)) {
+      let message = `apiDocs.definitions或tags::包含非法字符,${checksContent},影响前端代码生成!`;
+      onError && onError({ level: "warn", message });
     }
   }
 
@@ -254,45 +271,45 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
       if (!apiDocs.definitions[defName].title) {
         apiDocs.definitions[defName].title = defName;
       }
-    } catch (err) {
-    }
+    } catch (err) {}
   }
 
   let temp = {};
-  let KeyMap:{[controllerName:string]:ApiGroup} = {};
+  let KeyMap: { [controllerName: string]: ApiGroup } = {};
   for (let url in apiDocs.paths) {
     let apiItem: IApiDefinded = apiDocs.paths[url];
 
-    let groupKey = '';
+    let groupKey = "";
 
     for (let method in apiItem) {
       let methodInfo: IMethodDefinded = apiItem[method];
-      let apiDefItem: Method = new Method(methodInfo,{url,method}) //{url, method};
+      let apiDefItem: Method = new Method(methodInfo, { url, method }); //{url, method};
 
-      if(tag2DescMap[methodInfo.tags[0]]){
+      if (tag2DescMap[methodInfo.tags[0]]) {
         groupKey = tag2DescMap[methodInfo.tags[0]];
         // 任何一个为非中文都可以 ;
-        if(!isCheckable(groupKey) && isCheckable(methodInfo.tags[0])){
+        if (!isCheckable(groupKey) && isCheckable(methodInfo.tags[0])) {
           groupKey = methodInfo.tags[0];
         }
-      }else{
+      } else {
         groupKey = methodInfo.tags[0];
       }
 
       if (!KeyMap[groupKey]) {
         KeyMap[groupKey] = new ApiGroup({
           name: groupKey,
-          serverInfo:{
-            host:apiDocs.host,
-            ...apiDocs.info
+          serverInfo: {
+            host: apiDocs.host,
+            baseUrl: apiDocs.basePath,
+            ...apiDocs.info,
           },
-        })
+        });
       }
 
-      temp[url] = {url, methodName: methodInfo.operationId, group: groupKey};
+      temp[url] = { url, methodName: methodInfo.operationId, group: groupKey };
 
-      if((KeyMap[groupKey].isMethodNameExist(apiDefItem.name))){
-        console.warn('api名字相同::',groupKey,apiDefItem.name);
+      if (KeyMap[groupKey].isMethodNameExist(apiDefItem.name)) {
+        console.warn("api名字相同::", groupKey, apiDefItem.name);
         continue;
       }
 
@@ -307,18 +324,18 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
       //     );
       // }
 
-      apiDefItem.requestParam.map(item => {
-          if (item.schema) {
-            addDef2List(
-              KeyMap[groupKey].definitions,
-              findAllRefType(apiDocs.definitions, item.schema),
-            );
-          }
-        });
+      apiDefItem.requestParam.map((item) => {
+        if (item.schema) {
+          addDef2List(
+            KeyMap[groupKey].definitions,
+            findAllRefType(apiDocs.definitions, item.schema)
+          );
+        }
+      });
 
       addDef2List(
         KeyMap[groupKey].definitions,
-        findAllRefType(apiDocs.definitions, apiDefItem.responseSchema),
+        findAllRefType(apiDocs.definitions, apiDefItem.responseSchema)
       );
       KeyMap[groupKey].addApi(apiDefItem);
     }
@@ -330,14 +347,14 @@ export function transfer(apiDocs: ISwaggerApisDocs,onError:OnError=({message})=>
   return apiGroups;
 }
 
-let ParamNameExclude = ['function','export','delete'];
+let ParamNameExclude = ["function", "export", "delete"];
 
-function getParamName(paramName:string) {
-  if(ParamNameExclude.includes(paramName)){
-    return paramName+"_";
-  }else if(paramName.includes("[]")) {
-    return paramName.replace("[]",'');
-  }else{
+function getParamName(paramName: string) {
+  if (ParamNameExclude.includes(paramName)) {
+    return paramName + "_";
+  } else if (paramName.includes("[]")) {
+    return paramName.replace("[]", "");
+  } else {
     return paramName;
   }
 }

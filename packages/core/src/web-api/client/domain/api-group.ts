@@ -7,29 +7,29 @@
  * @Date    2020/5/12
  **/
 import Method from "./method";
-import {SchemaProps} from "../../../typings/api";
+import { SchemaProps } from "../../../typings/api";
 
-export default  class ApiGroup {
+export default class ApiGroup {
+  apis: Method[] = [];
 
-  apis:Method[]=[];
+  definitions: { [name: string]: SchemaProps } = {};
 
-  definitions:{[name:string]:SchemaProps}={};
+  constructor(
+    public options: {
+      name: string;
+      serverInfo: any;
+    }
+  ) {}
 
-  constructor(public options:{
-    name:string;
-    serverInfo:any;
-  }) {
+  get name() {
+    return this.options.name;
   }
 
-  get name(){
-    return this.options.name
-  }
-
-  get serverInfo(){
+  get serverInfo() {
     return this.options.serverInfo;
   }
 
-  addApis(apis:Method[]){
+  addApis(apis: Method[]) {
     this.apis = this.apis.concat(apis);
   }
 
@@ -37,7 +37,7 @@ export default  class ApiGroup {
    * 添加一个api
    * @param api
    */
-  addApi(api:Method){
+  addApi(api: Method) {
     this.apis.push(api);
   }
 
@@ -45,7 +45,7 @@ export default  class ApiGroup {
    * 是否已经存在方法;
    * @param methodName
    */
-  isMethodNameExist(methodName:string){
-    return !(this.apis.every(method=>method.name!==methodName));
+  isMethodNameExist(methodName: string) {
+    return !this.apis.every((method) => method.name !== methodName);
   }
 }

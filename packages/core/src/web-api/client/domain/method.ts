@@ -106,9 +106,9 @@ export default class Method {
   }
 
   tplGetMethodType() {
-    let methodType =  this.methodInfoOptions.method.toLocaleLowerCase();
-    if(methodType==='delete'){
-      return 'deleteF';
+    let methodType = this.methodInfoOptions.method.toLocaleLowerCase();
+    if (methodType === "delete") {
+      return "deleteF";
     }
     return methodType;
   }
@@ -152,7 +152,7 @@ export default class Method {
   }
 
   tplGetUrl(): string {
-    return `\`${this.url.replace(/{/g, "${param.")}\``;
+    return `serverInfo.baseUrl+\`${this.url.replace(/{/g, "${param.")}\``;
   }
 
   // getQueryParam(apiItem.requestParam)
