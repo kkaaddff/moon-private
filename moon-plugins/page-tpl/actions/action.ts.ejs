@@ -1,0 +1,23 @@
+import {Command} from "../constant";
+import {IAllReducerProps} from "../types";
+import {redux} from  'moon-runtime';
+import {PageModel} from './index';
+import api from "api";
+
+export default class <%=action.className%> extends redux.BaseAction<IAllReducerProps> {
+
+  constructor(pageModel:PageModel) {
+    super(pageModel);
+  }
+
+ <% action.methods.forEach(method=>{ %>
+        /**
+         * <%- method.comment||"" %>
+         */
+        <%=method.name%> =async (<%-method.param%>) => {
+            <%-method.content %>
+        }
+   <% }) %>
+}
+
+// create by moon https://github.com/creasy2010/moon
