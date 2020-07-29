@@ -9,7 +9,7 @@ const controllerName = "<%-webapiGroup.name %>";
  * <%=apiItem.comment%>
  *
  */
-async function <%=apiItem.tplGetMethodName()%>(
+export async function <%=apiItem.tplGetMethodName()%>(
     <%= apiItem.tplGetRequestParamContent() %>
 ):Promise< <%= apiItem.tplGetResponseInterfaceName() %> > {
 
@@ -24,11 +24,11 @@ async function <%=apiItem.tplGetMethodName()%>(
 <% }) %>
 
 
-export default {
-<% webapiGroup.apis.forEach(apiItem=>{ %>
-    <%=apiItem.tplGetMethodName()%>,
-<% }) %>
-};
+// export default {
+// <% webapiGroup.apis.forEach(apiItem=>{ %>
+//     <%=apiItem.tplGetMethodName()%>,
+// <% }) %>
+// }; 
 
 
 

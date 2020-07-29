@@ -300,7 +300,7 @@ export function transfer(
           name: groupKey,
           serverInfo: {
             host: apiDocs.host,
-            baseUrl: apiDocs.basePath,
+            baseUrl: apiDocs.basePath === "/" ? "" : apiDocs.basePath,
             ...apiDocs.info,
           },
         });

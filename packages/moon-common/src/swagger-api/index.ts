@@ -112,15 +112,13 @@ async function loadeApiGroup(
           context.apiGroups = null;
           await hookInstance.swagger2ApiGroup.promise(context);
 
-          if(!context.apiGroups){
+          if (!context.apiGroups) {
             apiGroups = apiGroups.concat(
               context.apiGroups
                 ? context.apiGroups
                 : MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal)
             );
           }
-
-
         } catch (err) {
           console.warn(`从swagger导出数据失败跳过此swagger${swaggerUrl}`);
           console.warn(err);
@@ -284,7 +282,7 @@ export async function genApi(context: {
       inserts.push({
         mark: /export +default/,
         isBefore: true,
-        content: `import  ${controllerName} from '${filePath}';`,
+        content: `import * as  ${controllerName} from '${filePath}';`,
         check: (content: string) => !content.includes(filePath),
       });
 
