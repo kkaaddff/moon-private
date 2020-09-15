@@ -81,7 +81,7 @@ export async function buildWebApi(context: IWebApiContext): Promise<string> {
   let { webapiGroup, projectPath } = context;
   let fileHandle = getHandleFile({
     context,
-    outDir: context.projectPath,
+    outDir: projectPath,
     tplBase: join(__dirname, "tpl"),
   });
   //生成 方法入参入出参的ts定义;
@@ -128,7 +128,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
         param.name,
         "req"
       );
-      if(!param.isBasicType()) {
+      if (!param.isBasicType()) {
         param2RespTypes.push(param.getObjectJsonSchemas());
       }
     }
