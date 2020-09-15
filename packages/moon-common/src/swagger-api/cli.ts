@@ -8,16 +8,15 @@
  * @coder.yang2010@gmail.com
  * @Date    2020/3/24
  **/
-import {genApi} from "./index";
-import {loadMoonConfig} from "./util/config";
-import {IMoonConfig} from "moon-core/src/typings/config";
+import { genApi } from "./index";
+import { loadMoonConfig } from "./util/config";
+import { IMoonConfig } from "moon-core/src/typings/config";
 
-
-(async ()=>{
+(async () => {
   let projectPath = process.cwd();
-  let config  =( await loadMoonConfig()) as IMoonConfig;
+  let config = (await loadMoonConfig()) as IMoonConfig;
   await genApi({
-    workDir:projectPath,
-    config:config.api
+    workDir: projectPath,
+    config: config.api,
   });
 })();

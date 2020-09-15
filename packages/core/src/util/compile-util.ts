@@ -5,14 +5,14 @@
  *
  * @Date    2019/3/26
  **/
-import {join, parse} from 'path';
-import * as fse from 'fs-extra';
-import * as prettier from 'prettier';
-import {IHandleFile, IHandlePageParam, IInsertOption} from '../typings/util';
-import debug from 'debug';
-import {IFileSaveOptions} from '../typings/page';
+import { join, parse } from "path";
+import * as fse from "fs-extra";
+import * as prettier from "prettier";
+import { IHandleFile, IHandlePageParam, IInsertOption } from "../typings/util";
+import debug from "debug";
+import { IFileSaveOptions } from "../typings/page";
 
-const log = debug('moon:core:compile-util');
+const log = debug("moon:core:compile-util");
 /**
  * 获取处理页面内容;;
  * 处理文件 的公共逻辑; 从模板中取出内容,渲染出来, 然后保存;
@@ -32,28 +32,28 @@ export function getHandleFile({
     semi: true,
     bracketSpacing: false,
     singleQuote: true,
-    trailingComma: 'all',
-    parser: 'typescript',
+    trailingComma: "all",
+    parser: "typescript",
     ...prettiesConfig,
   };
 
   return async function handlePage(
     tplPath: string,
     dealCal: (tplContent: string) => Promise<string>,
-    param?: IHandlePageParam,
+    param?: IHandlePageParam
   ) {
     let _param = {
-      saveFilePath: tplPath.replace('.tpl', '').replace('.ejs', ''),
+      saveFilePath: tplPath.replace(".tpl", "").replace(".ejs", ""),
       ...param,
     };
     let _tplFilePath = join(tplBase, tplPath);
 
     let _tplContent = await fse.readFile(_tplFilePath);
-    log('开始处理模板: ', _tplFilePath);
+    log("开始处理模板: ", _tplFilePath);
     let content = await dealCal(_tplContent.toString());
 
     let saveOptions: IFileSaveOptions = {
-      projectOutDir: '',
+      projectOutDir: "",
       tplPath,
       toSaveFilePath: join(outDir, _param.saveFilePath),
       param,
@@ -64,10 +64,10 @@ export function getHandleFile({
     try {
       saveOptions.content = prettier.format(
         saveOptions.content,
-        prettiesConfig,
+        prettiesConfig
       );
     } catch (err) {
-      if (tplPath.endsWith('.ts.ejs')) {
+      if (tplPath.endsWith(".ts.ejs")) {
         console.warn(err);
       }
     }
@@ -81,15 +81,15 @@ export function getHandleFile({
     try {
       saveOptions.content = prettier.format(
         saveOptions.content,
-        prettiesConfig,
+        prettiesConfig
       );
     } catch (err) {}
-    log('output filePath: ', saveOptions.toSaveFilePath);
+    log("output filePath: ", saveOptions.toSaveFilePath);
     fse.writeFileSync(saveOptions.toSaveFilePath, saveOptions.content);
     if (context.afterSave) {
       await context.afterSave(saveOptions, context);
     }
-    return saveOptions.toSaveFilePath
+    return saveOptions.toSaveFilePath;
   };
 }
 
@@ -105,24 +105,23 @@ export function insertContent(rawContent: string, inserts: IInsertOption[]) {
   for (let i = 0, ilen = inserts.length; i < ilen; i++) {
     let item: IInsertOption = inserts[i];
 
-    if (!item.check ||item.check(content, rawContent)) {
-
-      let markContent , index ;
-      if(item.mark instanceof RegExp) {
-        let [matchContent] = content.match(item.mark );
+    if (!item.check || item.check(content, rawContent)) {
+      let markContent, index;
+      if (item.mark instanceof RegExp) {
+        let [matchContent] = content.match(item.mark);
         if (matchContent) {
           index = content.indexOf(matchContent);
           markContent = matchContent;
         } else {
-          throw new Error('内容未匹配到标记点');
+          throw new Error("内容未匹配到标记点");
         }
       } else {
-        index =  content.indexOf(item.mark);
-        if(index >0) {
-          markContent= item.mark;
+        index = content.indexOf(item.mark);
+        if (index > 0) {
+          markContent = item.mark;
           index = content.indexOf(item.mark);
         } else {
-          throw new Error('内容未匹配到标记点');
+          throw new Error("内容未匹配到标记点");
         }
       }
 
