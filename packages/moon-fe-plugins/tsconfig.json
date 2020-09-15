@@ -4,14 +4,18 @@
     "noEmit": false,
     "rootDir": "./src",
     "skipDefaultLibCheck": true,
+    "sourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "./lib",
-    "declarationDir":"./declarations",
+    "declarationDir": "./declarations",
     "declaration": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/**/*", "temp/**",
+  "exclude": [
+    "node_modules",
+    "**/__tests__/**/*",
+    "temp/**",
     "../moon-wanmi/src/demo/**"
   ]
 }

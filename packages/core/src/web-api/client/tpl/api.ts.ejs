@@ -5,33 +5,34 @@ const controllerName = "<%-webapiGroup.name %>";
 <% webapiGroup.apis.forEach(apiItem=>{ %>
 
 /**
- *
- * <%=apiItem.comment%>
- *
- */
+*
+* <%=apiItem.comment%>
+*
+*/
 export async function <%=apiItem.tplGetMethodName()%>(
-    <%= apiItem.tplGetRequestParamContent() %>
-):Promise< <%= apiItem.tplGetResponseInterfaceName() %> > {
+<%= apiItem.tplGetRequestParamContent() %>
+):Promise< <%= apiItem.tplGetResponseInterfaceName() %>> {
 
-  const result = await sdk.<%=apiItem.tplGetMethodType()%> <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
-    <%-apiItem.tplGetUrl()%>,
-     <%-apiItem.tplGetBodyParam()%> ,
-     <%-apiItem.tplGetQueryParam()%>,
-    {serverInfo,controllerName}
+  const result = await sdk.<%=apiItem.tplGetMethodType()%>
+  <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
+  <%-apiItem.tplGetUrl()%>,
+  <%-apiItem.tplGetBodyParam()%> ,
+  <%-apiItem.tplGetQueryParam()%>,
+  {serverInfo,controllerName}
   );
-  return  result.data;
-}
-<% }) %>
+  return result.data;
+  }
+  <% }) %>
 
 
-// export default {
-// <% webapiGroup.apis.forEach(apiItem=>{ %>
-//     <%=apiItem.tplGetMethodName()%>,
-// <% }) %>
-// }; 
+  // export default {
+  // <% webapiGroup.apis.forEach(apiItem=>{ %>
+  // <%=apiItem.tplGetMethodName()%>,
+  // <% }) %>
+  // };
 
 
 
-<%-tsDefinded%>
+  <%-tsDefinded%>
 
-// create by moon https://github.com/creasy2010/moon
+  // create by moon https://github.com/creasy2010/moon
