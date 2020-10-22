@@ -140,14 +140,14 @@ export default class Method {
           if (item.isBasicType()) {
             typeStr = item.getBasicTsType();
           }
-          return `${
-            item.comment ? "\n/*" + item.comment + "*/\n" : ""
-          }${item.name + (item.isRequired ? "" : "?")}:${typeStr}`;
+          return `${item.comment ? "\n/*" + item.comment + "*/\n" : ""}
+          '${item.name}'${item.isRequired ? "" : "?"}:${
+            typeStr.includes(".") ? `['${typeStr}']` : typeStr
+          }`;
         })
         .join(";");
       param = `param:{${typeStr}}`;
     }
-
     return param;
   }
 
@@ -155,7 +155,6 @@ export default class Method {
     return `serverInfo.baseUrl+\`${this.url.replace(/{/g, "${param.")}\``;
   }
 
-  // getQueryParam(apiItem.requestParam)
   tplGetBodyParam(): string {
     let paramItem = this.requestParam.filter((item) => item.isInBody);
     if (
@@ -167,7 +166,7 @@ export default class Method {
       return `param.${paramItem[0].name}`;
     } else {
       return `{${paramItem
-        .map((item) => `${item.name}:param.${item.name}`)
+        .map((item) => buildKeyValueStr(item.name))
         .join(",\n")}}`;
     }
   }
@@ -184,7 +183,7 @@ export default class Method {
     // } else {
     // InQuery的参数必须得有key
     return `{${paramItem
-      .map((item) => `${item.name}:param.${item.name}`)
+      .map((item) => buildKeyValueStr(item.name))
       .join(",\n")}}`;
     // }
   }
@@ -212,5 +211,17 @@ function getTypeNameFromSchema(schema) {
     );
   } else {
     return "unknown";
+  }
+}
+
+/**
+ * 处理 参数是路径问题 sort.sorted
+ * @param params
+ */
+function buildKeyValueStr(key: string) {
+  if (key.includes(".")) {
+    return `'${key}':param['${key}']`;
+  } else {
+    return `${key}:param.${key}`;
   }
 }

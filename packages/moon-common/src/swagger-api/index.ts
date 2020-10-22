@@ -282,7 +282,8 @@ export async function genApi(context: {
       inserts.push({
         mark: /export +default/,
         isBefore: true,
-        content: `import * as  ${controllerName} from '${filePath}';`,
+        // content: `import * as  ${controllerName} from '${filePath}';`,
+        content: `import  ${controllerName} from '${filePath}';`,
         check: (content: string) => !content.includes(filePath),
       });
 
