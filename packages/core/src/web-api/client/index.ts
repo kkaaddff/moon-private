@@ -84,7 +84,6 @@ export async function buildWebApi(context: IWebApiContext): Promise<string> {
     outDir: projectPath,
     tplBase: join(__dirname, "tpl"),
   });
-  //生成 方法入参入出参的ts定义;
   if (context.beforeCompile) {
     for (let i = 0, ilen = webapiGroup.apis.length; i < ilen; i++) {
       let apiItem = webapiGroup.apis[i];
@@ -92,6 +91,7 @@ export async function buildWebApi(context: IWebApiContext): Promise<string> {
     }
   }
 
+  //生成 方法入参入出参的ts定义;
   let tsDefinded = await generateTsDefined(context);
   //本项目公共的ts定义;
   let apiPath = await fileHandle(
@@ -102,7 +102,6 @@ export async function buildWebApi(context: IWebApiContext): Promise<string> {
         webapiGroup,
         tsDefinded,
       });
-
       return conent;
     },
     { saveFilePath: webapiGroup.name + ".ts" }

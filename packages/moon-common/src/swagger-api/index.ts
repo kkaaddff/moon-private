@@ -230,6 +230,7 @@ export async function genApi(context: {
           hookInstance.beforeApiCompile.call(apiItem);
           return apiItem;
         },
+        // reqParamModify: async () => {},
         resSchemaModify: async (
           schema: SchemaProps,
           apiItem: IWebApiDefinded,
@@ -242,7 +243,6 @@ export async function genApi(context: {
             context,
             defaulltMoonConfig.api.wrapper
           );
-
           hookInstance.onResponseSchema.call(finalSchema, {
             apiItem,
             apiGroup: context.webapiGroup,
@@ -258,7 +258,6 @@ export async function genApi(context: {
               ? `result.${defaulltMoonConfig.api.wrapper}`
               : "result"
           );
-
           return Promise.resolve(options);
         },
       });

@@ -69,6 +69,9 @@ export default class ApiCompileHooks {
   /** 单个api编译时 */
   beforeApiCompile = new SyncHook<IWebApiDefinded>(["IWebApiDefinded"]);
 
+  /** 单个api request修改时 */
+  onRequestParam = new SyncHook(["requestParam", "context"]);
+
   /** 单个api response修改时 */
   onResponseSchema = new SyncHook(["responseSchema", "context"]);
 
