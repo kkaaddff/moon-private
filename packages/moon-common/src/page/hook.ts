@@ -29,14 +29,4 @@ export default class PageCompileHooks {
     "options",
     "context",
   ]);
-
-  // beforeApiCompile=new SyncHook<IWebApiDefinded>(["IWebApiDefinded"]);
-  //
-  // beforeApiSave =new SyncHook<IFileSaveOptions,any>(["IFileSaveOptions","any"]);
-  //
-  // afterApiSave =new SyncHook<ApiFilePath,IWebApiGroup>(["ApiFilePath","IWebApiGroup"]);
-  //
-  // // beforeIndex=new SyncHook<IWebApiGroup>();
-  //
-  // afterIndex=new SyncHook<string,ApiIndex>();
 }

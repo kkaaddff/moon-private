@@ -1,6 +1,6 @@
-import sdk from "@api/sdk";
-const serverInfo = <%-JSON.stringify(webapiGroup.serverInfo) %>;
-const controllerName = "<%-webapiGroup.name %>";
+import * as sdk from '@/utils/fetch'
+const serverInfo = <%-JSON.stringify(webapiGroup.serverInfo) %>
+const controllerName = "<%-webapiGroup.name %>"
 
 <% webapiGroup.apis.forEach(apiItem=>{ %>
 
@@ -19,8 +19,8 @@ async function <%=apiItem.tplGetMethodName()%>(
   <%-apiItem.tplGetBodyParam()%> ,
   <%-apiItem.tplGetQueryParam()%>,
   {serverInfo,controllerName}
-  );
-  return result.data;
+  )
+  return result.data
   }
   <% }) %>
 
@@ -29,7 +29,7 @@ async function <%=apiItem.tplGetMethodName()%>(
   <% webapiGroup.apis.forEach(apiItem=>{ %>
   <%=apiItem.tplGetMethodName()%>,
   <% }) %>
-  };
+  }
 
 
 

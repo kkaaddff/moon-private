@@ -29,10 +29,14 @@ export function getHandleFile({
   prettiesConfig = {},
 }: IHandleFile) {
   prettiesConfig = {
-    semi: true,
-    bracketSpacing: false,
+    tabWidth: 2,
+    jsxSingleQuote: true,
+    jsxBracketSameLine: true,
+    endOfLine: "lf",
+    printWidth: 100,
     singleQuote: true,
-    trailingComma: "all",
+    semi: false,
+    trailingComma: "es5",
     parser: "typescript",
     ...prettiesConfig,
   };

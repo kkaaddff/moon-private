@@ -252,22 +252,12 @@ export async function genApi(context: {
         },
         beforeSave: (options: IFileSaveOptions, context: any) => {
           hookInstance.beforeApiSave.call(options, context);
-          // TODO dong 2020/4/24 这块内容可以在模板中改掉
-          options.content = options.content
-            .replace(
-              `import sdk from "@api/sdk";`,
-              `import * as sdk from '@/utils/fetch';`
-            )
-            .replace(
-              `import sdk from '@api/sdk';`,
-              `import * as sdk from '@/utils/fetch';`
-            )
-            .replace(
-              /result\.data/gi,
-              defaulltMoonConfig.api.wrapper
-                ? `result.${defaulltMoonConfig.api.wrapper}`
-                : "result"
-            );
+          options.content = options.content.replace(
+            /result\.data/gi,
+            defaulltMoonConfig.api.wrapper
+              ? `result.${defaulltMoonConfig.api.wrapper}`
+              : "result"
+          );
 
           return Promise.resolve(options);
         },
