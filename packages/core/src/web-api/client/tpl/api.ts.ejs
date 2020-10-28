@@ -24,13 +24,10 @@ async function <%=apiItem.tplGetMethodName()%>(
   }
   <% }) %>
 
-
   export default {
   <% webapiGroup.apis.forEach(apiItem=>{ %>
   <%=apiItem.tplGetMethodName()%>,
   <% }) %>
   }
-
-
 
   <%-tsDefinded%>

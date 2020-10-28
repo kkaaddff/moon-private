@@ -80,7 +80,6 @@ export default class Method {
           return new RequestParameter(item, { ownedMethod: this });
         });
     }
-
     return this.params;
   }
 

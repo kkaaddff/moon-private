@@ -225,7 +225,6 @@ export async function genApi(context: {
           );
         }
       }
-
       let saveApiFile = await MoonCore.WebApiGen.buildWebApi({
         webapiGroup,
         projectPath: apiDir,

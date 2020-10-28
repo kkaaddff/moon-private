@@ -26,6 +26,12 @@ export interface IWebApiDefinded {
 export interface IWebApiContext extends IFileSaveOpt {
   webapiGroup: ApiGroup;
   projectPath: string;
+  //修改请求参数信息; 进行调整以生成ts定义; 因为多了api层的修改;
+  reqParamModify?: (
+    reqParam: RequestParameter,
+    apiItem: Method,
+    context: IWebApiContext
+  ) => Promise<RequestParameter>;
   //修改返回值的schema信息; 进行调整以生成ts定义; 因为多了api层的修改;
   resSchemaModify?: (
     resScheme: SchemaProps,
