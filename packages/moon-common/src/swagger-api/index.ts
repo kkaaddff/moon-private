@@ -23,11 +23,14 @@ import {
 
 import { IFileSaveOptions } from "moon-core/declarations/typings/page";
 import { IInsertOption } from "moon-core/declarations/typings/util";
+import { RequestParameter } from "moon-core/declarations/web-api/client/domain";
 import { IMoonConfig } from "moon-core/declarations/typings/config";
 import { loadMoonConfig } from "./util/config";
 import { applyHook } from "../util/hook-util";
 import ApiGroup from "moon-core/declarations/web-api/client/domain/api-group";
+
 const log = debug("j2t:cli");
+
 async function loadJson(swaggerUrl: string): Promise<any> {
   return new Promise((resolve, reject) => {
     console.log(`从${swaggerUrl}中加载api doc信息`);
@@ -230,7 +233,19 @@ export async function genApi(context: {
           hookInstance.beforeApiCompile.call(apiItem);
           return apiItem;
         },
-        // reqParamModify: async () => {},
+        reqParamModify: async (
+          reqParam: RequestParameter,
+          apiItem: IWebApiDefinded,
+          context: IWebApiContext
+        ): Promise<RequestParameter> => {
+          let finalSchema = reqParam;
+          hookInstance.onRequestParam.call(finalSchema, {
+            apiItem,
+            apiGroup: context.webapiGroup,
+            apiDir,
+          });
+          return finalSchema;
+        },
         resSchemaModify: async (
           schema: SchemaProps,
           apiItem: IWebApiDefinded,
