@@ -154,7 +154,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
       if (_resSchema) {
         if (/.*[\u4e00-\u9fa5]+.*/.test(_resSchema.title)) {
           console.warn(
-            "model title中包含中文会导致生成ts失败,请检查" + apiItem.name
+            "model title中包含中文会导致生成ts失败,请检查:" + apiItem.name
           );
         }
         //title为空, 或者中文.
