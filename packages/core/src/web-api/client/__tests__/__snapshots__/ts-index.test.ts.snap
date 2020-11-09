@@ -1,0 +1,256 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`api索引 basic 1`] = `
+Object {
+  "model-controller": Object {
+    "fileName": "model-controller",
+    "methods": Object {
+      "addModel": Object {
+        "methdoName": "addModel",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "model",
+                "type": "IAddModelModelReq",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "AddModelRes",
+        ],
+        "url": "/model/add",
+      },
+      "addModelTag": Object {
+        "methdoName": "addModelTag",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "modelTagRel",
+                "type": "IAddModelTagModelTagRelReq",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "AddModelTagRes",
+        ],
+        "url": "/model/add/tag",
+      },
+      "deleteModel": Object {
+        "methdoName": "deleteModel",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "id",
+                "type": "number",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "DeleteModelRes",
+        ],
+        "url": "/model/delete/\${param.id}",
+      },
+      "deleteModelTag": Object {
+        "methdoName": "deleteModelTag",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "id",
+                "type": "number",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "DeleteModelTagRes",
+        ],
+        "url": "/model/delete/tag/\${param.id}",
+      },
+      "getModel": Object {
+        "methdoName": "getModel",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "id",
+                "type": "number",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "GetModelRes",
+          "ModelResouces[]",
+          "ModelResouces",
+          "ModelTagsVo[]",
+          "ModelTagsVo",
+        ],
+        "url": "/model/info/\${param.id}",
+      },
+      "getModelPageList": Object {
+        "methdoName": "getModelPageList",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "modelPageParam",
+                "type": "IGetModelPageListModelPageParamReq",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "GetModelPageListRes",
+          "GetModelRes[]",
+          "GetModelRes",
+          "ModelResouces[]",
+          "ModelResouces",
+          "ModelTagsVo[]",
+          "ModelTagsVo",
+        ],
+        "url": "/model/getPageList",
+      },
+      "updateModel": Object {
+        "methdoName": "updateModel",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "model",
+                "type": "IUpdateModelModelReq",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "UpdateModelRes",
+        ],
+        "url": "/model/update",
+      },
+    },
+  },
+  "model-resouces-controller": Object {
+    "fileName": "model-resouces-controller",
+    "methods": Object {
+      "addModelResouces": Object {
+        "methdoName": "addModelResouces",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "modelResouces",
+                "type": "IAddModelResoucesModelResoucesReq",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "AddModelResoucesRes",
+        ],
+        "url": "/modelResouces/add",
+      },
+      "deleteModelResouces": Object {
+        "methdoName": "deleteModelResouces",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "id",
+                "type": "number",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "DeleteModelResoucesRes",
+        ],
+        "url": "/modelResouces/delete/\${param.id}",
+      },
+      "getModelResouces": Object {
+        "methdoName": "getModelResouces",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "id",
+                "type": "number",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "GetModelResoucesRes",
+        ],
+        "url": "/modelResouces/info/\${param.id}",
+      },
+      "getModelResoucesPageList": Object {
+        "methdoName": "getModelResoucesPageList",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "modelResoucesPageParam",
+                "type": "IGetModelResoucesPageListModelResoucesPageParamReq",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "GetModelResoucesPageListRes",
+          "GetModelResoucesRes[]",
+          "GetModelResoucesRes",
+        ],
+        "url": "/modelResouces/getPageList",
+      },
+      "updateModelResouces": Object {
+        "methdoName": "updateModelResouces",
+        "params": Array [
+          Object {
+            "name": "param",
+            "subTypes": Array [
+              Object {
+                "isRequired": false,
+                "name": "modelResouces",
+                "type": "IUpdateModelResoucesModelResoucesReq",
+              },
+            ],
+          },
+        ],
+        "responseTs": Array [
+          "UpdateModelResoucesRes",
+        ],
+        "url": "/modelResouces/update",
+      },
+    },
+  },
+}
+`;
