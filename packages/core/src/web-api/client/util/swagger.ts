@@ -56,7 +56,9 @@ export function resSchemaModify(
         ];
       } else if (subSchema.properties[wrapper]["type"] === "array") {
         //@ts-ignore
-        if (
+        if(['string','number','integer'].includes(subSchema.properties[wrapper].items.type)){
+          return subSchema.properties[wrapper];
+        }else if (
           !(
             subSchema.properties[wrapper].items.originalRef ||
             subSchema.properties[wrapper].items["$ref"]

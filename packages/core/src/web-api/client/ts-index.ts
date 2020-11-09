@@ -91,7 +91,7 @@ export function genApiTsIndex({
       let statement = functionDec.getStructure();
 
       if (statement.kind === StructureKind.Function) {
-        let [_,url] = functionDec.getBodyText().match(urlReg);
+        let urlMatch= functionDec.getBodyText().match(urlReg);
 
         let responseTs = statement.returnType
           ? getAllTsNameRef(
@@ -104,13 +104,13 @@ export function genApiTsIndex({
         allMethods[statement.name] = {
           methdoName:statement.name,
           responseTs,
-          url,
+          url:urlMatch&&urlMatch[1],
           params: statement.parameters.map((item) => {
             // console.log(item.type);
             //@ts-ignore
-            let results = (item.type as string).matchAll(
+            let results = (item.type && (item.type as string).matchAll(
               /([a-zA-Z0-9_]*) ?\?? ?: ?([a-zA-Z0-9_]*);/,
-            );
+            ))||[];
 
             return {
               name: item.name,
