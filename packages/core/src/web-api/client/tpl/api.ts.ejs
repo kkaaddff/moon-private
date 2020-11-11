@@ -13,7 +13,7 @@ async function <%=apiItem.tplGetMethodName()%>(
 <%- apiItem.tplGetRequestParamContent() %>
 ):Promise< <%= apiItem.tplGetResponseInterfaceName() %>> {
 
-  const result = await sdk.<%=apiItem.tplGetMethodType()%>
+  export const result = await sdk.<%=apiItem.tplGetMethodType()%>
   <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
   <%-apiItem.tplGetUrl()%>,
   <%-apiItem.tplGetBodyParam()%> ,
@@ -24,10 +24,10 @@ async function <%=apiItem.tplGetMethodName()%>(
   }
   <% }) %>
 
-  export default {
-  <% webapiGroup.apis.forEach(apiItem=>{ %>
-  <%=apiItem.tplGetMethodName()%>,
-  <% }) %>
-  }
+  // export default {
+  // <% webapiGroup.apis.forEach(apiItem=>{ %>
+  // <%=apiItem.tplGetMethodName()%>,
+  // <% }) %>
+  // }
 
   <%-tsDefinded%>
