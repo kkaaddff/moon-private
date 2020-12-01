@@ -118,9 +118,9 @@ export default class RequestParameter {
       return this.basicTypesMap[this.ast["items"].type] + "[]";
     }
     // 对int64格式的Id 类参数的定义采用联合类型
-    if (this.ast.format === "int64") {
-      return "number | string";
-    }
+    // if (this.ast.format === "int64") {
+    //   return "number | string";
+    // }
     return this.basicTypesMap[this.ast.type];
   }
 
