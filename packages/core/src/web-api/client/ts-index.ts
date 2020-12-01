@@ -109,7 +109,7 @@ export function genApiTsIndex({
             // console.log(item.type);
             //@ts-ignore
             let results = (item.type && (item.type as string).matchAll(
-              /([a-zA-Z0-9_]*) ?\?? ?: ?([a-zA-Z0-9_]*);/,
+              /([a-zA-Z0-9_]*) ?\?? ?: ?([a-zA-Z0-9_]*);?/,
             ))||[];
 
             return {
