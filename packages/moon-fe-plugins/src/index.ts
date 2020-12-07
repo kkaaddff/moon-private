@@ -6,3 +6,10 @@
  * @coder.yang2010@gmail.com
  * @Date    2020/4/10
  **/
+
+import util from  './util'
+
+
+export default {
+  util,
+}
