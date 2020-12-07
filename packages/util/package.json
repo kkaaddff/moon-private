@@ -8,7 +8,7 @@
     "registory": "http://registory.npmjs.org"
   },
   "scripts": {
-    "prepublishOnly": "tsc && ts-node ./src/copy.ts",
+    "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
