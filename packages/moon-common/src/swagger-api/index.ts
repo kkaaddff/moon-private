@@ -271,25 +271,23 @@ async function loadeApiGroup(
   }
 
   await hookInstance.loadSwagger.promise(context);
-  let apiJson;
 
   let errrorMsgDeal = async (errorInfo) => {
     await hookInstance.onError.promise(errorInfo, context);
   };
 
   if (context.swaggerJson) {
-    apiJson = context.swaggerJson;
-    apiGroups = MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal);
+    await hookInstance.swagger2ApiGroup.promise(context);
+    apiGroups = MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal);
     return apiGroups;
   } else {
     if (apiGenConfig.swaggerUrl) {
-      let apiJson = await loadJson(apiGenConfig.swaggerUrl);
-      context.swaggerJson = apiJson;
+      context.swaggerJson = await loadJson(apiGenConfig.swaggerUrl);
       await hookInstance.swagger2ApiGroup.promise(context);
       if (!context["apiGroups"]) {
         //默认转换规则
         context["apiGroups"] = MoonCore.SwaggerUtil.transfer(
-          apiJson,
+          context.swaggerJson,
           errrorMsgDeal
         );
       }
@@ -298,8 +296,7 @@ async function loadeApiGroup(
       for (let i = 0, iLen = apiGenConfig.swaggerUrls.length; i < iLen; i++) {
         let swaggerUrl = apiGenConfig.swaggerUrls[i];
         try {
-          let apiJson = await loadJson(swaggerUrl);
-          context.swaggerJson = apiJson;
+          context.swaggerJson= await loadJson(swaggerUrl);
           context.apiGroups = null;
           await hookInstance.swagger2ApiGroup.promise(context);
 
@@ -307,7 +304,7 @@ async function loadeApiGroup(
             apiGroups = apiGroups.concat(
               context.apiGroups
                 ? context.apiGroups
-                : MoonCore.SwaggerUtil.transfer(apiJson, errrorMsgDeal)
+                : MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal)
             );
           }
         } catch (err) {
