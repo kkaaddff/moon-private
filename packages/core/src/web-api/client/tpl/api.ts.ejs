@@ -9,11 +9,11 @@ const controllerName = "<%-webapiGroup.name %>"
 * <%=apiItem.comment%>
 *
 */
-async function <%=apiItem.tplGetMethodName()%>(
+export async function <%=apiItem.tplGetMethodName()%>(
 <%- apiItem.tplGetRequestParamContent() %>
 ):Promise< <%= apiItem.tplGetResponseInterfaceName() %>> {
 
-  export const result = await sdk.<%=apiItem.tplGetMethodType()%>
+ const result = await sdk.<%=apiItem.tplGetMethodType()%>
   <%-apiItem.responseSchema? "<"+Util.getTypeNameFromSchema(apiItem.responseSchema) +">":""%>(
   <%-apiItem.tplGetUrl()%>,
   <%-apiItem.tplGetBodyParam()%> ,
@@ -24,10 +24,10 @@ async function <%=apiItem.tplGetMethodName()%>(
   }
   <% }) %>
 
-  // export default {
-  // <% webapiGroup.apis.forEach(apiItem=>{ %>
-  // <%=apiItem.tplGetMethodName()%>,
-  // <% }) %>
-  // }
+export default {
+<% webapiGroup.apis.forEach(apiItem=>{ %>
+<%=apiItem.tplGetMethodName()%>,
+<% }) %>
+}
 
   <%-tsDefinded%>
