@@ -72,6 +72,7 @@ export async function genTsFromDefines(
   log(`根据jsonSchema中definitions生成ts定义文件`);
 
   try {
+    debugger
     let tsContent = await compile(definitions, name, {
       bannerComment: "",
       unreachableDefinitions: true,

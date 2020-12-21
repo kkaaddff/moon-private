@@ -87,7 +87,7 @@ export function getHandleFile({
         saveOptions.content,
         prettiesConfig
       );
-    } catch (err) {}
+    } catch (err) { }
     log("output filePath: ", saveOptions.toSaveFilePath);
     fse.writeFileSync(saveOptions.toSaveFilePath, saveOptions.content);
     if (context.afterSave) {
