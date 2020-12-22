@@ -1,6 +1,6 @@
 {
   "name": "@zhang/moon-core",
-  "version": "0.1.1-alpha.9",
+  "version": "0.1.1-alpha.12",
   "description": "",
   "main": "lib/index.js",
   "typings": "declarations/index.d.ts",

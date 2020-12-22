@@ -1,6 +1,6 @@
 {
   "name": "@zhang/moon-common",
-  "version": "0.1.1-alpha.11",
+  "version": "0.1.1-alpha.12",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -14,12 +14,12 @@
     "registory": "http://registory.npmjs.org"
   },
   "dependencies": {
+    "@zhang/moon-core": "^0.1.1-alpha.12",
     "debug": "^4.1.1",
     "ejs": "^3.0.1",
     "generate-schema": "^2.6.0",
     "json-schema-to-typescript": "^8.2.0",
     "minimatch": "^3.0.4",
-    "@zhang/moon-core": "^0.1.1-alpha.9",
     "prettier": "^2.0.5",
     "tapable": "^1.1.3",
     "ts-morph": "^7.0.1"
