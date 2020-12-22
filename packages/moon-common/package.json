@@ -1,5 +1,5 @@
 {
-  "name": "@zhang/moon-common",
+  "name": "@zhangqc/moon-common",
   "version": "0.1.1-alpha.12",
   "description": "",
   "main": "index.js",
@@ -14,7 +14,7 @@
     "registory": "http://registory.npmjs.org"
   },
   "dependencies": {
-    "@zhang/moon-core": "^0.1.1-alpha.12",
+    "@zhangqc/moon-core": "^0.1.1-alpha.12",
     "debug": "^4.1.1",
     "ejs": "^3.0.1",
     "generate-schema": "^2.6.0",
