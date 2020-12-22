@@ -9,7 +9,7 @@ import * as request from "request";
 import * as fse from "fs-extra";
 import * as _ from "lodash";
 import { join } from "path";
-import MoonCore from "moon-core";
+import MoonCore from "@zhangqc/moon-core";
 import debug from "debug";
 import * as minimatch from "minimatch";
 
@@ -19,15 +19,15 @@ import {
   IWebApiContext,
   IWebApiDefinded,
   SchemaProps,
-} from "moon-core/declarations/typings/api";
+} from "@zhangqc/moon-core/declarations/typings/api";
 
-import { IFileSaveOptions } from "moon-core/declarations/typings/page";
-import { IInsertOption } from "moon-core/declarations/typings/util";
-import { RequestParameter } from "moon-core/declarations/web-api/client/domain";
-import { IMoonConfig } from "moon-core/declarations/typings/config";
+import { IFileSaveOptions } from "@zhangqc/moon-core/declarations/typings/page";
+import { IInsertOption } from "@zhangqc/moon-core/declarations/typings/util";
+import { RequestParameter } from "@zhangqc/moon-core/declarations/web-api/client/domain";
+import { IMoonConfig } from "@zhangqc/moon-core/declarations/typings/config";
 import { loadMoonConfig } from "./util/config";
 import { applyHook } from "../util/hook-util";
-import ApiGroup from "moon-core/declarations/web-api/client/domain/api-group";
+import ApiGroup from "@zhangqc/moon-core/declarations/web-api/client/domain/api-group";
 
 const log = debug("j2t:cli");
 

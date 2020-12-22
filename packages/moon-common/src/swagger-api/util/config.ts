@@ -6,10 +6,9 @@
  * @coder.yang2010@gmail.com
  * @Date    2020/3/8
  **/
-// import {IMoonConfig} from "moon-core/declarations/typings/config";
 import { join } from "path";
 import * as fse from "fs-extra";
-import { IMoonConfig } from "moon-core/declarations/typings/config";
+import { IMoonConfig } from "@zhangqc/moon-core/declarations/typings/config";
 
 export interface IBackendConfig {
   db: {
