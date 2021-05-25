@@ -6,29 +6,29 @@
  * @coder.yang2010@gmail.com
  * @Date    2020/5/12
  **/
-import { IMethodDefinded } from "../util/swagger";
-import { toLCamelize } from "../../../util/string-util";
-import RequestParameter from "./request-parameter";
-import { SchemaProps } from "../../../typings/api";
-import { toUCamelize } from "../util/string-util";
+import { IMethodDefinded } from '../util/swagger'
+import { toLCamelize } from '../../../util/string-util'
+import RequestParameter from './request-parameter'
+import { SchemaProps } from '../../../typings/api'
+import { toUCamelize } from '../util/string-util'
 
-export type MethodName = "POST" | "GET" | "UPDATE" | "DELETE" | "OPTIONS";
+export type MethodName = 'POST' | 'GET' | 'UPDATE' | 'DELETE' | 'OPTIONS'
 export default class Method {
   constructor(
     public methodInfo: IMethodDefinded,
     public methodInfoOptions: {
-      url: string;
-      method: MethodName | string;
+      url: string
+      method: MethodName | string
     }
   ) {}
 
-  private _name: string;
+  private _name: string
 
   get methodName() {
-    return this.methodInfoOptions.method;
+    return this.methodInfoOptions.method
   }
   get url(): string {
-    return this.methodInfoOptions.url;
+    return this.methodInfoOptions.url
   }
   /**
    * 方法名称;
@@ -36,92 +36,92 @@ export default class Method {
   get name(): string {
     if (!this._name) {
       this._name = toLCamelize(this.methodInfo.operationId)
-        .replace(/UsingPOST.*/gi, "")
-        .replace(/UsingPUT.*/gi, "")
-        .replace(/UsingHEAD.*/gi, "")
-        .replace(/UsingOPTIONS.*/gi, "")
-        .replace(/UsingPATCH.*/gi, "")
-        .replace(/UsingGET.*/gi, "")
-        .replace(/UsingDELETE.*/gi, "");
-      return this._name;
+        .replace(/UsingPOST.*/gi, '')
+        .replace(/UsingPUT.*/gi, '')
+        .replace(/UsingHEAD.*/gi, '')
+        .replace(/UsingOPTIONS.*/gi, '')
+        .replace(/UsingPATCH.*/gi, '')
+        .replace(/UsingGET.*/gi, '')
+        .replace(/UsingDELETE.*/gi, '')
+      return this._name
     } else {
-      return this._name;
+      return this._name
     }
   }
 
   set name(newName: string) {
-    this._name = newName;
+    this._name = newName
   }
 
   /**
    * 备注信息;
    */
   get comment(): string {
-    return this.methodInfo.summary;
+    return this.methodInfo.summary
   }
 
-  private params: RequestParameter[];
+  private params: RequestParameter[]
 
   get requestParam(): RequestParameter[] {
     if (!this.params) {
       this.params = (this.methodInfo.parameters || [])
-        .filter((item) => item.in != "header")
+        .filter((item) => item.in != 'header')
         //spring error根据参数传递过来
         .filter(
           (item) =>
             !(
-              item.name === "errors" &&
+              item.name === 'errors' &&
               item.schema &&
-              item.schema["$ref"] === "#/definitions/Errors"
+              item.schema['$ref'] === '#/definitions/Errors'
             )
         )
-        .filter((item) => !item.name.startsWith("userInfo"))
+        .filter((item) => !item.name.startsWith('userInfo'))
         .map((item) => {
-          return new RequestParameter(item, { ownedMethod: this });
-        });
+          return new RequestParameter(item, { ownedMethod: this })
+        })
     }
-    return this.params;
+    return this.params
   }
 
   getObjectJsonSchemas() {}
 
-  private _responseSchma;
+  private _responseSchma
   get responseSchema(): SchemaProps {
     if (!this._responseSchma) {
-      this._responseSchma = this.methodInfo.responses["200"].schema;
+      this._responseSchma = this.methodInfo.responses['200'].schema
       if (this._responseSchma) {
-        this._responseSchma.title = toUCamelize(this.name + "Res");
+        this._responseSchma.title = toUCamelize(this.name + 'Res')
       }
     }
-    return this._responseSchma;
+    return this._responseSchma
   }
 
   set responseSchema(res) {
-    this._responseSchma = res;
+    this._responseSchma = res
 
     if (this._responseSchma) {
-      this._responseSchma.title = toUCamelize(this.name + "Res");
+      this._responseSchma.title = toUCamelize(this.name + 'Res')
     }
   }
 
   tplGetMethodType() {
-    let methodType = this.methodInfoOptions.method.toLocaleLowerCase();
-    if (methodType === "delete") {
-      return "deleteF";
+    let methodType = this.methodInfoOptions.method.toLocaleLowerCase()
+    if (methodType === 'delete') {
+      return 'deleteF'
     }
-    return methodType;
+    return methodType
   }
 
   tplGetMethodName() {
-    let methodName = this.name;
+    let methodName = this.name
     if (!methodName) {
-      return "post";
-    } else if (methodName.toLowerCase() === "export") {
-      return "exportF";
-    } else if (methodName.toLowerCase() === "delete") {
-      return "deleteF";
+      return 'post'
+    } else if (methodName.toLowerCase() === 'export') {
+      return 'exportF'
+    } else if (methodName.toLowerCase() === 'delete') {
+      return 'deleteF'
     } else {
-      return methodName;
+      return methodName
     }
   }
 
@@ -131,45 +131,43 @@ export default class Method {
    */
   tplGetRequestParamContent(): string {
     let param = ``,
-      typeStr = ``;
+      typeStr = ``
     if (this.requestParam.length) {
       typeStr = this.requestParam
         .map((item) => {
-          let typeStr = item.tplGenInterfaceName();
+          let typeStr = item.tplGenInterfaceName()
           if (item.isBasicType()) {
-            typeStr = item.getBasicTsType();
+            typeStr = item.getBasicTsType()
           }
-          return `${item.comment ? "\n/*" + item.comment + "*/\n" : ""}
-          '${item.name}'${item.isRequired ? "" : "?"}:${typeStr}`;
+          return `${item.comment ? '\n/*' + item.comment + '*/\n' : ''}
+          '${item.name}'${item.isRequired ? '' : '?'}:${typeStr}`
         })
-        .join(";");
-      param = `param:{${typeStr}}`;
+        .join(';')
+      param = `param:{${typeStr}}`
     }
-    return param;
+    return param
   }
 
   tplGetUrl(): string {
-    return `serverInfo.baseUrl+\`${this.url.replace(/{/g, "${param.")}\``;
+    return `serverInfo.baseUrl+\`${this.url.replace(/{/g, '${param.')}\``
   }
 
   tplGetBodyParam(): string {
-    let paramItem = this.requestParam.filter((item) => item.isInBody);
+    let paramItem = this.requestParam.filter((item) => item.isInBody)
     if (
       paramItem.length === 1 &&
-      (["date", "file", "array"].includes(paramItem[0].jsonSchema.type) ||
+      (['date', 'file', 'array'].includes(paramItem[0].jsonSchema.type) ||
         // @ts-ignore
         paramItem[0].jsonSchema.$ref)
     ) {
-      return `param.${paramItem[0].name}`;
+      return `param.${paramItem[0].name}`
     } else {
-      return `{${paramItem
-        .map((item) => buildKeyValueStr(item.name))
-        .join(",\n")}}`;
+      return `{${paramItem.map((item) => buildKeyValueStr(item.name)).join(',\n')}}`
     }
   }
 
   tplGetQueryParam(): string {
-    let paramItem = this.requestParam.filter((item) => item.isInQuery);
+    let paramItem = this.requestParam.filter((item) => item.isInQuery)
     // if (
     //   paramItem.length === 1 &&
     //   (["date", "file", "array"].includes(paramItem[0].jsonSchema.type) ||
@@ -179,35 +177,30 @@ export default class Method {
     //   return `param.${paramItem[0].name}`;
     // } else {
     // InQuery的参数必须得有key
-    return `{${paramItem
-      .map((item) => buildKeyValueStr(item.name))
-      .join(",\n")}}`;
+    return `{${paramItem.map((item) => buildKeyValueStr(item.name)).join(',\n')}}`
     // }
   }
 
   tplGetResponseInterfaceName(): string {
-    return getTypeNameFromSchema(this.responseSchema);
+    return getTypeNameFromSchema(this.responseSchema)
   }
 }
 
 function getTypeNameFromSchema(schema) {
   if (!schema) {
-    return "unknown";
+    return 'unknown'
   }
 
   if (schema.title) {
-    return schema.title.replace(
-      /(«|»|,| )([a-zA-Z])?/gi,
-      (_, __, char: string) => {
-        if (char) {
-          return char.toUpperCase();
-        } else {
-          return "";
-        }
+    return schema.title.replace(/(«|»|,| )([a-zA-Z])?/gi, (_, __, char: string) => {
+      if (char) {
+        return char.toUpperCase()
+      } else {
+        return ''
       }
-    );
+    })
   } else {
-    return "unknown";
+    return 'unknown'
   }
 }
 
@@ -216,9 +209,9 @@ function getTypeNameFromSchema(schema) {
  * @param params
  */
 function buildKeyValueStr(key: string) {
-  if (key.includes(".")) {
-    return `'${key}':param['${key}']`;
+  if (key.includes('.')) {
+    return `'${key}':param['${key}']`
   } else {
-    return `${key}:param.${key}`;
+    return `${key}:param.${key}`
   }
 }

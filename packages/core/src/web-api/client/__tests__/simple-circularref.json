@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "required":["storeVOList"],
+  "required": ["storeVOList"],
   "properties": {
     "storeVOList": {
       "type": "array",
@@ -16,7 +16,7 @@
   "definitions": {
     "CompanyInfoVO": {
       "type": "object",
-      "required":["storeVOList"],
+      "required": ["storeVOList"],
       "properties": {
         "storeVOList": {
           "type": "array",

@@ -2,10 +2,9 @@
   "api": {
     "swaggerUrl": "https://user-api.union8.top/v2/api-docs",
     "dir": "./api",
-    "wrapper":"data",
-    "mock": {
-    },
+    "wrapper": "data",
+    "mock": {},
     "exclude": [],
-    "include":["modify-password-controller"]
+    "include": ["modify-password-controller"]
   }
 }

@@ -6,31 +6,31 @@
  * @coder.yang2010@gmail.com
  * @Date    2020/5/12
  **/
-import Method from "./method";
-import { SchemaProps } from "../../../typings/api";
+import Method from './method'
+import { SchemaProps } from '../../../typings/api'
 
 export default class ApiGroup {
-  apis: Method[] = [];
+  apis: Method[] = []
 
-  definitions: { [name: string]: SchemaProps } = {};
+  definitions: { [name: string]: SchemaProps } = {}
 
   constructor(
     public options: {
-      name: string;
-      serverInfo: any;
+      name: string
+      serverInfo: any
     }
   ) {}
 
   get name() {
-    return this.options.name;
+    return this.options.name
   }
 
   get serverInfo() {
-    return this.options.serverInfo;
+    return this.options.serverInfo
   }
 
   addApis(apis: Method[]) {
-    this.apis = this.apis.concat(apis);
+    this.apis = this.apis.concat(apis)
   }
 
   /**
@@ -38,7 +38,7 @@ export default class ApiGroup {
    * @param api
    */
   addApi(api: Method) {
-    this.apis.push(api);
+    this.apis.push(api)
   }
 
   /**
@@ -46,6 +46,6 @@ export default class ApiGroup {
    * @param methodName
    */
   isMethodNameExist(methodName: string) {
-    return !this.apis.every((method) => method.name !== methodName);
+    return !this.apis.every((method) => method.name !== methodName)
   }
 }

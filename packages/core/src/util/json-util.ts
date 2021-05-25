@@ -6,14 +6,14 @@
  * @Date    2019/3/27
  **/
 
-import * as generateSchema from "generate-schema";
-import { compile } from "json-schema-to-typescript";
-import { IWebApiContext } from "../typings/api";
-import { IJsonTsGenResult, ITsGenResult } from "../typings/util";
+import * as generateSchema from 'generate-schema'
+import { compile } from 'json-schema-to-typescript'
+import { IWebApiContext } from '../typings/api'
+import { IJsonTsGenResult, ITsGenResult } from '../typings/util'
 
-import debug from "debug";
+import debug from 'debug'
 
-const log = debug("web-apis:jsonUtil");
+const log = debug('web-apis:jsonUtil')
 /**
  * 将json转换为ts定义
  *
@@ -25,10 +25,10 @@ export async function genTsFromJSON(
   value: any,
   context?: IWebApiContext
 ): Promise<IJsonTsGenResult> {
-  log(`根据JSON生成ts定义文件`);
-  let schema = generateSchema.json(name, value);
-  let tsResult = await genTsFromSchema(name, schema, context);
-  return { ...tsResult, schema };
+  log(`根据JSON生成ts定义文件`)
+  let schema = generateSchema.json(name, value)
+  let tsResult = await genTsFromSchema(name, schema, context)
+  return { ...tsResult, schema }
 }
 
 //考虑使用z隐式传参呢..
@@ -45,48 +45,45 @@ export async function genTsFromSchema(
   jsonSchema: any,
   context?: IWebApiContext
 ): Promise<ITsGenResult> {
-  log(`根据jsonSchema生成ts定义文件`);
+  log(`根据jsonSchema生成ts定义文件`)
   let tsContent = await compile(jsonSchema, name, {
-    bannerComment: "",
+    bannerComment: '',
     // unreachableDefinitions:true,
     // $refOptions:{
     //   parse:{
     //     definitions:parse
     //   }
     // }
-  });
+  })
 
   let result = {
-    typeName: jsonSchema.title ? jsonSchema.title.replace(/ */gi, "") : name,
+    typeName: jsonSchema.title ? jsonSchema.title.replace(/ */gi, '') : name,
     tsContent,
-  };
-  return result;
+  }
+  return result
 }
 
 export async function genTsFromDefines(
   definitions: {
-    definitions: { [key: string]: any };
+    definitions: { [key: string]: any }
   },
-  name = "IgnoreType"
+  name = 'IgnoreType'
 ): Promise<string> {
-  log(`根据jsonSchema中definitions生成ts定义文件`);
+  log(`根据jsonSchema中definitions生成ts定义文件`)
 
   try {
     let tsContent = await compile(definitions, name, {
-      bannerComment: "",
+      bannerComment: '',
       unreachableDefinitions: true,
-    });
+    })
 
     tsContent = tsContent
-      .replace(
-        / \* This interface was referenced by `IgnoreType`'s JSON-Schema\n/g,
-        ""
-      )
-      .replace(/.*via the `definition`.*\n/g, "");
+      .replace(/ \* This interface was referenced by `IgnoreType`'s JSON-Schema\n/g, '')
+      .replace(/.*via the `definition`.*\n/g, '')
 
-    return tsContent;
+    return tsContent
   } catch (err) {
-    console.warn("生成ts出错", err);
-    return "";
+    console.warn('生成ts出错', err)
+    return ''
   }
 }

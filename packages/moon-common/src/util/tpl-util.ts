@@ -20,14 +20,12 @@
  *
  * @Date    2019/3/26
  **/
-import {join, parse} from 'path';
-import * as fse from 'fs-extra';
-import debug from 'debug';
-import {IAction, IActorItem, ISubComp} from "@zhangqc/moon-core/src/typings/page";
+import { join, parse } from 'path'
+import * as fse from 'fs-extra'
+import debug from 'debug'
+import { IAction, IActorItem, ISubComp } from '@zhangqc/moon-core/src/typings/page'
 
-const log = debug('moon:core:compile-util');
-
-
+const log = debug('moon:core:compile-util')
 
 /**
  * 获取处理页面内容;;
@@ -38,25 +36,21 @@ const log = debug('moon:core:compile-util');
  *
  * @returns {(filePath: string, dealCal: (tplContent: string) => Promise<string>, param?: IHandlePageParam) => Promise<void>}
  */
-export function getHandleFile({
-  outDir,
-  tplBase,
-  context
-}: IHandleFile) {
+export function getHandleFile({ outDir, tplBase, context }: IHandleFile) {
   return async function handlePage(
     tplPath: string,
     dealCal: (tplContent: string) => Promise<string>,
-    param?: IHandlePageParam,
+    param?: IHandlePageParam
   ) {
     let _param = {
       saveFilePath: tplPath.replace('.ejs', ''),
       ...param,
-    };
-    let _tplFilePath = join(tplBase, tplPath);
+    }
+    let _tplFilePath = join(tplBase, tplPath)
 
-    let _tplContent = await fse.readFile(_tplFilePath);
-    log('开始处理模板: ', _tplFilePath);
-    let content = await dealCal(_tplContent.toString());
+    let _tplContent = await fse.readFile(_tplFilePath)
+    log('开始处理模板: ', _tplFilePath)
+    let content = await dealCal(_tplContent.toString())
 
     let saveOptions: IFileSaveOptions = {
       projectOutDir: '',
@@ -64,20 +58,20 @@ export function getHandleFile({
       toSaveFilePath: join(outDir, _param.saveFilePath),
       param,
       content,
-    };
-
-    if (context &&context.beforeSave) {
-      saveOptions = await context.beforeSave(saveOptions, context);
     }
 
-    await fse.ensureDir(parse(saveOptions.toSaveFilePath).dir);
-    log('output filePath: ', saveOptions.toSaveFilePath);
-    fse.writeFileSync(saveOptions.toSaveFilePath, saveOptions.content);
+    if (context && context.beforeSave) {
+      saveOptions = await context.beforeSave(saveOptions, context)
+    }
+
+    await fse.ensureDir(parse(saveOptions.toSaveFilePath).dir)
+    log('output filePath: ', saveOptions.toSaveFilePath)
+    fse.writeFileSync(saveOptions.toSaveFilePath, saveOptions.content)
     if (context && context.afterSave) {
-      await context.afterSave(saveOptions, context);
+      await context.afterSave(saveOptions, context)
     }
     return saveOptions.toSaveFilePath
-  };
+  }
 }
 
 /**
@@ -88,40 +82,39 @@ export function getHandleFile({
  * @returns {string}
  */
 export function insertContent(rawContent: string, inserts: IInsertOption[]) {
-  let content = rawContent;
+  let content = rawContent
   for (let i = 0, ilen = inserts.length; i < ilen; i++) {
-    let item: IInsertOption = inserts[i];
+    let item: IInsertOption = inserts[i]
 
-    if (!item.check ||item.check(content, rawContent)) {
-
-      let markContent , index ;
-      if(item.mark instanceof RegExp) {
-        let [matchContent] = content.match(item.mark );
+    if (!item.check || item.check(content, rawContent)) {
+      let markContent, index
+      if (item.mark instanceof RegExp) {
+        let [matchContent] = content.match(item.mark)
         if (matchContent) {
-          index = content.indexOf(matchContent);
-          markContent = matchContent;
+          index = content.indexOf(matchContent)
+          markContent = matchContent
         } else {
-          throw new Error('内容未匹配到标记点');
+          throw new Error('内容未匹配到标记点')
         }
       } else {
-        index =  content.indexOf(item.mark);
-        if(index >0) {
-          markContent= item.mark;
-          index = content.indexOf(item.mark);
+        index = content.indexOf(item.mark)
+        if (index > 0) {
+          markContent = item.mark
+          index = content.indexOf(item.mark)
         } else {
-          throw new Error('内容未匹配到标记点');
+          throw new Error('内容未匹配到标记点')
         }
       }
 
       if (!item.isBefore) {
-        index = index + markContent.length;
+        index = index + markContent.length
       }
       content = `${content.substring(0, index)}
       ${item.content} 
-      ${content.substring(index)}`;
+      ${content.substring(index)}`
     }
   }
-  return content;
+  return content
 }
 
 /**
@@ -132,53 +125,50 @@ export function insertContent(rawContent: string, inserts: IInsertOption[]) {
  * @returns {Promise<void>}
  */
 export async function insertFile(filepath: string, inserts: IInsertOption[]) {
-  let rawContent = await readFile(filepath);
-  let content = insertContent(rawContent, inserts);
-  await fse.writeFile(filepath, content);
+  let rawContent = await readFile(filepath)
+  let content = insertContent(rawContent, inserts)
+  await fse.writeFile(filepath, content)
 }
 
 async function readFile(filePath: string): Promise<string> {
-  let _tplContent = await fse.readFile(filePath);
-  return _tplContent.toString();
+  let _tplContent = await fse.readFile(filePath)
+  return _tplContent.toString()
 }
 
-
-
 interface IHandlePageParam {
-  saveFilePath: string;
-  subComp?: ISubComp;
-  actor?: IActorItem;
+  saveFilePath: string
+  subComp?: ISubComp
+  actor?: IActorItem
   action?: IAction
 }
 
 export interface IFileSaveOpt {
-  beforeSave?: (options: IFileSaveOptions, context: any) => Promise<IFileSaveOptions>;
-  afterSave?: (options: IFileSaveOptions, context: any) => Promise<void>;
+  beforeSave?: (options: IFileSaveOptions, context: any) => Promise<IFileSaveOptions>
+  afterSave?: (options: IFileSaveOptions, context: any) => Promise<void>
 }
 
 export interface IHandleFile {
-  outDir: string;
-  tplBase: string;
-  context?: IFileSaveOpt;
+  outDir: string
+  tplBase: string
+  context?: IFileSaveOpt
 }
 
 export interface IInsertOption {
-  mark: string|RegExp;
-  isBefore?: boolean;
-  content: string;
+  mark: string | RegExp
+  isBefore?: boolean
+  content: string
   /**
    *
    * @param content
    * @returns {boolean}   验证是否需要做 true  继续,false 中断
    */
-  check?: (content, rawContent) => boolean;
+  check?: (content, rawContent) => boolean
 }
 
-
 export interface IFileSaveOptions {
-  projectOutDir: string;
-  tplPath: string;
-  toSaveFilePath: string;
-  content: string;
+  projectOutDir: string
+  tplPath: string
+  toSaveFilePath: string
+  content: string
   param?: IHandlePageParam
 }

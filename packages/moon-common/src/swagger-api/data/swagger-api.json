@@ -32,18 +32,12 @@
   "paths": {
     "/biz/applog": {
       "post": {
-        "tags": [
-          "AppLog-Api"
-        ],
+        "tags": ["AppLog-Api"],
         "summary": "新增AppLog",
         "description": "新增AppLog",
         "operationId": "saveAppLogUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
         "parameters": [
           {
             "in": "body",
@@ -79,15 +73,11 @@
     },
     "/biz/applog/{id}": {
       "get": {
-        "tags": [
-          "AppLog-Api"
-        ],
+        "tags": ["AppLog-Api"],
         "summary": "查询单个AppLog",
         "description": "查询单个AppLog",
         "operationId": "queryAppLogByIdUsingGET",
-        "produces": [
-          "*/*"
-        ],
+        "produces": ["*/*"],
         "parameters": [
           {
             "name": "id",
@@ -119,15 +109,11 @@
     },
     "/biz/applogs": {
       "get": {
-        "tags": [
-          "AppLog-Api"
-        ],
+        "tags": ["AppLog-Api"],
         "summary": "根据appId查询所有AppLog",
         "description": "根据appId查询所有AppLog",
         "operationId": "queryByPageUsingGET",
-        "produces": [
-          "*/*"
-        ],
+        "produces": ["*/*"],
         "parameters": [
           {
             "name": "appId",
@@ -172,18 +158,12 @@
     },
     "/biz/authinfo": {
       "post": {
-        "tags": [
-          "AppAuthInfo-Api"
-        ],
+        "tags": ["AppAuthInfo-Api"],
         "summary": "新增AppAuthInfo",
         "description": "新增AppAuthInfo",
         "operationId": "saveAppAuthInfoUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
         "parameters": [
           {
             "in": "body",
@@ -217,18 +197,12 @@
         }
       },
       "put": {
-        "tags": [
-          "AppAuthInfo-Api"
-        ],
+        "tags": ["AppAuthInfo-Api"],
         "summary": "更新AppAuthInfo",
         "description": "更新AppAuthInfo",
         "operationId": "updateAppAuthInfoUsingPUT",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
         "parameters": [
           {
             "in": "body",
@@ -264,15 +238,11 @@
     },
     "/biz/authinfo/bymenu/{menuId}": {
       "get": {
-        "tags": [
-          "AppAuthInfo-Api"
-        ],
+        "tags": ["AppAuthInfo-Api"],
         "summary": "根据menuId查询单个AppAuthInfo",
         "description": "根据menuId查询单个AppAuthInfo",
         "operationId": "queryAppAuthInfoByMenuIdUsingGET",
-        "produces": [
-          "*/*"
-        ],
+        "produces": ["*/*"],
         "parameters": [
           {
             "name": "menuId",
@@ -304,15 +274,11 @@
     },
     "/biz/authinfo/{id}": {
       "get": {
-        "tags": [
-          "AppAuthInfo-Api"
-        ],
+        "tags": ["AppAuthInfo-Api"],
         "summary": "查询单个AppAuthInfo",
         "description": "查询单个AppAuthInfo",
         "operationId": "queryAppAuthInfoByIdUsingGET",
-        "produces": [
-          "*/*"
-        ],
+        "produces": ["*/*"],
         "parameters": [
           {
             "name": "id",
@@ -344,15 +310,11 @@
     },
     "/biz/authinfos": {
       "get": {
-        "tags": [
-          "AppAuthInfo-Api"
-        ],
+        "tags": ["AppAuthInfo-Api"],
         "summary": "查询所有AppAuthInfo",
         "description": "查询所有AppAuthInfo",
         "operationId": "queryAppAuthInfosUsingGET",
-        "produces": [
-          "*/*"
-        ],
+        "produces": ["*/*"],
         "responses": {
           "200": {
             "description": "OK",
@@ -374,18 +336,12 @@
     },
     "/biz/menu": {
       "post": {
-        "tags": [
-          "Menu-Api"
-        ],
+        "tags": ["Menu-Api"],
         "summary": "新增Menu",
         "description": "新增Menu",
         "operationId": "saveMenuUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
         "parameters": [
           {
             "in": "body",
@@ -419,18 +375,12 @@
         }
       },
       "put": {
-        "tags": [
-          "Menu-Api"
-        ],
+        "tags": ["Menu-Api"],
         "summary": "更新Menu",
         "description": "更新Menu",
         "operationId": "updateMenuUsingPUT",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
         "parameters": [
           {
             "in": "body",
@@ -466,15 +416,11 @@
     },
     "/biz/menu/{id}": {
       "get": {
-        "tags": [
-          "Menu-Api"
-        ],
+        "tags": ["Menu-Api"],
         "summary": "查询单个Menu",
         "description": "查询单个Menu",
         "operationId": "queryMenuByIdUsingGET",
-        "produces": [
-          "*/*"
-        ],
+        "produces": ["*/*"],
         "parameters": [
           {
             "name": "id",
@@ -506,15 +452,11 @@
     },
     "/biz/menus": {
       "get": {
-        "tags": [
-          "Menu-Api"
-        ],
+        "tags": ["Menu-Api"],
         "summary": "查询所有授权的Menu",
         "description": "查询所有授权的Menu",
         "operationId": "queryMenusUsingGET",
-        "produces": [
-          "*/*"
-        ],
+        "produces": ["*/*"],
         "responses": {
           "200": {
             "description": "OK",
@@ -536,18 +478,12 @@
     },
     "/biz/userCustom": {
       "post": {
-        "tags": [
-          "UserCustom-Api"
-        ],
+        "tags": ["UserCustom-Api"],
         "summary": "新增UserCustom",
         "description": "新增UserCustom",
         "operationId": "saveUserCustomUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
         "parameters": [
           {
             "in": "body",
@@ -581,18 +517,12 @@
         }
       },
       "put": {
-        "tags": [
-          "UserCustom-Api"
-        ],
+        "tags": ["UserCustom-Api"],
         "summary": "更新UserCustom",
         "description": "更新UserCustom",
         "operationId": "updateUserCustomUsingPUT",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
         "parameters": [
           {
             "in": "body",
@@ -628,15 +558,11 @@
     },
     "/biz/usercustom": {
       "get": {
-        "tags": [
-          "UserCustom-Api"
-        ],
+        "tags": ["UserCustom-Api"],
         "summary": "根据userId查询用户自定义信息",
         "description": "查询用户自定义信息",
         "operationId": "queryByUserIdUsingGET",
-        "produces": [
-          "*/*"
-        ],
+        "produces": ["*/*"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1179,9 +1105,7 @@
     },
     "Response": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",
@@ -1201,9 +1125,7 @@
     },
     "Response«AppAuthInfoResp»": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",
@@ -1223,9 +1145,7 @@
     },
     "Response«AppLogResp»": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",
@@ -1245,9 +1165,7 @@
     },
     "Response«Menu响应体»": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",
@@ -1267,9 +1185,7 @@
     },
     "Response«UserCustom请求体»": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",
@@ -1289,9 +1205,7 @@
     },
     "Response«long»": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",

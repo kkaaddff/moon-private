@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "required":["employeeVOList","detailAddress","goodsIds"],
+  "required": ["employeeVOList", "detailAddress", "goodsIds"],
   "properties": {
     "employeeVOList": {
       "type": "array",
@@ -35,9 +35,7 @@
   "definitions": {
     "BaseResponse«CompanyInfoResponse»": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",
@@ -178,9 +176,7 @@
     },
     "BaseResponse«CompanyInformationModifyResponse»": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",
@@ -263,10 +259,7 @@
           "type": "integer",
           "format": "int32",
           "description": "供应商类型\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "contactName": {
           "type": "string",
@@ -289,10 +282,7 @@
           "type": "integer",
           "format": "int32",
           "description": "删除标志\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "detailAddress": {
           "type": "string",
@@ -343,10 +333,7 @@
           "type": "integer",
           "format": "int32",
           "description": "是否确认打款\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "socialCreditCode": {
           "type": "string",
@@ -374,7 +361,7 @@
     },
     "EmployeeVO": {
       "type": "object",
-      "required":["accountDisableReason","accountName","accountPassword","accountState","accountType","companyInfo"],
+      "required": ["accountDisableReason", "accountName", "accountPassword", "accountState", "accountType", "companyInfo"],
       "properties": {
         "accountDisableReason": {
           "type": "string",
@@ -392,20 +379,13 @@
           "type": "integer",
           "format": "int32",
           "description": "账号状态\n* ENABLE: 启用\n* DISABLE: 禁用",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "accountType": {
           "type": "integer",
           "format": "int32",
           "description": "账号类型\n* b2bBoss: b2b账号\n* s2bBoss: s2b平台端账号\n* s2bSupplier: s2b供应商端账号",
-          "enum": [
-            0,
-            1,
-            2
-          ]
+          "enum": [0, 1, 2]
         },
         "companyInfo": {
           "description": "供应商",
@@ -434,10 +414,7 @@
           "type": "integer",
           "format": "int32",
           "description": "删除标志\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "deletePerson": {
           "type": "string",
@@ -512,7 +489,7 @@
     },
     "CompanyInfoVO": {
       "type": "object",
-      "required":["employeeVOList"],
+      "required": ["employeeVOList"],
       "properties": {
         "address": {
           "type": "string",
@@ -576,10 +553,7 @@
           "type": "integer",
           "format": "int32",
           "description": "供应商类型\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "contactName": {
           "type": "string",
@@ -602,10 +576,7 @@
           "type": "integer",
           "format": "int32",
           "description": "删除标志\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "detailAddress": {
           "type": "string",
@@ -656,10 +627,7 @@
           "type": "integer",
           "format": "int32",
           "description": "是否确认打款\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "socialCreditCode": {
           "type": "string",
@@ -714,11 +682,7 @@
           "type": "integer",
           "format": "int32",
           "description": "审核状态\n* WAIT_CHECK: 0：待审核\n* CHECKED: 1：已审核\n* NOT_PASS: 2：审核未通过",
-          "enum": [
-            0,
-            1,
-            2
-          ]
+          "enum": [0, 1, 2]
         },
         "cityId": {
           "type": "integer",
@@ -734,10 +698,7 @@
           "type": "integer",
           "format": "int32",
           "description": "供应商类型(0、平台自营 1、第三方供应商)\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "contactEmail": {
           "type": "string",
@@ -765,19 +726,13 @@
           "type": "integer",
           "format": "int32",
           "description": "删除标志\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "freightTemplateType": {
           "type": "integer",
           "format": "int32",
           "description": "使用的运费模板类别(0:店铺运费,1:单品运费)\n* NO: 否\n* YES: 是",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "goodsIds": {
           "type": "array",
@@ -824,10 +779,7 @@
           "type": "integer",
           "format": "int32",
           "description": "店铺状态\n* OPENING: 0、开启\n* CLOSED: 1、关店",
-          "enum": [
-            0,
-            1
-          ]
+          "enum": [0, 1]
         },
         "supplierName": {
           "type": "string",
@@ -856,9 +808,7 @@
     },
     "BaseResponse": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",
@@ -877,9 +827,7 @@
     },
     "BaseResponse«CompanyInfoRopResponse»": {
       "type": "object",
-      "required": [
-        "code"
-      ],
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "string",

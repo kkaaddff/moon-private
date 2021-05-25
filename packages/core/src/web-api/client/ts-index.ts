@@ -12,24 +12,24 @@ import {
   InterfaceDeclarationStructure,
   StructureKind,
   TypeAliasDeclarationStructure,
-} from 'ts-morph';
+} from 'ts-morph'
 
-import debug from 'debug';
-const baseType = ['number', 'string', 'unknown', 'boolean'];
-const numberReg = /^[0-9]+$/;
-let log = debug('web-api:ts-index');
+import debug from 'debug'
+const baseType = ['number', 'string', 'unknown', 'boolean']
+const numberReg = /^[0-9]+$/
+let log = debug('web-api:ts-index')
 export interface Controller {
-  fileName: '';
+  fileName: ''
   methods: {
     [methodName: string]: {
-      responseTs: string[];
-    };
-  };
+      responseTs: string[]
+    }
+  }
 }
 
 export interface ApiIndex {}
 
-const urlReg= new RegExp("`(.*)`");
+const urlReg = new RegExp('`(.*)`')
 
 export function genApiTsIndex({
   tsConfig,
@@ -37,97 +37,90 @@ export function genApiTsIndex({
   apiSuffix,
   filter,
 }: {
-  apiDir: string;
-  tsConfig: string;
-  apiSuffix?: string;
-  filter?: (param: {filePath: string}) => boolean;
+  apiDir: string
+  tsConfig: string
+  apiSuffix?: string
+  filter?: (param: { filePath: string }) => boolean
 }) {
   const project = new Project({
     tsConfigFilePath: tsConfig,
-  });
-  let result = project.addExistingSourceFiles(apiDir + '**/*.ts');
+  })
+  let result = project.addExistingSourceFiles(apiDir + '**/*.ts')
 
-  let apiTeIndex = {};
+  let apiTeIndex = {}
 
-  for (
-    let fileIndex = 0, fileIndexLen = result.length;
-    fileIndex < fileIndexLen;
-    fileIndex++
-  ) {
-    let fileController = result[fileIndex];
-    let fileName = fileController.getBaseNameWithoutExtension();
+  for (let fileIndex = 0, fileIndexLen = result.length; fileIndex < fileIndexLen; fileIndex++) {
+    let fileController = result[fileIndex]
+    let fileName = fileController.getBaseNameWithoutExtension()
 
     if (apiSuffix) {
       if (!fileName.endsWith(apiSuffix)) {
-        continue;
+        continue
       }
     }
 
-    if (filter && !filter({filePath: fileName})) {
-      continue;
+    if (filter && !filter({ filePath: fileName })) {
+      continue
     }
 
     apiTeIndex[fileName] = {
       fileName,
       methods: {},
-    };
-    let allMethods = apiTeIndex[fileName].methods;
+    }
+    let allMethods = apiTeIndex[fileName].methods
 
     let allInterface = fileController
       .getStructure()
       // @ts-ignore
       .statements.filter((item) =>
-        [StructureKind.Interface, StructureKind.TypeAlias].includes(item.kind),
-      );
+        [StructureKind.Interface, StructureKind.TypeAlias].includes(item.kind)
+      )
     //获取所有function方法.
-    let controllerFuns =fileController.getFunctions();
-    for (
-      let i = 0, iLen = controllerFuns.length;
-      i < iLen;
-      i++
-    ) {
-      let functionDec =controllerFuns[i];
+    let controllerFuns = fileController.getFunctions()
+    for (let i = 0, iLen = controllerFuns.length; i < iLen; i++) {
+      let functionDec = controllerFuns[i]
 
-      let statement = functionDec.getStructure();
+      let statement = functionDec.getStructure()
 
       if (statement.kind === StructureKind.Function) {
-        let urlMatch= functionDec.getBodyText().match(urlReg);
+        let urlMatch = functionDec.getBodyText().match(urlReg)
 
         let responseTs = statement.returnType
           ? getAllTsNameRef(
               allInterface,
-            //@ts-ignore
-              statement.returnType.replace('Promise<', '').replace('>', ''),
+              //@ts-ignore
+              statement.returnType.replace('Promise<', '').replace('>', '')
             )
-          : [];
+          : []
 
         allMethods[statement.name] = {
-          methdoName:statement.name,
+          methdoName: statement.name,
           responseTs,
-          url:urlMatch&&urlMatch[1],
+          url: urlMatch && urlMatch[1],
           params: statement.parameters.map((item) => {
             // console.log(item.type);
             //@ts-ignore
-            let results = (item.type && (item.type as string).matchAll(
-              /([a-zA-Z0-9_]*) ?\?? ?: ?([a-zA-Z0-9_]*);?/,
-            ))||[];
+            let results =
+              (item.type &&
+                (item.type as string).matchAll(/([a-zA-Z0-9_]*) ?\?? ?: ?([a-zA-Z0-9_]*);?/)) ||
+              []
 
             return {
               name: item.name,
 
               subTypes: Array.from(results).map((item) => ({
                 name: item[1],
-                isRequired:item[0].includes('?'),
+                isRequired: item[0].includes('?'),
                 type: item[2],
               })),
-            };
+            }
           }),
-        };
+        }
       }
     }
   }
 
-  return apiTeIndex;
+  return apiTeIndex
 }
 
 /**
@@ -141,23 +134,23 @@ export function genApiTsIndex({
 function getAllTsNameRef(
   interfaces: (InterfaceDeclarationStructure | TypeAliasDeclarationStructure)[],
   name: string,
-  results: string[] = [],
+  results: string[] = []
 ): string[] {
   if (name.endsWith('[]') && !results.includes(name)) {
-    name = name.replace('[]', '');
+    name = name.replace('[]', '')
     if (isRefTs(name)) {
-      results.push(name + '[]');
+      results.push(name + '[]')
     }
   }
 
   for (let i = 0, iLen = interfaces.length; i < iLen; i++) {
-    let interfaceItem = interfaces[i];
+    let interfaceItem = interfaces[i]
     if (interfaceItem.name === name) {
       //如果是type则继续传递向下找;
       if (StructureKind.TypeAlias === interfaceItem.kind) {
         if (typeof interfaceItem.type === 'string') {
-          results.push(interfaceItem.name);
-          getAllTsNameRef(interfaces, interfaceItem.type, results);
+          results.push(interfaceItem.name)
+          getAllTsNameRef(interfaces, interfaceItem.type, results)
         }
       }
 
@@ -165,35 +158,31 @@ function getAllTsNameRef(
         // @ts-ignore
         // console.log(interfaces.properties);
         //遍历获取子依赖..
-        results.push(name);
+        results.push(name)
         if (interfaceItem.properties) {
           // @ts-ignore
-          for (
-            let j = 0, jLen = interfaceItem.properties.length;
-            j < jLen;
-            j++
-          ) {
+          for (let j = 0, jLen = interfaceItem.properties.length; j < jLen; j++) {
             // @ts-ignore
-            let property = interfaceItem.properties[j];
+            let property = interfaceItem.properties[j]
             //基本类型不统计在内了.,只统计interface与type类型的.
             //@ts-ignore
             if (['number', 'string', 'YearMonth'].includes(property.type)) {
-              continue;
+              continue
             }
 
-            let _propertyType = property.type as string;
+            let _propertyType = property.type as string
             if (_propertyType.includes('|')) {
-              let allRef = _propertyType.split('|');
+              let allRef = _propertyType.split('|')
 
               for (let k = 0, kLen = allRef.length; k < kLen; k++) {
-                let refElement = allRef[k];
+                let refElement = allRef[k]
                 if (isRefTs(refElement) && !results.includes(refElement)) {
-                  results = getAllTsNameRef(interfaces, refElement, results);
+                  results = getAllTsNameRef(interfaces, refElement, results)
                 }
               }
             } else {
               if (isRefTs(_propertyType) && !results.includes(_propertyType)) {
-                results = getAllTsNameRef(interfaces, _propertyType, results);
+                results = getAllTsNameRef(interfaces, _propertyType, results)
               }
             }
           }
@@ -203,10 +192,10 @@ function getAllTsNameRef(
   }
 
   if (!results.includes(name) && isRefTs(name)) {
-    results.push(name);
+    results.push(name)
   }
 
-  return results;
+  return results
 }
 
 /**
@@ -216,16 +205,14 @@ function getAllTsNameRef(
  */
 function isRefTs(refInfo: string): boolean {
   if (baseType.includes(refInfo)) {
-    return false;
+    return false
   } else if (numberReg.test(refInfo.trim())) {
-    return false;
+    return false
   }
   log(
-    `判断是否是引用类型;${numberReg.test(
-      '1',
-    )} -${refInfo}- VS -${refInfo.trim()}-`,
+    `判断是否是引用类型;${numberReg.test('1')} -${refInfo}- VS -${refInfo.trim()}-`,
     numberReg.test(refInfo + ''),
-    typeof refInfo,
-  );
-  return true;
+    typeof refInfo
+  )
+  return true
 }

@@ -1,17 +1,26 @@
 {
   "name": "moon",
   "scripts": {
+    "clean": "lerna clean",
     "compile": "lerna run prepublishOnly",
-    "start": "gulp startMoonApp",
-    "publish": "lerna publish",
-    "startMoonUI": "cd packages/moon-ui && docker-compose down && docker-compose up -d",
-    "startMoonOld": "gulp startMoonOldApp",
     "install": "lerna bootstrap --registry=https://registry.npm.taobao.org",
-    "clean": "lerna clean"
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "publish": "lerna publish",
+    "start": "gulp startMoonApp",
+    "startMoonOld": "gulp startMoonOldApp",
+    "startMoonUI": "cd packages/moon-ui && docker-compose down && docker-compose up -d"
   },
   "workspaces": [
     "packages/*"
   ],
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
   "private": true,
   "dependencies": {
     "jest": "^24.8.0",
@@ -23,9 +32,10 @@
   "devDependencies": {
     "@types/jest": "^24.0.21",
     "jest-cli": "^24.9.0",
+    "lint-staged": "^10.0.7",
+    "prettier": "^2.3.0",
     "shelljs": "^0.8.3",
-    "ts-jest": "^24.1.0",
-    "prettier": "^2.3.0"
+    "ts-jest": "^24.1.0"
   },
   "git": "git@gitee.com:kkaaddff/moon-private.git"
 }
