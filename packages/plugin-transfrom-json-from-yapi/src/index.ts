@@ -1,3 +1,4 @@
+import { titleCase } from 'title-case'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 /**
@@ -15,8 +16,11 @@ export class TransfromJsonFromYapiPlugin {
 export function transfromJson(context) {
   const { swaggerJson } = context
   const { paths } = swaggerJson
+
   swaggerJson.definitions = swaggerJson?.definitions ?? {}
+
   swaggerJson.tags = addDefinition2Tag(swaggerJson.tags)
+
   for (const pathKey in paths) {
     addOperationId(paths[pathKey], pathKey)
   }
@@ -34,10 +38,12 @@ function addDefinition2Tag(tags: Array<{ name: string; description?: string }> =
   tags.forEach((tag) => {
     tag.description =
       tag.description ??
-      tag.name
-        .match(/\([a-zA-Z| |0-9]*\)/g)
-        .pop()
-        .replace(/\(|\)/g, '')
+      titleCase(
+        tag.name
+          .match(/\([a-zA-Z| |0-9]*\)/g)
+          .pop()
+          .replace(/\(|\)/g, '')
+      )
   })
   return tags
 }
