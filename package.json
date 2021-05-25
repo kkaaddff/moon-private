@@ -1,13 +1,15 @@
 {
+  "name": "moon",
   "scripts": {
     "compile": "lerna run prepublishOnly",
     "start": "gulp startMoonApp",
+    "publish": "lerna publish",
     "startMoonUI": "cd packages/moon-ui && docker-compose down && docker-compose up -d",
     "startMoonOld": "gulp startMoonOldApp",
     "install": "lerna bootstrap --registry=https://registry.npm.taobao.org",
     "clean": "lerna clean"
   },
-  "packages": [
+  "workspaces": [
     "packages/*"
   ],
   "dependencies": {
@@ -17,7 +19,6 @@
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3"
   },
-  "name": "moon",
   "devDependencies": {
     "@types/jest": "^24.0.21",
     "gulp": "^4.0.2",
@@ -26,5 +27,6 @@
     "shelljs": "^0.8.3",
     "ts-jest": "^24.1.0",
     "typedoc": "^0.17.6"
-  }
+  },
+  "git": "git@gitee.com:kkaaddff/moon-private.git"
 }
