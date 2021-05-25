@@ -6,12 +6,11 @@
  * @Date    2019/3/27
  **/
 
-import * as generateSchema from 'generate-schema';
-import {compile} from 'json-schema-to-typescript';
-import debug from 'debug';
+import * as generateSchema from "generate-schema";
+import { compile } from "json-schema-to-typescript";
+import debug from "debug";
 
-
-const log = debug('web-apis:jsonUtil');
+const log = debug("web-apis:jsonUtil");
 /**
  * 将json转换为ts定义
  *
@@ -25,7 +24,7 @@ export async function genTsFromJSON(
   log(`根据JSON生成ts定义文件`);
   let schema = generateSchema.json(name, value);
   let tsResult = await genTsFromSchema(name, schema);
-  return {...tsResult, schema};
+  return { ...tsResult, schema };
 }
 
 //考虑使用z隐式传参呢..
@@ -39,11 +38,11 @@ export async function genTsFromJSON(
  */
 export async function genTsFromSchema(
   name: string,
-  jsonSchema: any,
+  jsonSchema: any
 ): Promise<ITsGenResult> {
   log(`根据jsonSchema生成ts定义文件`);
   let tsContent = await compile(jsonSchema, name, {
-    bannerComment: '',
+    bannerComment: "",
     // unreachableDefinitions:true,
     // $refOptions:{
     //   parse:{
@@ -54,7 +53,7 @@ export async function genTsFromSchema(
 
   let result = {
     //这是一个默认的规则;
-    typeName: jsonSchema.title ? jsonSchema.title.replace(/ */gi, '') : name,
+    typeName: jsonSchema.title ? jsonSchema.title.replace(/ */gi, "") : name,
     tsContent,
   };
   return result;
@@ -62,26 +61,29 @@ export async function genTsFromSchema(
 
 export async function genTsFromDefines(
   definitions: {
-    definitions: {[key: string]: any};
+    definitions: { [key: string]: any };
   },
-  name = 'IgnoreType',
+  name = "IgnoreType"
 ): Promise<string> {
   log(`根据jsonSchema中definitions生成ts定义文件`);
 
-  try{
-    debugger
+  try {
     let tsContent = await compile(definitions, name, {
-      bannerComment: '',
+      bannerComment: "",
       unreachableDefinitions: true,
     });
 
-    tsContent =  tsContent.replace(/ \* This interface was referenced by `IgnoreType`'s JSON-Schema\n/g,"")
-      .replace(/.*via the `definition`.*\n/g,"");
+    tsContent = tsContent
+      .replace(
+        / \* This interface was referenced by `IgnoreType`'s JSON-Schema\n/g,
+        ""
+      )
+      .replace(/.*via the `definition`.*\n/g, "");
 
     return tsContent;
-  }catch(err) {
-      console.warn('生成ts出错',err);
-      return '';
+  } catch (err) {
+    console.warn("生成ts出错", err);
+    return "";
   }
 }
 
@@ -93,5 +95,5 @@ export interface IJsonTsGenResult extends ITsGenResult {
 
 export interface ITsGenResult {
   typeName: string;
-  tsContent: string
+  tsContent: string;
 }
