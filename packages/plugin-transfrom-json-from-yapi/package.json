@@ -1,13 +1,10 @@
 {
-  "name": "@zhangqc/moon-common",
-  "version": "0.1.1-alpha.15",
+  "name": "@zhangqc/plugin-transfrom-json-from-yapi",
+  "version": "0.1.1-alpha.1",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": "",
   "license": "MIT",
-  "bin": {
-    "swaggerApi": "lib/swagger-api/cli.js"
-  },
   "scripts": {
     "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +13,6 @@
     "registory": "http://registory.npmjs.org"
   },
   "dependencies": {
-    "@zhangqc/moon-core": "^0.1.1-alpha.15",
     "debug": "^4.1.1",
     "ejs": "^3.0.1",
     "generate-schema": "^2.6.0",

@@ -13,7 +13,7 @@
  * ICheckArea4socialSecurity   =>ICheckArea4SocialSecurity
  * @param {string} name
  * @returns {any}
- * @deprecated 逐步使用 mooon-util
+ * @deprecated 逐步使用 moon-util
  */
 export function toUCamelize(name: string): string {
   return name

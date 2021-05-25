@@ -6,11 +6,11 @@
  * @Date    2019/4/2
  **/
 import * as request from 'request'
+import * as fs from 'fs'
 import * as fse from 'fs-extra'
 import * as _ from 'lodash'
 import { join } from 'path'
 import MoonCore from '@zhangqc/moon-core'
-import debug from 'debug'
 import * as minimatch from 'minimatch'
 
 import ApiCompileHooks from './hook'
@@ -20,18 +20,33 @@ import {
   IWebApiDefinded,
   SchemaProps,
 } from '@zhangqc/moon-core/declarations/typings/api'
-
 import { IFileSaveOptions } from '@zhangqc/moon-core/declarations/typings/page'
 import { IInsertOption } from '@zhangqc/moon-core/declarations/typings/util'
 import { RequestParameter } from '@zhangqc/moon-core/declarations/web-api/client/domain'
-import { IMoonConfig } from '@zhangqc/moon-core/declarations/typings/config'
-import { loadMoonConfig } from './util/config'
-import { applyHook } from '../util/hook-util'
 import ApiGroup from '@zhangqc/moon-core/declarations/web-api/client/domain/api-group'
+import { applyHook } from '../util/hook-util'
 
-const log = debug('j2t:cli')
-
+/**
+ * 读取 swaggerJson 支持本地文件和远程接口
+ * @param swaggerUrl
+ * @returns Json Object
+ */
 async function loadJson(swaggerUrl: string): Promise<any> {
+  let result = null
+  if (fs.existsSync(swaggerUrl)) {
+    result = await loadJsonFromFs(swaggerUrl)
+  } else {
+    result = await loadJsonFromServer(swaggerUrl)
+  }
+  return result
+}
+
+async function loadJsonFromFs(filePath: string): Promise<any> {
+  const apiJson = await fse.readJSONSync(filePath)
+  return apiJson
+}
+
+async function loadJsonFromServer(swaggerUrl: string): Promise<any> {
   return new Promise((resolve, reject) => {
     console.log(`从${swaggerUrl}中加载api doc信息`)
     request(swaggerUrl, function (error, response, body) {
@@ -56,10 +71,6 @@ interface IApiIndex {
   }
 }
 let oldApiIndex: IApiIndex = {}
-
-function isDebug(): boolean {
-  return process.env.hasOwnProperty('DEBUG')
-}
 
 process.on('unhandledRejection', (error) => {
   console.log('unhandledRejection', error)
@@ -87,11 +98,11 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
 
   await hookInstance.init.promise(context)
 
-  const ApiIndexPath = join(workBase, defaulltMoonConfig.api.dir, '_api-info.json')
-
   let apiGroups = await loadeApiGroup(defaulltMoonConfig.api, hookInstance)
 
   await hookInstance.beforeCompile.call(apiGroups, context)
+
+  const ApiIndexPath = join(workBase, defaulltMoonConfig.api.dir, '_api-info.json')
 
   try {
     oldApiIndex = await fse.readJSONSync(ApiIndexPath)

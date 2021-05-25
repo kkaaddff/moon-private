@@ -98,8 +98,6 @@ export function genApiTsIndex({
           responseTs,
           url: urlMatch && urlMatch[1],
           params: statement.parameters.map((item) => {
-            // console.log(item.type);
-            //@ts-ignore
             let results =
               (item.type &&
                 (item.type as string).matchAll(/([a-zA-Z0-9_]*) ?\?? ?: ?([a-zA-Z0-9_]*);?/)) ||
@@ -107,7 +105,6 @@ export function genApiTsIndex({
 
             return {
               name: item.name,
-
               subTypes: Array.from(results).map((item) => ({
                 name: item[1],
                 isRequired: item[0].includes('?'),
