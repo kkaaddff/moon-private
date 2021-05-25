@@ -13,6 +13,20 @@ import debug from 'debug'
 import { IFileSaveOptions } from '../typings/page'
 
 const log = debug('moon:core:compile-util')
+
+const defaultPrettiesConfig = {
+  tabWidth: 2,
+  jsxSingleQuote: true,
+  jsxBracketSameLine: true,
+  endOfLine: 'lf',
+  printWidth: 100,
+  singleQuote: true,
+  semi: false,
+  trailingComma: 'es5',
+  parser: 'typescript',
+  ...fse.readJsonSync('.prettierrc', { throws: false }),
+}
+
 /**
  * 获取处理页面内容;;
  * 处理文件 的公共逻辑; 从模板中取出内容,渲染出来, 然后保存;
@@ -24,15 +38,7 @@ const log = debug('moon:core:compile-util')
  */
 export function getHandleFile({ outDir, tplBase, context, prettiesConfig = {} }: IHandleFile) {
   prettiesConfig = {
-    tabWidth: 2,
-    jsxSingleQuote: true,
-    jsxBracketSameLine: true,
-    endOfLine: 'lf',
-    printWidth: 100,
-    singleQuote: true,
-    semi: false,
-    trailingComma: 'es5',
-    parser: 'typescript',
+    ...defaultPrettiesConfig,
     ...prettiesConfig,
   }
 
