@@ -6,19 +6,53 @@
  * @Date    2019/3/27
  **/
 
+import * as request from 'request'
+import * as fs from 'fs'
+import * as fse from 'fs-extra'
 import * as generateSchema from 'generate-schema'
 import { compile } from 'json-schema-to-typescript'
-import debug from 'debug'
 
-const log = debug('web-apis:jsonUtil')
+/**
+ * 读取 swaggerJson 支持本地文件和远程接口
+ * @param swaggerUrl
+ * @returns Json Object
+ */
+export async function loadJson(swaggerUrl: string): Promise<any> {
+  let result = null
+  if (fs.existsSync(swaggerUrl)) {
+    result = await loadJsonFromFs(swaggerUrl)
+  } else {
+    result = await loadJsonFromServer(swaggerUrl)
+  }
+  return result
+}
+
+async function loadJsonFromFs(filePath: string): Promise<any> {
+  const apiJson = await fse.readJSONSync(filePath)
+  return apiJson
+}
+
+async function loadJsonFromServer(swaggerUrl: string): Promise<any> {
+  return new Promise((resolve, reject) => {
+    console.log(`从${swaggerUrl}中加载api doc信息`)
+    request(swaggerUrl, function (error, response, body) {
+      if (error) {
+        console.error(error)
+        reject(error)
+      } else {
+        resolve(JSON.parse(body))
+      }
+    })
+  })
+}
+
 /**
  * 将json转换为ts定义
- *
+  log(`根据JSON生成ts定义文件`)
  * @param value
  * @returns {any}
  */
 export async function genTsFromJSON(name: string, value: any): Promise<IJsonTsGenResult> {
-  log(`根据JSON生成ts定义文件`)
   let schema = generateSchema.json(name, value)
   let tsResult = await genTsFromSchema(name, schema)
   return { ...tsResult, schema }
@@ -28,13 +62,12 @@ export async function genTsFromJSON(name: string, value: any): Promise<IJsonTsGe
 
 /**
  * 将json schema 转换为ts定义
- *
+  log(`根据jsonSchema生成ts定义文件`)
  * @param {string} name
  * @param jsonSchema
  * @returns {Promise<string>}
  */
 export async function genTsFromSchema(name: string, jsonSchema: any): Promise<ITsGenResult> {
-  log(`根据jsonSchema生成ts定义文件`)
   let tsContent = await compile(jsonSchema, name, {
     bannerComment: '',
     // unreachableDefinitions:true,
@@ -53,14 +86,19 @@ export async function genTsFromSchema(name: string, jsonSchema: any): Promise<IT
   return result
 }
 
+/**
+ * 
+  log(`根据jsonSchema中definitions生成ts定义文件`)
+ * @param definitions 
+ * @param name 
+ * @returns 
+ */
 export async function genTsFromDefines(
   definitions: {
     definitions: { [key: string]: any }
   },
   name = 'IgnoreType'
 ): Promise<string> {
-  log(`根据jsonSchema中definitions生成ts定义文件`)
-
   try {
     let tsContent = await compile(definitions, name, {
       bannerComment: '',

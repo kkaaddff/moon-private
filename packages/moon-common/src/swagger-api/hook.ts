@@ -7,15 +7,9 @@
  * @Date    2019/12/26
  **/
 import { AsyncSeriesHook, AsyncSeriesWaterfallHook, SyncHook } from 'tapable'
-
-import {
-  IWebApiContext,
-  IWebApiDefinded,
-  SchemaProps,
-} from '@zhangqc/moon-core/declarations/typings/api'
-import { IMoonConfig } from '@zhangqc/moon-core/declarations/typings/config'
+import { IWebApiDefinded } from '@zhangqc/moon-core/declarations/typings/api'
 import { IFileSaveOptions } from '@zhangqc/moon-core/declarations/typings/page'
-import { IGenApiConfig } from './index'
+import { IGenApiConfig } from './types'
 import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
 
 type ApiFilePath = string
@@ -40,6 +34,7 @@ export type ErrorMsg = {
  * api可编译hook
  */
 export default class ApiCompileHooks {
+  /** 配置初始化之后 */
   init = new AsyncSeriesHook<GenContext>(['context'])
 
   onError = new AsyncSeriesHook<ErrorMsg, IContext>(['errorMsgs', 'context'])

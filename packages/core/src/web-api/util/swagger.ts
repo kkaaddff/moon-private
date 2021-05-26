@@ -264,7 +264,7 @@ export function transfer(
 
     for (let method in apiItem) {
       let methodInfo: IMethodDefinded = apiItem[method]
-      let apiDefItem: Method = new Method(methodInfo, { url, method }) //{url, method};
+      let apiDefItem: Method = new Method(methodInfo, { url, method })
 
       if (tag2DescMap[methodInfo.tags[0]]) {
         groupKey = tag2DescMap[methodInfo.tags[0]]
@@ -326,16 +326,4 @@ export function transfer(
     apiGroups.push(KeyMap[key])
   }
   return apiGroups
-}
-
-let ParamNameExclude = ['function', 'export', 'delete']
-
-function getParamName(paramName: string) {
-  if (ParamNameExclude.includes(paramName)) {
-    return paramName + '_'
-  } else if (paramName.includes('[]')) {
-    return paramName.replace('[]', '')
-  } else {
-    return paramName
-  }
 }
