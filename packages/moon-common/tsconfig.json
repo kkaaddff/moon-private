@@ -2,13 +2,14 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    //    "rootDir": "./src",
+    "rootDir": "./src",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
+    "sourceMap": true,
     "outDir": "./lib",
     "declarationDir": "./declarations",
     "declaration": true
   },
-  //  "include": ["src"],
+  "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/**/*", "temp/**", "../moon-wanmi/src/demo/**"]
 }
