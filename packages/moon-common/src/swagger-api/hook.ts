@@ -48,6 +48,7 @@ export default class ApiCompileHooks {
     swaggerJson?: any
   }>(['context'])
 
+  /** json加载之后转换之前 */
   swagger2ApiGroup = new AsyncSeriesWaterfallHook<any, ApiGroup[]>(['context'])
 
   /** 编辑转换之前 */

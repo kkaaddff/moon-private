@@ -2,7 +2,7 @@ import { loadJson } from '../util/json-util'
 import MoonCore from '@zhangqc/moon-core'
 import type ApiCompileHooks from './hook'
 import { IGenApiConfig } from './types'
-import { RequestParameter, ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
+import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
 
 export default async function loadApiGroup(
   apiGenConfig: IGenApiConfig,
@@ -13,7 +13,7 @@ export default async function loadApiGroup(
   let context = {
     moonConfig: apiGenConfig,
     swaggerJson: null,
-    apiGroups: null,
+    apiGroups: [],
   }
   await hookInstance.loadApiGroup.promise(context)
 
@@ -31,38 +31,34 @@ export default async function loadApiGroup(
     await hookInstance.swagger2ApiGroup.promise(context)
     apiGroups = MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal)
     return apiGroups
-  } else {
-    if (apiGenConfig.swaggerUrl) {
-      context.swaggerJson = await loadJson(apiGenConfig.swaggerUrl)
-      await hookInstance.swagger2ApiGroup.promise(context)
-      if (!context['apiGroups']) {
-        //默认转换规则
-        context['apiGroups'] = MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal)
-      }
-    } else if (apiGenConfig.swaggerUrls) {
-      let apiGroups = context.apiGroups || []
-      for (let i = 0, iLen = apiGenConfig.swaggerUrls.length; i < iLen; i++) {
-        let swaggerUrl = apiGenConfig.swaggerUrls[i]
-        try {
-          context.swaggerJson = await loadJson(swaggerUrl)
-          context.apiGroups = null
-          await hookInstance.swagger2ApiGroup.promise(context)
-
-          if (!context.apiGroups) {
-            apiGroups = apiGroups.concat(
-              context.apiGroups
-                ? context.apiGroups
-                : MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal)
-            )
-          }
-        } catch (err) {
-          console.warn(`从swagger导出数据失败跳过此swagger${swaggerUrl}`)
-          console.warn(err)
-        }
-      }
-      context['apiGroups'] = apiGroups
-    }
   }
 
-  return context['apiGroups']
+  /** 将单个的 swaggerUrl 加入到 swaggerUrls 列表中统一处理逻辑 */
+  if (apiGenConfig.swaggerUrl) {
+    apiGenConfig.swaggerUrls = [...(apiGenConfig?.swaggerUrls ?? []), apiGenConfig.swaggerUrl]
+  }
+
+  if (apiGenConfig?.swaggerUrls?.length) {
+    let apiGroups = context.apiGroups || []
+    for (let i = 0, iLen = apiGenConfig.swaggerUrls.length; i < iLen; i++) {
+      let swaggerUrl = apiGenConfig.swaggerUrls[i]
+      try {
+        context.swaggerJson = await loadJson(swaggerUrl)
+        context.apiGroups = null
+        await hookInstance.swagger2ApiGroup.promise(context)
+
+        if (!context.apiGroups) {
+          apiGroups = apiGroups.concat(
+            MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal)
+          )
+        }
+      } catch (err) {
+        console.warn(`从swagger导出数据失败跳过此swagger${swaggerUrl}`)
+        console.warn(err)
+      }
+    }
+    context.apiGroups = apiGroups
+  }
+
+  return context.apiGroups
 }

@@ -4,6 +4,9 @@ import Method from '../domain/method'
 import ApiGroup from '../domain/api-group'
 import { paramCase } from 'param-case'
 
+/** 针对 «» 字符做特殊判断 */
+const nameCheckReg = /^[0-9a-zA-Z_\-«» ]*$/
+
 export function resSchemaModify(
   schema: SchemaProps,
   apiItem: IWebApiDefinded,
@@ -75,6 +78,11 @@ export function resSchemaModify(
   }
 }
 
+/**
+ * 将 schema 添加到 definitions 中去
+ * @param definitions
+ * @param schema
+ */
 export function addDef2List(
   definitions: {
     [defName: string]: SchemaProps
@@ -96,6 +104,7 @@ export function addDef2List(
   }
 }
 
+/** 递归遍历寻找 所有引用类型 */
 export function findAllRefType(
   definitions: {
     [defName: string]: SchemaProps
@@ -203,6 +212,7 @@ export interface ISwaggerApisDocs {
   paths: {
     [apiUrl: string]: IApiDefinded
   }
+  /** VO/DTO */
   definitions: {
     [defName: string]: SchemaProps
   }
@@ -212,10 +222,8 @@ export interface OnError {
   (param: { level: 'warn' | 'error'; message: string }): void
 }
 
-const nameCheckReg = /^[0-9a-zA-Z_\-«» ]*$/
-function isCheckable(content: string) {
-  return nameCheckReg.test(content)
-}
+type TPlainObject = { [key: string]: string }
+
 /**
  * 转换项目
  * @param {ISwaggerApisDocs} apiDocs
@@ -230,22 +238,16 @@ export function transfer(
 
   /**
    * 推荐采用 ke-bab 命名法处理文件名
+   * { [name:中文]:description（用作生成文件名） }
    */
-  let tag2DescMap: { [k: string]: string } = apiDocs?.tags?.reduce((acc, next) => {
+  let tag2DescMap: TPlainObject = apiDocs?.tags?.reduce((acc, next) => {
     acc[next.name] = paramCase(next.description)
     return acc
   }, {})
 
-  let checksContents = [...Object.keys(apiDocs.definitions), ...Object.values(tag2DescMap)]
+  let allKeys: string[] = [...Object.keys(apiDocs.definitions), ...Object.values(tag2DescMap)]
 
-  //验证数据是否正确的.
-  for (let i = 0, iLen = checksContents.length; i < iLen; i++) {
-    let checksContent = checksContents[i]
-    if (!isCheckable(checksContent)) {
-      let message = `apiDocs.definitions或tags::包含非法字符,${checksContent},影响前端代码生成!`
-      onError && onError({ level: 'warn', message })
-    }
-  }
+  checksContents(allKeys, onError)
 
   for (let defName in apiDocs.definitions) {
     try {
@@ -255,29 +257,53 @@ export function transfer(
     } catch (err) {}
   }
 
-  let temp = {}
-  let KeyMap: { [controllerName: string]: ApiGroup } = {}
-  for (let url in apiDocs.paths) {
-    let apiItem: IApiDefinded = apiDocs.paths[url]
+  const apiGroupMap = buildApiGroupMapFromPaths(apiDocs, tag2DescMap)
 
+  for (let key in apiGroupMap) {
+    apiGroups.push(apiGroupMap[key])
+  }
+
+  return apiGroups
+}
+
+function isCheckable(content: string) {
+  return nameCheckReg.test(content)
+}
+
+/**
+ * 验证数据是否正确的.
+ */
+function checksContents(contents: string[], onError = (e: unknown) => {}) {
+  for (let i = 0, iLen = contents.length; i < iLen; i++) {
+    let checksContent = contents[i]
+    if (!isCheckable(checksContent)) {
+      let message = `apiDocs.definitions或tags::包含非法字符,${checksContent},影响前端代码生成!`
+      onError({ level: 'warn', message })
+    }
+  }
+}
+
+function buildApiGroupMapFromPaths(apiDocs: ISwaggerApisDocs, descMap: TPlainObject) {
+  const resultGroupKeyMap: { [controllerName: string]: ApiGroup } = {}
+
+  for (let url in apiDocs.paths) {
+    const apiItem = apiDocs.paths[url]
     let groupKey = ''
 
     for (let method in apiItem) {
-      let methodInfo: IMethodDefinded = apiItem[method]
-      let apiDefItem: Method = new Method(methodInfo, { url, method })
+      const methodInfo = apiItem[method]
+      const apiDefItem = new Method(methodInfo, { url, method })
 
-      if (tag2DescMap[methodInfo.tags[0]]) {
-        groupKey = tag2DescMap[methodInfo.tags[0]]
-        // 任何一个为非中文都可以 ;
-        if (!isCheckable(groupKey) && isCheckable(methodInfo.tags[0])) {
-          groupKey = methodInfo.tags[0]
-        }
-      } else {
-        groupKey = methodInfo.tags[0]
+      // 任何一个为非中文都可以 ;
+      groupKey = [descMap[methodInfo.tags[0]], methodInfo.tags[0]].find(isCheckable)
+
+      if (groupKey === undefined) {
+        console.warn('group名字未在tags中定义相同::', methodInfo, apiDefItem.name)
+        continue
       }
 
-      if (!KeyMap[groupKey]) {
-        KeyMap[groupKey] = new ApiGroup({
+      if (!resultGroupKeyMap[groupKey]) {
+        resultGroupKeyMap[groupKey] = new ApiGroup({
           name: groupKey,
           serverInfo: {
             host: apiDocs.host,
@@ -287,9 +313,7 @@ export function transfer(
         })
       }
 
-      temp[url] = { url, methodName: methodInfo.operationId, group: groupKey }
-
-      if (KeyMap[groupKey].isMethodNameExist(apiDefItem.name)) {
+      if (resultGroupKeyMap[groupKey].isMethodNameExist(apiDefItem.name)) {
         console.warn('api名字相同::', groupKey, apiDefItem.name)
         continue
       }
@@ -304,26 +328,21 @@ export function transfer(
       //       methodInfo.operationId.indexOf('Using') + 5,
       //     );
       // }
-
       apiDefItem.requestParam.map((item) => {
         if (item.schema) {
           addDef2List(
-            KeyMap[groupKey].definitions,
+            resultGroupKeyMap[groupKey].definitions,
             findAllRefType(apiDocs.definitions, item.schema)
           )
         }
       })
 
       addDef2List(
-        KeyMap[groupKey].definitions,
+        resultGroupKeyMap[groupKey].definitions,
         findAllRefType(apiDocs.definitions, apiDefItem.responseSchema)
       )
-      KeyMap[groupKey].addApi(apiDefItem)
+      resultGroupKeyMap[groupKey].addApi(apiDefItem)
     }
   }
-
-  for (let key in KeyMap) {
-    apiGroups.push(KeyMap[key])
-  }
-  return apiGroups
+  return resultGroupKeyMap
 }
