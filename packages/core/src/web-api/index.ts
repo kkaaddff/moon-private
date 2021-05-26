@@ -8,11 +8,11 @@
 
 import * as ejs from 'ejs'
 import { join } from 'path'
-import { getHandleFile } from '../../util/compile-util'
+import { getHandleFile } from '../util/compile-util'
 import { pascalCase } from 'pascal-case'
-import { genTsFromDefines } from '../../util/json-util'
-import { IParamShape } from '../../typings/api'
-import { IWebApiContext, IWebApiDefinded } from '../../typings/api'
+import { genTsFromDefines } from '../util/json-util'
+import { IParamShape } from '../typings/api'
+import { IWebApiContext, IWebApiDefinded } from '../typings/api'
 
 import debug from 'debug'
 import RequestParameter from './domain/request-parameter'

@@ -6,10 +6,11 @@
  * @Date    2019/5/31
  **/
 import { IFileSaveOpt } from './util'
-import RequestParameter from '../web-api/client/domain/request-parameter'
-import { ApiGroup } from '../web-api/client/domain'
-import Method from '../web-api/client/domain/method'
+import RequestParameter from '../web-api/domain/request-parameter'
+import { ApiGroup } from '../web-api/domain'
+import Method from '../web-api/domain/method'
 
+export type IWebApiGroup = any
 /**
  * 对于接口的定义
  */

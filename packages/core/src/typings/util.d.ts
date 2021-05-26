@@ -5,7 +5,6 @@
  *
  * @Date    2019/5/31
  **/
-import { IFileSaveOptions } from '../page/old/taro-redux/redux-taro'
 import { SchemaProps } from './api'
 import { IAction, IActorItem, ISubComp } from './page'
 
@@ -17,8 +16,8 @@ interface IHandlePageParam {
 }
 
 export interface IFileSaveOpt {
-  beforeSave?: (options: IFileSaveOptions, context: any) => Promise<IFileSaveOptions>
-  afterSave?: (options: IFileSaveOptions, context: any) => Promise<void>
+  beforeSave?: (options: any, context: any) => Promise<any>
+  afterSave?: (options: any, context: any) => Promise<void>
 }
 
 export interface IHandleFile {

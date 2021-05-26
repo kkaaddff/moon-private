@@ -1,9 +1,9 @@
-import { IJSObjectProps, IWebApiContext, IWebApiDefinded, SchemaProps } from '../../../typings/api'
-import debug from 'debug'
+import { IJSObjectProps, IWebApiContext, IWebApiDefinded, SchemaProps } from '../../typings/api'
 import { camelCase } from 'camel-case'
 import Method from '../domain/method'
 import ApiGroup from '../domain/api-group'
-const log = debug('swaggerUtil:')
+import { paramCase } from 'param-case'
+
 export function resSchemaModify(
   schema: SchemaProps,
   apiItem: IWebApiDefinded,
@@ -26,7 +26,6 @@ export function resSchemaModify(
   if (schema['originalRef'] === 'BaseResponse') {
     return null
   } else if (schema['$ref']) {
-    // console.log('schema[\'$ref\']',schema);
     let subSchema = JSON.parse(
       JSON.stringify(context.webapiGroup.definitions[schema['originalRef']] as IJSObjectProps)
     )
@@ -125,7 +124,6 @@ export function findAllRefType(
       //遍历对象, 至到找到所有的引用内容为至;
       let jlen = refs.length
       traverseObj(definitions[ref], refs)
-      // console.log('子 traverseObj',refs);
       if (refs.length > jlen) {
         //有新的ref添加进来..
 
@@ -229,13 +227,15 @@ export function transfer(
 ): ApiGroup[] {
   //分组;
   let apiGroups: ApiGroup[] = []
-  let tag2DescMap: { [name: string]: string } = (apiDocs.tags || []).reduce((acc, next) => {
-    acc[next.name] = next.description
-      .split(' ')
-      .map((item) => camelCase(item))
-      .join('-')
+
+  /**
+   * 推荐采用 ke-bab 命名法处理文件名
+   */
+  let tag2DescMap: { [k: string]: string } = apiDocs?.tags?.reduce((acc, next) => {
+    acc[next.name] = paramCase(next.description)
     return acc
   }, {})
+
   let checksContents = [...Object.keys(apiDocs.definitions), ...Object.values(tag2DescMap)]
 
   //验证数据是否正确的.

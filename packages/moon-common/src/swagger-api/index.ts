@@ -14,7 +14,6 @@ import MoonCore from '@zhangqc/moon-core'
 import * as minimatch from 'minimatch'
 import { camelCase } from 'camel-case'
 import ApiCompileHooks from './hook'
-
 import {
   IWebApiContext,
   IWebApiDefinded,
@@ -22,8 +21,7 @@ import {
 } from '@zhangqc/moon-core/declarations/typings/api'
 import { IFileSaveOptions } from '@zhangqc/moon-core/declarations/typings/page'
 import { IInsertOption } from '@zhangqc/moon-core/declarations/typings/util'
-import { RequestParameter } from '@zhangqc/moon-core/declarations/web-api/client/domain'
-import ApiGroup from '@zhangqc/moon-core/declarations/web-api/client/domain/api-group'
+import { RequestParameter, ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
 import { applyHook } from '../util/hook-util'
 
 /**
@@ -70,7 +68,6 @@ interface IApiIndex {
     }
   }
 }
-let oldApiIndex: IApiIndex = {}
 
 process.on('unhandledRejection', (error) => {
   console.log('unhandledRejection', error)
@@ -94,21 +91,16 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
   let defaulltMoonConfig = {
     api: context.config,
   }
-  ;(defaulltMoonConfig.api.plugins || []).map(applyHook.bind(this, hookInstance))
+
+  defaulltMoonConfig.api?.plugins?.map((plugin) => {
+    applyHook(hookInstance, plugin)
+  })
 
   await hookInstance.init.promise(context)
 
   let apiGroups = await loadeApiGroup(defaulltMoonConfig.api, hookInstance)
 
   await hookInstance.beforeCompile.call(apiGroups, context)
-
-  const ApiIndexPath = join(workBase, defaulltMoonConfig.api.dir, '_api-info.json')
-
-  try {
-    oldApiIndex = await fse.readJSONSync(ApiIndexPath)
-  } catch (err) {
-    console.warn('读取 历史api索引出错: ', err)
-  }
 
   let apiDir = join(workBase, defaulltMoonConfig.api.dir)
 

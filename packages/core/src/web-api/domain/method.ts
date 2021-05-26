@@ -10,7 +10,7 @@ import { IMethodDefinded } from '../util/swagger'
 import { camelCase } from 'camel-case'
 import { pascalCase } from 'pascal-case'
 import RequestParameter from './request-parameter'
-import { SchemaProps } from '../../../typings/api'
+import { SchemaProps } from '../../typings/api'
 
 export type MethodName = 'POST' | 'GET' | 'UPDATE' | 'DELETE' | 'OPTIONS'
 export default class Method {
@@ -168,17 +168,7 @@ export default class Method {
 
   tplGetQueryParam(): string {
     let paramItem = this.requestParam.filter((item) => item.isInQuery)
-    // if (
-    //   paramItem.length === 1 &&
-    //   (["date", "file", "array"].includes(paramItem[0].jsonSchema.type) ||
-    //     // @ts-ignore
-    //     paramItem[0].jsonSchema.$ref)
-    // ) {
-    //   return `param.${paramItem[0].name}`;
-    // } else {
-    // InQuery的参数必须得有key
     return `{${paramItem.map((item) => buildKeyValueStr(item.name)).join(',\n')}}`
-    // }
   }
 
   tplGetResponseInterfaceName(): string {

@@ -10,8 +10,8 @@ import { readJSON, remove } from 'fs-extra'
 import { join } from 'path'
 
 import { buildWebApi } from '..'
-import { IWebApiGroup } from '../../../typings/api'
-import { readDirFiles } from '../../../util/jest-util'
+import { IWebApiGroup } from '../../typings/api'
+import { readDirFiles } from '../../util/jest-util'
 
 import { tmpdir } from 'os'
 

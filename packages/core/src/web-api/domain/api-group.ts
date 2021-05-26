@@ -7,7 +7,7 @@
  * @Date    2020/5/12
  **/
 import Method from './method'
-import { SchemaProps } from '../../../typings/api'
+import { SchemaProps } from '../../typings/api'
 
 export default class ApiGroup {
   apis: Method[] = []

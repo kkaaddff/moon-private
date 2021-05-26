@@ -1,3 +1,4 @@
+//@ts-ignore
 import * as sdk from '@/utils/fetch'
 const serverInfo = {
   host: '127.0.0.1:8888',

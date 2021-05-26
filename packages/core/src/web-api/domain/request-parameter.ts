@@ -1,4 +1,4 @@
-import { SchemaProps } from '../../../typings/api'
+import { SchemaProps } from '../../typings/api'
 import { pascalCase } from 'pascal-case'
 import Method from './method'
 

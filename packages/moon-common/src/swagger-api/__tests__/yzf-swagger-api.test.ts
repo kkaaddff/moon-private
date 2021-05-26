@@ -31,6 +31,7 @@ describe('云帐房swaggerapi测试', () => {
       await moonCore.WebApiGen.buildWebApi({
         webapiGroup,
         projectPath: targetDir,
+        // @ts-ignore
         beforeCompile: (apiItem: IWebApiDefinded) => {
           return apiItem
         },

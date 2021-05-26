@@ -47,7 +47,7 @@ export interface IPageDefined {
   mainComp: {
     imports: string
     style: string
-    methods: IActionItem[]
+    methods: unknown[]
   }
 
   models: IActorItem[]
@@ -93,7 +93,7 @@ export interface IActorEvent {
 export interface IAction {
   content?: string
   fileName: string
-  methods: IActionItem[]
+  methods: unknown[]
 }
 
 export interface IActorItem {
@@ -107,7 +107,7 @@ export interface ISubComp {
   fileName: string
   imports: string
   style: string
-  methods: IActionItem[]
+  methods: unknown[]
 }
 
 /**
