@@ -12,7 +12,7 @@ import * as _ from 'lodash'
 import { join } from 'path'
 import MoonCore from '@zhangqc/moon-core'
 import * as minimatch from 'minimatch'
-
+import { camelCase } from 'camel-case'
 import ApiCompileHooks from './hook'
 
 import {
@@ -192,7 +192,7 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
       //@ts-ignore
       hookInstance.afterApiSave.call(saveApiFile, webapiGroup)
 
-      let controllerName = MoonCore.StringUtil.toLCamelize(webapiGroup.name)
+      let controllerName = camelCase(webapiGroup.name)
       let filePath = `./${webapiGroup.name}`
 
       inserts.push({

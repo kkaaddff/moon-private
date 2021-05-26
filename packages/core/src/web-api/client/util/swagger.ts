@@ -1,7 +1,6 @@
 import { IJSObjectProps, IWebApiContext, IWebApiDefinded, SchemaProps } from '../../../typings/api'
 import debug from 'debug'
-import { toLCamelize } from '../../../util/string-util'
-import RequestParameter from '../domain/request-parameter'
+import { camelCase } from 'camel-case'
 import Method from '../domain/method'
 import ApiGroup from '../domain/api-group'
 const log = debug('swaggerUtil:')
@@ -231,7 +230,10 @@ export function transfer(
   //分组;
   let apiGroups: ApiGroup[] = []
   let tag2DescMap: { [name: string]: string } = (apiDocs.tags || []).reduce((acc, next) => {
-    acc[next.name] = next.description.split(' ').map(toLCamelize).join('-')
+    acc[next.name] = next.description
+      .split(' ')
+      .map((item) => camelCase(item))
+      .join('-')
     return acc
   }, {})
   let checksContents = [...Object.keys(apiDocs.definitions), ...Object.values(tag2DescMap)]

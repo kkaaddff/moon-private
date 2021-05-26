@@ -7,10 +7,10 @@
  * @Date    2020/5/12
  **/
 import { IMethodDefinded } from '../util/swagger'
-import { toLCamelize } from '../../../util/string-util'
+import { camelCase } from 'camel-case'
+import { pascalCase } from 'pascal-case'
 import RequestParameter from './request-parameter'
 import { SchemaProps } from '../../../typings/api'
-import { toUCamelize } from '../util/string-util'
 
 export type MethodName = 'POST' | 'GET' | 'UPDATE' | 'DELETE' | 'OPTIONS'
 export default class Method {
@@ -35,7 +35,7 @@ export default class Method {
    */
   get name(): string {
     if (!this._name) {
-      this._name = toLCamelize(this.methodInfo.operationId)
+      this._name = camelCase(this.methodInfo.operationId)
         .replace(/UsingPOST.*/gi, '')
         .replace(/UsingPUT.*/gi, '')
         .replace(/UsingHEAD.*/gi, '')
@@ -90,7 +90,7 @@ export default class Method {
     if (!this._responseSchma) {
       this._responseSchma = this.methodInfo.responses['200'].schema
       if (this._responseSchma) {
-        this._responseSchma.title = toUCamelize(this.name + 'Res')
+        this._responseSchma.title = pascalCase(this.name + 'Res')
       }
     }
     return this._responseSchma
@@ -100,7 +100,7 @@ export default class Method {
     this._responseSchma = res
 
     if (this._responseSchma) {
-      this._responseSchma.title = toUCamelize(this.name + 'Res')
+      this._responseSchma.title = pascalCase(this.name + 'Res')
     }
   }
 

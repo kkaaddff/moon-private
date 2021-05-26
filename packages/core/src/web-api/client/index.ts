@@ -9,13 +9,12 @@
 import * as ejs from 'ejs'
 import { join } from 'path'
 import { getHandleFile } from '../../util/compile-util'
-import * as stringUtil from '../../util/string-util'
+import { pascalCase } from 'pascal-case'
 import { genTsFromDefines } from '../../util/json-util'
 import { IParamShape } from '../../typings/api'
 import { IWebApiContext, IWebApiDefinded } from '../../typings/api'
 
 import debug from 'debug'
-import { toUCamelize } from '../../util/string-util'
 import RequestParameter from './domain/request-parameter'
 const log = debug('web-api:')
 
@@ -23,8 +22,6 @@ const log = debug('web-api:')
 //TODO 类型生成重复的问题?
 
 const Util = {
-  ...stringUtil,
-
   getMethodName(methodName: string) {
     if (!methodName) {
       return 'post'
@@ -42,7 +39,7 @@ const Util = {
    * @param names
    */
   genInterfaceName(...names) {
-    return `I${stringUtil.toUCamelize(names.join('-'))}`
+    return `I${pascalCase(names.join('-'))}`
   },
 
   /**
@@ -146,7 +143,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
         }
         //title为空, 或者中文.
         if (!_resSchema.title) {
-          _resSchema.title = toUCamelize(apiItem.name + 'Res')
+          _resSchema.title = pascalCase(apiItem.name + 'Res')
         }
         apiItem.responseSchema = _resSchema
         if (_resSchema) {

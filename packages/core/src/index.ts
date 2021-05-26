@@ -8,7 +8,6 @@
  **/
 
 import * as JsonUtil from './util/json-util'
-import * as StringUtil from './util/string-util'
 import * as JestUtil from './util/jest-util'
 import * as CompileUtil from './util/compile-util'
 import * as WebApiGen from './web-api/client'
@@ -26,7 +25,6 @@ export default {
   //   domain:apiDomain
   // },
   JsonUtil,
-  StringUtil,
   CompileUtil,
   fakeGen,
   JestUtil,
