@@ -52,6 +52,7 @@ export class TransfromJsonFromYapiPlugin {
         responseSchema.properties = responseSchema.properties['YmmResult<Void>'].properties
       }
     })
+
     /**
      * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
      * 从参数中收集 `definitions`
@@ -65,6 +66,7 @@ export class TransfromJsonFromYapiPlugin {
     })
   }
 }
+
 //--------------------处理 swagger2ApiGroup--------------------------------------------
 export function transfromJson(context) {
   const { swaggerJson } = context
@@ -103,12 +105,12 @@ function addDefinition2Tag(tags: Array<{ name: string; description?: string }> =
 
 function addOperationId(request: TRequest, path: string) {
   for (const method in request) {
-    const operationId = buildOperationId(path, method as TMethod)
+    const operationId = buildOperationId(path, method as TMethodType)
     request[method]['operationId'] = operationId
   }
 }
 
-function buildOperationId(path: string, method: TMethod) {
+function buildOperationId(path: string, method: TMethodType) {
   const lastPath = path.split('/').pop() ?? ''
   return `${lastPath}By${method}`
 }
@@ -156,10 +158,10 @@ function traverseDefinitionsProps(propObj) {
 
 //--------------------类型定义--------------------------------------------
 
-type TMethod = 'post' | 'get' | 'delete' | 'put'
+type TMethodType = 'post' | 'get' | 'delete' | 'put'
 
 type TRequestDetail = { operationId?: string; [k: string]: any }
 
 type TRequest = {
-  [k in TMethod]: TRequestDetail
+  [k in TMethodType]: TRequestDetail
 }

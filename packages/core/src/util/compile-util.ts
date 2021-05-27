@@ -74,20 +74,26 @@ export function getHandleFile({ outDir, tplBase, context, prettiesConfig = {} }:
       }
     }
 
-    if (context.beforeSave) {
-      saveOptions = await context.beforeSave(saveOptions, context)
-    }
-
     await fse.ensureDir(parse(saveOptions.toSaveFilePath).dir)
 
     try {
       saveOptions.content = prettier.format(saveOptions.content, prettiesConfig)
-    } catch (err) {}
+    } catch (err) {
+      console.warn(`格式化失败::${err}`)
+    }
+
+    if (context.beforeSave) {
+      saveOptions = await context.beforeSave(saveOptions, context)
+    }
+
     log('output filePath: ', saveOptions.toSaveFilePath)
+
     fse.writeFileSync(saveOptions.toSaveFilePath, saveOptions.content)
+
     if (context.afterSave) {
       await context.afterSave(saveOptions, context)
     }
+
     return saveOptions.toSaveFilePath
   }
 }

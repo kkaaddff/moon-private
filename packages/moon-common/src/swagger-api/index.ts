@@ -117,16 +117,15 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
           return apiGroup
         },
         beforeSave: (options: IFileSaveOptions, context: any) => {
-          hookInstance.beforeApiSave.call(options, context)
           options.content = options.content.replace(
             /result\.data/gi,
             defaulltMoonConfig.api.wrapper ? `result.${defaulltMoonConfig.api.wrapper}` : 'result'
           )
+          hookInstance.beforeApiSave.call(options, context)
           return Promise.resolve(options)
         },
       })
 
-      //@ts-ignore
       hookInstance.afterApiSave.call(saveApiFile, webapiGroup)
 
       let controllerName = camelCase(webapiGroup.name)
