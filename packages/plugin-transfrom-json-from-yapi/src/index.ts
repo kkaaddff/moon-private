@@ -1,4 +1,5 @@
 import { titleCase } from 'title-case'
+import { clone } from 'lodash'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 /**
@@ -10,6 +11,32 @@ const pluginName = 'TransfromJsonFromYapiPlugin'
 export class TransfromJsonFromYapiPlugin {
   apply(compilerHook) {
     compilerHook.swagger2ApiGroup.tap(pluginName, transfromJson)
+    compilerHook.onRequestParam.tap(pluginName, (apiItem, context) => {
+      const requestParams = apiItem.requestParam
+      let destructRequestParam = []
+
+      requestParams?.forEach((param) => {
+        if (param.ast.name === 'root') {
+          const tempSchema = param.ast.schema
+
+          for (const key in tempSchema.properties) {
+            const newParam = clone(param)
+            const schemaElement = tempSchema.properties[key]
+            newParam.ast = {
+              in: param.ast.in,
+              name: key,
+              schema: schemaElement,
+            }
+            destructRequestParam.push(newParam)
+          }
+        }
+      })
+
+      if (destructRequestParam.length) {
+        apiItem.requestParam = destructRequestParam
+      }
+      return requestParams
+    })
   }
 }
 

@@ -69,7 +69,6 @@ const Util = {
  * 生成webapi相关
  *
  * @param {{webapiGroup: IWebApiGroup; projectPath: string}} param
- * @returns {Promise<void>}
  */
 export async function buildWebApi(context: IWebApiContext): Promise<string> {
   let { webapiGroup, projectPath } = context
@@ -88,8 +87,7 @@ export async function buildWebApi(context: IWebApiContext): Promise<string> {
 
   if (context.reqParamModify) {
     for (let i = 0, ilen = webapiGroup.apis.length; i < ilen; i++) {
-      let apiItem = webapiGroup.apis[i]
-      // webapiGroup.apis[i] = await context.reqParamModify("1", apiItem, context);
+      webapiGroup.apis[i] = await context.reqParamModify(webapiGroup.apis[i], context)
     }
   }
 

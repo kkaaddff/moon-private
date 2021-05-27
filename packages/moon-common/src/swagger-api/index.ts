@@ -85,18 +85,13 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
           hookInstance.beforeApiCompile.call(apiItem)
           return apiItem
         },
-        reqParamModify: async (
-          reqParam: RequestParameter,
-          apiItem: IWebApiDefinded,
-          context: IWebApiContext
-        ): Promise<RequestParameter> => {
-          let finalSchema = reqParam
-          hookInstance.onRequestParam.call(finalSchema, {
+        reqParamModify: async (apiItem, context) => {
+          hookInstance.onRequestParam.call(apiItem, {
             apiItem,
             apiGroup: context.webapiGroup,
             apiDir,
           })
-          return finalSchema
+          return apiItem
         },
         resSchemaModify: async (
           schema: SchemaProps,

@@ -82,6 +82,12 @@ export default class Method {
     }
     return this.params
   }
+  /**
+   * 暴露修改能力给 hooks
+   */
+  set requestParam(params) {
+    this.params = params
+  }
 
   getObjectJsonSchemas() {}
 
