@@ -1,5 +1,5 @@
 import { titleCase } from 'title-case'
-import { clone } from 'lodash'
+import { clone, isEmpty } from 'lodash'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 export class TransfromJsonFromYapiPlugin {
@@ -53,11 +53,10 @@ export class TransfromJsonFromYapiPlugin {
      */
     compilerHook.beforeDeclarationGen.tap(pluginName, (apiGroup) => {
       const { definitions } = apiGroup
-      const newDefinition = []
+
       for (const key in definitions) {
-        traverseDefinitionsProps(definitions[key], newDefinition)
+        traverseDefinitionsProps(definitions[key])
       }
-      apiGroup.definitions = { ...newDefinition }
     })
   }
 }
@@ -112,17 +111,36 @@ function buildOperationId(path: string, method: TMethod) {
 //--------------------处理 definitions 修改--------------------------------------------
 
 /**
- * 递归遍历 definitions
+ * 递归遍历 definitions 处理 Yapi 中定义的 json-schema 不符合 json-schema-to-typescript 规范的问题
+ * https://www.npmjs.com/package/json-schema-to-typescript
  * @param propObj definitions prop
- * @param result collect
  * @returns
  */
+const JSON_SCHEMA_TYPES = {
+  Long: 'number',
+  long: 'number',
+  int: 'number',
+}
+function traverseDefinitionsProps(propObj) {
+  if (!propObj) {
+    return
+  }
 
-function traverseDefinitionsProps(propObj, newProperties) {
+  if (isEmpty(propObj.items)) {
+    delete propObj.items
+  } else {
+    traverseDefinitionsProps(propObj.items)
+  }
+
+  if (propObj.type) {
+    propObj.type = JSON_SCHEMA_TYPES[propObj.type]
+      ? JSON_SCHEMA_TYPES[propObj.type]
+      : propObj.type.toLowerCase()
+  }
+
   if (propObj?.properties) {
     for (const key in propObj.properties) {
-      newProperties.push({ ...propObj.properties[key], title: key })
-      traverseDefinitionsProps(propObj.properties[key], newProperties)
+      traverseDefinitionsProps(propObj.properties[key])
     }
   } else {
     return

@@ -11,11 +11,9 @@ import { join } from 'path'
 import { pascalCase } from 'pascal-case'
 import { getHandleFile } from '../util/compile-util'
 import { genTsFromDefines } from '../util/json-util'
-import { IParamShape } from '../typings/api'
-import { IWebApiContext, IWebApiDefinded } from '../typings/api'
+import { IWebApiContext } from '../typings/api'
 
 import debug from 'debug'
-import RequestParameter from './domain/request-parameter'
 const log = debug('web-api:')
 
 //TODO 参数是file类型的处理
@@ -125,9 +123,10 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
     let apiItem = webapiGroup.apis[i]
 
     for (let i = 0, ilen = apiItem.requestParam.length; i < ilen; i++) {
-      let param: RequestParameter = apiItem.requestParam[i]
-      //@ts-ignore
+      let param = apiItem.requestParam[i]
+
       param.jsonSchema.title = Util.genInterfaceName(apiItem.name, param.name, 'req')
+
       if (!param.isBasicType()) {
         param2RespTypes.push(param.getObjectJsonSchemas())
       }
@@ -145,7 +144,7 @@ async function generateTsDefined(context: IWebApiContext): Promise<string> {
         }
         //title为空, 或者中文.
         if (!_resSchema.title) {
-          _resSchema.title = pascalCase(apiItem.name + 'Res')
+          _resSchema.title = pascalCase(apiItem.name + ' ' + 'res')
         }
         apiItem.responseSchema = _resSchema
         if (_resSchema) {

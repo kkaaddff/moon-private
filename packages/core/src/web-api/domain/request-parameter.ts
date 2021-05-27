@@ -18,6 +18,7 @@ export interface IParamAst {
   name: string
   required: boolean
   type: string
+  title?: string
   schema?: SchemaProps
 }
 
