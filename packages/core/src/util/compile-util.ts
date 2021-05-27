@@ -75,7 +75,6 @@ export function getHandleFile({ outDir, tplBase, context, prettiesConfig = {} }:
     }
 
     await fse.ensureDir(parse(saveOptions.toSaveFilePath).dir)
-
     try {
       saveOptions.content = prettier.format(saveOptions.content, prettiesConfig)
     } catch (err) {

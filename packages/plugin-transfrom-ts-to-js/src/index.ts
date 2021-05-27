@@ -6,9 +6,8 @@ export class TransfromTsToJsPlugin {
     /**
      * 将 目标的 ts 转换成 js 并且同时输出 d.ts
      */
-    compilerHook.beforeApiSave.tap(pluginName, (options, context) => {
+    compilerHook.beforeApiSave.tap(pluginName, (options, moonContext) => {
       buildTs(options)
-      context
     })
   }
 }
