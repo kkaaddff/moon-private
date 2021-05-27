@@ -8,8 +8,8 @@
 
 import * as ejs from 'ejs'
 import { join } from 'path'
-import { getHandleFile } from '../util/compile-util'
 import { pascalCase } from 'pascal-case'
+import { getHandleFile } from '../util/compile-util'
 import { genTsFromDefines } from '../util/json-util'
 import { IParamShape } from '../typings/api'
 import { IWebApiContext, IWebApiDefinded } from '../typings/api'
@@ -113,7 +113,11 @@ export async function buildWebApi(context: IWebApiContext): Promise<string> {
 
 async function generateTsDefined(context: IWebApiContext): Promise<string> {
   log(`ts定义信息: beg`)
-  let { webapiGroup, resSchemaModify } = context
+
+  let { webapiGroup, resSchemaModify, tsDeclarationModify } = context
+
+  // 插入 hook 处理 `definitions`
+  tsDeclarationModify(webapiGroup)
 
   let param2RespTypes = []
 

@@ -112,6 +112,10 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
           })
           return finalSchema
         },
+        tsDeclarationModify: (apiGroup) => {
+          hookInstance.beforeDeclarationGen.call(apiGroup)
+          return apiGroup
+        },
         beforeSave: (options: IFileSaveOptions, context: any) => {
           hookInstance.beforeApiSave.call(options, context)
           options.content = options.content.replace(

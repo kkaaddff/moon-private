@@ -2,15 +2,20 @@ import { titleCase } from 'title-case'
 import { clone } from 'lodash'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
-/**
- * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
- * - 缺失了 `definitions` ：默认使用空对象
- * - tags 下请求对象中缺少 operationId ： 根据 url 以及 method 补全
- * - path 下请求对象中缺少 description (描述服务的 controller )：
- */
 export class TransfromJsonFromYapiPlugin {
   apply(compilerHook) {
+    /**
+     * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
+     * - 缺失了 `definitions` ：默认使用空对象
+     * - tags 下请求对象中缺少 operationId ： 根据 url 以及 method 补全
+     * - path 下请求对象中缺少 description (描述服务的 controller )：
+     */
     compilerHook.swagger2ApiGroup.tap(pluginName, transfromJson)
+
+    /**
+     * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
+     * * 将入参析构一层 解决 Yapi 参数默认包裹在 root：
+     */
     compilerHook.onRequestParam.tap(pluginName, (apiItem, context) => {
       const requestParams = apiItem.requestParam
       let destructRequestParam = []
@@ -37,9 +42,26 @@ export class TransfromJsonFromYapiPlugin {
       }
       return requestParams
     })
+    /**
+     * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
+     * * 将出参析构一层 解决 Yapi 参数默认包裹在 root：
+     */
+    compilerHook.onResponseSchema.tap(pluginName, (apiItem, context) => {})
+    /**
+     * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
+     * 从参数中收集 `definitions`
+     */
+    compilerHook.beforeDeclarationGen.tap(pluginName, (apiGroup) => {
+      const { definitions } = apiGroup
+      const newDefinition = []
+      for (const key in definitions) {
+        traverseDefinitionsProps(definitions[key], newDefinition)
+      }
+      apiGroup.definitions = { ...newDefinition }
+    })
   }
 }
-
+//--------------------处理 swagger2ApiGroup--------------------------------------------
 export function transfromJson(context) {
   const { swaggerJson } = context
   const { paths } = swaggerJson
@@ -86,6 +108,28 @@ function buildOperationId(path: string, method: TMethod) {
   const lastPath = path.split('/').pop() ?? ''
   return `${lastPath}By${method}`
 }
+
+//--------------------处理 definitions 修改--------------------------------------------
+
+/**
+ * 递归遍历 definitions
+ * @param propObj definitions prop
+ * @param result collect
+ * @returns
+ */
+
+function traverseDefinitionsProps(propObj, newProperties) {
+  if (propObj?.properties) {
+    for (const key in propObj.properties) {
+      newProperties.push({ ...propObj.properties[key], title: key })
+      traverseDefinitionsProps(propObj.properties[key], newProperties)
+    }
+  } else {
+    return
+  }
+}
+
+//--------------------类型定义--------------------------------------------
 
 type TMethod = 'post' | 'get' | 'delete' | 'put'
 

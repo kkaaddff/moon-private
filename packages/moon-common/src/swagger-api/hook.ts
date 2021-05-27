@@ -66,6 +66,9 @@ export default class ApiCompileHooks {
   /** 单个api response修改时 */
   onResponseSchema = new SyncHook(['responseSchema', 'context'])
 
+  /** 一组 api 的类型定义生成前 */
+  beforeDeclarationGen = new SyncHook(['webApiGroup'])
+
   /** controller文件存储前 */
   beforeApiSave = new SyncHook<IFileSaveOptions, GenContext>(['IFileSaveOptions', 'any'])
 
