@@ -42,11 +42,16 @@ export class TransfromJsonFromYapiPlugin {
       }
       return requestParams
     })
+
     /**
      * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
      * * 将出参析构一层 解决 Yapi 参数默认包裹在 root：
      */
-    compilerHook.onResponseSchema.tap(pluginName, (apiItem, context) => {})
+    compilerHook.onResponseSchema.tap(pluginName, (responseSchema, context) => {
+      if (responseSchema?.properties?.['YmmResult<Void>']) {
+        responseSchema.properties = responseSchema.properties['YmmResult<Void>'].properties
+      }
+    })
     /**
      * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
      * 从参数中收集 `definitions`
@@ -120,7 +125,9 @@ const JSON_SCHEMA_TYPES = {
   Long: 'number',
   long: 'number',
   int: 'number',
+  Void: 'null',
 }
+
 function traverseDefinitionsProps(propObj) {
   if (!propObj) {
     return
