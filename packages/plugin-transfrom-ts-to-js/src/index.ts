@@ -1,14 +1,14 @@
+import buildTs from './tsbuild'
 const pluginName = 'TransfromTs2JsPlugin'
 
-export class TransfromJsonFromYapiPlugin {
+export class TransfromTsToJsPlugin {
   apply(compilerHook) {
     /**
      * 将 目标的 ts 转换成 js 并且同时输出 d.ts
      */
     compilerHook.beforeApiSave.tap(pluginName, (options, context) => {
-      options
+      buildTs(options)
       context
-      debugger
     })
   }
 }
