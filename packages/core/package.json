@@ -8,6 +8,7 @@
   "license": "MIT",
   "gitHead": "96cd395e9a2b767aa1bc57aa28bca4dd3c794db1",
   "publishConfig": {
+    "access": "public",
     "registory": "http://registory.npmjs.org"
   },
   "scripts": {
