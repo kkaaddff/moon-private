@@ -8,8 +8,8 @@ module.exports = {
     docsDir: 'docs',
 
     editLinks: true,
-    editLinkText: 'Edit this page on GitHub',
-    lastUpdated: 'Last Updated',
+    editLinkText: '在GitHub上编辑此页',
+    lastUpdated: '最近更新于',
 
     nav: [
       { text: 'Guide', link: '/', activeMatch: '^/$|^/guide/' },
@@ -17,10 +17,6 @@ module.exports = {
         text: 'Config Reference',
         link: '/config/basics',
         activeMatch: '^/config/',
-      },
-      {
-        text: 'Release Notes',
-        link: 'https://github.com/vuejs/vitepress/releases',
       },
     ],
 
