@@ -5,6 +5,12 @@ import * as fse from 'fs-extra'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 export class TransfromJsonFromYapiPlugin {
+  private type: 'YmmMaven' | 'manual'
+
+  constructor(config: { type: 'manual' | null }) {
+    this.type = config.type ?? 'YmmMaven'
+  }
+
   apply(compilerHook) {
     /**
      * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
@@ -48,9 +54,12 @@ export class TransfromJsonFromYapiPlugin {
     /**
      * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
      * * 将出参析构一层 解决 Yapi 参数默认包裹在 root：
+     * ! 区分 手动维护的 swagger 和 插件 自动生成的 yapi
      */
     compilerHook.onResponseSchema.tap(pluginName, (responseSchema, context) => {
-      if (responseSchema?.properties?.['YmmResult<Void>']) {
+      if (this.type === 'manual' && responseSchema?.properties?.['data']) {
+        responseSchema.properties = responseSchema.properties['data'].properties
+      } else if (responseSchema?.properties?.['YmmResult<Void>']) {
         responseSchema.properties = responseSchema.properties['YmmResult<Void>'].properties
       }
     })
