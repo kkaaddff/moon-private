@@ -1,0 +1,35 @@
+{
+  "name": "@zhangqc/loader-yapi",
+  "version": "0.1.1-alpha.2",
+  "description": "",
+  "main": "lib/index.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registory": "http://registory.npmjs.org"
+  },
+  "dependencies": {
+    "camel-case": "^4.1.2",
+    "debug": "^4.1.1",
+    "ejs": "^3.0.1",
+    "generate-schema": "^2.6.0",
+    "json-schema-to-typescript": "^8.2.0",
+    "minimatch": "^3.0.4",
+    "param-case": "^3.0.4",
+    "pascal-case": "^3.1.2",
+    "prettier": "^2.0.5",
+    "tapable": "^1.1.3",
+    "title-case": "^3.0.3",
+    "ts-morph": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^7.0.0",
+    "@types/tapable": "^1.0.4",
+    "fs-extra": "^8.1.0"
+  }
+}
