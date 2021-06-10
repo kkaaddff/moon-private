@@ -42,6 +42,9 @@ export class TransfromJsonFromYapiPlugin {
             }
             destructRequestParam.push(newParam)
           }
+        } else {
+          // InBody InQuery 等不同属性的 params 在 requestParams 中的位置也不同
+          destructRequestParam.push(param)
         }
       })
 
