@@ -6,7 +6,7 @@
  * @Date    2019/3/27
  **/
 
-import * as request from 'request'
+import request from 'umi-request'
 import * as fs from 'fs'
 import * as fse from 'fs-extra'
 import * as generateSchema from 'generate-schema'
@@ -33,17 +33,10 @@ async function loadJsonFromFs(filePath: string): Promise<any> {
 }
 
 async function loadJsonFromServer(swaggerUrl: string): Promise<any> {
-  return new Promise((resolve, reject) => {
-    console.log(`从${swaggerUrl}中加载api doc信息`)
-    request(swaggerUrl, function (error, response, body) {
-      if (error) {
-        console.error(error)
-        reject(error)
-      } else {
-        resolve(JSON.parse(body))
-      }
-    })
+  let result = await request(swaggerUrl, {
+    method: 'get',
   })
+  return result
 }
 
 /**

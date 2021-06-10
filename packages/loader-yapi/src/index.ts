@@ -1,14 +1,27 @@
-import buildTs from './tsbuild'
-const pluginName = 'TransfromTs2JsPlugin'
+import request from 'umi-request'
 
-export class TransfromTsToJsPlugin {
-  apply(compilerHook) {
-    /**
-     * 将 目标的 ts 转换成 js 并且同时输出 d.ts
-     */
-    compilerHook.beforeApiSave.tap(pluginName, (options, moonContext) => {
-      buildTs(options)
-    })
+async function fetch(pid, token, url) {
+  let result = await request(url, {
+    method: 'get',
+    params: {
+      type: 'OpenAPIV2',
+      pid, // YApi项目id
+      status: 'all',
+      isWiki: false,
+      token, // YApi生成的项目Token
+    },
+  })
+  return result
+}
+
+export async function yapiLoader(swaggerUrl, tokenMap) {
+  try {
+    const mapList = Object.entries(tokenMap)
+    const result = await Promise.all(mapList.map((item) => fetch(item[0], item[1], swaggerUrl)))
+    return result
+  } catch (error) {
+    console.warn('加载 YApi 数据出错！')
+    console.warn(error)
   }
 }
 

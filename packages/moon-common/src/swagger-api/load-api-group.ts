@@ -40,17 +40,35 @@ export default async function loadApiGroup(
 
   if (apiGenConfig?.swaggerUrls?.length) {
     let apiGroups = context.apiGroups || []
+
     for (let i = 0, iLen = apiGenConfig.swaggerUrls.length; i < iLen; i++) {
       let swaggerUrl = apiGenConfig.swaggerUrls[i]
+      console.log(`从${swaggerUrl}中加载api doc信息`)
       try {
-        context.swaggerJson = await loadJson(swaggerUrl)
-        context.apiGroups = null
-        await hookInstance.swagger2ApiGroup.promise(context)
+        if (apiGenConfig.loader?.[0]) {
+          //----------------------------------------------------------------
+          /** 将自定义 loader 的 options 传给 loader */
+          /** 如果有自定义 loader 采用自定义 loader */
+          let swaggerJsonList = await apiGenConfig.loader?.[0](swaggerUrl, apiGenConfig.loader?.[1])
+          context.apiGroups = null
 
-        if (!context.apiGroups) {
-          apiGroups = apiGroups.concat(
-            MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal)
-          )
+          for (let index = 0; index < swaggerJsonList.length; index++) {
+            context.swaggerJson = swaggerJsonList[index]
+            await hookInstance.swagger2ApiGroup.promise(context)
+            apiGroups = apiGroups.concat(
+              MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal)
+            )
+          }
+          //----------------------------------------------------------------
+        } else {
+          context.swaggerJson = await loadJson(swaggerUrl)
+          context.apiGroups = null
+          await hookInstance.swagger2ApiGroup.promise(context)
+          if (!context.apiGroups) {
+            apiGroups = apiGroups.concat(
+              MoonCore.SwaggerUtil.transfer(context.swaggerJson, errrorMsgDeal)
+            )
+          }
         }
       } catch (err) {
         console.warn(`从swagger导出数据失败跳过此swagger${swaggerUrl}`)
