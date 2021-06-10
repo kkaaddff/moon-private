@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.1.1-alpha.16...@zhangqc/moon-core@0.2.0-alpha.1) (2021-06-10)
+
+
+### Features
+
+* **增加 loader :** 将loader提取成插件内置loader ([454f31c](https://github.com/kkaaddff/moon-private/commit/454f31c5141ea11a96ee935cf746118bfb19db98))
+
+
+
+
+
 # [0.2.0-alpha.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.1.1-alpha.16...@zhangqc/moon-core@0.2.0-alpha.0) (2021-06-10)
 
 
