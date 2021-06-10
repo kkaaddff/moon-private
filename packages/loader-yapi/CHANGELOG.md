@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@apis/loader-yapi@0.1.0-alpha.2...@apis/loader-yapi@0.0.2) (2021-06-10)
+
+**Note:** Version bump only for package @apis/loader-yapi
+
+
+
+
+
 # 0.1.0-alpha.2 (2021-06-10)
 
 
