@@ -35,7 +35,6 @@
   "devDependencies": {
     "@types/fs-extra": "^7.0.0",
     "@types/klaw": "^3.0.0",
-    "file-visitor": "1.0.0",
     "prettier": "^1.16.4"
   }
 }

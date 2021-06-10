@@ -1,18 +1,18 @@
-import { Project, ScriptTarget } from 'ts-morph'
+import { ModuleKind, ModuleResolutionKind, Project, ScriptTarget } from 'ts-morph'
 import * as fse from 'fs-extra'
 import * as prettier from 'prettier'
 import { join, parse } from 'path'
 
 const TSCONFIG = {
   compilerOptions: {
-    target: 99, // ts-morph 内部定义 ScriptTarget
+    target: ScriptTarget.ESNext, // ts-morph 内部定义 ScriptTarget
     allowJs: true,
     strict: false,
     lib: ['dom', 'esnext'],
-    module: 99, // ts-morph 内部定义
+    module: ModuleKind.ESNext, // ts-morph 内部定义
     outDir: './src/api',
     declaration: true,
-    moduleResolution: 2, // ts-morph 内部定义
+    moduleResolution: ModuleResolutionKind.NodeJs, // ts-morph 内部定义
     noUnusedLocals: false,
     noUnusedParameters: false,
     esModuleInterop: true,

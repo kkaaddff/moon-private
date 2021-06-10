@@ -1,5 +1,7 @@
 import { titleCase } from 'title-case'
-import { clone, isEmpty } from 'lodash'
+import { pascalCase } from 'pascal-case'
+import { clone, isEmpty, omit } from 'lodash'
+import * as fse from 'fs-extra'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 export class TransfromJsonFromYapiPlugin {
@@ -59,10 +61,11 @@ export class TransfromJsonFromYapiPlugin {
      */
     compilerHook.beforeDeclarationGen.tap(pluginName, (apiGroup) => {
       const { definitions } = apiGroup
-
       for (const key in definitions) {
-        traverseDefinitionsProps(definitions[key])
+        traverseDefinitionsProps(definitions[key], key, definitions)
       }
+
+      fse.writeFile('./definitions.json', JSON.stringify(definitions))
     })
   }
 }
@@ -124,37 +127,74 @@ function buildOperationId(path: string, method: TMethodType) {
  * @returns
  */
 const JSON_SCHEMA_TYPES = {
-  Long: 'number',
   long: 'number',
   int: 'number',
-  Void: 'null',
+  void: 'null',
 }
 
-function traverseDefinitionsProps(propObj) {
+function traverseDefinitionsProps(propObj, key, definitions) {
   if (!propObj) {
     return
   }
 
+  //------------------------字段数据类型 rename-----------------------------------
+  if (propObj.type) {
+    propObj.type = propObj.type.toLowerCase()
+    if (JSON_SCHEMA_TYPES[propObj.type]) {
+      propObj.type = JSON_SCHEMA_TYPES[propObj.type]
+    }
+  }
+  //------------------------字段数据类型 rename-----------------------------------
+
   if (isEmpty(propObj.items)) {
     delete propObj.items
   } else {
-    traverseDefinitionsProps(propObj.items)
+    traverseDefinitionsProps(propObj.items, key, definitions)
   }
 
-  if (propObj.type) {
-    propObj.type = JSON_SCHEMA_TYPES[propObj.type]
-      ? JSON_SCHEMA_TYPES[propObj.type]
-      : propObj.type.toLowerCase()
-  }
-
-  if (propObj?.properties) {
+  if (propObj.properties) {
     for (const key in propObj.properties) {
-      traverseDefinitionsProps(propObj.properties[key])
+      const propertiesItem = propObj.properties[key]
+      traverseDefinitionsProps(propertiesItem, key, definitions)
+      // 后序遍历，将复杂类型塞到 #/definitions/中去
+      if (propertiesItem.type === 'object') {
+        definitions[key] = propertiesItem
+        propObj.properties[key] = {
+          ...omit(propertiesItem, ['items', 'properties']),
+          schema: {
+            $ref: `#/definitions/${key}`,
+          },
+        }
+      }
     }
-  } else {
-    return
   }
 }
+
+// function traverseDefinitionsProps(propObj) {
+//   if (!propObj) {
+//     return
+//   }
+
+//   if (isEmpty(propObj.items)) {
+//     delete propObj.items
+//   } else {
+//     traverseDefinitionsProps(propObj.items)
+//   }
+
+//   if (propObj.type) {
+//     propObj.type = JSON_SCHEMA_TYPES[propObj.type]
+//       ? JSON_SCHEMA_TYPES[propObj.type]
+//       : propObj.type.toLowerCase()
+//   }
+
+//   if (propObj?.properties) {
+//     for (const key in propObj.properties) {
+//       traverseDefinitionsProps(propObj.properties[key])
+//     }
+//   } else {
+//     return
+//   }
+// }
 
 //--------------------类型定义--------------------------------------------
 
