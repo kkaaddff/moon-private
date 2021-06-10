@@ -10,7 +10,7 @@
  **/
 import { genApi } from './index'
 import { loadMoonConfig } from './util/config'
-import { IMoonConfig } from '@zhangqc/moon-core/src/typings/config'
+import { IMoonConfig } from '@apis/moon-core/src/typings/config'
 
 ;(async () => {
   let projectPath = process.cwd()

@@ -8,7 +8,7 @@
 import * as fse from 'fs-extra'
 import * as _ from 'lodash'
 import { join } from 'path'
-import MoonCore from '@zhangqc/moon-core'
+import MoonCore from '@apis/moon-core'
 import * as minimatch from 'minimatch'
 import { camelCase } from 'camel-case'
 import ApiCompileHooks from './hook'
@@ -17,10 +17,10 @@ import {
   IWebApiContext,
   IWebApiDefinded,
   SchemaProps,
-} from '@zhangqc/moon-core/declarations/typings/api'
-import { IFileSaveOptions } from '@zhangqc/moon-core/declarations/typings/page'
-import { IInsertOption } from '@zhangqc/moon-core/declarations/typings/util'
-import { RequestParameter, ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
+} from '@apis/moon-core/declarations/typings/api'
+import { IFileSaveOptions } from '@apis/moon-core/declarations/typings/page'
+import { IInsertOption } from '@apis/moon-core/declarations/typings/util'
+import { RequestParameter, ApiGroup } from '@apis/moon-core/declarations/web-api/domain'
 import { applyHook } from '../util/hook-util'
 import { IGenApiConfig } from './types'
 

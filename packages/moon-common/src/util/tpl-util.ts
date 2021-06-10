@@ -23,7 +23,7 @@
 import { join, parse } from 'path'
 import * as fse from 'fs-extra'
 import debug from 'debug'
-import { IAction, IActorItem, ISubComp } from '@zhangqc/moon-core/src/typings/page'
+import { IAction, IActorItem, ISubComp } from '@apis/moon-core/src/typings/page'
 
 const log = debug('moon:core:compile-util')
 

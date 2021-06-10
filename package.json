@@ -9,7 +9,7 @@
     "commit": "node node_modules/@commitlint/cli/lib/cli.js '🔧 build(配置): vitepress 配置'",
     "clean": "lerna clean",
     "compile": "lerna run prepublishOnly",
-    "bootstrap": "lerna bootstrap --registry=https://registry.npm.taobao.org",
+    "bootstrap": "lerna bootstrap",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "publish": "lerna publish",
     "start": "gulp startMoonApp",
