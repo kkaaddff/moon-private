@@ -1,5 +1,5 @@
 {
-  "name": "@zhangqc/loader-yapi",
+  "name": "@apis/loader-yapi",
   "version": "0.1.0-alpha.1",
   "description": "",
   "main": "lib/index.js",

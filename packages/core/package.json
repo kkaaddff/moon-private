@@ -1,5 +1,5 @@
 {
-  "name": "@zhangqc/moon-core",
+  "name": "@apis/moon-core",
   "version": "0.2.0-alpha.1",
   "description": "",
   "main": "lib/index.js",
