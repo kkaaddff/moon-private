@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.1.0...@apis/plugin-transfrom-json-from-yapi@0.1.1) (2021-06-10)
+
+
+### Bug Fixes
+
+* **修复参数缺失bug:** 混合query和body的参数取不到的情况 ([ddc50d0](https://github.com/kkaaddff/moon-private/commit/ddc50d0ee1f1f1bbc840d073509f44f826f7ff15))
+
+
+
+
+
 # [0.1.0](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.0.2...@apis/plugin-transfrom-json-from-yapi@0.1.0) (2021-06-10)
 
 
