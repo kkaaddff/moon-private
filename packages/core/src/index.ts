@@ -12,7 +12,6 @@ import * as JestUtil from './util/jest-util'
 import * as CompileUtil from './util/compile-util'
 import * as WebApiGen from './web-api'
 import * as SwaggerUtil from './web-api/util/swagger'
-import * as fakeGen from './web-api/fake-gen'
 import * as TsIndex from './web-api/ts-index'
 import * as apiDomain from './web-api/domain'
 
@@ -26,7 +25,6 @@ export default {
   // },
   JsonUtil,
   CompileUtil,
-  fakeGen,
   JestUtil,
   SwaggerUtil,
   WebApiGen,

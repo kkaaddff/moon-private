@@ -49,7 +49,7 @@ export class SwaggerMock {
           console.log(
             `当前Controller:  ${webapiGroup.name}:['${apiItem.name}'],如果过进入infinite loop . 请设置moon.config :api.mock.ignoreApi`
           )
-          debugger
+
           let json = await fakeGen.genrateFakeData(resSchema, webapiGroup.definitions)
           mockMethod.data = json
           console.log('fake data!!')

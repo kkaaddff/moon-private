@@ -20,7 +20,7 @@ import {
 } from '@apis/moon-core/declarations/typings/api'
 import { IFileSaveOptions } from '@apis/moon-core/declarations/typings/page'
 import { IInsertOption } from '@apis/moon-core/declarations/typings/util'
-import { RequestParameter, ApiGroup } from '@apis/moon-core/declarations/web-api/domain'
+import { ApiGroup } from '@apis/moon-core/declarations/web-api/domain'
 import { applyHook } from '../util/hook-util'
 import { IGenApiConfig } from './types'
 
