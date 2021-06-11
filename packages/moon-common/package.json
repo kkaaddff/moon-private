@@ -1,6 +1,6 @@
 {
   "name": "@apis/moon-common",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "author": "",
@@ -17,7 +17,7 @@
     "registory": "http://registory.npmjs.org"
   },
   "dependencies": {
-    "@apis/moon-core": "^0.0.2",
+    "@apis/moon-core": "^0.0.3",
     "debug": "^4.1.1",
     "ejs": "^3.0.1",
     "generate-schema": "^2.6.0",
