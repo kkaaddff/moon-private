@@ -1,5 +1,5 @@
 import * as fse from 'fs-extra'
-import { genrateFakeData, cancelCircularRef } from '../fake-gen'
+import { genrateFakeData, cancelCircularRef } from '../src/fake-gen'
 import { join } from 'path'
 
 import * as jsf from 'json-schema-faker'
