@@ -166,7 +166,7 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
   await MoonCore.CompileUtil.insertFile(apiIndexFilePath, inserts)
   //还是生成 一个总的 ?
   //转换
-
+  hookInstance.afterIndex.call(apiIndexFilePath, context)
   await hookInstance.finish.call(context)
 }
 

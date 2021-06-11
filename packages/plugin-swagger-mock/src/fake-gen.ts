@@ -13,10 +13,11 @@ import * as _ from 'lodash'
 //https://json-schema-faker.js.org/#gist/d9e27543d84157c1672f87e93ac250cc
 //https://github.com/json-schema-faker/json-schema-faker/tree/master/docs
 
-jsf.option('alwaysFakeOptionals', false)
+jsf.option('alwaysFakeOptionals', true)
 jsf.option('ignoreMissingRefs', true)
 jsf.option('failOnInvalidTypes', false)
 jsf.option('failOnInvalidFormat', false)
+jsf.extend('faker', () => require('faker'))
 
 /**
  * @param jsonSchema
@@ -24,8 +25,14 @@ jsf.option('failOnInvalidFormat', false)
  */
 export async function genrateFakeData(
   jsonSchema: any,
-  definitions: { [name: string]: any } = {}
+  definitions: { [name: string]: any } = {},
+  lang: TLanguage
 ): Promise<object> {
+  if (lang !== 'en') {
+    const faker = jsf.locate('faker')
+    faker.locale = lang
+  }
+
   if (jsonSchema.$ref && definitions[jsonSchema.$ref.replace('#/definitions/', '')]) {
     jsonSchema = definitions[jsonSchema.$ref.replace('#/definitions/', '')]
   }
@@ -95,3 +102,5 @@ export function cancelCircularRef(jsonSchema, definitions = {}, superRefs = [], 
     }
   }
 }
+
+export type TLanguage = 'zh_CN' | 'en'

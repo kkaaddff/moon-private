@@ -9,8 +9,15 @@
 import * as fakeGen from './fake-gen'
 import * as fse from 'fs-extra'
 import { join } from 'path'
+import { TLanguage } from './fake-gen'
 
 export class SwaggerMock {
+  language: TLanguage
+
+  constructor(config: SwaggerConfig) {
+    this.language = config?.lang ?? 'en'
+  }
+
   apply(hook) {
     let mockItem: MockRepos
 
@@ -50,7 +57,12 @@ export class SwaggerMock {
             `当前Controller:  ${webapiGroup.name}:['${apiItem.name}'],如果过进入infinite loop . 请设置moon.config :api.mock.ignoreApi`
           )
 
-          let json = await fakeGen.genrateFakeData(resSchema, webapiGroup.definitions)
+          let json = await fakeGen.genrateFakeData(
+            resSchema,
+            webapiGroup.definitions,
+            this.language
+          )
+
           mockMethod.data = json
           console.log('fake data!!')
         } catch (err) {
@@ -81,24 +93,11 @@ class MockRepos {
   getMockFile(controller: string): IMockFile {
     if (!this.repos[controller]) {
       let filePath = join(this.apiMockDir, controller + '.json')
-      if (fse.existsSync(filePath)) {
-        try {
-          let mocks = fse.readJSONSync(filePath)
-          this.repos[controller] = {
-            name: controller,
-            filePath,
-            mocks,
-          }
-        } catch (err) {
-          console.warn(err)
-        }
-      } else {
-        fse.ensureFileSync(filePath)
-        this.repos[controller] = {
-          name: controller,
-          filePath,
-          mocks: [],
-        }
+      fse.ensureFileSync(filePath)
+      this.repos[controller] = {
+        name: controller,
+        filePath,
+        mocks: [],
       }
     }
 
@@ -112,6 +111,11 @@ class MockRepos {
       })
     )
   }
+}
+
+export interface SwaggerConfig {
+  lang: TLanguage
+  mocks: IMock[]
 }
 
 export interface IMockFile {
