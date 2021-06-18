@@ -60,10 +60,13 @@ export class TransfromJsonFromYapiPlugin {
      * ! 区分 手动维护的 swagger 和 插件 自动生成的 yapi
      */
     compilerHook.onResponseSchema.tap(pluginName, (responseSchema, context) => {
-      if (this.type === 'manual' && responseSchema?.properties?.['data']) {
-        responseSchema.properties = responseSchema.properties['data'].properties
-      } else if (responseSchema?.properties?.['YmmResult<Void>']) {
-        responseSchema.properties = responseSchema.properties['YmmResult<Void>'].properties
+      const result = this.type === 'manual' ? 'data' : 'YmmResult<Void>'
+      if (responseSchema?.properties?.[result]) {
+        if (responseSchema?.properties?.[result].type === 'array') {
+          responseSchema.items = responseSchema.properties[result].items
+        }
+        responseSchema.properties = responseSchema.properties[result].properties
+        responseSchema.type = responseSchema.properties[result].type
       }
     })
 
