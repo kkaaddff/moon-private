@@ -65,6 +65,7 @@ export class TransfromJsonFromYapiPlugin {
         if (responseSchema?.properties?.[result].type === 'array') {
           responseSchema.items = responseSchema.properties[result].items
           responseSchema.type = 'array'
+          
           delete responseSchema.properties
         } else {
           responseSchema.properties = responseSchema.properties[result].properties
