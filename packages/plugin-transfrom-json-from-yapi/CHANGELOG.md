@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.1.2...@apis/plugin-transfrom-json-from-yapi@0.1.3) (2021-06-18)
+
+
+### Bug Fixes
+
+* **修复response转换:** type赋值 ([ac0e4b6](https://github.com/kkaaddff/moon-private/commit/ac0e4b665ed113f8824eb42238936d8fc4760ed5))
+* **transform json:** 判断type ([7564e9d](https://github.com/kkaaddff/moon-private/commit/7564e9dd1b1a5500552da7d0e3a5f59542f2d95b))
+
+
+
+
+
 ## [0.1.2](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.1.1...@apis/plugin-transfrom-json-from-yapi@0.1.2) (2021-06-18)
 
 
