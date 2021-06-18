@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.3](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-swagger-mock@0.0.2...@apis/plugin-swagger-mock@0.0.3) (2021-06-18)
+
+
+### Bug Fixes
+
+* **trabsfrom json:** res结果是数组时的处理 ([48ce60b](https://github.com/kkaaddff/moon-private/commit/48ce60b5207a76300d944c1f625a0866ca09ef8e))
+
+
+
+
+
 ## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-swagger-mock@0.1.0...@apis/plugin-swagger-mock@0.0.2) (2021-06-17)
 
 **Note:** Version bump only for package @apis/plugin-swagger-mock
