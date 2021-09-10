@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.2.0-alpha.2...@zhangqc/moon-common@0.1.0) (2021-09-10)
+
+
+### Bug Fixes
+
+* **支持mock数据:** mock plugin ([a199cc9](https://github.com/kkaaddff/moon-private/commit/a199cc965c148c97c31d8a06d03ab9a50e08646b))
+* **mock:** 修改mock的目录 ([8367fde](https://github.com/kkaaddff/moon-private/commit/8367fdeec5cd77abbb094acb755fd234d4b659ad))
+
+
+### Features
+
+* **zhangqc:** 全局更新包名 ([774a776](https://github.com/kkaaddff/moon-private/commit/774a7768545ace36515d355b47bce97b5205bc65))
+
+
+
+
+
 ## [0.0.4](https://github.com/kkaaddff/moon-private/compare/@apis/moon-common@0.0.3...@apis/moon-common@0.0.4) (2021-06-11)
 
 
