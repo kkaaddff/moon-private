@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "",
   "license": "MIT",
+  "homepage": "https://github.com/kkaaddff/moon-private",
   "bin": {
     "swaggerApi": "lib/swagger-api/cli.js"
   },

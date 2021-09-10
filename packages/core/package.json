@@ -7,6 +7,7 @@
   "author": "",
   "license": "MIT",
   "gitHead": "96cd395e9a2b767aa1bc57aa28bca4dd3c794db1",
+  "homepage": "https://github.com/kkaaddff/moon-private",
   "publishConfig": {
     "access": "public",
     "registory": "http://registory.npmjs.org"

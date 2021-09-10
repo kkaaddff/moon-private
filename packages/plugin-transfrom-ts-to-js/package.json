@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "author": "",
   "license": "MIT",
+  "homepage": "https://github.com/kkaaddff/moon-private",
   "scripts": {
     "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
