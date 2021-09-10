@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-ts-to-js@0.1.0...@zhangqc/plugin-transfrom-ts-to-js@0.1.1) (2021-09-10)
+
+**Note:** Version bump only for package @zhangqc/plugin-transfrom-ts-to-js
+
+
+
+
+
 # [0.1.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-ts-to-js@0.1.1-alpha.2...@zhangqc/plugin-transfrom-ts-to-js@0.1.0) (2021-09-10)
 
 
