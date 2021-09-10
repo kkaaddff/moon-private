@@ -1,5 +1,5 @@
 {
-  "name": "@apis/plugin-swagger-mock",
+  "name": "@zhangqc/plugin-swagger-mock",
   "version": "0.0.3",
   "description": "",
   "main": "lib/index.js",

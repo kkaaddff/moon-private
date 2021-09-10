@@ -1,5 +1,5 @@
 {
-  "name": "@apis/plugin-transfrom-ts-to-js",
+  "name": "@zhangqc/plugin-transfrom-ts-to-js",
   "version": "0.0.2",
   "description": "",
   "main": "lib/index.js",

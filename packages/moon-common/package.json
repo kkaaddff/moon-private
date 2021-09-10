@@ -1,5 +1,5 @@
 {
-  "name": "@apis/moon-common",
+  "name": "@zhangqc/moon-common",
   "version": "0.0.4",
   "description": "",
   "main": "index.js",

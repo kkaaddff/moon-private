@@ -1,5 +1,5 @@
 {
-  "name": "@apis/plugin-transfrom-json-from-yapi",
+  "name": "@zhangqc/plugin-transfrom-json-from-yapi",
   "version": "0.1.3",
   "description": "",
   "main": "lib/index.js",
