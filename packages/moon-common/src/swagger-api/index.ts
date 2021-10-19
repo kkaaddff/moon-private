@@ -32,22 +32,22 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
   let workBase = context.workDir
   let hookInstance = new ApiCompileHooks()
 
-  let defaulltMoonConfig = {
+  let defaultMoonConfig = {
     api: context.config,
   }
 
   /** 注册 所有 plugin */
-  defaulltMoonConfig.api?.plugins?.map((plugin) => {
+  defaultMoonConfig.api?.plugins?.map((plugin) => {
     applyHook(hookInstance, plugin)
   })
 
   await hookInstance.init.promise(context)
 
-  let apiGroups = await loadApiGroup(defaulltMoonConfig.api, hookInstance)
+  let apiGroups = await loadApiGroup(defaultMoonConfig.api, hookInstance)
 
   await hookInstance.beforeCompile.call(apiGroups, context)
 
-  let apiDir = join(workBase, defaulltMoonConfig.api.dir)
+  let apiDir = join(workBase, defaultMoonConfig.api.dir)
 
   let inserts: IInsertOption[] = []
 
@@ -58,7 +58,7 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
       await hookInstance.beforeGroupCompile.call(webapiGroup, context)
 
       // 在 exclude 列表
-      if (defaulltMoonConfig.api?.exclude?.some((item) => minimatch(webapiGroup.name, item))) {
+      if (defaultMoonConfig.api?.exclude?.some((item) => minimatch(webapiGroup.name, item))) {
         console.log(
           `${i + 1}/${ilen} ignore webapiGroup:${webapiGroup.name},due to MoonConfig.api.exclude`
         )
@@ -67,8 +67,8 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
 
       // 有 include 且不在 include 列表
       if (
-        defaulltMoonConfig.api?.include?.length > 0 &&
-        defaulltMoonConfig.api.include.every((item) => minimatch(webapiGroup.name, item))
+        defaultMoonConfig.api?.include?.length > 0 &&
+        defaultMoonConfig.api.include.every((item) => minimatch(webapiGroup.name, item))
       ) {
         console.log(
           `${i + 1}/${ilen} ignore webapiGroup:${webapiGroup.name},due to MoonConfig.api.include`
@@ -103,7 +103,7 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
             schema,
             apiItem,
             context,
-            defaulltMoonConfig.api.wrapper
+            defaultMoonConfig.api.wrapper
           )
           hookInstance.onResponseSchema.call(finalSchema, {
             apiItem,
@@ -119,7 +119,7 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
         beforeSave: (options: IFileSaveOptions, context: any) => {
           options.content = options.content.replace(
             /result\.data/gi,
-            defaulltMoonConfig.api.wrapper ? `result.${defaulltMoonConfig.api.wrapper}` : 'result'
+            defaultMoonConfig.api.wrapper ? `result.${defaultMoonConfig.api.wrapper}` : 'result'
           )
           hookInstance.beforeApiSave.call(options, context)
           return Promise.resolve(options)
