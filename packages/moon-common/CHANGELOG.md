@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.2.0...@zhangqc/moon-common@0.3.0) (2021-11-08)
+
+
+### Features
+
+* **core:** 类型 ([320280d](https://github.com/kkaaddff/moon-private/commit/320280de69d71831365cf258b5ed6599d8182212))
+
+
+
+
+
 # [0.2.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.1.1...@zhangqc/moon-common@0.2.0) (2021-11-08)
 
 
