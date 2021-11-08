@@ -17,9 +17,9 @@ import {
   IWebApiContext,
   IWebApiDefinded,
   SchemaProps,
-} from '@zhangqc/moon-core/declarations/typings/api'
-import { IFileSaveOptions } from '@zhangqc/moon-core/declarations/typings/page'
-import { IInsertOption } from '@zhangqc/moon-core/declarations/typings/util'
+} from '@zhangqc/moon-core'
+import { IFileSaveOptions } from '@zhangqc/moon-core'
+import { IInsertOption } from '@zhangqc/moon-core'
 import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
 import { applyHook } from '../util/hook-util'
 import { IGenApiConfig } from './types'

@@ -8,7 +8,7 @@
  **/
 import { join } from 'path'
 import * as fse from 'fs-extra'
-import { IMoonConfig } from '@zhangqc/moon-core/declarations/typings/config'
+import { IMoonConfig } from '@zhangqc/moon-core'
 
 export interface IBackendConfig {
   db: {

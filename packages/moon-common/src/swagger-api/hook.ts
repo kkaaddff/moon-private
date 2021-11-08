@@ -7,8 +7,8 @@
  * @Date    2019/12/26
  **/
 import { AsyncSeriesHook, AsyncSeriesWaterfallHook, SyncHook } from 'tapable'
-import { IWebApiDefinded } from '@zhangqc/moon-core/declarations/typings/api'
-import { IFileSaveOptions } from '@zhangqc/moon-core/declarations/typings/page'
+import { IWebApiDefinded } from '@zhangqc/moon-core'
+import { IFileSaveOptions } from '@zhangqc/moon-core'
 import { IGenApiConfig } from './types'
 import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
 
