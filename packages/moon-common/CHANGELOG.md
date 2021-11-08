@@ -28,7 +28,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.4](https://github.com/kkaaddff/moon-private/compare/@apis/moon-common@0.0.3...@apis/moon-common@0.0.4) (2021-06-11)
+## [0.0.4](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.0.3...@zhangqc/moon-common@0.0.4) (2021-06-11)
 
 
 ### Bug Fixes
@@ -40,17 +40,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.3](https://github.com/kkaaddff/moon-private/compare/@apis/moon-common@0.0.2...@apis/moon-common@0.0.3) (2021-06-10)
+## [0.0.3](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.0.2...@zhangqc/moon-common@0.0.3) (2021-06-10)
 
-**Note:** Version bump only for package @apis/moon-common
-
-
+**Note:** Version bump only for package @zhangqc/moon-common
 
 
 
-## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@apis/moon-common@0.2.0-alpha.3...@apis/moon-common@0.0.2) (2021-06-10)
 
-**Note:** Version bump only for package @apis/moon-common
+
+## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.2.0-alpha.3...@zhangqc/moon-common@0.0.2) (2021-06-10)
+
+**Note:** Version bump only for package @zhangqc/moon-common
 
 
 

@@ -18,7 +18,6 @@
     "registory": "http://registory.npmjs.org"
   },
   "dependencies": {
-    "@apis/moon-core": "^0.0.3",
     "debug": "^4.1.1",
     "ejs": "^3.0.1",
     "generate-schema": "^2.6.0",

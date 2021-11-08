@@ -8,13 +8,13 @@
 import { tmpdir } from 'os'
 import { join } from 'path'
 import { readJSON, remove } from 'fs-extra'
-import moonCore from '@apis/moon-core'
+import moonCore from '@zhangqc/moon-core'
 import {
   IWebApiContext,
   IWebApiDefinded,
   IWebApiGroup,
   SchemaProps,
-} from '@apis/moon-core/declarations/typings/api'
+} from '@zhangqc/moon-core/declarations/typings/api'
 
 describe('云帐房swaggerapi测试', () => {
   it('正常生成测试', async () => {

@@ -1,8 +1,8 @@
 import { loadJson } from '../util/json-util'
-import MoonCore from '@apis/moon-core'
+import MoonCore from '@zhangqc/moon-core'
 import type ApiCompileHooks from './hook'
 import { IGenApiConfig } from './types'
-import { ApiGroup } from '@apis/moon-core/declarations/web-api/domain'
+import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
 
 export default async function loadApiGroup(
   apiGenConfig: IGenApiConfig,

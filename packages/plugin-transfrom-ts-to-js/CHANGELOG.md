@@ -22,9 +22,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-ts-to-js@0.1.1-alpha.3...@apis/plugin-transfrom-ts-to-js@0.0.2) (2021-06-10)
+## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-ts-to-js@0.1.1-alpha.3...@zhangqc/plugin-transfrom-ts-to-js@0.0.2) (2021-06-10)
 
-**Note:** Version bump only for package @apis/plugin-transfrom-ts-to-js
+**Note:** Version bump only for package @zhangqc/plugin-transfrom-ts-to-js
 
 
 
@@ -32,7 +32,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.1-alpha.3 (2021-06-10)
 
-**Note:** Version bump only for package @apis/plugin-transfrom-ts-to-js
+**Note:** Version bump only for package @zhangqc/plugin-transfrom-ts-to-js
 
 
 

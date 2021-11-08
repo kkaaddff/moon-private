@@ -36,7 +36,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.1.3](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.1.2...@apis/plugin-transfrom-json-from-yapi@0.1.3) (2021-06-18)
+## [0.1.3](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.1.2...@zhangqc/plugin-transfrom-json-from-yapi@0.1.3) (2021-06-18)
 
 
 ### Bug Fixes
@@ -48,7 +48,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.1.2](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.1.1...@apis/plugin-transfrom-json-from-yapi@0.1.2) (2021-06-18)
+## [0.1.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.1.1...@zhangqc/plugin-transfrom-json-from-yapi@0.1.2) (2021-06-18)
 
 
 ### Bug Fixes
@@ -59,7 +59,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.1.1](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.1.0...@apis/plugin-transfrom-json-from-yapi@0.1.1) (2021-06-10)
+## [0.1.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.1.0...@zhangqc/plugin-transfrom-json-from-yapi@0.1.1) (2021-06-10)
 
 
 ### Bug Fixes
@@ -70,7 +70,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [0.1.0](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.0.2...@apis/plugin-transfrom-json-from-yapi@0.1.0) (2021-06-10)
+# [0.1.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.0.2...@zhangqc/plugin-transfrom-json-from-yapi@0.1.0) (2021-06-10)
 
 
 ### Features
@@ -81,7 +81,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@apis/plugin-transfrom-json-from-yapi@0.1.1-alpha.3...@apis/plugin-transfrom-json-from-yapi@0.0.2) (2021-06-10)
+## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.1.1-alpha.3...@zhangqc/plugin-transfrom-json-from-yapi@0.0.2) (2021-06-10)
 
 
 ### Reverts
@@ -94,7 +94,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.1-alpha.3 (2021-06-10)
 
-**Note:** Version bump only for package @apis/plugin-transfrom-json-from-yapi
+**Note:** Version bump only for package @zhangqc/plugin-transfrom-json-from-yapi
 
 
 

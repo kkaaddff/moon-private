@@ -28,15 +28,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.5](https://github.com/kkaaddff/moon-private/compare/@apis/moon-core@0.0.3...@apis/moon-core@0.0.5) (2021-06-17)
+## [0.0.5](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.0.3...@zhangqc/moon-core@0.0.5) (2021-06-17)
 
-**Note:** Version bump only for package @apis/moon-core
-
-
+**Note:** Version bump only for package @zhangqc/moon-core
 
 
 
-## [0.0.3](https://github.com/kkaaddff/moon-private/compare/@apis/moon-core@0.0.2...@apis/moon-core@0.0.3) (2021-06-11)
+
+
+## [0.0.3](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.0.2...@zhangqc/moon-core@0.0.3) (2021-06-11)
 
 
 ### Bug Fixes
@@ -48,9 +48,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@apis/moon-core@0.2.0-alpha.2...@apis/moon-core@0.0.2) (2021-06-10)
+## [0.0.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.2.0-alpha.2...@zhangqc/moon-core@0.0.2) (2021-06-10)
 
-**Note:** Version bump only for package @apis/moon-core
+**Note:** Version bump only for package @zhangqc/moon-core
 
 
 
