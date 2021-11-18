@@ -1,14 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "noEmit": false,
     "rootDir": "./src",
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "outDir": "./lib",
-    "declarationDir": "./declarations",
-    "declaration": true
+    "outDir": "./lib"
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/**/*", "temp/**"]

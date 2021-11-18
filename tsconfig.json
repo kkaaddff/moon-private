@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "esnext",
+    "target": "ES5",
+    "noEmit": false,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "declarationDir": "./declarations",
+    "declaration": true,
     "noImplicitAny": false,
     "sourceMap": true,
     "experimentalDecorators": true,
-    "noEmit": true,
     "lib": ["es5", "es2015", "es2017", "esnext"],
     "baseUrl": ".",
     "paths": {

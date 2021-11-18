@@ -8,6 +8,8 @@
     "install": "lerna bootstrap --ci",
     "commit": "node node_modules/@commitlint/cli/lib/cli.js '🔧 build(配置): vitepress 配置'",
     "clean": "lerna clean",
+    "compile": "lerna run prepublishOnly",
+    "changed": "lerna changed",
     "bootstrap": "lerna bootstrap",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "publish": "lerna publish",
