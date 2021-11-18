@@ -1,7 +1,5 @@
 import { titleCase } from 'title-case'
-import { pascalCase } from 'pascal-case'
 import { clone, isEmpty, omit } from 'lodash'
-import * as fse from 'fs-extra'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 export class TransfromJsonFromYapiPlugin {
@@ -65,7 +63,7 @@ export class TransfromJsonFromYapiPlugin {
         if (responseSchema?.properties?.[result].type === 'array') {
           responseSchema.items = responseSchema.properties[result].items
           responseSchema.type = 'array'
-          
+
           delete responseSchema.properties
         } else {
           responseSchema.properties = responseSchema.properties[result].properties

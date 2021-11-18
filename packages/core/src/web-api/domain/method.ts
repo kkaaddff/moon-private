@@ -7,7 +7,7 @@
  * @Date    2020/5/12
  **/
 import { IMethodDefinded } from '../util/swagger'
-import { camelCase } from 'camel-case'
+import { camelCase } from 'lodash'
 import { pascalCase } from 'pascal-case'
 import RequestParameter from './request-parameter'
 import { SchemaProps } from '../../typings/api'

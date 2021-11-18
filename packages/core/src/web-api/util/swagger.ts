@@ -1,8 +1,7 @@
 import { IJSObjectProps, IWebApiContext, IWebApiDefinded, SchemaProps } from '../../typings/api'
-import { camelCase } from 'camel-case'
 import Method from '../domain/method'
 import ApiGroup from '../domain/api-group'
-import { paramCase } from 'param-case'
+import { kebabCase } from 'lodash'
 
 /** 针对 «» 字符做特殊判断 */
 const nameCheckReg = /^[0-9a-zA-Z_\-«» ]*$/
@@ -241,7 +240,7 @@ export function transfer(
    * { [name:中文]:description（用作生成文件名） }
    */
   let tag2DescMap: TPlainObject = apiDocs?.tags?.reduce((acc, next) => {
-    acc[next.name] = paramCase(next.description)
+    acc[next.name] = kebabCase(next.description)
     return acc
   }, {})
 

@@ -10,14 +10,10 @@ import * as _ from 'lodash'
 import { join } from 'path'
 import MoonCore from '@zhangqc/moon-core'
 import * as minimatch from 'minimatch'
-import { camelCase } from 'camel-case'
+import { camelCase } from 'lodash'
 import ApiCompileHooks from './hook'
 import loadApiGroup from './load-api-group'
-import {
-  IWebApiContext,
-  IWebApiDefinded,
-  SchemaProps,
-} from '@zhangqc/moon-core'
+import { IWebApiContext, IWebApiDefinded, SchemaProps } from '@zhangqc/moon-core'
 import { IFileSaveOptions } from '@zhangqc/moon-core'
 import { IInsertOption } from '@zhangqc/moon-core'
 import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
