@@ -291,7 +291,7 @@ function buildApiGroupMapFromPaths(apiDocs: ISwaggerApisDocs, descMap: TPlainObj
     for (let method in apiItem) {
       const methodInfo = apiItem[method]
       const apiDefItem = new Method(methodInfo, { url, method })
-      debugger
+
       // 任何一个为非中文都可以 ;
       groupKey = [descMap[methodInfo.tags[0]], methodInfo.tags[0]].find(isCheckable)
 
