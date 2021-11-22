@@ -19,7 +19,6 @@
     "ejs": "^3.0.1",
     "generate-schema": "^2.6.0",
     "json-schema-to-typescript": "^8.2.0",
-    "minimatch": "^3.0.4",
     "pascal-case": "^3.1.2",
     "prettier": "^2.0.5",
     "tapable": "^1.1.3",
