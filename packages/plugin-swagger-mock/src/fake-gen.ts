@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * @desc
  *
@@ -28,8 +29,9 @@ export async function genrateFakeData(
   definitions: { [name: string]: any } = {},
   lang: TLanguage
 ): Promise<object> {
+  const faker = jsf.locate('faker')
+
   if (lang !== 'en') {
-    const faker = jsf.locate('faker')
     faker.locale = lang
   }
 
@@ -45,7 +47,7 @@ export async function genrateFakeData(
   cancelCircularRef(toDealJsonSchema, definitions)
   //去除circul 依赖, 如果有循环依赖,则设置null. 类似fastjson的处理方式;
 
-  return await jsf.generate(toDealJsonSchema)
+  return (await jsf.resolve(toDealJsonSchema)) as object
 }
 
 /**

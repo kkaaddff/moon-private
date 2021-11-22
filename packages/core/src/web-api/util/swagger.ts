@@ -3,9 +3,6 @@ import Method from '../domain/method'
 import ApiGroup from '../domain/api-group'
 import { kebabCase } from 'lodash'
 
-/** 针对 «» 字符做特殊判断 */
-const nameCheckReg = /^[0-9a-zA-Z_\-«» ]*$/
-
 export function resSchemaModify(
   schema: SchemaProps,
   apiItem: IWebApiDefinded,
@@ -264,6 +261,8 @@ export function transfer(
 
   return apiGroups
 }
+/** 针对 «» 字符做特殊判断 */
+const nameCheckReg = /^[0-9a-zA-Z_\-«» ]*$/
 
 function isCheckable(content: string) {
   return nameCheckReg.test(content)
@@ -292,7 +291,7 @@ function buildApiGroupMapFromPaths(apiDocs: ISwaggerApisDocs, descMap: TPlainObj
     for (let method in apiItem) {
       const methodInfo = apiItem[method]
       const apiDefItem = new Method(methodInfo, { url, method })
-
+      debugger
       // 任何一个为非中文都可以 ;
       groupKey = [descMap[methodInfo.tags[0]], methodInfo.tags[0]].find(isCheckable)
 

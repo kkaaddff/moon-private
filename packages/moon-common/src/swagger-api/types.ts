@@ -4,7 +4,7 @@ export interface IGenApiConfig {
   // controller:RegExp;
   dir: string
   plugins?: any[]
-  loader?: [(url: string, options: TTokenMap) => Promise<any>, TTokenMap]
+  loader?: [(options: TTokenMap) => Promise<any>, TTokenMap]
   wrapper?: string
   exclude?: string[]
   include?: string[]

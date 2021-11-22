@@ -1,32 +1,42 @@
 import request from 'umi-request'
 
-const getApiUrl = (
-  { token, catId } = {
-    token: 'f1180521157f557c715a42d2a9b5c30fa000aadb96a0fce739bee7dd78014c11',
-    catId: '39537',
-  }
-) => {
+const getApiUrl = ({ token, catId }: { token: string; catId: number }) => {
   return `https://yapi.amh-group.com/api/plugin/exportSwagger?type=OpenAPIV2&token=${token}&cat_id=${catId}`
 }
 
-async function fetch(pid, token, url) {
-  let result = await request(url, {
-    method: 'get',
-    params: {
-      type: 'OpenAPIV2',
-      pid, // YApi项目id
-      status: 'all',
-      isWiki: false,
-      token, // YApi生成的项目Token
-    },
-  })
+async function fetch(catId, token) {
+  let result = await request(getApiUrl({ token, catId }))
   return result
 }
+type TTokenMap = {
+  catIds: number[]
+  token: string
+}[]
 
-export async function yapiLoader(swaggerUrl, tokenMap) {
+export async function yapiLoader(tokenMap: TTokenMap) {
   try {
-    const mapList = Object.entries(tokenMap)
-    const result = await Promise.all(mapList.map((item) => fetch(item[0], item[1], swaggerUrl)))
+    if (!Array.isArray(tokenMap)) {
+      throw new Error(`loader options 应为数组！get ${Object.prototype.toString.call(tokenMap)}`)
+    }
+    const mapList: {
+      catId
+      token
+    }[] = []
+
+    tokenMap.map(({ catIds, token }) => {
+      if (!Array.isArray(catIds)) {
+        throw new Error(
+          `loader options catIds 应为数组！get ${Object.prototype.toString.call(catIds)}`
+        )
+      }
+      catIds.map((catId) => {
+        mapList.push({
+          catId,
+          token,
+        })
+      })
+    })
+    const result = await Promise.all(mapList.map((item) => fetch(item.catId, item.token)))
     return result
   } catch (error) {
     console.warn('加载 YApi 数据出错！')
