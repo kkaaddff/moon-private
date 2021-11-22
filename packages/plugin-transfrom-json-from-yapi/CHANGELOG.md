@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.3.0...@zhangqc/plugin-transfrom-json-from-yapi@0.4.0) (2021-11-22)
+
+
+### Features
+
+* **json-schema:** 升级json-schema ([1237381](https://github.com/kkaaddff/moon-private/commit/123738160930f1cd8de4cba7126f75908ed7b737))
+
+
+
+
+
 # [0.3.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.2.1...@zhangqc/plugin-transfrom-json-from-yapi@0.3.0) (2021-11-22)
 
 
