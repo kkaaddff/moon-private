@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.2.0...@zhangqc/moon-core@0.3.0) (2021-11-22)
+
+
+### Features
+
+* **全局:** 整理更新依赖 ([94f4921](https://github.com/kkaaddff/moon-private/commit/94f4921249790f0eb80de0923422704f99ca4377))
+* **tsconfig:** 整理全局 tsconfig ([dd4a624](https://github.com/kkaaddff/moon-private/commit/dd4a624538ed2e4324287d99671ca2470c23c5cd))
+
+
+
+
+
 # [0.2.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.1.1...@zhangqc/moon-core@0.2.0) (2021-11-08)
 
 
