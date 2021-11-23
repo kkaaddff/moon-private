@@ -1,8 +1,9 @@
 {
-  "name": "@zhangqc/loader-yapi",
-  "version": "0.3.0",
+  "name": "@zhangqc/vite-plugin-moon-mock",
+  "version": "0.0.0",
   "description": "",
   "main": "lib/index.js",
+  "typings": "declarations/index.d.ts",
   "author": "",
   "license": "MIT",
   "homepage": "https://github.com/kkaaddff/moon-private",
@@ -15,15 +16,12 @@
     "registory": "http://registory.npmjs.org"
   },
   "dependencies": {
-    "debug": "^4.1.1",
-    "ejs": "^3.0.1",
-    "prettier": "^2.0.5",
-    "tapable": "^1.1.3",
-    "ts-morph": "^7.0.1"
+    "path-to-regexp": "^6.2.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^7.0.0",
     "@types/tapable": "^1.0.4",
+    "vite": "^2",
     "fs-extra": "^8.1.0"
   }
 }

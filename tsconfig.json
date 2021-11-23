@@ -5,8 +5,6 @@
     "noEmit": false,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "declarationDir": "./declarations",
-    "declaration": true,
     "noImplicitAny": false,
     "sourceMap": true,
     "experimentalDecorators": true,

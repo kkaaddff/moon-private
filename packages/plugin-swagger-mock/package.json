@@ -19,7 +19,6 @@
     "ejs": "^3.0.1",
     "faker": "^5.5.3",
     "json-schema-faker": "^0.5.0-rcv.34",
-    "pascal-case": "^3.1.2",
     "prettier": "^2.0.5",
     "string-similarity": "^4.0.4",
     "tapable": "^1.1.3"
