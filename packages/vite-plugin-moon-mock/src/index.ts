@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite'
 import * as path from 'path'
-import * as url from 'url'
+import { parse } from 'url'
 import { pathToRegexp } from 'path-to-regexp'
 import { ResolvedConfig } from 'vite'
 import MoonCore from '@zhangqc/moon-core'
@@ -39,7 +39,8 @@ type TMockOptions = {
   }
 }
 
-export let mockData: TMockMethod[] = []
+let mockData: TMockMethod[] = []
+let moonConfig: any
 
 async function createMockServer(opt: TMockOptions) {
   const moonConfig = require(path.join(process.cwd(), 'moon-config.js'))
@@ -48,7 +49,12 @@ async function createMockServer(opt: TMockOptions) {
 
   for (const key in result) {
     const controllerMethod = JSON.parse(result[key])
-    mockData.push(...controllerMethod)
+    mockData.push(
+      ...controllerMethod.map((item) => ({
+        ...item,
+        url: parse(item.url).pathname,
+      }))
+    )
   }
 }
 
@@ -63,14 +69,10 @@ function requestMiddleware(opt: TMockOptions) {
     } = {}
 
     if (req.url) {
-      queryParams = url.parse(req.url, true)
+      queryParams = parse(req.url, true)
     }
 
     const reqUrl = queryParams.pathname
-
-    if (reqUrl.includes('uc-behaviour-analysis-manager')) {
-      debugger
-    }
 
     const matchRequest = mockData.find((item) => {
       if (!reqUrl || !item || !item.url) {
@@ -79,51 +81,16 @@ function requestMiddleware(opt: TMockOptions) {
       if (item.method && item.method.toUpperCase() !== req.method) {
         return false
       }
-      return reqUrl.includes(item.url)
+      return pathToRegexp(item.url).test(reqUrl)
     })
 
-    if (reqUrl.includes('uc-behaviour-analysis-manager')) {
-      matchRequest
-      debugger
+    if (matchRequest) {
+      const { controller, data, url } = matchRequest
+      res.setHeader('Content-Type', 'application/json')
+      res.statusCode = 200
+      res.end(JSON.stringify({ data, code: '200', message: 'success', url }))
+      return
     }
-    // if (matchRequest) {
-    //   const isGet = req.method && req.method.toUpperCase() === 'GET'
-    //   const { response, rawResponse, timeout, statusCode, url } = matchRequest
-
-    //   if (timeout) {
-    //     await sleep(timeout)
-    //   }
-
-    //   const urlMatch = match(url, { decode: decodeURIComponent })
-
-    //   let query = queryParams.query
-    //   if (reqUrl) {
-    //     if ((isGet && JSON.stringify(query) === '{}') || !isGet) {
-    //       const params = (urlMatch(reqUrl) as any).params
-    //       if (JSON.stringify(params) !== '{}') {
-    //         query = (urlMatch(reqUrl) as any).params || {}
-    //       } else {
-    //         query = queryParams.query || {}
-    //       }
-    //     }
-    //   }
-
-    //   const self: RespThisType = { req, res, parseJson: parseJson.bind(null, req) }
-    //   if (isFunction(rawResponse)) {
-    //     await rawResponse.bind(self)(req, res)
-    //   } else {
-    //     const body = await parseJson(req)
-    //     res.setHeader('Content-Type', 'application/json')
-    //     res.statusCode = statusCode || 200
-    //     const mockResponse = isFunction(response)
-    //       ? response.bind(self)({ url: req.url, body, query, headers: req.headers })
-    //       : response
-    //     res.end(JSON.stringify(Mock.mock(mockResponse)))
-    //   }
-
-    //   logger && loggerOutput('request invoke', req.url!)
-    //   return
-    // }
     next()
   }
   return middleware
