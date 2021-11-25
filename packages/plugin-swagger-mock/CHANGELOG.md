@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-swagger-mock@0.3.0...@zhangqc/plugin-swagger-mock@0.4.0) (2021-11-25)
+
+
+### Features
+
+* **全局:** 更新所有包的declaration ([bcb54c9](https://github.com/kkaaddff/moon-private/commit/bcb54c9785b663c9028ee83fde8ebcdfc8a90a4a))
+
+
+
+
+
 # [0.3.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-swagger-mock@0.2.0...@zhangqc/plugin-swagger-mock@0.3.0) (2021-11-22)
 
 

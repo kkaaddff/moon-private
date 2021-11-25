@@ -1,6 +1,6 @@
 {
   "name": "@zhangqc/vite-plugin-moon-mock",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
   "typings": "declarations/index.d.ts",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/fs-extra": "^7.0.0",
     "@types/tapable": "^1.0.4",
-    "vite": "^2",
-    "fs-extra": "^8.1.0"
+    "fs-extra": "^8.1.0",
+    "vite": "^2"
   }
 }
