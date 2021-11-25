@@ -16,7 +16,8 @@
     "registory": "http://registory.npmjs.org"
   },
   "dependencies": {
-    "path-to-regexp": "^6.2.0"
+    "path-to-regexp": "^6.2.0",
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^7.0.0",
