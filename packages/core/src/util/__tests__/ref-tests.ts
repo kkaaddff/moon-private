@@ -6,9 +6,7 @@
  * @Date    2019/4/2
  **/
 
-import { genTsFromSchema, genTsFromDefines } from '../json-util'
-import { join } from 'path'
-import * as fse from 'fs-extra'
+import { genTsFromDefines } from '../json-util'
 
 describe('ref测试', () => {
   it('ref测试', async () => {

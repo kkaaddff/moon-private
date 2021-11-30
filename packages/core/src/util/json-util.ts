@@ -6,30 +6,13 @@
  * @Date    2019/3/27
  **/
 
-import * as generateSchema from 'generate-schema'
 import { compile } from 'json-schema-to-typescript'
 import { IWebApiContext } from '../typings/api'
-import { IJsonTsGenResult, ITsGenResult } from '../typings/util'
+import { ITsGenResult } from '../typings/util'
 
 import debug from 'debug'
 
 const log = debug('web-apis:jsonUtil')
-/**
- * 将json转换为ts定义
- *
- * @param value
- * @returns {any}
- */
-export async function genTsFromJSON(
-  name: string,
-  value: any,
-  context?: IWebApiContext
-): Promise<IJsonTsGenResult> {
-  log(`根据JSON生成ts定义文件`)
-  let schema = generateSchema.json(name, value)
-  let tsResult = await genTsFromSchema(name, schema, context)
-  return { ...tsResult, schema }
-}
 
 //考虑使用z隐式传参呢..
 

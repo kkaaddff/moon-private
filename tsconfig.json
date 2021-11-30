@@ -8,7 +8,7 @@
     "noImplicitAny": false,
     "sourceMap": true,
     "experimentalDecorators": true,
-    "lib": ["es5", "es2015", "es2017", "esnext"],
+    "lib": ["es5", "es2015", "es2017", "esnext", "dom"],
     "baseUrl": ".",
     "paths": {
       "@vue/compat": ["packages/vue-compat/src"],

@@ -3,7 +3,6 @@ import { genrateFakeData, cancelCircularRef } from '../src/fake-gen'
 import { join } from 'path'
 
 import * as jsf from 'json-schema-faker'
-import * as $RefParser from 'json-schema-ref-parser'
 
 jsf.option('alwaysFakeOptionals', true)
 jsf.option('ignoreMissingRefs', true)
@@ -25,7 +24,7 @@ describe('循环依赖测试', () => {
     delete apiSchema.definitions
 
     cancelCircularRef(apiSchema, definitions)
-    let result = await genrateFakeData(apiSchema, definitions)
+    let result = await genrateFakeData(apiSchema, definitions, 'en')
     expect(result).not.toBeNull()
   })
 })

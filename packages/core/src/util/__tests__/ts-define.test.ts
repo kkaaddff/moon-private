@@ -6,7 +6,7 @@
  * @Date    2019/4/2
  **/
 
-import { genTsFromSchema, genTsFromDefines } from '../json-util'
+import { genTsFromDefines } from '../json-util'
 
 describe('ts类型定义生成', () => {
   it('ts类型定义生成', async () => {
