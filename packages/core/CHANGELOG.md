@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.5.0...@zhangqc/moon-core@0.6.0) (2021-12-06)
+
+
+### Features
+
+* **依赖:** 删除为用到的依赖 ([c4786a7](https://github.com/kkaaddff/moon-private/commit/c4786a769d21d3b766e7cc4073ad400541f6dfb3))
+
+
+
+
+
 # [0.5.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.4.0...@zhangqc/moon-core@0.5.0) (2021-11-25)
 
 
