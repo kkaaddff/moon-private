@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.6.0...@zhangqc/moon-common@0.7.0) (2021-12-07)
+
+
+### Features
+
+* **common、core:** 更新config和jsapi ([d5bfe8c](https://github.com/kkaaddff/moon-private/commit/d5bfe8c3ae8d76449db120787c5f95520315acb2))
+
+
+
+
+
 # [0.6.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.5.0...@zhangqc/moon-common@0.6.0) (2021-11-25)
 
 
