@@ -131,7 +131,7 @@ function addOperationId(request: TRequest, path: string) {
 
 function buildOperationId(path: string, method: TMethodType) {
   const lastPath = path.split('/').pop() ?? ''
-  return `${lastPath}By${method}`
+  return `${method}${lastPath}`
 }
 
 //--------------------处理 definitions 修改--------------------------------------------

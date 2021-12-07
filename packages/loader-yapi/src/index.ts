@@ -1,6 +1,6 @@
 import request from 'umi-request'
 
-const getApiUrl = ({ token, catId }: { token: string; catId: number }) => {
+const getApiUrl = ({ token, catId }: { token: string; catId: string }) => {
   return `https://yapi.amh-group.com/api/plugin/exportSwagger?type=OpenAPIV2&token=${token}&cat_id=${catId}`
 }
 
@@ -9,7 +9,7 @@ async function fetch(catId, token) {
   return result
 }
 type TTokenMap = {
-  catIds: number[]
+  catIds: Array<string | number>
   token: string
 }[]
 
@@ -31,7 +31,7 @@ export async function yapiLoader(tokenMap: TTokenMap) {
       }
       catIds.map((catId) => {
         mapList.push({
-          catId,
+          catId: typeof catId === 'string' ? catId.split('_')[1] : catId,
           token,
         })
       })
