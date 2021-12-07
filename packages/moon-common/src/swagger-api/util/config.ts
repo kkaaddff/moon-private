@@ -24,13 +24,11 @@ export interface IBackendConfig {
   }
 }
 
-export async function loadMoonConfig(
-  projectDir = process.cwd()
-): Promise<IMoonConfig | IBackendConfig> {
+export async function loadMoonConfig(projectDir = process.cwd()): Promise<IMoonConfig> {
   let defaultMoonConfig: IMoonConfig
 
-  let JSONconfigFilePath = join(projectDir, '.moon.json')
   let jsConfigFilePath = join(projectDir, 'moon-config.js')
+  let JSONconfigFilePath = join(projectDir, '.moon.json')
   try {
     if (fse.existsSync(JSONconfigFilePath)) {
       console.log('读取配置文件', JSONconfigFilePath)
@@ -39,11 +37,14 @@ export async function loadMoonConfig(
       console.log('读取配置文件', jsConfigFilePath)
       defaultMoonConfig = require(jsConfigFilePath)
     } else {
-      throw new Error('配置不存在:' + JSONconfigFilePath)
+      throw new Error(`
+      配置不存在:
+        ${JSONconfigFilePath},
+        ${jsConfigFilePath}`)
     }
   } catch (err) {
     console.error(err)
-    throw new Error('配置读取失败:' + JSONconfigFilePath)
+    throw new Error('配置读取失败:' + jsConfigFilePath + ',' + JSONconfigFilePath)
   }
 
   return defaultMoonConfig

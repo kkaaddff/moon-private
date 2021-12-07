@@ -10,13 +10,14 @@
  **/
 import { genApi } from './index'
 import { loadMoonConfig } from './util/config'
-import { IMoonConfig } from '@zhangqc/moon-core/src/typings/config'
 
-;(async () => {
+async function main() {
   let projectPath = process.cwd()
-  let config = (await loadMoonConfig()) as IMoonConfig
+  let config = await loadMoonConfig()
   await genApi({
     workDir: projectPath,
     config: config.api,
   })
-})()
+}
+
+main()

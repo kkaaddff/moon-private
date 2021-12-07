@@ -9,7 +9,7 @@
 
 import { SyncHook } from 'tapable'
 
-;(async () => {
+async function main() {
   let loadSwagger = new SyncHook<string, object>(['sdfsdf', 'adasd'])
 
   loadSwagger.tap('test', (aa, tt1) => {
@@ -24,4 +24,6 @@ import { SyncHook } from 'tapable'
   let result = loadSwagger.call('111', tt)
   console.log(result)
   console.log('tt:::', tt)
-})()
+}
+
+main()
