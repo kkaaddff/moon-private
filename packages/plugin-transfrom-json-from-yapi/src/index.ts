@@ -1,5 +1,5 @@
 import { titleCase } from 'title-case'
-import { clone, isEmpty, omit } from 'lodash'
+import { clone, isEmpty, upperFirst } from 'lodash'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 export class TransfromJsonFromYapiPlugin {
@@ -131,7 +131,7 @@ function addOperationId(request: TRequest, path: string) {
 
 function buildOperationId(path: string, method: TMethodType) {
   const lastPath = path.split('/').pop() ?? ''
-  return `${method}${lastPath}`
+  return `${method}${upperFirst(lastPath)}`
 }
 
 //--------------------处理 definitions 修改--------------------------------------------
