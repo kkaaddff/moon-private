@@ -3,7 +3,7 @@
   "version": "0.8.0",
   "description": "",
   "main": "swagger-api/index.js",
-  "types": "declarations/index.d.ts",
+  "types": "declarations/swagger-api/index.d.ts",
   "author": "",
   "license": "MIT",
   "homepage": "https://github.com/kkaaddff/moon-private",
