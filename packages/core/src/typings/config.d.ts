@@ -23,12 +23,8 @@ export interface IMoonConfig {
     include?: string[]
     mock?: {
       isMock?: boolean
-      ignoreApi: {
-        [controller: string]: string[]
-      }
-      mockApi: {
-        [controller: string]: string[]
-      }
+      ignoreApi: Array<string | RegExp>
+      mockApi: Array<string | RegExp>
     }
   }
 }

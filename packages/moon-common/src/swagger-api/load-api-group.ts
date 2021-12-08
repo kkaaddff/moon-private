@@ -49,7 +49,7 @@ export default async function loadApiGroup(
           //----------------------------------------------------------------
           /** 将自定义 loader 的 options 传给 loader */
           /** 如果有自定义 loader 采用自定义 loader */
-          let swaggerJsonList = await apiGenConfig.loader?.[0]( apiGenConfig.loader?.[1])
+          let swaggerJsonList = await apiGenConfig.loader?.[0](apiGenConfig.loader?.[1])
           context.apiGroups = null
 
           for (let index = 0; index < swaggerJsonList.length; index++) {

@@ -14,7 +14,7 @@ import { TLanguage } from './fake-gen'
 export class SwaggerMock {
   language: TLanguage
 
-  constructor(config: SwaggerConfig) {
+  constructor(config?: SwaggerConfig) {
     this.language = config?.lang ?? 'en'
   }
 
