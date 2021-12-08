@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/loader-yapi@0.6.0...@zhangqc/loader-yapi@0.6.1) (2021-12-08)
+
+
+### Bug Fixes
+
+* **loader:** 补充loader类型定义 ([400d657](https://github.com/kkaaddff/moon-private/commit/400d6579c8c9695a84e2f9b6840e684f90194360))
+
+
+
+
+
 # [0.6.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/loader-yapi@0.5.0...@zhangqc/loader-yapi@0.6.0) (2021-12-08)
 
 
