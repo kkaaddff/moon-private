@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
-  "typings": "declarations/index.d.ts",
+  "types": "declarations/index.d.ts",
   "author": "",
   "license": "MIT",
   "homepage": "https://github.com/kkaaddff/moon-private",

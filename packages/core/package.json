@@ -3,7 +3,7 @@
   "version": "0.7.0",
   "description": "",
   "main": "lib/index.js",
-  "typings": "declarations/index.d.ts",
+  "types": "declarations/index.d.ts",
   "author": "",
   "license": "MIT",
   "gitHead": "96cd395e9a2b767aa1bc57aa28bca4dd3c794db1",
