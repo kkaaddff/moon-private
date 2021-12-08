@@ -16,7 +16,8 @@ async function main() {
   let config = await loadMoonConfig()
   await genApi({
     workDir: projectPath,
-    config: config.api,
+    // TODO: 暂时不支持配置文件
+    config: config.api as any,
   })
 }
 

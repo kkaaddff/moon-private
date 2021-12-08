@@ -30,5 +30,6 @@
     "@types/fs-extra": "^7.0.0",
     "@types/tapable": "^1.0.4",
     "fs-extra": "^8.1.0"
-  }
+  },
+  "gitHead": "343cd8db424d527567891b8cf9b867a97c8d9ada"
 }
