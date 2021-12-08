@@ -2,7 +2,7 @@
   "name": "@zhangqc/moon-common",
   "version": "0.8.2",
   "description": "",
-  "main": "swagger-api/index.js",
+  "main": "lib/swagger-api/index.js",
   "types": "declarations/swagger-api/index.d.ts",
   "author": "",
   "license": "MIT",
