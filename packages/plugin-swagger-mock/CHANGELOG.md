@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-swagger-mock@0.6.0...@zhangqc/plugin-swagger-mock@0.6.1) (2021-12-08)
+
+
+### Bug Fixes
+
+* **corecommonmock:** 补充类型定义 ([4774add](https://github.com/kkaaddff/moon-private/commit/4774add4d95f44660600df9b12c0dc00a8b145a6))
+
+
+
+
+
 # [0.6.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-swagger-mock@0.5.0...@zhangqc/plugin-swagger-mock@0.6.0) (2021-12-08)
 
 

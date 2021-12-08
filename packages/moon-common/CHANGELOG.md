@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.8.1...@zhangqc/moon-common@0.8.2) (2021-12-08)
+
+
+### Bug Fixes
+
+* **corecommonmock:** 补充类型定义 ([4774add](https://github.com/kkaaddff/moon-private/commit/4774add4d95f44660600df9b12c0dc00a8b145a6))
+
+
+
+
+
 ## [0.8.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.8.0...@zhangqc/moon-common@0.8.1) (2021-12-08)
 
 **Note:** Version bump only for package @zhangqc/moon-common
