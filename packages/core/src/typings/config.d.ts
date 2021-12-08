@@ -18,6 +18,7 @@ export interface IMoonConfig {
     swaggerUrls?: string[]
     dir: string
     plugins?: any[]
+    loader?: any[]
     wrapper?: string
     exclude?: string[]
     include?: string[]

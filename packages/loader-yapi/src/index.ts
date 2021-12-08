@@ -8,12 +8,12 @@ async function fetch(catId, token) {
   let result = await request(getApiUrl({ token, catId }))
   return result
 }
-type TTokenMap = {
+export type TYapiConfig = {
   catIds: Array<string | number>
   token: string
 }[]
 
-export async function yapiLoader(tokenMap: TTokenMap) {
+export async function yapiLoader(tokenMap: TYapiConfig) {
   try {
     if (!Array.isArray(tokenMap)) {
       throw new Error(`loader options 应为数组！get ${Object.prototype.toString.call(tokenMap)}`)
