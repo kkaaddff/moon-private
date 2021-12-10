@@ -1,6 +1,6 @@
 {
   "name": "@zhangqc/loader-yapi",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "",
   "main": "lib/index.js",
   "types": "declarations/index.d.ts",

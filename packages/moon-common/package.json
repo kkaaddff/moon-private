@@ -1,6 +1,6 @@
 {
   "name": "@zhangqc/moon-common",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "description": "",
   "main": "lib/swagger-api/index.js",
   "types": "declarations/swagger-api/index.d.ts",
