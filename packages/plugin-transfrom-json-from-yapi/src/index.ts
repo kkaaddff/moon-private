@@ -110,14 +110,13 @@ export function transfromJson(context) {
  */
 function addDefinition2Tag(tags: Array<{ name: string; description?: string }> = []) {
   tags.forEach((tag) => {
-    tag.description =
+    tag.description = titleCase(
       tag.description ??
-      titleCase(
         tag.name
           .match(/\([a-zA-Z| |0-9]*\)/g)
           .pop()
           .replace(/\(|\)/g, '')
-      )
+    )
   })
   return tags
 }

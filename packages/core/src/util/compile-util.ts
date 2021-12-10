@@ -21,7 +21,6 @@ import {
   ObjectLiteralExpression,
   Project,
   ScriptTarget,
-  SyntaxKind,
 } from 'ts-morph'
 import { IFileSaveOptions } from '../typings/page'
 

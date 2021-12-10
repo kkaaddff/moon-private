@@ -233,11 +233,12 @@ export function transfer(
   let apiGroups: ApiGroup[] = []
 
   /**
-   * 推荐采用 ke-bab 命名法处理文件名
-   * { [name:中文]:description（用作生成文件名） }
+   * name:中文名
+   * description:英文（用作生成文件名）
+   * !任何一个为非中文都可以 ;
    */
   let tag2DescMap: TPlainObject = apiDocs?.tags?.reduce((acc, next) => {
-    acc[next.name] = kebabCase(next.description)
+    acc[next.name] = next.description
     return acc
   }, {})
 
@@ -302,7 +303,8 @@ function buildApiGroupMapFromPaths(apiDocs: ISwaggerApisDocs, descMap: TPlainObj
 
       if (!resultGroupKeyMap[groupKey]) {
         resultGroupKeyMap[groupKey] = new ApiGroup({
-          name: groupKey,
+          // !推荐采用 ke-bab 命名法处理文件名
+          name: kebabCase(groupKey),
           serverInfo: {
             host: apiDocs.host,
             baseUrl: apiDocs.basePath === '/' ? '' : apiDocs.basePath,
