@@ -8,13 +8,42 @@
 import { join, parse } from 'path'
 import * as fse from 'fs-extra'
 import * as prettier from 'prettier'
-import { IHandleFile, IHandlePageParam, IInsertOption } from '../typings/util'
+import {
+  IHandleFile,
+  IHandlePageParam,
+  IInsertImportDeclaration,
+  IInsertOption,
+} from '../typings/util'
 import debug from 'debug'
+import {
+  ModuleKind,
+  ModuleResolutionKind,
+  ObjectLiteralExpression,
+  Project,
+  ScriptTarget,
+  SyntaxKind,
+} from 'ts-morph'
 import { IFileSaveOptions } from '../typings/page'
 
 const log = debug('moon:core:compile-util')
 
-const defaultPrettiesConfig = {
+export const DefaultTsconfig = {
+  compilerOptions: {
+    target: ScriptTarget.ESNext, // ts-morph 内部定义 ScriptTarget
+    allowJs: true,
+    strict: false,
+    lib: ['dom', 'esnext'],
+    module: ModuleKind.ESNext, // ts-morph 内部定义
+    outDir: './src/api',
+    declaration: true,
+    moduleResolution: ModuleResolutionKind.NodeJs, // ts-morph 内部定义
+    noUnusedLocals: false,
+    noUnusedParameters: false,
+    esModuleInterop: true,
+  },
+}
+
+export const DefaultPrettiesConfig = {
   tabWidth: 2,
   jsxSingleQuote: true,
   jsxBracketSameLine: true,
@@ -38,7 +67,7 @@ const defaultPrettiesConfig = {
  */
 export function getHandleFile({ outDir, tplBase, context, prettiesConfig = {} }: IHandleFile) {
   prettiesConfig = {
-    ...defaultPrettiesConfig,
+    ...DefaultPrettiesConfig,
     ...prettiesConfig,
   }
 
@@ -100,14 +129,13 @@ export function getHandleFile({ outDir, tplBase, context, prettiesConfig = {} }:
 /**
  * 向内容中间插入数据;
  *
- * @param {string} rawContent
- * @param {IInsertOption[]} inserts
- * @returns {string}
+ * @param rawContent
+ * @param inserts
  */
 export function insertContent(rawContent: string, inserts: IInsertOption[]) {
   let content = rawContent
   for (let i = 0, ilen = inserts.length; i < ilen; i++) {
-    let item: IInsertOption = inserts[i]
+    let item = inserts[i]
 
     if (!item.check || item.check(content, rawContent)) {
       let markContent, index
@@ -137,19 +165,51 @@ export function insertContent(rawContent: string, inserts: IInsertOption[]) {
       ${content.substring(index)}`
     }
   }
+  content = prettier.format(content, DefaultPrettiesConfig)
+  return content
+}
+
+/**
+ * 生成 index.ts  索引文件
+ * @param filepath 索引文件路径 index.ts
+ * @param inserts
+ * @returns
+ */
+export function genIndexContentByTs(filepath: string, inserts: IInsertImportDeclaration[]) {
+  const project = new Project(DefaultTsconfig)
+
+  let sourceFile = project.addSourceFileAtPath(filepath)
+  const importsText = sourceFile.getImportDeclarations().map((item) => item.getText())
+
+  inserts.map((item) => {
+    if (!importsText.find((text) => text.includes(item.namespaceImport))) {
+      sourceFile.addImportDeclaration({
+        namespaceImport: item.namespaceImport,
+        moduleSpecifier: item.moduleSpecifier,
+      })
+
+      const ExportAssignment = sourceFile.getExportAssignment((d) => !d.isExportEquals())
+      const objectLiteralExpression = ExportAssignment.getExpression() as ObjectLiteralExpression
+
+      objectLiteralExpression.addShorthandPropertyAssignment({
+        name: item.namespaceImport,
+      })
+    }
+  })
+
+  let content = sourceFile.getFullText()
+  content = prettier.format(content, DefaultPrettiesConfig)
   return content
 }
 
 /**
  *
  * 向文件内容中间插入数据; 插入后再保存数据;
- * @param {string} filepath
- * @param {IInsertOption[]} inserts
- * @returns {Promise<void>}
+ * @param filepath
+ * @param inserts
  */
-export async function insertFile(filepath: string, inserts: IInsertOption[]) {
-  let rawContent = await readFile(filepath)
-  let content = insertContent(rawContent, inserts)
+export async function insertFile(filepath: string, inserts: IInsertImportDeclaration[]) {
+  let content = genIndexContentByTs(filepath, inserts)
   await fse.writeFile(filepath, content)
 }
 

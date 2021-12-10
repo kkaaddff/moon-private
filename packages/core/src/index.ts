@@ -16,13 +16,14 @@ import * as TsIndex from './web-api/ts-index'
 import * as apiDomain from './web-api/domain'
 import { IMoonConfig } from './typings/config'
 import { IFileSaveOptions } from './typings/page'
-import { IInsertOption } from './typings/util'
+import { IInsertOption, IInsertImportDeclaration } from './typings/util'
 import { IWebApiContext, IWebApiDefinded, SchemaProps } from './typings/api'
 
 export {
   IMoonConfig,
   IFileSaveOptions,
   IInsertOption,
+  IInsertImportDeclaration,
   IWebApiContext,
   IWebApiDefinded,
   SchemaProps,

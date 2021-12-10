@@ -15,7 +15,7 @@ import ApiCompileHooks from './hook'
 import loadApiGroup from './load-api-group'
 import { IWebApiContext, IWebApiDefinded, SchemaProps } from '@zhangqc/moon-core'
 import { IFileSaveOptions } from '@zhangqc/moon-core'
-import { IInsertOption } from '@zhangqc/moon-core'
+import { IInsertImportDeclaration } from '@zhangqc/moon-core'
 import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
 import { applyHook } from '../util/hook-util'
 import { IGenApiConfig } from './types'
@@ -45,7 +45,7 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
 
   let apiDir = join(workBase, defaultMoonConfig.api.dir)
 
-  let inserts: IInsertOption[] = []
+  let inserts: IInsertImportDeclaration[] = []
 
   for (let i = 0, ilen = apiGroups.length; i < ilen; i++) {
     try {
@@ -128,18 +128,8 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
       let filePath = `./${webapiGroup.name}`
 
       inserts.push({
-        mark: /export +default/,
-        isBefore: true,
-        content: `import * as  ${controllerName} from '${filePath}';`,
-        // content: `import  ${controllerName} from '${filePath}';`,
-        check: (content: string) => !content.includes(filePath),
-      })
-
-      inserts.push({
-        mark: /default +{/,
-        isBefore: false,
-        content: `${controllerName},`,
-        check: (_, raw) => !raw.includes(filePath),
+        namespaceImport: controllerName,
+        moduleSpecifier: filePath,
       })
 
       await hookInstance.afterGroupCompile.call(webapiGroup, context)

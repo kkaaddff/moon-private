@@ -39,6 +39,11 @@ export interface IInsertOption {
   check?: (content, rawContent) => boolean
 }
 
+export interface IInsertImportDeclaration {
+  namespaceImport: string
+  moduleSpecifier: string
+}
+
 interface IJsonTsGenResult extends ITsGenResult {
   typeName: string
   tsContent: string
