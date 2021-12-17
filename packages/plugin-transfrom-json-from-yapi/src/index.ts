@@ -91,7 +91,7 @@ export class TransfromJsonFromYapiPlugin {
   }
 
   //--------------------处理 swagger2ApiGroup--------------------------------------------
-  transfromJson(context) {
+  transfromJson = (context) => {
     const { swaggerJson } = context
     const { paths } = swaggerJson
 
@@ -112,7 +112,7 @@ export class TransfromJsonFromYapiPlugin {
    * @param tags
    * @returns
    */
-  addDefinition2Tag(tags: Array<{ name: string; description?: string }> = []) {
+  addDefinition2Tag = (tags: Array<{ name: string; description?: string }> = []) => {
     tags.forEach((tag) => {
       tag.description = titleCase(
         tag.description ??
@@ -125,7 +125,7 @@ export class TransfromJsonFromYapiPlugin {
     return tags
   }
 
-  addOperationId(request: TRequest, path: string) {
+  addOperationId = (request: TRequest, path: string) => {
     for (const method in request) {
       const operationId = this.customMethod
         ? this.customMethod(path, method)
@@ -134,7 +134,7 @@ export class TransfromJsonFromYapiPlugin {
     }
   }
 
-  buildOperationId(path: string, method: TMethodType) {
+  buildOperationId = (path: string, method: TMethodType) => {
     const lastPath = path.split('/').pop() ?? ''
     return `${method}${upperFirst(lastPath)}`
   }
