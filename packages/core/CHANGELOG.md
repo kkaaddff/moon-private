@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.9.0...@zhangqc/moon-core@0.9.1) (2021-12-17)
+
+
+### Bug Fixes
+
+* **core:** 重命名判断 url 和 method ([0e5315c](https://github.com/kkaaddff/moon-private/commit/0e5315cfd7f763c2e909d60213f2d33085b32dc4))
+
+
+
+
+
 # [0.9.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.8.2...@zhangqc/moon-core@0.9.0) (2021-12-10)
 
 
