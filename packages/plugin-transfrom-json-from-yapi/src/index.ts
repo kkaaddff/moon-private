@@ -3,10 +3,15 @@ import { clone, isEmpty, upperFirst } from 'lodash'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 export class TransfromJsonFromYapiPlugin {
-  private type: 'YmmMaven' | 'manual'
+  private type: 'YmmMaven' | 'manual' | null
+  private customMethod: (path: string, method: string) => string | null
 
-  constructor(config: { type: 'manual' | null }) {
+  constructor(config: {
+    type?: TransfromJsonFromYapiPlugin['type']
+    customName?: TransfromJsonFromYapiPlugin['customMethod']
+  }) {
     this.type = config.type ?? 'YmmMaven'
+    this.customMethod = config.customName ?? null
   }
 
   apply(compilerHook) {
@@ -16,7 +21,7 @@ export class TransfromJsonFromYapiPlugin {
      * - tags 下请求对象中缺少 operationId ： 根据 url 以及 method 补全
      * - path 下请求对象中缺少 description (描述服务的 controller )：
      */
-    compilerHook.swagger2ApiGroup.tap(pluginName, transfromJson)
+    compilerHook.swagger2ApiGroup.tap(pluginName, this.transfromJson)
 
     /**
      * 处理 Yapi 导出 swaggerJson 中存在的信息不全的问题
@@ -84,53 +89,55 @@ export class TransfromJsonFromYapiPlugin {
       }
     })
   }
-}
 
-//--------------------处理 swagger2ApiGroup--------------------------------------------
-export function transfromJson(context) {
-  const { swaggerJson } = context
-  const { paths } = swaggerJson
+  //--------------------处理 swagger2ApiGroup--------------------------------------------
+  transfromJson(context) {
+    const { swaggerJson } = context
+    const { paths } = swaggerJson
 
-  swaggerJson.definitions = swaggerJson?.definitions ?? {}
+    swaggerJson.definitions = swaggerJson?.definitions ?? {}
 
-  swaggerJson.tags = addDefinition2Tag(swaggerJson.tags)
+    swaggerJson.tags = this.addDefinition2Tag(swaggerJson.tags)
 
-  for (const pathKey in paths) {
-    addOperationId(paths[pathKey], pathKey)
+    for (const pathKey in paths) {
+      this.addOperationId(paths[pathKey], pathKey)
+    }
   }
-}
-/**
- * 处理 `tags` 下只有 `name` 的情况。
- * 从 `name` 中提取英文作为服务名称
- * 1. 匹配括号中的英文加数字
- * 2. 从匹配数组中取最后一个
- * 3. 替换掉括号（）
- * @param tags
- * @returns
- */
-function addDefinition2Tag(tags: Array<{ name: string; description?: string }> = []) {
-  tags.forEach((tag) => {
-    tag.description = titleCase(
-      tag.description ??
-        tag.name
-          .match(/\([a-zA-Z| |0-9]*\)/g)
-          .pop()
-          .replace(/\(|\)/g, '')
-    )
-  })
-  return tags
-}
-
-function addOperationId(request: TRequest, path: string) {
-  for (const method in request) {
-    const operationId = buildOperationId(path, method as TMethodType)
-    request[method]['operationId'] = operationId
+  /**
+   * 处理 `tags` 下只有 `name` 的情况。
+   * 从 `name` 中提取英文作为服务名称
+   * 1. 匹配括号中的英文加数字
+   * 2. 从匹配数组中取最后一个
+   * 3. 替换掉括号（）
+   * @param tags
+   * @returns
+   */
+  addDefinition2Tag(tags: Array<{ name: string; description?: string }> = []) {
+    tags.forEach((tag) => {
+      tag.description = titleCase(
+        tag.description ??
+          tag.name
+            .match(/\([a-zA-Z| |0-9]*\)/g)
+            .pop()
+            .replace(/\(|\)/g, '')
+      )
+    })
+    return tags
   }
-}
 
-function buildOperationId(path: string, method: TMethodType) {
-  const lastPath = path.split('/').pop() ?? ''
-  return `${method}${upperFirst(lastPath)}`
+  addOperationId(request: TRequest, path: string) {
+    for (const method in request) {
+      const operationId = this.customMethod
+        ? this.customMethod(path, method)
+        : this.buildOperationId(path, method as TMethodType)
+      request[method]['operationId'] = operationId
+    }
+  }
+
+  buildOperationId(path: string, method: TMethodType) {
+    const lastPath = path.split('/').pop() ?? ''
+    return `${method}${upperFirst(lastPath)}`
+  }
 }
 
 //--------------------处理 definitions 修改--------------------------------------------
@@ -146,45 +153,6 @@ const JSON_SCHEMA_TYPES = {
   int: 'number',
   void: 'null',
 }
-
-// TODO： definitions 拆分出更多的类型
-// function traverseDefinitionsProps(propObj, key, definitions) {
-//   if (!propObj) {
-//     return
-//   }
-
-//   //------------------------字段数据类型 rename-----------------------------------
-//   if (propObj.type) {
-//     propObj.type = propObj.type.toLowerCase()
-//     if (JSON_SCHEMA_TYPES[propObj.type]) {
-//       propObj.type = JSON_SCHEMA_TYPES[propObj.type]
-//     }
-//   }
-//   //------------------------字段数据类型 rename-----------------------------------
-
-//   if (isEmpty(propObj.items)) {
-//     delete propObj.items
-//   } else {
-//     traverseDefinitionsProps(propObj.items, key, definitions)
-//   }
-
-//   if (propObj.properties) {
-//     for (const key in propObj.properties) {
-//       const propertiesItem = propObj.properties[key]
-//       traverseDefinitionsProps(propertiesItem, key, definitions)
-//       // 后序遍历，将复杂类型塞到 #/definitions/中去
-//       if (propertiesItem.type === 'object') {
-//         definitions[key] = propertiesItem
-//         propObj.properties[key] = {
-//           ...omit(propertiesItem, ['items', 'properties']),
-//           schema: {
-//             $ref: `#/definitions/${key}`,
-//           },
-//         }
-//       }
-//     }
-//   }
-// }
 
 function traverseDefinitionsProps(propObj) {
   if (!propObj) {
