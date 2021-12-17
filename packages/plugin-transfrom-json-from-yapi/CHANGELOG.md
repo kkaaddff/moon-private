@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.10.0...@zhangqc/plugin-transfrom-json-from-yapi@0.10.1) (2021-12-17)
+
+
+### Bug Fixes
+
+* **TransfromJsonFromYapiPlugin:** class绑定this ([0d0df5d](https://github.com/kkaaddff/moon-private/commit/0d0df5d1536386c85df42e60d36281bba1ae87c7))
+
+
+
+
+
 # [0.10.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-json-from-yapi@0.9.0...@zhangqc/plugin-transfrom-json-from-yapi@0.10.0) (2021-12-17)
 
 
