@@ -42,10 +42,17 @@ export default class ApiGroup {
   }
 
   /**
-   * 是否已经存在方法;
+   * 是否已经存在`methodName`相同方法;
    * @param methodName
    */
   isMethodNameExist(methodName: string) {
     return !this.apis.every((method) => method.name !== methodName)
+  }
+  /**
+   * 是否已经存在`url`相同的方法;
+   * @param methodUrl
+   */
+  isMethodUrlExist(methodUrl: string) {
+    return !this.apis.every((method) => method.url !== methodUrl)
   }
 }

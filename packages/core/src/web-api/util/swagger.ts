@@ -315,6 +315,10 @@ function buildApiGroupMapFromPaths(apiDocs: ISwaggerApisDocs, descMap: TPlainObj
 
       if (resultGroupKeyMap[groupKey].isMethodNameExist(apiDefItem.name)) {
         console.warn('api名字相同::', groupKey, apiDefItem.name)
+      }
+
+      if (resultGroupKeyMap[groupKey].isMethodNameExist(apiDefItem.url)) {
+        console.warn('api url 相同::', groupKey, apiDefItem.url)
         continue
       }
 
