@@ -44,8 +44,6 @@ export const DefaultTsconfig = {
 
 export const DefaultPrettiesConfig = {
   tabWidth: 2,
-  jsxSingleQuote: true,
-  jsxBracketSameLine: true,
   endOfLine: 'lf',
   printWidth: 100,
   singleQuote: true,
