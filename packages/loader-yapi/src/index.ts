@@ -1,7 +1,7 @@
 import request from 'umi-request'
 
 const getApiUrl = ({ token, catId }: { token: string; catId: string }) => {
-  return `https://yapi.amh-group.com/api/plugin/exportSwagger?type=OpenAPIV2&token=${token}&cat_id=${catId}`
+  return ``
 }
 
 async function fetch(catId, token) {
