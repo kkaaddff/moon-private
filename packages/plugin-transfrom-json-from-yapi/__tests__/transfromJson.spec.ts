@@ -19,7 +19,7 @@ const YapiJson = {
       post: {
         tags: ['质检模板项服务(Pigeon api)'],
         summary: '列表查询',
-        description: '[李祥伟](dingtalk://dingtalkclient/action/sendmsg?dingtalk_id=:)',
+        description: '[李祥伟]()',
         consumes: ['application/json'],
         parameters: [
           {
@@ -47,7 +47,7 @@ const YapiJson = {
             schema: {
               properties: {
                 data: {
-                  description: '类型：com.ymm.crm.inspector.dto.TemplateItemDto',
+                  description: '类型：com.inspector.dto.TemplateItemDto',
                   properties: {
                     level: {
                       description: '枚举类型->FIRST:;SECOND:;',
@@ -79,7 +79,7 @@ const YapiJson = {
                     },
                     childItemList: {
                       description:
-                        '；类型：com.ymm.crm.inspector.dto.TemplateItemDto；属性信息见当前属性所在对象的属性信息',
+                        '；类型：com.inspector.dto.TemplateItemDto；属性信息见当前属性所在对象的属性信息',
                       type: 'object',
                     },
                     parentId: {
@@ -162,7 +162,7 @@ const TargetJson = {
         tags: ['质检模板项服务(Pigeon api)'],
         summary: '列表查询',
         operationId: 'listTemplateItemBypost',
-        description: '[李祥伟](dingtalk://dingtalkclient/action/sendmsg?dingtalk_id=:)',
+        description: '[李祥伟]()',
         consumes: ['application/json'],
         parameters: [
           {
@@ -190,7 +190,7 @@ const TargetJson = {
             schema: {
               properties: {
                 data: {
-                  description: '类型：com.ymm.crm.inspector.dto.TemplateItemDto',
+                  description: '类型：com.inspector.dto.TemplateItemDto',
                   properties: {
                     level: {
                       description: '枚举类型->FIRST:;SECOND:;',
@@ -222,7 +222,7 @@ const TargetJson = {
                     },
                     childItemList: {
                       description:
-                        '；类型：com.ymm.crm.inspector.dto.TemplateItemDto；属性信息见当前属性所在对象的属性信息',
+                        '；类型：com.inspector.dto.TemplateItemDto；属性信息见当前属性所在对象的属性信息',
                       type: 'object',
                     },
                     parentId: {
