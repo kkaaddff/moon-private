@@ -3,14 +3,14 @@ import { clone, isEmpty, upperFirst } from 'lodash'
 const pluginName = 'TransfromJsonFromYapiPlugin'
 
 export class TransfromJsonFromYapiPlugin {
-  private type: 'YmmMaven' | 'manual' | null
+  private type: 'Maven' | 'manual' | null
   private customMethod: (path: string, method: string) => string | null
 
   constructor(config: {
     type?: TransfromJsonFromYapiPlugin['type']
     customName?: TransfromJsonFromYapiPlugin['customMethod']
   }) {
-    this.type = config.type ?? 'YmmMaven'
+    this.type = config.type ?? 'Maven'
     this.customMethod = config.customName ?? null
   }
 
@@ -63,7 +63,7 @@ export class TransfromJsonFromYapiPlugin {
      * ! 区分 手动维护的 swagger 和 插件 自动生成的 yapi
      */
     compilerHook.onResponseSchema.tap(pluginName, (responseSchema, context) => {
-      const result = this.type === 'manual' ? 'data' : 'YmmResult<Void>'
+      const result = this.type === 'manual' ? 'data' : 'Result<Void>'
       if (responseSchema?.properties?.[result]) {
         if (responseSchema?.properties?.[result].type === 'array') {
           responseSchema.items = responseSchema.properties[result].items
