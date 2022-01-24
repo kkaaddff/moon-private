@@ -8,6 +8,7 @@
   "license": "MIT",
   "homepage": "https://github.com/kkaaddff/moon-private",
   "scripts": {
+    "start": "tsc -w",
     "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

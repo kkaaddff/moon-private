@@ -13,6 +13,7 @@
     "registory": "http://registory.npmjs.org"
   },
   "scripts": {
+    "start": "tsc -w",
     "prepublishOnly": "tsc && ts-node ./src/copy.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
