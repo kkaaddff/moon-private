@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-swagger-mock@0.6.1...@zhangqc/plugin-swagger-mock@0.6.2) (2022-01-24)
+
+
+### Bug Fixes
+
+* **transfrom-ts-to-js:** 转换 index 文件 ([34fd6cf](https://github.com/kkaaddff/moon-private/commit/34fd6cf006f5227991b80340fa35c610abf1650d))
+
+
+
+
+
 ## [0.6.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-swagger-mock@0.6.0...@zhangqc/plugin-swagger-mock@0.6.1) (2021-12-08)
 
 

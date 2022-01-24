@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-ts-to-js@0.6.0...@zhangqc/plugin-transfrom-ts-to-js@0.6.1) (2022-01-24)
+
+
+### Bug Fixes
+
+* **buildTs:** 处理index.ts ([8f2b208](https://github.com/kkaaddff/moon-private/commit/8f2b2080b87ed00145e95823496c4d7beb2fd9b0))
+* **transfrom-ts-to-js:** 转换 index 文件 ([34fd6cf](https://github.com/kkaaddff/moon-private/commit/34fd6cf006f5227991b80340fa35c610abf1650d))
+
+
+
+
+
 # [0.6.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-transfrom-ts-to-js@0.5.0...@zhangqc/plugin-transfrom-ts-to-js@0.6.0) (2021-12-10)
 
 

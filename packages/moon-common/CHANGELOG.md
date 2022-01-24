@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.9.0...@zhangqc/moon-common@0.9.1) (2022-01-24)
+
+
+### Bug Fixes
+
+* **transfrom-ts-to-js:** 转换 index 文件 ([34fd6cf](https://github.com/kkaaddff/moon-private/commit/34fd6cf006f5227991b80340fa35c610abf1650d))
+
+
+
+
+
 # [0.9.0](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-common@0.8.4...@zhangqc/moon-common@0.9.0) (2021-12-10)
 
 
