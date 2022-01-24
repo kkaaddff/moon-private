@@ -10,6 +10,7 @@ import * as fakeGen from './fake-gen'
 import * as fse from 'fs-extra'
 import { join } from 'path'
 import { TLanguage } from './fake-gen'
+import ApiCompileHooks from '@zhangqc/moon-common/declarations/swagger-api/hook'
 
 export class SwaggerMock {
   language: TLanguage
@@ -18,7 +19,7 @@ export class SwaggerMock {
     this.language = config?.lang ?? 'en'
   }
 
-  apply(hook) {
+  apply(hook: ApiCompileHooks) {
     let mockItem: MockRepos
 
     hook.onResponseSchema.tap('plugin-api-swagger-mock', async (resSchema, context) => {

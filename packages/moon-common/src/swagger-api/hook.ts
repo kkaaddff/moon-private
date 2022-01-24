@@ -80,9 +80,9 @@ export default class ApiCompileHooks {
   /** 编辑转换之后 */
   afterCompile = new SyncHook<ApiGroup[]>(['webApiGroup', 'context'])
 
-  beforeIndex = new SyncHook<ApiGroup>()
+  beforeIndex = new SyncHook<ApiGroup[]>(['webApiGroup', 'context'])
 
-  afterIndex = new SyncHook<string, ApiIndex>()
+  afterIndex = new SyncHook<string, ApiIndex>(['webApiGroup', 'context'])
 
   /** 结束后;*/
   finish = new SyncHook<GenContext>(['context'])

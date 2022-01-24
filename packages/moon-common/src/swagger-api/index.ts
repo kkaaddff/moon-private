@@ -137,7 +137,10 @@ export async function genApi(context: { workDir: string; config: IGenApiConfig }
       console.error(err)
     }
   }
-  await hookInstance.afterCompile.call(apiGroups, context)
+
+  hookInstance.afterCompile.call(apiGroups, context)
+
+  hookInstance.beforeIndex.call(apiGroups, context)
 
   let apiIndexFilePath = join(apiDir, 'index.ts')
   if (!fse.pathExistsSync(apiIndexFilePath)) {
