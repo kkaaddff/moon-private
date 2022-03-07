@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.9.2...@zhangqc/moon-core@0.9.3) (2022-03-07)
+
+**Note:** Version bump only for package @zhangqc/moon-core
+
+
+
+
+
 ## [0.9.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/moon-core@0.9.1...@zhangqc/moon-core@0.9.2) (2022-01-24)
 
 **Note:** Version bump only for package @zhangqc/moon-core

@@ -1,6 +1,6 @@
 {
   "name": "@zhangqc/plugin-transfrom-json-from-yapi",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "",
   "main": "lib/index.js",
   "types": "declarations/index.d.ts",

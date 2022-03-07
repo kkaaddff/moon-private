@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.3](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-swagger-mock@0.6.2...@zhangqc/plugin-swagger-mock@0.6.3) (2022-03-07)
+
+**Note:** Version bump only for package @zhangqc/plugin-swagger-mock
+
+
+
+
+
 ## [0.6.2](https://github.com/kkaaddff/moon-private/compare/@zhangqc/plugin-swagger-mock@0.6.1...@zhangqc/plugin-swagger-mock@0.6.2) (2022-01-24)
 
 
