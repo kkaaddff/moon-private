@@ -4,6 +4,12 @@
   "description": "",
   "main": "lib/swagger-api/index.js",
   "types": "declarations/swagger-api/index.d.ts",
+  "files": [
+    "lib",
+    "CHANGELOG.md",
+    "README.md",
+    "declarations"
+  ],
   "author": "",
   "license": "MIT",
   "homepage": "https://github.com/kkaaddff/moon-private",

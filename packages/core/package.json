@@ -4,6 +4,12 @@
   "description": "",
   "main": "lib/index.js",
   "types": "declarations/index.d.ts",
+  "files": [
+    "lib",
+    "CHANGELOG.md",
+    "README.md",
+    "declarations"
+  ],
   "author": "",
   "license": "MIT",
   "gitHead": "96cd395e9a2b767aa1bc57aa28bca4dd3c794db1",

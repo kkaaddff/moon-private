@@ -23,28 +23,6 @@ const log = debug('web-apis:jsonUtil')
  * @param jsonSchema
  * @returns {Promise<string>}
  */
-export async function genTsFromSchema(
-  name: string,
-  jsonSchema: any,
-  context?: IWebApiContext
-): Promise<ITsGenResult> {
-  log(`根据jsonSchema生成ts定义文件`)
-  let tsContent = await compile(jsonSchema, name, {
-    bannerComment: '',
-    // unreachableDefinitions:true,
-    // $refOptions:{
-    //   parse:{
-    //     definitions:parse
-    //   }
-    // }
-  })
-
-  let result = {
-    typeName: jsonSchema.title ? jsonSchema.title.replace(/ */gi, '') : name,
-    tsContent,
-  }
-  return result
-}
 
 export async function genTsFromDefines(
   definitions: {
