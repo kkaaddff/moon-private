@@ -114,13 +114,17 @@ export class TransfromJsonFromYapiPlugin {
    */
   addDefinition2Tag = (tags: Array<{ name: string; description?: string }> = []) => {
     tags.forEach((tag) => {
-      tag.description = titleCase(
-        tag.description ??
-          tag.name
-            .match(/\([a-zA-Z| |0-9]*\)/g)
-            .pop()
-            .replace(/\(|\)/g, '')
-      )
+      try {
+        tag.description = titleCase(
+          tag.description ??
+            tag.name
+              .match(/\([a-zA-Z| |0-9]*\)/g)
+              .pop()
+              .replace(/\(|\)/g, '')
+        )
+      } catch (error) {
+        throw new Error(`请检查 tag 的 name 是否符合规范：${tag.name}`)
+      }
     })
     return tags
   }
