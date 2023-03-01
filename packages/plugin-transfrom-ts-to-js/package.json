@@ -1,6 +1,6 @@
 {
   "name": "@zhangqc/plugin-transfrom-ts-to-js",
-  "version": "0.6.2",
+  "version": "1.0.2",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -31,9 +31,9 @@
     "ts-morph": "^7.0.1"
   },
   "devDependencies": {
-    "@zhangqc/moon-common": "^0.9.2",
     "@types/fs-extra": "^7.0.0",
     "@types/tapable": "^1.0.4",
+    "@zhangqc/moon-common": "^1.0.2",
     "fs-extra": "^8.1.0"
   }
 }
