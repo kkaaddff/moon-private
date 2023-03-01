@@ -10,7 +10,7 @@ import { AsyncSeriesHook, AsyncSeriesWaterfallHook, SyncHook } from 'tapable'
 import { IWebApiDefinded } from '@zhangqc/moon-core'
 import { IFileSaveOptions } from '@zhangqc/moon-core'
 import { IGenApiConfig } from './types'
-import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
+import { ApiGroup } from '@zhangqc/moon-core/lib/web-api/domain'
 
 type ApiFilePath = string
 type ApiIndex = any

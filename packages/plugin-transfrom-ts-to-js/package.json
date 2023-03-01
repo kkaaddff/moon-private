@@ -3,19 +3,20 @@
   "version": "0.6.2",
   "description": "",
   "main": "lib/index.js",
-  "types": "declarations/index.d.ts",
+  "types": "lib/index.d.ts",
   "files": [
     "lib",
     "CHANGELOG.md",
-    "README.md",
-    "declarations"
+    "README.md"
   ],
   "author": "",
   "license": "MIT",
   "homepage": "https://github.com/kkaaddff/moon-private",
   "scripts": {
     "start": "tsc -w",
-    "prepublishOnly": "tsc",
+    "clean": "rm -rf lib",
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "publishConfig": {
@@ -30,6 +31,7 @@
     "ts-morph": "^7.0.1"
   },
   "devDependencies": {
+    "@zhangqc/moon-common": "^0.9.2",
     "@types/fs-extra": "^7.0.0",
     "@types/tapable": "^1.0.4",
     "fs-extra": "^8.1.0"

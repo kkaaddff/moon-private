@@ -5,3 +5,4 @@ declarations
 lib
 build
 **/moon-plugins/**.js
+yarn-lock.json

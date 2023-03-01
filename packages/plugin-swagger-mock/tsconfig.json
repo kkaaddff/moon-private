@@ -3,7 +3,6 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./lib",
-    "declarationDir": "./declarations",
     "declaration": true,
     "allowSyntheticDefaultImports": true
   },

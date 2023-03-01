@@ -8,7 +8,6 @@
  * @Date    2019/5/20
  **/
 import {
-  Project,
   InterfaceDeclarationStructure,
   StructureKind,
   TypeAliasDeclarationStructure,

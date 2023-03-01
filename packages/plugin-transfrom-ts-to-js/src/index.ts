@@ -1,6 +1,6 @@
 import buildTs from './tsbuild'
 const pluginName = 'TransfromTs2JsPlugin'
-import ApiCompileHooks from '@zhangqc/moon-common/declarations/swagger-api/hook'
+import ApiCompileHooks from '@zhangqc/moon-common/lib/swagger-api/hook'
 import * as fse from 'fs-extra'
 
 export class TransfromTsToJsPlugin {

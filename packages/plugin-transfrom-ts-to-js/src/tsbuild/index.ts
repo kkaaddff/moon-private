@@ -1,7 +1,7 @@
-import { ModuleKind, ModuleResolutionKind, Project, ScriptTarget } from 'ts-morph'
+import { Project } from 'ts-morph'
 import * as fse from 'fs-extra'
 import * as prettier from 'prettier'
-import { join, parse } from 'path'
+import { parse } from 'path'
 import MoonCore from '@zhangqc/moon-core'
 
 enum EXTENSION {

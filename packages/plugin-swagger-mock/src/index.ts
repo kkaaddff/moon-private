@@ -10,7 +10,7 @@ import * as fakeGen from './fake-gen'
 import * as fse from 'fs-extra'
 import { join } from 'path'
 import { TLanguage } from './fake-gen'
-import ApiCompileHooks from '@zhangqc/moon-common/declarations/swagger-api/hook'
+import ApiCompileHooks from '@zhangqc/moon-common/lib/swagger-api/hook'
 
 export class SwaggerMock {
   language: TLanguage

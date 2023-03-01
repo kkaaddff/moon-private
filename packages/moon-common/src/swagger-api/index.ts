@@ -16,7 +16,7 @@ import loadApiGroup from './load-api-group'
 import { IWebApiContext, IWebApiDefinded, SchemaProps } from '@zhangqc/moon-core'
 import { IFileSaveOptions } from '@zhangqc/moon-core'
 import { IInsertImportDeclaration } from '@zhangqc/moon-core'
-import { ApiGroup } from '@zhangqc/moon-core/declarations/web-api/domain'
+import { ApiGroup } from '@zhangqc/moon-core/lib/web-api/domain'
 import { applyHook } from '../util/hook-util'
 import { IGenApiConfig } from './types'
 
